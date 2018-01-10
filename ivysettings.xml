@@ -1,0 +1,13 @@
+<ivysettings>
+    <settings defaultResolver="chained"/>
+    <resolvers>
+        <chain name="chained" returnFirst="true">
+            <filesystem name="libraries">
+                <artifact pattern="${ivy.conf.dir}/repository/[branch]-[revision].[ext]"/>
+            </filesystem>
+            <url name="ibiblio-mirror">
+                <artifact pattern="http://maven.aliyun.com/nexus/content/repositories/central/[organisation]/[module]/[branch]/[revision]/[branch]-[revision].[ext]"/>
+            </url>
+        </chain>
+    </resolvers>
+</ivysettings>

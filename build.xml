@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="bugucms" default="compile" xmlns:ivy="antlib:org.apache.ivy.ant">
+    <property file="build.properties"/>
+
+    <!-- =================================================================== -->
+    <!-- 创建展开目录形式的WAR应用 -->
+    <!-- =================================================================== -->
+    <target name="info" description="显示项目构建信息">
+        <echo level="info">
+            +-------------------------您正在构建的项目信息-----------------------------+
+            +--------------------------------------------------------------------------+
+            项目名称|${project.name}
+            项目描述|${project.discription}
+            项目版本|${project.revision}
+            项目联系人|${project.contact}
+            +--------------------------------------------------------------------------+
+        </echo>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 初始化，创建目录 -->
+    <!-- =================================================================== -->
+    <target name="init" description="创建目录" depends="info">
+        <mkdir dir="${src.test.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.classes.dir}"/>
+        <mkdir dir="${build.lib.dir}"/>
+        <mkdir dir="${build.test.dir}"/>
+        <mkdir dir="${rel.dir}"/>
+        <mkdir dir="${rel.war.exploded.dir}"/>
+        <mkdir dir="${rel.war.dir}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 清空所有输出文件包括build和部署目录 -->
+    <!-- =================================================================== -->
+    <target name="clean" description="清空所有输出文件包括build和部署目录">
+        <delete dir="${build.classes.dir}"/>
+        <delete dir="${build.lib.dir}"/>
+        <delete dir="${build.test.dir}"/>
+        <delete dir="${rel.war.exploded.dir}"/>
+        <delete dir="${rel.war.dir}"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 清空第三方包本地缓存 -->
+    <!-- =================================================================== -->
+    <target name="clean-lib-cache" description="清空第三方包本地缓存">
+        <delete dir="${build.lib.dir}/"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 设置第三方包下载配置文件 -->
+    <!-- =================================================================== -->
+    <target name="configure-lib" description="设置第三方包配置文件">
+        <ivy:settings file="${basedir}/ivysettings.xml" />
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 下载或从本地缓存获取第三方包 -->
+    <!-- =================================================================== -->
+    <target name="get-lib" depends="init,clean-lib-cache,configure-lib" description="下载或从本地缓存获取第三方包">
+        <ivy:retrieve pattern="${build.lib.dir}/[branch]-[revision].[ext]"/>
+    </target>
+
+
+    <!-- =================================================================== -->
+    <!-- 编译JAVA文件 -->
+    <!-- =================================================================== -->
+    <target name="compile" description="编译Java文件" depends="init,info">
+        <!--
+        <available classname="existedClass" classpathref="master-classpath" property="lib.present"/>
+        <fail unless="lib.present"
+              message="第三方包还没有下载,请配置ivy.xml文件,并执行get-lib任务"/>
+        <javac destdir="${build.classes.dir}" target="1.6" debug="true" encoding="UTF-8"
+               deprecation="false" optimize="false" failonerror="true">
+            <src path="${src.java.dir}"/>
+            <classpath refid="master-classpath"/>
+        </javac>
+        -->
+        <!--编译测试代码 -->
+        <javac destdir="${build.test.dir}" debug="on" deprecation="false" failonerror="true">
+            <src path="${src.test.dir}"/>
+            <classpath refid="master-classpath"/>
+            <classpath location="${build.classes.dir}"/>
+        </javac>
+        <!-- 测试中可能会用到的peroperties文件拷贝到测试类文件 -->
+        <!--
+        <copy todir="${build.test.dir}">
+            <fileset dir="${src.test.dir}" includes="**/*.properties"/>
+            <fileset dir="${src.test.dir}" includes="*.xml"/>
+            <fileset dir="${src.test.dir}" includes="config/**/**"/>
+            <fileset dir="${src.test.dir}" includes="data/**/**"/>
+        </copy>
+        -->
+    </target>
+
+</project>
