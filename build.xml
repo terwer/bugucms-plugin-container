@@ -60,7 +60,7 @@
     <!-- 下载或从本地缓存获取第三方包 -->
     <!-- =================================================================== -->
     <target name="get-lib" depends="init,clean-lib-cache,configure-lib" description="下载或从本地缓存获取第三方包">
-        <ivy:retrieve pattern="${build.lib.dir}/[branch]-[revision].[ext]"/>
+        <ivy:retrieve pattern="${build.lib.dir}/[module]-[revision].[ext]"/>
     </target>
 
 

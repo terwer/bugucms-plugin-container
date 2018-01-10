@@ -19,6 +19,8 @@
 <ivy-module version="2.0">
     <info organisation="com.bugucms" module="bugucms"/>
     <dependencies>
-        <dependency org="org/apache" name="commons" branch="commons-lang3" rev="3.3.1" />
+        <dependency org="org/springframework" name="spring-core" rev="4.3.13.RELEASE"/>
+        <dependency org="org/mybatis" name="mybatis" rev="3.4.5"/>
+        <dependency org="com/itextpdf" name="itextpdf" rev="5.5.12"/>
     </dependencies>
 </ivy-module>
