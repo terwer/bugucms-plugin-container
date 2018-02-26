@@ -1,4 +1,4 @@
-package com.bugucms.controller;
+package com.bugucms.front.account.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,7 @@ import java.util.Map;
 @Controller
 public class HelloWorldController {
 
-    @RequestMapping(value = "/hello", method = RequestMethod.GET)
+    @RequestMapping(value = "/hello", method = RequestMethod.POST)
     public ModelAndView Hello(HttpServletRequest request) {
         MappingJacksonJsonView json = new MappingJacksonJsonView();
         json.setContentType("application/json;charset=utf-8");

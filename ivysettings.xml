@@ -5,8 +5,8 @@
             <filesystem name="libraries">
                 <artifact pattern="${ivy.conf.dir}/repository/[module]-[revision].[ext]"/>
             </filesystem>
-            <url name="aliyun-mirror">
-                <artifact pattern="${maven.repository.url}/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
+            <url name="paic-mirror">
+                <artifact pattern="${ivy.repository.url}/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
             </url>
         </chain>
     </resolvers>

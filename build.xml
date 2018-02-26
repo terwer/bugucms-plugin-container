@@ -40,6 +40,7 @@
         <delete dir="${build.test.dir}"/>
         <delete dir="${rel.war.exploded.dir}"/>
         <delete dir="${rel.war.dir}"/>
+    	<delete dir="${web.dir}/WEB-INF/lib"/>
     </target>
 
     <!-- =================================================================== -->
@@ -61,6 +62,14 @@
     <!-- =================================================================== -->
     <target name="get-lib" depends="init,clean-lib-cache,configure-lib" description="下载或从本地缓存获取第三方包">
         <ivy:retrieve pattern="${build.lib.dir}/[module]-[revision].[ext]"/>
+       
+    	<mkdir dir="${web.dir}/WEB-INF/lib"/>
+        <copy todir="${web.dir}/WEB-INF/lib" overwrite="true">
+            <fileset dir="${build.lib.dir}/">
+                <exclude name="servlet-3.0.jar"/>
+            </fileset>
+        </copy>
+    	
     </target>
 
 
@@ -131,12 +140,14 @@
             </fileset>
         </copy>
 
+    	<!--
         <mkdir dir="${rel.war.exploded.dir}/WEB-INF/lib"/>
         <copy todir="${rel.war.exploded.dir}/WEB-INF/lib" overwrite="true">
             <fileset dir="${build.lib.dir}/">
                 <exclude name="servlet-3.0.jar"/>
             </fileset>
         </copy>
+        -->
 
         <copy todir="${rel.war.exploded.dir}/" overwrite="true">
             <fileset dir="${web.dir}/">
