@@ -64,6 +64,13 @@
     </target>
 
 
+    <!-- Java编译CLASSPATH -->
+    <path id="master-classpath">
+        <fileset dir="${build.lib.dir}"/>
+        <!-- <fileset file="${weblogic.jar}"/> -->
+        <!-- <fileset file="${javaee.jar}"/> -->
+    </path>
+
     <!-- =================================================================== -->
     <!-- 编译JAVA文件 -->
     <!-- =================================================================== -->
@@ -72,18 +79,21 @@
         <available classname="existedClass" classpathref="master-classpath" property="lib.present"/>
         <fail unless="lib.present"
               message="第三方包还没有下载,请配置ivy.xml文件,并执行get-lib任务"/>
+         -->
         <javac destdir="${build.classes.dir}" target="1.6" debug="true" encoding="UTF-8"
                deprecation="false" optimize="false" failonerror="true">
             <src path="${src.java.dir}"/>
             <classpath refid="master-classpath"/>
         </javac>
-        -->
+
         <!--编译测试代码 -->
+        <!--
         <javac destdir="${build.test.dir}" debug="on" deprecation="false" failonerror="true">
             <src path="${src.test.dir}"/>
             <classpath refid="master-classpath"/>
             <classpath location="${build.classes.dir}"/>
         </javac>
+        -->
         <!-- 测试中可能会用到的peroperties文件拷贝到测试类文件 -->
         <!--
         <copy todir="${build.test.dir}">
@@ -93,6 +103,47 @@
             <fileset dir="${src.test.dir}" includes="data/**/**"/>
         </copy>
         -->
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 创建用于发布的WAR包文件 -->
+    <!-- =================================================================== -->
+    <target name="war" depends="clean,exploded-war" description="创建用于发布的WAR包文件">
+        <jar jarfile="${rel.war.dir}/${project.name}.war"
+             basedir="${rel.war.exploded.dir}">
+            <manifest>
+                <attribute name="Built-By" value="${user.name}" />
+                <attribute name="Specification-Version" value="${build.version}"/>
+            </manifest>
+        </jar>
+
+        <echo message="war success"/>
+    </target>
+
+    <!-- =================================================================== -->
+    <!-- 创建展开目录形式的WAR应用 -->
+    <!-- =================================================================== -->
+    <target name="exploded-war" depends="compile" description="创建展开目录形式的WAR应用(开发模式)">
+        <mkdir dir="${rel.war.exploded.dir}/WEB-INF/classes"/>
+
+        <copy todir="${rel.war.exploded.dir}/WEB-INF/classes" overwrite="true">
+            <fileset dir="${build.classes.dir}/">
+            </fileset>
+        </copy>
+
+        <mkdir dir="${rel.war.exploded.dir}/WEB-INF/lib"/>
+        <copy todir="${rel.war.exploded.dir}/WEB-INF/lib" overwrite="true">
+            <fileset dir="${build.lib.dir}/">
+                <exclude name="servlet-3.0.jar"/>
+            </fileset>
+        </copy>
+
+        <copy todir="${rel.war.exploded.dir}/" overwrite="true">
+            <fileset dir="${web.dir}/">
+            </fileset>
+        </copy>
+
+        <echo message="exploded-war success"/>
     </target>
 
 </project>

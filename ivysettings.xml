@@ -6,7 +6,7 @@
                 <artifact pattern="${ivy.conf.dir}/repository/[module]-[revision].[ext]"/>
             </filesystem>
             <url name="aliyun-mirror">
-                <artifact pattern="http://maven.aliyun.com/nexus/content/repositories/central/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
+                <artifact pattern="${maven.repository.url}/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
             </url>
         </chain>
     </resolvers>
