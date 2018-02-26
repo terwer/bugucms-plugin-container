@@ -108,7 +108,7 @@
     <!-- =================================================================== -->
     <!-- 创建用于发布的WAR包文件 -->
     <!-- =================================================================== -->
-    <target name="war" depends="clean,exploded-war" description="创建用于发布的WAR包文件">
+    <target name="war" depends="clean,get-lib,exploded-war" description="创建用于发布的WAR包文件">
         <jar jarfile="${rel.war.dir}/${project.name}.war"
              basedir="${rel.war.exploded.dir}">
             <manifest>
