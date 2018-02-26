@@ -25,7 +25,10 @@
         <param-name>log4jRefreshInterval</param-name>
         <param-value>1800000</param-value>
     </context-param>
-
+ 	<listener>
+    	<listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+ 	</listener>
+ 
     <!--SpringMVC的前端控制器-->
     <servlet>
         <servlet-name>SpringMVC</servlet-name>
