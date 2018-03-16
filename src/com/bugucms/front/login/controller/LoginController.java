@@ -22,7 +22,7 @@ public class LoginController extends BGBaseController {
 	 */
 	@RequestMapping(value = "/register")
 	@ResponseBody
-	public RestResponseDTO accreditCredit(HttpServletRequest request,
+	public RestResponseDTO register(HttpServletRequest request,
 			HttpServletResponse response) {
 		RestResponseDTO restResponseDTO = new RestResponseDTO();
 		response.setContentType("application/json;charset=utf-8");

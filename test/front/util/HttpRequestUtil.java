@@ -15,7 +15,7 @@ import com.alibaba.fastjson.JSON;
 
 /**
  * 发起HTTP请求的Util类
- * @author HUANGLONG228
+ * @author terwergreen
  * @since 2015-6-20
  */
 @SuppressWarnings({ "rawtypes" })

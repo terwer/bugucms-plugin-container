@@ -17,7 +17,7 @@ public class LoginControllerTest {
 	private final String baseUrl = "http://127.0.0.1:8080/bugucms";
 
 	@Test
-	public void testGetLoanAgreementInfoList() {
+	public void testHello() {
 		// 请求服务
 		String requestType = "/hello.do";
 		// 请求参数
