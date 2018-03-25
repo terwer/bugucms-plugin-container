@@ -5,7 +5,7 @@
             <filesystem name="libraries">
                 <artifact pattern="${ivy.conf.dir}/repository/[module]-[revision].[ext]"/>
             </filesystem>
-            <url name="paic-mirror">
+            <url name="mirror">
                 <artifact pattern="${ivy.repository.url}/[organisation]/[module]/[revision]/[module]-[revision].[ext]"/>
             </url>
         </chain>

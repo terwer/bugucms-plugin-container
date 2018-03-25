@@ -25,6 +25,7 @@
         <!-- JSON -->
         <dependency org="org/codehaus/jackson" name="jackson-core-asl" rev="1.9.2" />
         <dependency org="org/codehaus/jackson" name="jackson-mapper-asl" rev="1.9.2"/>
+        <dependency org="com/alibaba" name="fastjson" rev="1.2.29"/>
         <!-- spring -->
         <dependency org="org/springframework" name="spring-core" rev="3.2.13.RELEASE" />
         <dependency org="org/springframework" name="spring-web" rev="3.2.13.RELEASE" />
@@ -37,6 +38,13 @@
         <dependency org="org/springframework" name="spring-expression" rev="3.2.13.RELEASE" />
         <!-- servlet -->
         <dependency org="javax/servlet" name="javax.servlet-api" rev="3.0.1"/>
+		<dependency org="javax/servlet" name="jstl" rev="1.0.3"/>
+		<!-- junit -->
+		<dependency org="junit" name="junit" rev="4.9"/>
+		<!-- aop add start -->
+		<dependency org="org/aspectj" name="aspectjrt" rev="1.8.9" />
+		<dependency org="org/aspectj" name="aspectjweaver" rev="1.8.9" />
+		<!-- aop add end -->
         <!-- mybatis -->
         <!-- <dependency org="org/mybatis" name="mybatis" rev="3.4.5"/> -->
     </dependencies>

@@ -89,12 +89,11 @@
         <fail unless="lib.present"
               message="第三方包还没有下载,请配置ivy.xml文件,并执行get-lib任务"/>
          -->
-        <javac destdir="${build.classes.dir}" target="1.6" debug="true" encoding="UTF-8"
-               deprecation="false" optimize="false" failonerror="true">
-            <src path="${src.java.dir}"/>
-            <classpath refid="master-classpath"/>
-        </javac>
-
+    	 <javac destdir="${build.classes.dir}" target="1.6" debug="true" encoding="UTF-8" deprecation="false" optimize="false" failonerror="true">
+    	 	<src path="${src.java.dir}"/>
+    	 	<classpath refid="master-classpath"/>
+    	 </javac>
+    	
         <!--编译测试代码 -->
         <!--
         <javac destdir="${build.test.dir}" debug="on" deprecation="false" failonerror="true">
@@ -118,8 +117,7 @@
     <!-- 创建用于发布的WAR包文件 -->
     <!-- =================================================================== -->
     <target name="war" depends="clean,get-lib,exploded-war" description="创建用于发布的WAR包文件">
-        <jar jarfile="${rel.war.dir}/${project.name}.war"
-             basedir="${rel.war.exploded.dir}">
+        <jar jarfile="${rel.war.name}" basedir="${rel.war.exploded.dir}">
             <manifest>
                 <attribute name="Built-By" value="${user.name}" />
                 <attribute name="Specification-Version" value="${build.version}"/>
