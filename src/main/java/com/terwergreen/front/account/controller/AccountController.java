@@ -25,10 +25,11 @@ public class AccountController extends BGBaseController {
 
     @RequestMapping(value = "/accountInfo", method = RequestMethod.GET)
     public ModelAndView Hello(HttpServletRequest request) {
-        Map<String, String> resultMap = new HashMap<String, String>();
-        resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
-        resultMap.put("msg", RestResponseStates.SUCCESS.getMsg());
+        // Map<String, String> resultMap = new HashMap<String, String>();
+        // resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
+        // resultMap.put("msg", RestResponseStates.SUCCESS.getMsg());
         // return super.processResultAll(resultMap);
+
         return new ModelAndView();
     }
 
@@ -36,6 +37,12 @@ public class AccountController extends BGBaseController {
     @ResponseBody
     public RestResponseDTO Hello2(HttpServletRequest request) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
+
+        Map<String, String> resultMap = new HashMap<String, String>();
+        resultMap.put("accountId", "F10001");
+        resultMap.put("mobile", "18888888888");
+        restResponseDTO.setData(resultMap);
+
         restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
         restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
         return restResponseDTO;
