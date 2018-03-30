@@ -27,3 +27,5 @@ nbdist/
 .mvn/wrapper/
 mvnw
 mvnw.cmd
+
+*log
