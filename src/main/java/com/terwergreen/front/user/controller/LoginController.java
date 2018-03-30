@@ -6,9 +6,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.terwergreen.middle.user.service.LoginService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,6 +21,9 @@ import com.terwergreen.front.common.web.BGBaseController;
 
 @Controller
 public class LoginController extends BGBaseController {
+
+    @Autowired
+    private LoginService loginService;
 
     /***********/
     /**页面开始**/
@@ -31,7 +37,7 @@ public class LoginController extends BGBaseController {
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public ModelAndView reg(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<String, String>();
-        paramMap.put("weburl", "http://localhost:8080/bugucms");
+        paramMap.put("weburl", "http://localhost:8080/");
         paramMap.put("webname", "特维博客");
         paramMap.put("webtheme", "专注于服务端技术分享");
         paramMap.put("keywords", "软件架构、服务端开发、Java、Spring、Dubbo、Zookeeper、微服务");
@@ -58,18 +64,26 @@ public class LoginController extends BGBaseController {
      */
     @RequestMapping(value = "/user/login")
     @ResponseBody
-    public RestResponseDTO login(HttpServletRequest request,
-                                 HttpServletResponse response) {
+    public RestResponseDTO login(HttpServletRequest request, HttpServletResponse response,
+                                 @RequestParam(value = "username", required = true) String username,
+                                 @RequestParam(value = "password", required = true) String password
+    ) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
+
+            Map<String, String> resultMap = new HashMap<String, String>();
+            String loginStatus = loginService.login(username,password);
+            resultMap.put("loginStatus", loginStatus);
+            restResponseDTO.setData(resultMap);
+
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
             restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
+            logger.debug("登陆成功");
             super.logger.info("请求结束");
         } catch (Exception e) {
             super.logger.error("接口异常:error=", e);
-            restResponseDTO = new RestResponseDTO();
             restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
             restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
             return restResponseDTO;
@@ -92,13 +106,18 @@ public class LoginController extends BGBaseController {
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
+
+            Map<String, String> resultMap = new HashMap<String, String>();
+            resultMap.put("accountId", "F00001");
+            resultMap.put("mobile", "15986685029");
+            restResponseDTO.setData(resultMap);
+
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
             restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
             logger.debug("注册成功，您的注册信息：用户名F10001。");
             super.logger.info("请求结束");
         } catch (Exception e) {
             super.logger.error("接口异常:error=", e);
-            restResponseDTO = new RestResponseDTO();
             restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
             restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
             return restResponseDTO;
