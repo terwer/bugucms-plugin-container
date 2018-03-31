@@ -48,6 +48,14 @@
             <version>5.1.45</version>
             <scope>runtime</scope>
         </dependency>
+        <!-- 添加oracle jdbc driver -->
+        <dependency>
+            <groupId>com.oracle</groupId>
+            <artifactId>ojdbc6</artifactId>
+            <version>11.2.0.4</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
@@ -59,6 +67,11 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <version>2.0.0.RELEASE</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>net.minidev</groupId>
+            <artifactId>json-smart</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
 
