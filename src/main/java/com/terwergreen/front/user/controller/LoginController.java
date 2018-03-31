@@ -72,10 +72,7 @@ public class LoginController extends BGBaseController {
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
-
-            Map<String, String> resultMap = new HashMap<String, String>();
-            String loginStatus = loginService.login(username,password);
-            resultMap.put("loginStatus", loginStatus);
+            Map resultMap = loginService.login(username,password);
             restResponseDTO.setData(resultMap);
 
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());

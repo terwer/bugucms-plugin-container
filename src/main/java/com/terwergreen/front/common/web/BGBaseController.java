@@ -9,18 +9,9 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class BGBaseController {
 
-	protected Log logger = LogFactory.getLog(this.getClass());
-
-	public Log getLogger() {
-		return logger;
-	}
-
-	public void setLogger(Log logger) {
-		this.logger = logger;
-	}
+	protected final Log logger = LogFactory.getLog(getClass());
 
 	/**
 	 * 封装放回结果信息 {"flag":"","msg":"","data":""} flag-msg:0-未登录,1-操作成功,2.....

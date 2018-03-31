@@ -1,5 +1,7 @@
 package com.terwergreen.middle.user.service;
 
+import java.util.Map;
+
 public interface LoginService {
-    String login(String username, String password);
+    Map login(String username, String password);
 }
