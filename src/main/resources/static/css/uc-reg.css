@@ -2,7 +2,7 @@
 
 html {
     background: #f5f5f5;
-    overflow: scroll-y
+    /*overflow: scroll-y*/
 }
 
 .gray-line {
@@ -29,7 +29,7 @@ html {
 
 .uc-mod-sign-up {
     background: #fff;
-    width: 500px
+    width: 380px
 }
 
 .other-info span {
@@ -75,15 +75,14 @@ input[type=text]:focus {
 .uc-mod-sign-up p.uc-field-licence {
     margin: 0;
     padding-top: 15px;
-    text-align: center
 }
 
 .uc-mod-sign-up div.uc-main {
     border: 0;
     box-shadow: none;
     float: none;
-    margin: 0 auto;
-    padding: 50px 0
+    /* margin: 0 auto; */
+    padding: 50px 0;
 }
 
 .uc-mod-sign-up p.uc-field-mobile,.uc-mod-sign-up p.uc-field-password {
@@ -121,12 +120,13 @@ input[type=text]:focus {
 }
 
 .uc-mod-sign-up .uc-main .uc-input {
-    background: 0 0;
+    background: none;
     border: 0;
     line-height: 21px;
-    margin: 4px;
-    outline: 0;
-    width: 320px
+    margin: 5px 4px;
+    padding:5px 4px;
+    outline: none;
+    width: 320px;
 }
 
 .uc-mod-sign-up .uc-field-captcha .uc-input-bg,.uc-mod-sign-up .uc-field-mobile .uc-input-bg,.uc-mod-sign-up .uc-field-password .uc-input-bg {
@@ -151,7 +151,6 @@ input[type=text]:focus {
     font-weight: 700;
     height: 40px;
     line-height: 40px;
-    margin-top: 50px;
     text-align: center;
     width: 100%
 }
@@ -197,11 +196,10 @@ input[type=text]:focus {
 }
 
 .uc-mod-sign-up .uc-field-captcha span.uc-input-bg {
-    border: 1px solid #e6e6e6;
     border-radius: 3px;
     height: 40px;
     margin: 3px 0 4px;
-    width: 256px
+    width: 256px;
 }
 
 .uc-mod-sign-up .uc-field-captcha span.input-focus {
@@ -383,3 +381,22 @@ body #ft {
     margin: 0;
     width: 100%
 }
+
+.uc-sign-up-wrapper{
+    margin: auto;background-color: #ffffff;
+}
+
+.uc-clearfix{
+    margin: 0 auto;
+}
+
+.uc-login a{
+	color:#22ac69;	
+}
+
+.uc-field-captcha{
+background: #fff;
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    height: 42px;
+	}
