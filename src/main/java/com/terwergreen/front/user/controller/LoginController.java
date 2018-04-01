@@ -42,6 +42,7 @@ public class LoginController extends BGBaseController {
         paramMap.put("domain", "localhost");
         paramMap.put("weburl", "http://localhost:8080");
         paramMap.put("webtheme", "default");
+        paramMap.put("adminPath", "admin");
         paramMap.put("webname", "远方的灯塔");
         paramMap.put("webslogen", "专注于服务端技术分享");
         paramMap.put("keywords", "软件架构、服务端开发、Java、Spring、Dubbo、Zookeeper、微服务");
