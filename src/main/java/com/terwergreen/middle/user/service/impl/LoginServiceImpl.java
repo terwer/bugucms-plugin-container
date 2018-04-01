@@ -18,11 +18,11 @@ public class LoginServiceImpl extends BaseService implements LoginService {
     private CommonDAO commonDAO;
 
     @Override
-    public Map login(String username, String password) {
+    public Map login(String account, String password) {
         Map paramMap = new HashMap();
-        paramMap.put("username", username);
+        paramMap.put("account", account);
         paramMap.put("password", password);
-        List list = commonDAO.queryList("login_by_username", paramMap);
+        List list = commonDAO.queryList("login_by_account", paramMap);
 
         Map resultMap = new HashMap();
         String loginStatus = "0";
