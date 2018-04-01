@@ -140,6 +140,14 @@ ____________  _________    _____________  ___      ______      ___  _________   
 						</div>
 						<div class="menu-container">
 							<ul id="menu" class="top-menu">
+                                <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
+                                    <a target="_blank" href="${weburl}/reg"><i class="iconfont"></i> 注册
+                                    </a>
+                                </li>
+                                <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
+                                    <a target="_blank" href="${weburl}/login"><i class="iconfont"></i> 登录
+                                    </a>
+                                </li>
 								<li id="menu-item-962" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-962">
 									<a target="_blank" href="${weburl}/shuoshuo.html"><i class="iconfont"></i> 说说
 									</a>
