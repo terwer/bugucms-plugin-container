@@ -61,7 +61,7 @@
 										<p class="uc-field uc-field-submit"><input class="uc-button uc-button-sign-up" type="submit" value="立即注册"></p>
 										<p class="uc-field uc-field-smscodetip"><span><a class="uc-link" href="${request.contextPath}/findpwd" target="_blank">短信验证码没收到？</a></span></p>
 										<p class="uc-field uc-field-licence"><label><span>点击“下一步”，即表示您已同意并愿意遵守<a class="uc-link" href="#" target="_blank">《${webname}用户服务条款》</a></span></label></p>
-										<p class="uc-login">已有帐号，
+<p class="uc-login">已有帐号，
 											<a href="${request.contextPath}/login" class="uc-link uc-link-login">立即登录</a>
 										</p>
 									</form>
