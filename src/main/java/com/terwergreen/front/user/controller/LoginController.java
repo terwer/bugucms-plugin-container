@@ -60,7 +60,7 @@ public class LoginController extends BGBaseController {
     /***********/
 
     /**
-     * 注册接口
+     * 登录接口
      *
      * @return
      * @author terwergreen
@@ -69,14 +69,14 @@ public class LoginController extends BGBaseController {
     @RequestMapping(value = "/user/login")
     @ResponseBody
     public RestResponseDTO login(HttpServletRequest request, HttpServletResponse response,
-                                 @RequestParam(value = "username", required = true) String username,
+                                 @RequestParam(value = "account", required = true) String account,
                                  @RequestParam(value = "password", required = true) String password
     ) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
-            Map resultMap = loginService.login(username,password);
+            Map resultMap = loginService.login(account,password);
             restResponseDTO.setData(resultMap);
 
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
@@ -101,21 +101,54 @@ public class LoginController extends BGBaseController {
      */
     @RequestMapping(value = "/user/register")
     @ResponseBody
-    public RestResponseDTO register(HttpServletRequest request,
-                                    HttpServletResponse response) {
+    public RestResponseDTO register(HttpServletRequest request, HttpServletResponse response,
+                                    @RequestParam(value = "account", required = true) String account,
+                                    @RequestParam(value = "password", required = true) String password
+    ) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
 
-            Map<String, String> resultMap = new HashMap<String, String>();
-            resultMap.put("accountId", "F00001");
-            resultMap.put("mobile", "15986685029");
-            restResponseDTO.setData(resultMap);
+            Map<String, String> paramMap = new HashMap<String, String>();
+            paramMap.put("accountId", "F00001");
+            paramMap.put("account", account);
+            paramMap.put("password", password);
+
+//            Map resultMap = loginService.register(account, password);
+//            restResponseDTO.setData(resultMap);
 
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
             restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
             logger.debug("注册成功，您的注册信息：用户名F10001。");
+            super.logger.info("请求结束");
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+            restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            return restResponseDTO;
+        }
+        return restResponseDTO;
+    }
+
+    /**
+     * 获取图片校验码接口
+     *
+     * @return
+     * @author terwergreen
+     * @date 2018-04-02 13:36:00
+     */
+    @RequestMapping(value = "/user/captcha")
+    @ResponseBody
+    public RestResponseDTO captcha(HttpServletRequest request, HttpServletResponse response) {
+        RestResponseDTO restResponseDTO = new RestResponseDTO();
+        response.setContentType("application/json;charset=utf-8");
+        try {
+            super.logger.info("请求开始");
+
+            restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
+            restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
+            logger.debug("获取图片校验码成功。");
             super.logger.info("请求结束");
         } catch (Exception e) {
             super.logger.error("接口异常:error=", e);

@@ -6,13 +6,13 @@
     <resultMap type="java.util.HashMap" id="statusMap">
         <result column="account_id" property="accountId"/>
     </resultMap>
-    <select id="login_by_username" resultMap="statusMap">
+    <select id="login_by_account" resultMap="statusMap">
         SELECT
             ACCOUNT_ID,
             ACCOUNT_NAME,
             MOBILE
         FROM
             bg_account_info
-        WHERE ACCOUNT_ID = #{username}
+        WHERE MOBILE = #{account}
     </select>
 </mapper>
