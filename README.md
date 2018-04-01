@@ -13,10 +13,10 @@ Oracle 11g
 
 # 启动
 ## 注意
-ojdbc6.jar需要手动安装，在项目的lib目录下，需要用命令```mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.4 -Dpackaging=jar -Dfile=ojdbc6.jar```安装   
-Spring Boot 默认将 /webjars/** 映射到 classpath:/META-INF/resources/webjars/ ，结合我们上面讲到的访问资源的规则，便可以得知我们在JSP页面中引入jquery.js的方法为：
+（1）ojdbc6.jar需要手动安装，在项目的lib目录下，需要用命令```mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.4 -Dpackaging=jar -Dfile=ojdbc6.jar```安装        
+（2）Spring Boot 默认将 /webjars/** 映射到 classpath:/META-INF/resources/webjars/ ，根据访问资源的规则，在JSP页面中引入jquery.js的方法为：
 ```
-<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/1.12.2/jquery.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
 ```
 
 ## 本地启动   

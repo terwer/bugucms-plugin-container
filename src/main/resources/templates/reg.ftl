@@ -9,9 +9,9 @@
     <meta name="description" content="${description}">
 
     <!--公共的样式-->
-    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/base.css">
     <!--页面自定义样式-->
-    <link rel="stylesheet" href="/static/css/uc-reg.css">
+    <link rel="stylesheet" href="${request.contextPath}/css/uc-reg.css">
     <style>
         .quc-wrapper a:active, .quc-wrapper a:hover {
             outline-width: 0
@@ -1980,11 +1980,11 @@
         <div id="regHeader">
             <div class="header-content">
 					<span class="switch-login"> <a
-                            href="${weburl}/login" title="登录" target="_blank">登录</a>
-					</span> <a href="${weburl}/reg" title=""> <span
+                            href="${request.contextPath}/login" title="登录" target="_blank">登录</a>
+					</span> <a href="${request.contextPath}/reg" title=""> <span
                     class="logo"></span>
             </a> <span class="page-title"> <a
-                    href="${weburl}/reg" title="注册帐号">注册帐号</a>
+                    href="${request.contextPath}/reg" title="注册帐号">注册帐号</a>
 					</span>
             </div>
 
@@ -2031,7 +2031,7 @@
                                     </p>
                                     <span class="quc-tip"></span>
                                     <p class="quc-field quc-next-step quc-clearfix">
-                                        <a href="${weburl}/user/register"
+                                        <a href="${request.contextPath}/user/register"
                                            class="quc-nextAndGet-sms-token">下一步</a>
                                     </p>
                                     <p
@@ -2039,7 +2039,7 @@
         quc-clearfix">
 											<span class="quc-sms-tips">短信验证码已发送至<label
                                                     class="quc-sms-tips-mobile"></label></span><a
-                                            href="${weburl}/reg"
+                                            href="${request.contextPath}/reg"
                                             class="quc-get-sms-token">免费获取校验码</a><span
                                             class="quc-input-bg"><input
                                             class="quc-input quc-input-sms-token" type="text"
@@ -2059,12 +2059,12 @@
                                 </p>
                                 <p class="quc-field quc-field-licence" style="display: none;">
                                     <label><span>点击“下一步”，即表示您已同意并愿意遵守<a
-                                            class="quc-link" href="${weburl}/"
+                                            class="quc-link" href="${request.contextPath}/"
                                             target="_blank">《${webname}服务条款》</a></span></label>
                                 </p>
                                 <p class="quc-login">
                                     <label><span>已有帐号，<a
-                                            href="${weburl}/login"
+                                            href="${request.contextPath}/login"
                                             class="quc-link quc-link-login">立即登录</a></span></label>
                                 </p>
                             </form>
@@ -2082,7 +2082,7 @@
                     </p>
                     <p>恭喜！您已完成360帐号注册</p>
                     <p>
-                        您可以用该帐号登录<a href="${weburl}/" class="link"
+                        您可以用该帐号登录<a href="${request.contextPath}/" class="link"
                                     target="_blank">${webname}</a>
                     </p>
                 </div>
@@ -2144,19 +2144,19 @@
     window.qCrumb = "";
 </script>
 <!--公共 js-->
-<script type="text/javascript" src="/static/js/jquery-1.9.1.min.js"></script>
-<script type="text/javascript" src="/static/js/i360utils.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/i360utils.js"></script>
 <script>
     window.QUC = window.QUC || {};
     QUC.t3 = +new Date();
 </script>
 
-<script type="text/javascript" src="/static/js/5.0.3.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/5.0.3.js"></script>
 <script>
     window.QUC = window.QUC || {};
     QUC.t5 = +new Date();
 </script>
-<script type="text/javascript" src="/static/js/base.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/base.js"></script>
 <script type="text/javascript">
     $(function () {
         var protocol = location.protocol.slice(0, -1);
@@ -2173,11 +2173,11 @@
     });
 </script>
 
-<script type="text/javascript" src="/static/js/uc_reg.js"></script>
+<script type="text/javascript" src="${request.contextPath}/js/uc_reg.js"></script>
 <script type="text/javascript">
     $(function () {
         var src = 'pcw_i360';
-        var destUrl = "${weburl}";
+        var destUrl = "${request.contextPath}";
         $("#doc").css('background', '#f5f5f5');
         var $wrapper = $('.quc-sign-up-wrapper');
         QHPass.setConfig('src', src);
