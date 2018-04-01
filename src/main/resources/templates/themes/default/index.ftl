@@ -24,30 +24,30 @@
     <meta http-equiv="Cache-Control" content="no-siteapp">
     <!-- 百度联盟 -->
     <meta name="baidu_union_verify" content="bd76270fb5a06c40f25bd1703d7d220b">
-    <title>${webname} - ${webtheme}</title>
+    <title>${webname} - ${webslogen}</title>
     <meta name="keywords" content="${keywords}">
     <meta name="description" content="${description}">
-    <link rel="shortcut icon" href="${request.contextPath}/themes/default/favicon.ico">
-    <link rel="apple-touch-icon" sizes="114x114" href="${request.contextPath}/themes/default/favicon.ico">
+    <link rel="shortcut icon" href="${request.contextPath}/themes/${webtheme}/favicon.ico">
+    <link rel="apple-touch-icon" sizes="114x114" href="${request.contextPath}/themes/${webtheme}/favicon.ico">
     <link rel="profile" href="http://gmpg.org/xfn/11">
     <!-- fontico -->
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/default/css/fontico.css">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/${webtheme}/css/fontico.css">
     <!-- pace -->
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/default/css/pace.css">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/${webtheme}/css/pace.css">
     <!--[if lt IE 9]>
-    <script src="${request.contextPath}/themes/default/js/html5.js"></script>
-    <script src="${request.contextPath}/themes/default/js/css3-mediaqueries.js"></script>
+    <script src="${request.contextPath}/themes/${webtheme}/js/html5.js"></script>
+    <script src="${request.contextPath}/themes/${webtheme}/js/css3-mediaqueries.js"></script>
     <![endif]-->
-     <link rel="stylesheet" id="default-style-css" href="${request.contextPath}/themes/default/style.css" type="text/css" media="all">
+     <link rel="stylesheet" id="default-style-css" href="${request.contextPath}/themes/${webtheme}/style.css" type="text/css" media="all">
     <!-- jquery -->
     <script type="text/javascript" src="${request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/slides.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/jquery.qrcode.min.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/jquery-ias.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/jquery.lazyload.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/tipso.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/script.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/flexisel.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/slides.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/jquery.qrcode.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/jquery-ias.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/jquery.lazyload.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/tipso.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/script.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/flexisel.js"></script>
     <style>
     a:hover, .top-menu a:hover, .show-more span, .cat-box .icon-cat, .single-content a, .single-content a:visited, #site-nav .down-menu > .current-menu-item > a, .entry-meta a, #site-nav .down-menu > .current-menu-item > a:hover, #site-nav .down-menu > li > a:hover, #site-nav .down-menu > li.sfHover > a, .cat-title .fa-bars, .widget-title .fa-bars, .at, .at a, #user-profile a:hover, #comments .fa-exclamation-circle, #comments .fa-check-square, #comments .fa-spinner, #comments .fa-pencil-square-o {color: #209ed8;}
     .sf-arrows > li > .sf-with-ul:focus:after, .sf-arrows > li:hover > .sf-with-ul:after, .sf-arrows > .sfHover > .sf-with-ul:after {border-top-color: #209ed8;}
@@ -76,8 +76,8 @@
     @media screen and (max-width: 1230px) {  #content, #colophon, .breadcrumb, .footer-widget {width: 98%;}  #top-menu {width: 98%;}  .top-nav {width: 98%;}  #main-search, #search-main, #mobile-nav {width: 98%;}  .breadcrumb {width: 98%;}  }
     </style>
 
-    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/default/default.css">
-    <link rel="stylesheet" href="${request.contextPath}/themes/default/css/layer.css" id="layuicss-skinlayercss">
+    <link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/${webtheme}/default.css">
+    <link rel="stylesheet" href="${request.contextPath}/themes/${webtheme}/css/layer.css" id="layuicss-skinlayercss">
 </head>
 <body class="home blog  pace-done">
 <div class="pace  pace-inactive">
@@ -205,7 +205,7 @@
         <div id="menu-box">
             <div id="top-menu"><span class="nav-search"><i class="fa fa-search"></i></span>
                 <hgroup class="logo-site">
-                    <h1 class="site-title"><a href="${weburl}/"><img src="${request.contextPath}/themes/default/logo.png" title="${webname}" rel="home"><span class="site-name">${webname}</span></a></h1>
+                    <h1 class="site-title"><a href="${weburl}/"><img src="${request.contextPath}/themes/${webtheme}/logo-big.png" title="${webname}" rel="home"><span class="site-name">${webname}</span></a></h1>
                 </hgroup><!-- .logo-site -->
                 <div id="site-nav-wrap">
                     <div id="sidr-close"><a href="${weburl}/#sidr-close" class="toggle-sidr-close">×</a>
@@ -305,7 +305,7 @@
                     <article id="post-3094"
                              class="post-3094 post type-post status-publish format-standard hentry category-javascript tag-wepy tag-wepy-com-loadings tag-406 tag-407 zqu">
                         <figure class="thumbnail">
-                            <div class="load"><a href="${weburl}/3094.html"><img src="${request.contextPath}/themes/default/loading.png" data-original="" alt="基于Wepy开发的微信小程序Loading加载组件正式发布" style="display: block;"></a></div>
+                            <div class="load"><a href="${weburl}/3094.html"><img src="${request.contextPath}/themes/${webtheme}/loading.png" data-original="" alt="基于Wepy开发的微信小程序Loading加载组件正式发布" style="display: block;"></a></div>
                             <span class="cat"><a
                                     href="${weburl}/category/web/javascript/">JavaScript</a></span></figure>
                         <header class="entry-header"><h2 class="entry-title"><a href="${weburl}/3094.html"
@@ -328,7 +328,7 @@
                     <article id="post-3077"
                              class="post-3077 post type-post status-publish format-standard hentry category-java tag-freemarker tag-java tag-shiro tag-springboot zqu">
                         <figure class="thumbnail">
-                            <div class="load"><a href="${weburl}/3077.html"><img src="${request.contextPath}/themes/default/loading.png" data-original="" alt="SpringBoot下使用Shiro+Freemaker报错：org.apache.shiro.UnavailableSecurityManagerException"></a>
+                            <div class="load"><a href="${weburl}/3077.html"><img src="${request.contextPath}/themes/${webtheme}/loading.png" data-original="" alt="SpringBoot下使用Shiro+Freemaker报错：org.apache.shiro.UnavailableSecurityManagerException"></a>
                             </div>
                             <span class="cat"><a href="${weburl}/category/coding/java/">Java</a></span>
                         </figure>
@@ -354,7 +354,7 @@
                              class="post-3072 post type-post status-publish format-standard hentry category-resource-sharing tag-98 tag-369 tag-403 zqu">
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/3072.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="腾讯云“云+校园扶持计划”1核2G1M服务器3年只需360元"></a></div>
                             <span class="cat"><a href="${weburl}/category/resource-sharing/">资源分享</a></span>
@@ -380,7 +380,7 @@
                              class="post-3067 post type-post status-publish format-standard hentry category-java tag-springboot tag-springcloud tag-zuul zqu">
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/3067.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="SpringCloud使用Zuul出现“Forwarding error”错误解决方法"></a></div>
                             <span class="cat"><a href="${weburl}/category/coding/java/">Java</a></span>
@@ -406,7 +406,7 @@
                              class="post-3049 post type-post status-publish format-standard hentry category-suitan tag-399 tag-400 zqu">
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/3049.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="2018，一个新的起点。"></a></div>
                             <span class="cat"><a href="${weburl}/category/talk/suitan/">个人随谈</a></span>
@@ -432,7 +432,7 @@
                              class="post-3041 post type-post status-publish format-standard hentry category-toss-with-record tag-javascript tag-398 zqu">
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/3041.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="使用百度地图+经纬度绘制数据可视化地理分布"></a></div>
                             <span class="cat"><a href="${weburl}/category/toss-more-than/toss-with-record/">折腾随记</a></span>
@@ -686,7 +686,7 @@
                                                                      rel="bookmark">Centos7安装Jenkins配置持续集成</a></h2>
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/2999.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="Centos7安装Jenkins配置持续集成"></a></div>
                         </figure>
@@ -722,7 +722,7 @@
                                                                      rel="bookmark">Python批量抓取站酷ZCOOL作品图片并归档</a></h2>
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/3019.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="Python批量抓取站酷ZCOOL作品图片并归档"></a></div>
                         </figure>
@@ -759,7 +759,7 @@
                                                                      rel="bookmark">JavaScript实时监听歌曲播放进度显示对应歌词</a></h2>
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/2993.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="JavaScript实时监听歌曲播放进度显示对应歌词"></a></div>
                         </figure>
@@ -796,7 +796,7 @@
                                                                      rel="bookmark">Fotor懒设计-小白用户的在线平面设计神器</a></h2>
                         <figure class="thumbnail">
                             <div class="load"><a href="${weburl}/2927.html"><img
-                                    src="${request.contextPath}/themes/default/loading.png"
+                                    src="${request.contextPath}/themes/${webtheme}/loading.png"
                                     data-original=""
                                     alt="Fotor懒设计-小白用户的在线平面设计神器"></a></div>
                         </figure>
@@ -915,7 +915,7 @@
             <a href="javascript:void(0)" class="qr" title="二维码"><i class="fa fa-qrcode"></i>
             <span class="qr-img">
             <div id="output">
-                <img class="alignnone" src="${request.contextPath}/themes/default/favicon.ico">
+                <img class="alignnone" src="${request.contextPath}/themes/${webtheme}/favicon.ico">
             </div>
             </span>
             </a>
@@ -936,9 +936,9 @@
         if (keycode == 37) location = '${weburl}/';
         if (keycode == 39) location = '${weburl}/page/2/';
     }</script>
-    <script src="${request.contextPath}/themes/default/js/layer.js"></script>
-    <script src="${request.contextPath}/themes/default/js/pace.min.js"></script>
-    <script src="${request.contextPath}/themes/default/default.js"></script>
+    <script src="${request.contextPath}/themes/${webtheme}/js/layer.js"></script>
+    <script src="${request.contextPath}/themes/${webtheme}/js/pace.min.js"></script>
+    <script src="${request.contextPath}/themes/${webtheme}/default.js"></script>
     <style id="STYLE_1522506135474">@CHARSET "UTF-8";
     * {-webkit-tap-highlight-color: rgba(255, 0, 0, 0)}
     .box-size {box-sizing: border-box;-moz-box-sizing: border-box;-webkit-box-sizing: border-box}
@@ -976,9 +976,9 @@
     .ds-payment-img .qrcode-border {border-radius: 29.97px;width: 236.89px;height: 236.89px;padding: 18.05px;margin-top: 25.53px;}
     </style>
 
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/superfish.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/gb2big5.js"></script>
-    <script type="text/javascript" src="${request.contextPath}/themes/default/js/carousel.min.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/superfish.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/gb2big5.js"></script>
+    <script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/carousel.min.js"></script>
 </div>
 <div id="overlay"></div>
 <div id="layer_shadow" class="share-layer-shadow"

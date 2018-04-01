@@ -1,13 +1,11 @@
 /*
-                 _       _   _____   _____  __    __       _____   __   _  
-                | |     | | /  ___| /  _  \ \ \  / /      /  ___| |  \ | | 
-                | |     | | | |     | | | |  \ \/ /       | |     |   \| | 
-                | |     | | | |     | | | |   \  /        | |     | |\   | 
-                | |___  | | | |___  | |_| |   / /         | |___  | | \  | 
-                |_____| |_| \_____| \_____/  /_/          \_____| |_|  \_| 
-*/
-/*
-
+____________  _________    _____________  ___      ______      ___  _________    _____________
+| __________| / ______ /   |  __________ | \ \     | | \ \     | | | / ______  |  __________ |
+    |  |    | |          |    _________   \ \    | |  \ \    | || |            |  __________
+   |  |     | | ______   |  /_________ |  \ \   | |   \ \   | |   | | ______   |  /_________|
+  |  |      | |______ | |  | \ \          \ \  | |    \ \  | |    | |______ | |  | \ \
+ |  |       | |________ |  |  \ \_______  \ \| |      \ \ |_|     | |________ |  |  \ \_______
+|__|        /_/______ | | _|   \______/   \_\_|       \_ |_|      /_/______ | | _|   \______/
 */
 a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video{margin:0;padding:0;outline:0;border:0;vertical-align:baseline;font-style:inherit;font-size:100%;font-family:inherit;}
 html{overflow-y:scroll;-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;font-size:62.5%;-webkit-text-size-adjust:100%;-ms-text-size-adjust:100%;}
