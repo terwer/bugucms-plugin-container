@@ -11,6 +11,9 @@
 		<link rel="stylesheet" href="${request.contextPath}/css/base.css">
 		<!--页面自定义样式-->
 		<link rel="stylesheet" href="${request.contextPath}/css/uc-reg.css">
+		<!-- bootstrap -->
+		<link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/css/bootstrap.min.css">
+		<link rel="shortcut icon" href="${request.contextPath}/themes/${webtheme}/favicon.ico">
 	</head>
 
 	<body class="login-page" style="height: 965px;">
@@ -32,36 +35,36 @@
 									<div class="uc-tip-wrapper uc-global-error">
 										<p class="uc-tip uc-tip-error"></p>
 									</div>
-									<form class="uc-form" method="post" action="${request.contextPath}/user/register">
+									<form id="registerForm" class="uc-form" method="post" action="${request.contextPath}/user/register">
 										<div>
 											<p class="uc-field uc-field-mobile uc-input-long">
 												<span class="uc-fixIe6margin"><label class="uc-label"></label></span>
-												<span class="uc-input-bg"><input class="uc-input uc-input-mobile" type="tel" name="account" data-name="mobile" maxlength="11" placeholder="请输入要注册的手机号"></span>
+												<span class="uc-input-bg"><input id="account" class="uc-input uc-input-mobile" type="tel" name="account" data-name="mobile" maxlength="11" placeholder="请输入要注册的手机号"></span>
 											</p>
 											<span class="uc-tip"></span>
 											<p class="uc-field uc-field-password uc-input-long">
 												<span class="uc-fixIe6margin"><label class="uc-label"></label></span>
-												<span class="uc-input-bg"><input class="uc-input uc-input-password" type="password" name="password" placeholder="密码请设置8-20个字符" maxlength="20"></span>
+												<span class="uc-input-bg"><input id="password" class="uc-input uc-input-password" type="password" name="password" placeholder="密码请设置8-20个字符"></span>
 											</p>
 											<span class="uc-tip"></span>
-											<p class="uc-field uc-field-captcha uc-input-short" style="display: block;"><img class="uc-captcha-img uc-captcha-change" alt="验证码" title="点击更换" tabindex="99" src="${request.contextPath}/user/captcha">
+											<p class="uc-field uc-field-captcha uc-input-short" style="display: block;"><img class="uc-captcha-img uc-captcha-change" alt="看不清" title="点击更换" tabindex="99" src="${request.contextPath}/common/captcha" onclick="this.src=this.src+'?'; return false">
 												<span class="uc-input-bg"><input class="uc-input uc-input-captcha" type="text" name="captcha" maxlength="7" placeholder="请输入验证码" autocomplete="off"></span>
 											</p>
 											<span class="uc-tip"></span>
 											<p class="uc-field uc-next-step uc-clearfix">
-												<a href="#" class="uc-nextAndGet-sms-token">下一步</a>
+												<a href="javascript:void(0);" id="btnNext" class="uc-nextAndGet-sms-token">下一步</a>
 											</p>
 											<p class="uc-field uc-field-sms-token uc-input-middle uc-clearfix">
 												<span class="uc-sms-tips">短信验证码已发送至<label class="uc-sms-tips-mobile"></label></span>
-												<a href="#" class="uc-get-sms-token">免费获取校验码</a>
+												<a href="javascript:void(0);" class="uc-get-sms-token">免费获取校验码</a>
 												<span class="uc-input-bg">
-                                            <input class="uc-input uc-input-sms-token" type="text" name="smscode" data-name="smsToken" placeholder="请输入短信验证码" maxlength="6"></span>
+                                            <input class="uc-input uc-input-sms-token" type="text" name="smsCode" data-name="smsToken" placeholder="请输入短信验证码" maxlength="6"></span>
 											</p>
 										</div>
-										<p class="uc-field uc-field-submit"><input class="uc-button uc-button-sign-up" type="submit" value="立即注册"></p>
+										<p class="uc-field uc-field-submit"><input id="btnRegister" class="uc-button uc-button-sign-up" type="button" value="立即注册"></p>
 										<p class="uc-field uc-field-smscodetip"><span><a class="uc-link" href="${request.contextPath}/findpwd" target="_blank">短信验证码没收到？</a></span></p>
-										<p class="uc-field uc-field-licence"><label><span>点击“下一步”，即表示您已同意并愿意遵守<a class="uc-link" href="#" target="_blank">《${webname}用户服务条款》</a></span></label></p>
-<p class="uc-login">已有帐号，
+										<p class="uc-field uc-field-licence"><label><span>点击“下一步”，即表示您已同意并愿意遵守<a class="uc-link" href="javascript:void(0);">《${webname}用户服务条款》</a></span></label></p>
+										<p class="uc-login">已有帐号，
 											<a href="${request.contextPath}/login" class="uc-link uc-link-login">立即登录</a>
 										</p>
 									</form>
@@ -96,7 +99,14 @@
 			</div>
 		</div>
 		<!-- jquery -->
-		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
+		<!-- bootstrap -->
+		<script type="text/javascript" src="${request.contextPath}/webjars/bootstrap/js/bootstrap.min.js"></script>
+		<!-- jquery-validate -->
+		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/jquery.validate.extend.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/messages_zh.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/js/uc_reg.js"></script>
 		<script type="text/javascript">
 		</script>

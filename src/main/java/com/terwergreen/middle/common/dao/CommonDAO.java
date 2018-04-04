@@ -16,6 +16,7 @@ import java.util.Map;
  * @ClassName：IBaseCommonDAO
  * @date 2018-03-31
  */
+@SuppressWarnings({ "rawtypes" })
 public interface CommonDAO {
     /**
      * 查询最大记录数

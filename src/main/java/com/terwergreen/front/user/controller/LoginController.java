@@ -15,11 +15,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.terwergreen.framework.core.bg.controller.BGBaseController;
 import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
-import com.terwergreen.front.common.web.BGBaseController;
 
 @Controller
+@SuppressWarnings({ "rawtypes" })
 public class LoginController extends BGBaseController {
 
     @Autowired
@@ -122,34 +123,6 @@ public class LoginController extends BGBaseController {
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
             restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
             logger.debug("注册成功，您的注册信息：用户名F10001。");
-            super.logger.info("请求结束");
-        } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
-            restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
-            return restResponseDTO;
-        }
-        return restResponseDTO;
-    }
-
-    /**
-     * 获取图片校验码接口
-     *
-     * @return
-     * @author terwergreen
-     * @date 2018-04-02 13:36:00
-     */
-    @RequestMapping(value = "/user/captcha")
-    @ResponseBody
-    public RestResponseDTO captcha(HttpServletRequest request, HttpServletResponse response) {
-        RestResponseDTO restResponseDTO = new RestResponseDTO();
-        response.setContentType("application/json;charset=utf-8");
-        try {
-            super.logger.info("请求开始");
-
-            restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
-            restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
-            logger.debug("获取图片校验码成功。");
             super.logger.info("请求结束");
         } catch (Exception e) {
             super.logger.error("接口异常:error=", e);

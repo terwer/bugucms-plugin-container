@@ -28,8 +28,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
-            <version>2.0.0.RELEASE</version>
-        </dependency>
+            </dependency>
         <!-- mybatis -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
@@ -40,34 +39,32 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-freemarker</artifactId>
-            <version>1.4.1.RELEASE</version>
-        </dependency>
+            </dependency>
         <!-- MySQL -->
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
-            <version>5.1.45</version>
             <scope>runtime</scope>
         </dependency>
         <!-- 添加oracle jdbc driver -->
+        <!-- 
         <dependency>
             <groupId>com.oracle</groupId>
             <artifactId>ojdbc6</artifactId>
             <version>11.2.0.4</version>
             <scope>runtime</scope>
         </dependency>
+        -->
         <!-- Tomcat -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-tomcat</artifactId>
-            <version>2.0.0.RELEASE</version>
             <!-- <scope>provided</scope> -->
         </dependency>
         <!-- 测试库 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <version>2.0.0.RELEASE</version>
             <scope>test</scope>
         </dependency>
         <!-- JSON -->
@@ -76,13 +73,29 @@
             <artifactId>json-smart</artifactId>
             <version>RELEASE</version>
         </dependency>
+		<!-- kaptcha验证码库 -->
+		<dependency> 
+		 <groupId>com.github.penggle</groupId> 
+		 <artifactId>kaptcha</artifactId> 
+		 <version>2.3.2</version> 
+		</dependency>
 
         <!-- Web前端开发库 -->
+        <dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>webjars-locator</artifactId>
+		    <version>0.33</version>
+		</dependency>
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>jquery</artifactId>
             <version>1.10.1</version>
         </dependency>
+        <dependency>
+		    <groupId>org.webjars</groupId>
+		    <artifactId>bootstrap</artifactId>
+		    <version>3.3.7</version>
+		</dependency>
     </dependencies>
 
     <build>
@@ -91,8 +104,7 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <version>2.0.0.RELEASE</version>
-            </plugin>
+                </plugin>
         </plugins>
     </build>
 

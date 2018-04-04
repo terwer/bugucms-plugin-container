@@ -1,10 +1,11 @@
 package com.terwergreen.front.homepage.controller;
 
-import com.terwergreen.front.common.web.BGBaseController;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.terwergreen.framework.core.bg.controller.BGBaseController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;

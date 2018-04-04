@@ -5,17 +5,16 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.terwergreen.framework.core.bg.controller.BGBaseController;
 import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
-import com.terwergreen.front.common.web.BGBaseController;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.portlet.ModelAndView;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
 /**
  * Created by terwergreen on 2017-11-30.

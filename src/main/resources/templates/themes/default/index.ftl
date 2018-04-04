@@ -36,7 +36,7 @@ ____________  _________    _____________  ___      ______      ___  _________   
     <![endif]-->
 		<link rel="stylesheet" id="default-style-css" href="${request.contextPath}/themes/${webtheme}/style.css" type="text/css" media="all">
 		<!-- jquery -->
-		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/slides.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/jquery.qrcode.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/js/jquery-ias.js"></script>
