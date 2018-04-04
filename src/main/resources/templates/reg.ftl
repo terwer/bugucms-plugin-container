@@ -4,16 +4,16 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="renderer" content="webkit">
-		<meta name="keywords" content="${keywords}">
-		<meta name="description" content="${description}">
-		<title>注册 - ${webname}</title>
+		<meta name="keywords" content="${siteConfigDTO.keywords}">
+		<meta name="description" content="${siteConfigDTO.description}">
+		<title>注册 - ${siteConfigDTO.webname}</title>
 		<!--公共的样式-->
 		<link rel="stylesheet" href="${request.contextPath}/css/base.css">
 		<!--页面自定义样式-->
 		<link rel="stylesheet" href="${request.contextPath}/css/uc-reg.css">
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/css/bootstrap.min.css">
-		<link rel="shortcut icon" href="${request.contextPath}/themes/${webtheme}/favicon.ico">
+		<link rel="shortcut icon" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
 	</head>
 
 	<body class="login-page" style="height: 965px;">
@@ -28,7 +28,7 @@
 				</div>
 				<div class="reg-content">
 					<div id="regWrap" style="display: block;">
-						<div class="reg-title">注册${webname}帐号</div>
+						<div class="reg-title">注册${siteConfigDTO.webname}帐号</div>
 						<div class="uc-sign-up-wrapper uc-wrapper uc-page">
 							<div class="uc-mod-sign-up uc-clearfix">
 								<div class="uc-main">
@@ -63,7 +63,7 @@
 										</div>
 										<p class="uc-field uc-field-submit"><input id="btnRegister" class="uc-button uc-button-sign-up" type="button" value="立即注册"></p>
 										<p class="uc-field uc-field-smscodetip"><span><a class="uc-link" href="${request.contextPath}/findpwd" target="_blank">短信验证码没收到？</a></span></p>
-										<p class="uc-field uc-field-licence"><label><span>点击“下一步”，即表示您已同意并愿意遵守<a class="uc-link" href="javascript:void(0);">《${webname}用户服务条款》</a></span></label></p>
+										<p class="uc-field uc-field-licence"><label><span>点击“下一步”，即表示您已同意并愿意遵守<a class="uc-link" href="javascript:void(0);">《${siteConfigDTO.webname}用户服务条款》</a></span></label></p>
 										<p class="uc-login">已有帐号，
 											<a href="${request.contextPath}/login" class="uc-link uc-link-login">立即登录</a>
 										</p>
@@ -80,10 +80,10 @@
 							<p>
 								<span class="reg-succeed-icon"></span>
 							</p>
-							<p>恭喜！您已完成${webname}帐号注册</p>
+							<p>恭喜！您已完成${siteConfigDTO.webname}帐号注册</p>
 							<p>
 								您可以用该帐号登录
-								<a href="${request.contextPath}/" class="link" target="_blank">${webname}</a>
+								<a href="${request.contextPath}/" class="link" target="_blank">${siteConfigDTO.webname}</a>
 							</p>
 						</div>
 					</div>
@@ -91,9 +91,9 @@
 			</div>
 			<div style="padding: 10px;"></div>
 			<div id="ft">
-				Copyright©2011-<span id="currentYear">2018</span> ${domain} All Rights Reserved ${webname}
+				Copyright©2011-<span id="currentYear">2018</span> ${siteConfigDTO.domain} All Rights Reserved ${siteConfigDTO.webname}
 				<p>
-					<a target="_blank" href="http://www.miibeian.gov.cn/">${beianinfo}</a>
+					<a target="_blank" href="http://www.miibeian.gov.cn/">${siteConfigDTO.beianinfo}</a>
 				</p>
 
 			</div>
@@ -103,10 +103,10 @@
 		<!-- bootstrap -->
 		<script type="text/javascript" src="${request.contextPath}/webjars/bootstrap/js/bootstrap.min.js"></script>
 		<!-- jquery-validate -->
-		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/jquery.validate.min.js"></script>
-		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
-		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/jquery.validate.extend.js"></script>
-		<script type="text/javascript" src="${request.contextPath}/themes/${webtheme}/lib/jquery-validate/messages_zh.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.extend.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/messages_zh.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/js/uc_reg.js"></script>
 		<script type="text/javascript">
 		</script>

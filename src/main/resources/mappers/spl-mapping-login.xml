@@ -1,16 +1,18 @@
 <!DOCTYPE mapper
-PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bgapp">
-	<resultMap type="java.util.HashMap" id="statusMap">
-		<result column="account_id" property="accountId"/>
-	</resultMap>
-	<select id="login_by_account" resultMap="statusMap">SELECT
-		ACCOUNT_ID,
-		ACCOUNT_NAME,
-		MOBILE
-		FROM
-		bg_account_info
-		WHERE MOBILE = #{account}</select>
+    <resultMap type="java.util.HashMap" id="statusMap">
+        <result column="account_id" property="accountId"/>
+    </resultMap>
+    <select id="login_by_account" resultMap="statusMap">
+		SELECT
+			accoutn_id,
+			account_name,
+		    mobile
+		  FROM
+			bg_account_info
+		WHERE mobile = #{account}
+	</select>
 </mapper>

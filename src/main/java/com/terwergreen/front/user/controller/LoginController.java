@@ -6,6 +6,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.terwergreen.middle.common.dto.SiteConfigDTO;
+import com.terwergreen.middle.common.service.CommonService;
 import com.terwergreen.middle.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,11 +22,13 @@ import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
 
 @Controller
-@SuppressWarnings({ "rawtypes" })
+@SuppressWarnings({"rawtypes"})
 public class LoginController extends BGBaseController {
 
     @Autowired
     private LoginService loginService;
+    @Autowired
+    private CommonService commonService;
 
     /***********/
     /**页面开始**/
@@ -32,28 +36,34 @@ public class LoginController extends BGBaseController {
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(HttpServletRequest request) {
+        try {
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            new ModelAndView("error", "message", "接口异常");
+        }
         return new ModelAndView();
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public ModelAndView reg(HttpServletRequest request) {
         Map<String, String> paramMap = new HashMap<String, String>();
-        // paramMap.put("domain", "terwergreen.com");
-        // paramMap.put("weburl", "http://www.terwergreen.com");
-        paramMap.put("domain", "localhost");
-        paramMap.put("weburl", "http://localhost:8080");
-        paramMap.put("webtheme", "default");
-        paramMap.put("adminPath", "admin");
-        paramMap.put("webname", "远方的灯塔");
-        paramMap.put("webslogen", "专注于服务端技术分享");
-        paramMap.put("keywords", "软件架构、服务端开发、Java、Spring、Dubbo、Zookeeper、微服务");
-        paramMap.put("description", "远方的灯塔(特维博客)是关注与分享互联网及服务端开发技术的个人博客，致力于Java后端开发及服务端技术、软件架构、微服务技术分享。同时也记录个人的一路点滴，所蕴含的包括前端、后端、数据库等知识，欢迎您关注我们。");
-        paramMap.put("beianinfo", "粤ICP备18023717号-1");
-        return new ModelAndView("reg", paramMap);
+        SiteConfigDTO siteConfigDTO = null;
+        try {
+            siteConfigDTO = commonService.getSiteConfig();
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            new ModelAndView("error", "message", "接口异常");
+        }
+        return new ModelAndView("reg", "siteConfigDTO", siteConfigDTO);
     }
 
     @RequestMapping(value = "/findpwd", method = RequestMethod.GET)
     public ModelAndView findpwd(HttpServletRequest request) {
+        try {
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            new ModelAndView("error", "message", "接口异常");
+        }
         return new ModelAndView();
     }
 
@@ -78,7 +88,7 @@ public class LoginController extends BGBaseController {
         response.setContentType("application/json;charset=utf-8");
         try {
             super.logger.info("请求开始");
-            Map resultMap = loginService.login(account,password);
+            Map resultMap = loginService.login(account, password);
             restResponseDTO.setData(resultMap);
 
             restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
