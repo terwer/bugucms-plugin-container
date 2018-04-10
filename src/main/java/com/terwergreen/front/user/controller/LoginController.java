@@ -46,7 +46,7 @@ public class LoginController extends BGBaseController {
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public ModelAndView reg(HttpServletRequest request) {
-        Map<String, String> paramMap = new HashMap<String, String>();
+        new HashMap<String, String>();
         SiteConfigDTO siteConfigDTO = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();

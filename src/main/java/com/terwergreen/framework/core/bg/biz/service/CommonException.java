@@ -9,7 +9,9 @@ package com.terwergreen.framework.core.bg.biz.service;
  */
 public class CommonException extends Exception {
 
-    // 原始异常
+	private static final long serialVersionUID = 1L;
+
+	// 原始异常
     private Throwable target;
 
     // 开发提供异常提示内容
