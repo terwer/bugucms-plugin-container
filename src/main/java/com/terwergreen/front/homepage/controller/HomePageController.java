@@ -1,5 +1,7 @@
 package com.terwergreen.front.homepage.controller;
 
+import com.terwergreen.bugucms.exception.RestException;
+import com.terwergreen.bugucms.exception.WebException;
 import com.terwergreen.framework.core.bg.controller.BGBaseController;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
@@ -18,23 +20,23 @@ public class HomePageController extends BGBaseController {
     private CommonService commonService;
 
     /***********/
-    /**页面开始**/
+    /** 页面开始 **/
     /***********/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(HttpServletRequest request) {
+    public ModelAndView home() throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            new ModelAndView("error", "message", "接口异常");
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
         }
         return new ModelAndView("themes/" + siteConfigDTO.getWebtheme() + "/index", "siteConfigDTO", siteConfigDTO);
     }
 
     /***********/
-    /**页面结束**/
+    /** 页面结束 **/
     /***********/
 
 }

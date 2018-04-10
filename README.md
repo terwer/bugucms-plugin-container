@@ -18,20 +18,21 @@ Oracle 11g
 ```
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
 ```
+（3）错误页面网页与API掉用分开，用``isAPI``字段标识，``String isAPI = request.getParameter("isAPI");``，网页访问不传，API访问传``Y``，PI访问输出JSON，否则输出HTML页面。            
 
 ## 本地启动   
 （1）打开``pom.xml``里面```spring-boot-starter-tomcat```的```<scope>provided</scope>```   
 （2）运行```BugucmsApplication.java```里面的```main```方法  
 
 ## Tomcat启动
-（1）注释掉``pom.xml``里面```spring-boot-starter-tomcat```的```<scope>provided</scope>``` ，或者直接复制```pom-tomcat.xml```到```pom.xml```   
+（1）注释掉``pom.xml``里面```spring-boot-starter-tomcat```的```<scope>provided</scope>``` ，或者直接复制```pom-prd-tomcat.xml```到```pom.xml```   
 （2）使用Intellij Idea  
 Build --> Build Artifacts --> 选择要打包编译的war --> 在项目target文件夹下出现新的war包   
 （3）将war包放到tomcat的webapps目录下  
 
 ## 发布流程
-1、打包之前copy``pom-prd-tomcat.xml``到``pom.xml``      
-2、打包之前``application-prd.properties``配置数据库用户名，密码 copy到``application-prd.properties``  
-3、部署之前初始化ddl表结构（如果需要）      
-4、部署之前``20180407-prd.sql``初始化数据     
+（1）打包之前copy``pom-prd-tomcat.xml``到``pom.xml``      
+（2）打包之前``application-prd.properties``配置数据库用户名，密码 copy到``application-prd.properties``  
+（3）部署之前初始化ddl表结构（如果需要）      
+（4）部署之前``20180407-prd.sql``初始化数据     
  

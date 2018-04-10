@@ -32,3 +32,4 @@ mvnw.cmd
 *.gz
 *.tmp
 bin/
+application-prd.properties      
