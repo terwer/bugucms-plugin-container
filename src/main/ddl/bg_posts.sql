@@ -1,25 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : tg-prd
- Source Server Type    : MySQL
- Source Server Version : 50556
- Source Host           : 39.104.66.135:3306
- Source Schema         : bugucms
-
- Target Server Type    : MySQL
- Target Server Version : 50556
- File Encoding         : 65001
-
- Date: 10/04/2018 18:27:39
-*/
-
-SET NAMES utf8mb4;
-SET FOREIGN_KEY_CHECKS = 0;
-
--- ----------------------------
--- Table structure for bg_posts
--- ----------------------------
 DROP TABLE IF EXISTS `bg_posts`;
 CREATE TABLE `bg_posts`  (
   `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章ID',
@@ -43,5 +21,3 @@ CREATE TABLE `bg_posts`  (
   INDEX `post_parent`(`post_parent`) USING BTREE,
   INDEX `post_author`(`post_author`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '文章表' ROW_FORMAT = Compact;
-
-SET FOREIGN_KEY_CHECKS = 1;
