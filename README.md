@@ -2,14 +2,21 @@
 轻量级、插件化的内容管理系统
 
 # 相关技术
+Centos 7.4      
 JDK1.8.162   
 Spring Boot 2.0.0   
 LogBack      
-FreeMarker    
-Maven 3.5.3      
+FreeMarker 模板引擎         
+Maven 3.5.3 (使用阿里云Maven仓库)          
 Tomcat 8.5.28   
 MySQL 5.7.19   
-Oracle 11g
+Oracle 11g    
+MyBatis 3.4.6   
+JSON    
+kaptcha图片验证码组件  
+HTML5      
+jQuery 1.10.1     
+bootstrap 3.3.7        
 
 # 启动
 ## 注意
@@ -18,7 +25,7 @@ Oracle 11g
 ```
 <script type="text/javascript" src="${pageContext.request.contextPath}/webjars/jquery/1.10.1/jquery.js"></script>
 ```
-（3）错误页面网页与API掉用分开，用``isAPI``字段标识，``String isAPI = request.getParameter("isAPI");``，网页访问不传，API访问传``Y``，PI访问输出JSON，否则输出HTML页面。            
+（3）错误页面网页与API调用分开，用``isAPI``字段标识，``String isAPI = request.getParameter("isAPI");``，网页访问不传，API访问传``Y``，API调用系统异常返回JSON，网页访问系统异常输出HTML页面。            
 
 ## 本地启动   
 （1）打开``pom.xml``里面```spring-boot-starter-tomcat```的```<scope>provided</scope>```   
