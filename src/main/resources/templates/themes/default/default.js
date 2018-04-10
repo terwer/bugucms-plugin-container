@@ -1,8 +1,5 @@
-//页面加载进度
 var consoleCSS = "color:red;-webkit-background-clip: text;font-size:1rem;";
 console.log('%c ☺ 感谢您访问远方的灯塔！', consoleCSS);
-console.log('%c 个人业务扩展开启啦，有需要相关业务的老板请下单，链接地址：https://www.terwergreen.com/business.html', consoleCSS);
-console.log('%c 志同道合开发者QQ交流群：30261540，快捷加入：https://shang.qq.com/wpa/qunwpa?idkey=c3541f1d0dbe443456228e3aebf23f6795b614a94d5df6a32f0b2b1c759bb99b', consoleCSS);
 
 $(function() {
 	$(".collapseButton").click(function() {
