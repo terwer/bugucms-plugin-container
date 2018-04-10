@@ -4,7 +4,6 @@ import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.exception.WebException;
 import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -23,15 +22,16 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = RestException.class)
     @ResponseBody
-    public RestResponseDTO defaultErrorHandler() {
+    public RestResponseDTO restErrorHandler(HttpServletRequest request, Exception e) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
+        restResponseDTO.setData(e.getLocalizedMessage() + ",request url is:" + request.getRequestURL());
         restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
         restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
         return restResponseDTO;
     }
 
     @ExceptionHandler(value = WebException.class)
-    public ModelAndView defaultErrorHandler(HttpServletRequest request, Exception e) throws Exception {
+    public ModelAndView webErrorHandler(HttpServletRequest request, Exception e) {
         ModelAndView mav = new ModelAndView();
         mav.addObject("message", e.getLocalizedMessage());
         mav.addObject("exception", getErrorInfoFromException(e));
