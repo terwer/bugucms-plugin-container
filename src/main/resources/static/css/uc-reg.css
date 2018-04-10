@@ -4,6 +4,10 @@ html {
 	/*overflow: scroll-y*/
 }
 
+a{
+    text-decoration: none !important;
+ }
+
 .gray-line {
 	border-right: 1px solid #828282
 }
@@ -133,16 +137,17 @@ input[type=text]:focus {
 .uc-mod-sign-up .uc-field-captcha .uc-input-bg,
 .uc-mod-sign-up .uc-field-mobile .uc-input-bg,
 .uc-mod-sign-up .uc-field-password .uc-input-bg {
-	background: #fff;
-	width: 250px
+	width: 250px;
 }
 
 .uc-mod-sign-up .uc-field-captcha .uc-captcha-img {
 	float: right;
 	height: 40px;
-	margin: 3px 0 0;
+	margin: 1px;
 	vertical-align: baseline;
-	width: 100px
+	width: 100px;
+	padding-right: 1px;
+	cursor:pointer;
 }
 
 .uc-mod-sign-up .uc-next-step .uc-nextAndGet-sms-token {

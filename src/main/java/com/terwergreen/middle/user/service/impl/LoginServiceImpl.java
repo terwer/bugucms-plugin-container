@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class LoginServiceImpl extends BaseService implements LoginService {
 
     @Autowired

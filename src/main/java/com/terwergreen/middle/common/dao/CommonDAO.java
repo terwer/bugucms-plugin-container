@@ -16,6 +16,7 @@ import java.util.Map;
  * @ClassName：IBaseCommonDAO
  * @date 2018-03-31
  */
+@SuppressWarnings({ "rawtypes" })
 public interface CommonDAO {
     /**
      * 查询最大记录数
@@ -29,7 +30,7 @@ public interface CommonDAO {
      * @param str
      * @return List
      */
-    List queryList(String sql, String str);
+    List queryListByString(String sql, String str);
 
     /**
      * 查询列表
@@ -47,7 +48,7 @@ public interface CommonDAO {
      * @param object
      * @return List
      */
-    List queryList(String sql, Object object);
+    List queryListByObject(String sql, Object object);
 
     /**
      * 分页查询
@@ -58,7 +59,7 @@ public interface CommonDAO {
      * @param pageSize 每页显示条目
      * @return
      */
-    List queryList(String sql, String str, int start, int pageSize);
+    List queryPageListByString(String sql, String str, int start, int pageSize);
 
     /**
      * 分页查询
@@ -69,7 +70,7 @@ public interface CommonDAO {
      * @param pageSize 每页显示条目
      * @return
      */
-    List queryList(String sql, Map paraMap, int start, int pageSize);
+    List queryPageList(String sql, Map paraMap, int start, int pageSize);
 
     /**
      * 分页查询
@@ -80,7 +81,7 @@ public interface CommonDAO {
      * @param pageSize 每页显示条目
      * @return
      */
-    List queryList(String sql, Object object, int start, int pageSize);
+    List queryPageListByObject(String sql, Object object, int start, int pageSize);
 
     /**
      * 查询单个信息
@@ -89,7 +90,7 @@ public interface CommonDAO {
      * @param str
      * @return Object
      */
-    Object querySingle(String sql, String str);
+    Object querySingleByString(String sql, String str);
 
     /**
      * 查询单个信息
@@ -107,7 +108,7 @@ public interface CommonDAO {
      * @param object
      * @return Object
      */
-    Object querySingle(String sql, Object object);
+    Object querySingleByObject(String sql, Object object);
 
     /**
      * 新增
@@ -125,7 +126,7 @@ public interface CommonDAO {
      * @param object
      * @return Object
      */
-    Object insert(String sql, Object object);
+    Object insertByObject(String sql, Object object);
 
     /**
      * 删除
@@ -143,7 +144,7 @@ public interface CommonDAO {
      * @param object
      * @return int
      */
-    int delete(String sql, Object object);
+    int deleteByObject(String sql, Object object);
 
     /**
      * 检核删除是否成功
@@ -161,7 +162,7 @@ public interface CommonDAO {
      * @param object
      * @return true:成功  false:失败
      */
-    boolean checkDelete(String sql, Object object);
+    boolean checkDeleteByObject(String sql, Object object);
 
     /**
      * 更新
@@ -179,7 +180,7 @@ public interface CommonDAO {
      * @param object
      * @return int
      */
-    int update(String sql, Object object);
+    int updateByObject(String sql, Object object);
 
     /**
      * 检核更新是否成功
@@ -197,7 +198,7 @@ public interface CommonDAO {
      * @param object
      * @return true:成功  false:失败
      */
-    boolean checkUpdate(String sql, Object object);
+    boolean checkUpdateByObject(String sql, Object object);
 
     /**
      * 批量更新
