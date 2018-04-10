@@ -22,8 +22,8 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
  * @ClassName：IBaseCommonDAO
  * @date 2018-03-31
  */
-@Repository
-@SuppressWarnings({"rawtypes"})
+@Repository      
+@SuppressWarnings({ "rawtypes", "restriction" })
 public class CommonIbatisDAO extends BaseDAO implements CommonDAO {
 
     @Override
@@ -176,7 +176,7 @@ public class CommonIbatisDAO extends BaseDAO implements CommonDAO {
         }
     }
 
-    @Override
+	@Override
     public Integer insertBatch(final String sql, final List insertList) throws BGDAOException {
         try {
             throw new NotImplementedException();

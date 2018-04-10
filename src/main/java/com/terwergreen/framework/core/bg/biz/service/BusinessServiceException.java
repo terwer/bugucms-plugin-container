@@ -2,7 +2,9 @@ package com.terwergreen.framework.core.bg.biz.service;
 
 public class BusinessServiceException extends Exception {
 
-    public BusinessServiceException() {
+	private static final long serialVersionUID = 1L;
+
+	public BusinessServiceException() {
     }
 
     public BusinessServiceException(Throwable paramThrowable) {

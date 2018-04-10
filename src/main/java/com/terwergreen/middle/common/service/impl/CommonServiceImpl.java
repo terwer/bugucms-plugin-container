@@ -14,13 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service
+@Service    
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class CommonServiceImpl extends BaseService implements CommonService {
 
     @Autowired
     private CommonDAO commonDAO;
 
-    @Override
+	@Override
     public SiteConfigDTO getSiteConfig() throws BusinessServiceException {
         SiteConfigDTO siteConfigDTO = null;
         try {
@@ -33,7 +34,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
         return siteConfigDTO;
     }
 
-    @Override
+	@Override
     public Object getOption(String optionGroup) throws BusinessServiceException {
         List list = null;
         try {
