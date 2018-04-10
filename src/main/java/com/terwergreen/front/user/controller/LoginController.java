@@ -6,6 +6,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.terwergreen.bugucms.exception.WebException;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
 import com.terwergreen.middle.user.service.LoginService;
@@ -35,34 +36,34 @@ public class LoginController extends BGBaseController {
     /***********/
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login(HttpServletRequest request) {
+    public ModelAndView login() throws Exception{
         try {
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            new ModelAndView("error", "message", "接口异常");
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
         }
         return new ModelAndView();
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
-    public ModelAndView reg(HttpServletRequest request) {
+    public ModelAndView reg() throws Exception {
         new HashMap<String, String>();
         SiteConfigDTO siteConfigDTO = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            new ModelAndView("error", "message", "接口异常");
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
         }
         return new ModelAndView("reg", "siteConfigDTO", siteConfigDTO);
     }
 
     @RequestMapping(value = "/findpwd", method = RequestMethod.GET)
-    public ModelAndView findpwd(HttpServletRequest request) {
+    public ModelAndView findpwd(HttpServletRequest request) throws Exception{
         try {
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            new ModelAndView("error", "message", "接口异常");
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
         }
         return new ModelAndView();
     }
