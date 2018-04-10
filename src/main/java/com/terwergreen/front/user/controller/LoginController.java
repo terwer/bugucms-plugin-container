@@ -96,7 +96,7 @@ public class LoginController extends BGBaseController {
             logger.debug("登陆成功");
             super.logger.info("请求结束");
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
+            logger.error("接口异常:error=", e);
             restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
             restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
             return restResponseDTO;
