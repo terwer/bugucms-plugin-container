@@ -22,7 +22,7 @@ public class HomePageController extends BGBaseController {
     /***********/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView reg(HttpServletRequest request) {
+    public ModelAndView home(HttpServletRequest request) {
         SiteConfigDTO siteConfigDTO = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();

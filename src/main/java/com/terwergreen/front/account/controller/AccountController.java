@@ -22,8 +22,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class AccountController extends BGBaseController {
 
-    @RequestMapping(value = "/accountInfo", method = RequestMethod.GET)
-    public ModelAndView Hello(HttpServletRequest request) {
+    @RequestMapping(value = "/account/accountInfo", method = RequestMethod.GET)
+    public ModelAndView accountInfo(HttpServletRequest request) {
         // Map<String, String> resultMap = new HashMap<String, String>();
         // resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
         // resultMap.put("msg", RestResponseStates.SUCCESS.getMsg());
@@ -32,9 +32,9 @@ public class AccountController extends BGBaseController {
         return new ModelAndView();
     }
 
-    @RequestMapping(value = "/activate", method = RequestMethod.GET)
+    @RequestMapping(value = "/account/activate", method = RequestMethod.GET)
     @ResponseBody
-    public RestResponseDTO Hello2(HttpServletRequest request) {
+    public RestResponseDTO activate(HttpServletRequest request) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
 
         Map<String, String> resultMap = new HashMap<String, String>();

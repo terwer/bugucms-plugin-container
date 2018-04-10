@@ -20,7 +20,6 @@ public class PostController extends BGBaseController {
     @Autowired
     private CommonService commonService;
 
-
     /***********/
     /**页面开始**/
     /***********/

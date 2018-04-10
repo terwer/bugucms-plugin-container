@@ -25,7 +25,7 @@ public class DeviceController extends BGBaseController {
 	 * @date 2018-04-03 13:36:00
 	 */
 	@RequestMapping(value = "common/sendSMS")
-	public RestResponseDTO captcha(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public RestResponseDTO sendSMS(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		RestResponseDTO restResponseDTO = new RestResponseDTO();
 		try {
 			response.setContentType("application/json;charset=utf-8");
