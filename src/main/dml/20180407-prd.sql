@@ -1,7 +1,7 @@
 -- 初始化站点配置
 INSERT INTO bg_options (option_group, option_name, option_value)
-VALUES ('siteConfig', 'domain', 'www.terwergreen'),
-  ('siteConfig', 'weburl', 'http://www.terwergreen'), ('siteConfig', 'webtheme', 'default'),
+VALUES ('siteConfig', 'domain', 'www.terwergreen.com'),
+  ('siteConfig', 'weburl', 'http://www.terwergreen.com'), ('siteConfig', 'webtheme', 'default'),
   ('siteConfig', 'webname', '远方的灯塔'),
   ('siteConfig', 'webslogen', '专注于服务端技术分享'),
   ('siteConfig', 'keywords', '软件架构、服务端开发、Java、Spring、Dubbo、Zookeeper、微服务'),
