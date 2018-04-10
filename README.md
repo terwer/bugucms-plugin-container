@@ -33,8 +33,11 @@ bootstrap 3.3.7
 
 ## Tomcat启动
 （1）注释掉``pom.xml``里面```spring-boot-starter-tomcat```的```<scope>provided</scope>``` ，或者直接复制```pom-prd-tomcat.xml```到```pom.xml```   
-（2）使用Intellij Idea  
+（2）使用IntelliJ IDEA        S
 Build --> Build Artifacts --> 选择要打包编译的war --> 在项目target文件夹下出现新的war包   
+或者使用eclipse    
+Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点击run，等待任务完成出现 ``BUILD SUCCES``，``ROOT.war``就会被打包好在``target``目录下     
+
 （3）将war包放到tomcat的webapps目录下  
 
 ## 发布流程
