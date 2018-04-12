@@ -9,7 +9,7 @@
 
 #regHeader {
 	background: #e8e8e8;
-	padding:0;
+	padding: 0;
 	width: 100%;
 }
 
@@ -17,7 +17,7 @@
 	margin: 0 auto;
 }
 
-#regHeader .logo-area{
+#regHeader .logo-area {
 	padding-right: 10px;
 }
 
@@ -26,7 +26,6 @@
 	height: 48px;
 	width: 168px
 }
-
 
 #regHeader .header-content span {
 	display: inline-block;
@@ -48,7 +47,7 @@
 	line-height: 48px;
 }
 
-#regContent{
+#regContent {
 	text-align: center;
 }
 
