@@ -27,6 +27,37 @@
 				</div>
 			</div>
 			<!--固定顶部部分结束-->
+			<!-- 登录界面开始 -->
+			<div class="layout-login">
+				<div class="book-container">
+					<div>
+						<div class="logo-area">
+							<img src="${request.contextPath}/img/logo-uc.png" alt="${siteConfigDTO.webname}">
+							<p class="logo-intro" id="logo-intro">${siteConfigDTO.webslogen}</p>
+						</div>
+						<div class="form-container" id="form_container">
+							<div class="ng-form-area show-place" id="form-area">
+								<form id="loginForm" action="javascript:void(0);" onsubmit="return false;">
+									<div class="shake-area" id="shake_area" style="z-index: 30;">
+										<div class="enter-area">
+											<input type="text" class="enter-item first-enter-item" id="account" name="account">
+										</div>
+										<div class="enter-area" style="z-index: 20;">
+											<input type="password" class="enter-item last-enter-item" id="password" name="password">
+										</div>
+									</div>
+									<input id="btnSubmit" class="button orange" type="submit" onsubmit="return false;" title="立即登录" value="立即登录">
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="other-tips">
+					<a href="${request.contextPath}/findpwd" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>
+					<a href="${request.contextPath}/reg" id="cloud_register"><em class="register-ico"></em><span>注册</span></a>
+				</div>
+			</div>
+			<!-- 登录界面介绍 -->
 		</div>
 		<!-- jquery -->
 		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>

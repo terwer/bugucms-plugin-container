@@ -5,23 +5,22 @@
 
 .layout-login {
 	position: absolute;
-	top: 50%;
+	top: 30%;
 	width: 100%;
-	margin-top: -230px;
 }
 
-.ll-book-container {
-	width: 540px;
+.book-container {
+	width: 360px;
 	margin: 0 auto;
 }
 
-.ll-logo-area {
-	height: 210px;
+.logo-area {
+	min-height: 120px;
 	overflow: hidden;
 	position: relative;
 }
 
-.ll-logo-area img {
+.logo-area img {
 	margin: 0 auto;
 	display: block;
 }
@@ -39,7 +38,7 @@
 	position: relative;
 	z-index: 10;
 	min-height: 130px;
-	height: auto
+	height: auto;
 }
 
 #other-tips {
