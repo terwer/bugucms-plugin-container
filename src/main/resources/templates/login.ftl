@@ -24,7 +24,7 @@
 		<div id="main" class="container-fluid">
 			<!--固定顶部部分开始-->
 			<div class="header clearfix">
-				<a href="javascript:void(0);" class="current-nav" style="display: block;"><em class="menu-more-ico"></em><span id="g_mod_name">${siteConfigDTO.webname}</span></a>
+				<a href="${siteConfigDTO.weburl}" class="current-nav" style="display: block;"><em class="menu-more-ico"></em><span id="g_mod_name">${siteConfigDTO.webname}</span></a>
 				<div class="vh-avator-area">
 					<div class="gl-lang-container">
 						<span class="help-center" id="g_help_center" onclick="show_help(this);">帮助中心</span>
