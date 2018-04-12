@@ -36,18 +36,19 @@ public class LoginController extends BGBaseController {
     /***********/
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public ModelAndView login() throws Exception{
+    public ModelAndView login() throws Exception {
+        SiteConfigDTO siteConfigDTO = null;
         try {
+            siteConfigDTO = commonService.getSiteConfig();
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
         }
-        return new ModelAndView();
+        return new ModelAndView("login", "siteConfigDTO", siteConfigDTO);
     }
 
     @RequestMapping(value = "/reg", method = RequestMethod.GET)
     public ModelAndView reg() throws Exception {
-        new HashMap<String, String>();
         SiteConfigDTO siteConfigDTO = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();
@@ -59,7 +60,7 @@ public class LoginController extends BGBaseController {
     }
 
     @RequestMapping(value = "/findpwd", method = RequestMethod.GET)
-    public ModelAndView findpwd(HttpServletRequest request) throws Exception{
+    public ModelAndView findpwd(HttpServletRequest request) throws Exception {
         try {
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);

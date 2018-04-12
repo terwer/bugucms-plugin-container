@@ -7,12 +7,11 @@
 		<meta name="keywords" content="${siteConfigDTO.keywords}">
 		<meta name="description" content="${siteConfigDTO.description}">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-
 		<title>注册 - ${siteConfigDTO.webname}</title>
 		<!--公共的样式-->
 		<link rel="stylesheet" href="${request.contextPath}/css/globle.css">
 		<!--页面自定义样式-->
-		<link rel="stylesheet" href="${request.contextPath}/css/uc-reg.css">
+		<link rel="stylesheet" href="${request.contextPath}/css/reg.css">
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/css/bootstrap.min.css">
 		<link rel="shortcut icon" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
