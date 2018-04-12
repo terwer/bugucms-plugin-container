@@ -6,11 +6,16 @@
 		<meta name="renderer" content="webkit">
 		<meta name="keywords" content="${siteConfigDTO.keywords}">
 		<meta name="description" content="${siteConfigDTO.description}">
-		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<!-- viewport可以控制用户在手机上两个手指缩放的行为范围，这行代码的意思是宽度为设备宽度，初始缩放为1，最大缩放也是1倍，用户不能缩放 -->
+		<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+		<!-- apple这行是告诉iOS这是个应用，就不会像网页一样可以滚动到顶部回弹一下的效果，就是可以看到苹果默认背景灰色部分的那个效果 -->
+		<meta name="apple-mobile-web-app-capable" content="yes" />
 		<title>登录 - ${siteConfigDTO.webname}</title>
 		<link rel="shortcut icon" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
 		<!-- artDialog -->
-		<link href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/ui-dialog.css" rel="stylesheet" />
+		<link rel="stylesheet" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/ui-dialog.css" />
+		<!-- poshytip -->
+		<link href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/tip-yellow/tip-yellow.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${request.contextPath}/css/main.css">
 		<link rel="stylesheet" href="${request.contextPath}/css/login.css">
 	</head>
@@ -40,10 +45,10 @@
 								<form id="loginForm" action="javascript:void(0);" onsubmit="return false;">
 									<div class="shake-area" id="shake_area" style="z-index: 30;">
 										<div class="enter-area">
-											<input type="text" class="enter-item first-enter-item" id="account" name="account">
+											<input type="text" class="enter-item first-enter-item" id="account" name="account" placeholder="请输入要注册的手机号" >
 										</div>
 										<div class="enter-area" style="z-index: 20;">
-											<input type="password" class="enter-item last-enter-item" id="password" name="password">
+											<input type="password" class="enter-item last-enter-item" id="password" name="password" placeholder="请输入密码">
 										</div>
 									</div>
 									<input id="btnSubmit" class="button orange" type="submit" onsubmit="return false;" title="立即登录" value="立即登录">
@@ -63,6 +68,15 @@
 		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
 		<!-- artDialog -->
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus-min.js"></script>
+		<!-- jquery-validate -->
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.extend.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/messages_zh.min.js"></script>
+		<!-- poshytip -->
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/jquery.poshytip.min.js"></script>
+		<!-- cookie -->
+		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js"></script>
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
 		<script src="${request.contextPath}/js/login.js"></script>
 	</body>
