@@ -44,5 +44,12 @@ Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点�
 （1）打包之前copy``pom-prd-tomcat.xml``到``pom.xml``      
 （2）打包之前``application-prd.properties``配置数据库用户名，密码 copy到``application.properties``  
 （3）部署之前初始化ddl表结构（如果需要）      
-（4）部署之前``20180407-prd.sql``初始化数据     
+（4）部署之前``20180407-prd.sql``初始化数据    
+
+## 参考
+[玩转spring boot——负载均衡与session共享](http://www.cnblogs.com/GoodHelper/p/6263240.html)  
+[ Spring Boot项目利用Redis实现session管理](https://blog.csdn.net/skyebefreeman/article/details/73076785)     
+[spring-boot+spring-session集成](https://yq.aliyun.com/articles/182676)      
+[使用Spring Session实现Spring Boot水平扩展](https://zhuanlan.zhihu.com/p/31673247)     
+[SpringBoot集成Shiro并用MongoDB做Session存储](http://www.tianshangkun.com/2017/11/10/SpringBoot%E9%9B%86%E6%88%90Shiro%E5%B9%B6%E7%94%A8MongoDB%E5%81%9ASession%E5%AD%98%E5%82%A8/)       
  

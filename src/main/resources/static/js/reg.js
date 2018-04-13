@@ -27,6 +27,19 @@ $(document).ready(function() {
 			captcha: {
 				required: "请输入验证码"
 			}
+		},
+		focusInvalid: true,
+		errorPlacement: function(error, element) {
+			var errorMsg = error[0].innerHTML;
+			$("#errorMsg").html(errorMsg).show();
+			//			var elementName = element[0].name;
+			//			$("#" + elementName).formtip(errorMsg);
+		},
+		success: function(element) {
+			var elem = $(element)[0].htmlFor;
+			$("#errorMsg").hide();
+			//			$("#" + elem).poshytip('disable');
+			//			$("#" + elem).poshytip('destroy');
 		}
 	});
 
@@ -56,6 +69,14 @@ $(document).ready(function() {
 	});
 
 	$("#btnRegister").on("click", function() {
+		var flag = $("#registerForm").valid();
+		if(!flag) {
+			// 没有通过验证
+			return;
+		}
+		console.log("校验通过");
+		return false;
+
 		//验证短信验证码
 		var smsData = {
 			smsCode: $("#smsCode").val()

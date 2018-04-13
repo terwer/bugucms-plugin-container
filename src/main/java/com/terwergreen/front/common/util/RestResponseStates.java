@@ -7,7 +7,11 @@ public enum RestResponseStates {
 
     SUCCESS("1", "请求成功，无任何异常"),
 
-    SERVER_ERROR("2", "系统忙，请稍候再试。如有疑问请联系管理员");
+    SERVER_ERROR("2", "系统忙，请稍候再试。如有疑问请联系管理员"),
+
+    INVALID_ACCOUNT("2000", "该账号尚未注册"),
+
+    INVALID_PASSWORD("2001", "密码错误，请重新输入");
 
     private String value;
     private String msg;

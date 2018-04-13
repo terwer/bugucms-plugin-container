@@ -24,7 +24,7 @@
 		<div id="main" class="container-fluid">
 			<!--固定顶部部分开始-->
 			<div class="header clearfix">
-				<a href="javascript:void(0);" class="current-nav" style="display: block;"><em class="menu-more-ico"></em><span id="g_mod_name">${siteConfigDTO.webname}</span></a>
+				<a href="${siteConfigDTO.weburl}" class="current-nav" style="display: block;"><em class="menu-more-ico"></em><span id="g_mod_name">${siteConfigDTO.webname}</span></a>
 				<div class="vh-avator-area">
 					<div class="gl-lang-container">
 						<span class="help-center" id="g_help_center" onclick="show_help(this);">帮助中心</span>
@@ -45,7 +45,7 @@
 								<form id="loginForm" action="javascript:void(0);" onsubmit="return false;">
 									<div class="shake-area" id="shake_area" style="z-index: 30;">
 										<div class="enter-area">
-											<input type="text" class="enter-item first-enter-item" id="account" name="account" placeholder="请输入要注册的手机号" >
+											<input type="text" class="enter-item first-enter-item" id="account" name="account" placeholder="请输入要注册的手机号">
 										</div>
 										<div class="enter-area" style="z-index: 20;">
 											<input type="password" class="enter-item last-enter-item" id="password" name="password" placeholder="请输入密码">
@@ -58,11 +58,18 @@
 					</div>
 				</div>
 				<div id="other-tips">
-					<a href="${request.contextPath}/findpwd" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>
+					<!--<a href="${request.contextPath}/findpwd" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>-->
+					<a href="javascript:void(0);" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>
 					<a href="${request.contextPath}/reg" id="cloud_register"><em class="register-ico"></em><span>注册</span></a>
 				</div>
+				<div id="ft">
+					Copyright©2011-<span id="currentYear">2018</span> ${siteConfigDTO.domain} All Rights Reserved ${siteConfigDTO.webname}
+					<p>
+						<a target="_blank" href="http://www.miibeian.gov.cn/">${siteConfigDTO.beianinfo}</a>
+					</p>
+				</div>
 			</div>
-			<!-- 登录界面介绍 -->
+			<!-- 登录界面结束 -->
 		</div>
 		<!-- jquery -->
 		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
@@ -78,7 +85,7 @@
 		<!-- cookie -->
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js"></script>
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
-		<script src="${request.contextPath}/js/login.js"></script>
+		<script src="${request.contextPath}/js/login.js?v=201804140045"></script>
 	</body>
 
 </html>

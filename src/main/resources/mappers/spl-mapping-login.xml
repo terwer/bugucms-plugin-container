@@ -3,16 +3,16 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bgapp">
-    <resultMap type="java.util.HashMap" id="statusMap">
-        <result column="account_id" property="accountId"/>
-    </resultMap>
-    <select id="login_by_account" resultMap="statusMap">
-		SELECT
-			accoutn_id,
-			account_name,
-		    mobile
-		  FROM
-			bg_account_info
-		WHERE mobile = #{account}
+    <!-- 校验用户名 -->
+    <select id="vali_by_account" resultType="int">
+		select count(1) from bg_users where mobile = #{account}
 	</select>
+    <!-- 校验密码 -->
+    <select id="vali_by_password" resultType="int">
+		select count(1) from bg_users where mobile = #{account} and password = md5(#{password})
+	</select>
+    <!-- 获取用户信息 -->
+    <select id="get_user_by_account" resultType="com.terwergreen.middle.user.UserDTO">
+        select user_name as accoutId,nick_name as nickName, user_profile as userProfile,mobile from bg_users where mobile = #{account}
+    </select>
 </mapper>
