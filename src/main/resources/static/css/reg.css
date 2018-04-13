@@ -1,17 +1,29 @@
+body {
+	font: 12px/1 "Hiragino Sans GB", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+	background: #328EB4 url(../img/body_bg.png) 0 0 repeat-x;
+	text-align: center;
+	color: #E0E2E6;
+}
+
+body a {
+	color: #5ee8a5;
+	text-decoration: none;
+}
+
+body a:focus,
+a:hover {
+	color: #48f510;
+	text-decoration: none;
+}
+
 #main {
-	background: #f5f5f5;
-	font: 14px "Microsoft YaHei";
 	height: 100%;
 	margin: 0 auto;
 	padding: 0;
 	width: 100%;
 }
 
-#regHeader {
-	background: #e8e8e8;
-	padding: 0;
-	width: 100%;
-}
+#regHeader {}
 
 #regHeader .header-content {
 	margin: 0 auto;
@@ -41,28 +53,53 @@
 	padding: 0 10px;
 }
 
+#regHeader .header-content .page-title a {
+	color: #E0E2E6;
+	text-decoration: none;
+}
+
 #regHeader .header-content .switch-login {
-	color: #7d7d7d;
+	color: #E0E2E6;
 	font-size: 14px;
 	line-height: 48px;
 }
 
-#regContent {
-	text-align: center;
+#regHeader .header-content .switch-login a {
+	color: #E0E2E6;
+	text-decoration: none;
 }
 
-#regContent .reg-title {
-	background: #fff;
-	border-bottom: 2px solid #f5f5f5;
-	color: #222;
+#reg-title {
+	/* background: #fff; */
+	/* border-bottom: 2px solid #f5f5f5; */
+	color: #fff;
 	font-size: 20px;
 	padding: 20px;
-	text-align: center
+	/* text-align: center */
+	/* margin:  0 auto; */
+}
+
+#regContent {
+	text-align: left;
+	width: 240px;
+	margin: 0 auto;
+}
+
+.uc-field-submit {
+	margin: 10px 0;
+}
+
+#btnRegister {
+	width: 100%;
+}
+
+#getSMSToken {
+	cursor: pointer;
 }
 
 .uc-sign-up-wrapper {
-	margin: auto;
-	background-color: #ffffff;
+	/* margin: auto; */
+	/* background-color: #ffffff; */
 }
 
 .uc-wrapper .uc-mod-sign-up .uc-button-disabled,
@@ -76,12 +113,12 @@
 }
 
 .uc-mod-sign-up .uc-sms-tips {
-	color: #333;
+	/* color: #333; */
 	display: block;
-	font-size: 14px;
+	/* font-size: 14px; */
 	height: 20px;
 	line-height: 20px;
-	overflow: hidden
+	overflow: hidden;
 }
 
 .uc-mod-sign-up .uc-field-smscodetip {
@@ -95,6 +132,10 @@
 
 .uc-clearfix {
 	margin: 0 auto;
+}
+
+#btnNext {
+	width: 100%;
 }
 
 .uc-mod-sign-up div.uc-main {
@@ -123,7 +164,7 @@
 
 .uc-mod-sign-up .uc-global-error .uc-tip {
 	margin: 0;
-	overflow: hidden
+	overflow: hidden;
 }
 
 .uc-mod-sign-up .uc-next-step .uc-nextAndGet-sms-token {
@@ -143,10 +184,20 @@
 	background: #149a59
 }
 
+
+/* 注册成功样式 */
+
+.reg-succeed {
+	display: none;
+}
+
+.uc-field-licence {
+	line-height: 18px;
+}
+
 .reg-succeed .reg-succeed-title {
-	background: #fff;
-	border-bottom: 2px solid #f5f5f5;
-	color: #222;
+	border-bottom: 1px solid #14bf0c;
+	color: #E0E2E6;
 	font-size: 20px;
 	padding: 20px;
 	text-align: center
@@ -158,23 +209,30 @@
 }
 
 .uc-sign-up-succeed {
-	background: #fff;
-	height: 204px;
+	height: 200px;
 	overflow: hidden;
 }
 
 .uc-sign-up-succeed p {
+	color: #E0E2E6;
 	font-size: 14px;
 	margin-bottom: 10px;
 	text-align: center;
 }
 
 .uc-sign-up-succeed .link {
-	color: #22ac69;
-	text-decoration: underline;
+	color: #5ee8a5;
+	text-decoration: none;
 }
 
 body #ft {
 	text-align: center;
-	padding: 0 0 10px
+	padding: 0 0 10px;
+	color: #E0E2E6;
+}
+
+body #ft a {
+	text-align: center;
+	padding: 0 0 10px;
+	color: #5ee8a5;
 }

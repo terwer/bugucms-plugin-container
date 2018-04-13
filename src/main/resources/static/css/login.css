@@ -43,6 +43,7 @@
 
 #other-tips {
 	text-align: center;
+	padding-bottom: 20px;
 }
 
 #other-tips a {
@@ -174,4 +175,16 @@ input:focus {
 		-o-box-sizing: border-box;
 		box-sizing: border-box;
 	}
+}
+
+body #ft {
+	text-align: center;
+	padding: 0 0 10px;
+	color: #E0E2E6;
+}
+
+body #ft a {
+	text-align: center;
+	padding: 0 0 10px;
+	color: #5ee8a5;
 }
