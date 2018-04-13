@@ -14,8 +14,10 @@
 		<link rel="shortcut icon" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
 		<!-- bootstrap -->
 		<link rel="stylesheet" href="${request.contextPath}/webjars/bootstrap/css/bootstrap.min.css">
+		<!-- poshytip -->
+		<link href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/tip-yellow/tip-yellow.css" rel="stylesheet" />
 		<!--页面自定义样式-->
-		<link rel="stylesheet" href="${request.contextPath}/css/reg.css">
+		<link rel="stylesheet" href="${request.contextPath}/css/reg.css?v=201804140045">
 	</head>
 
 	<body>
@@ -40,8 +42,8 @@
 				<div class="uc-sign-up-wrapper uc-wrapper">
 					<div class="uc-mod-sign-up uc-clearfix">
 						<div class="uc-main">
-							<div class="uc-tip-wrapper uc-global-error" style="display: none;">
-								<p class="uc-tip uc-tip-error">这里是错误提示</p>
+							<div class="uc-tip-wrapper uc-global-error">
+								<p id="errorMsg" class="uc-tip uc-tip-error"></p>
 							</div>
 
 							<form id="registerForm" class="form-inline" role="form">
@@ -49,12 +51,10 @@
 									<span class="input-group-addon">手机号</span>
 									<input type="text" class="form-control" name="account" maxlength="11" placeholder="请输入要注册的手机号" />
 								</div>
-								<span class="uc-tip">手机号错误</span>
 								<div class="input-group form-group">
 									<span class="input-group-addon">密&nbsp;&nbsp;&nbsp;码</span>
 									<input type="password" class="form-control" name="password" placeholder="密码请设置8-20个字符" />
 								</div>
-								<span class="uc-tip">密码错误</span>
 								<div class="input-group form-group">
 									<span class="input-group-addon">验证码</span>
 									<input type="text" class="form-control" name="captcha" placeholder="请输入验证码" maxlength="4">
@@ -62,7 +62,6 @@
 										<img alt="看不清" title="点击更换" style="height: 32px;" tabindex="99" src="${request.contextPath}/common/captcha" onclick="this.src=this.src+'?'; return false"/>
 									</span>
 								</div>
-								<span class="uc-tip">验证码错误</span>
 								<p class="uc-field uc-next-step uc-clearfix" style="display: none;">
 									<a href="javascript:void(0);" id="btnNext" class="btn btn-default">下一步</a>
 								</p>
@@ -121,7 +120,10 @@
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.extend.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/messages_zh.min.js"></script>
-		<script type="text/javascript" src="${request.contextPath}/js/reg.js"></script>
+		<!-- poshytip -->
+		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/jquery.poshytip.min.js"></script>
+		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
+		<script type="text/javascript" src="${request.contextPath}/js/reg.js?v=201804130045"></script>
 		<script type="text/javascript">
 		</script>
 	</body>

@@ -11,6 +11,6 @@ VALUES ('siteConfig', 'domain', 'www.terwergreen.com'),
 
 -- 初始化测试用户
 INSERT INTO bg_users (user_name, PASSWORD, nick_name, mobile, user_registered)
-VALUES ('B0001', '123456', '小猫咪', '18888888888', '2018-03-28 16:05:59');
+VALUES ('B0001', 'e10adc3949ba59abbe56e057f20f883e', '小猫咪', '18888888888', '2018-03-28 16:05:59');
 INSERT INTO bg_users (user_name, PASSWORD, nick_name, mobile, user_registered)
-VALUES ('B0002', '123456', '调皮狗', '16666666666', '2018-03-28 16:05:59');
+VALUES ('B0002', 'e10adc3949ba59abbe56e057f20f883e', '调皮狗', '16666666666', '2018-03-28 16:05:59');

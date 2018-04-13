@@ -1,6 +1,13 @@
 var consoleCSS = "color:red;-webkit-background-clip: text;font-size:1rem;";
 console.log('%c ☺ 感谢您访问远方的灯塔！', consoleCSS);
 
+//退出登录
+$(document).ready(function () {
+    $("#logout").on("click",function () {
+        logout_ajax();
+    });
+});
+
 $(function() {
 	$(".collapseButton").click(function() {
 		var obj = $(this);
@@ -227,3 +234,50 @@ $(document).on("click", "#click_author_qq_info", function() {
 		layer.msg('QQ号码不能为空');
 	}
 });
+
+function logout_ajax() {
+    var url = "/user/logout";
+    $.ajax({
+        type: "post",
+        url: url,
+        data: {
+        },
+        dataType: "json",
+        beforeSend: function() {
+            showTopContentDialog("login_loding", "<div class='dialog_loading'>正在登录中，请稍后...</div>", "登陆提示", 400, 75);
+        },
+        complete: function() {},
+        success: function(data) {
+            //退出成功
+            if(data.flag == "1") {
+                top.dialog.list["login_loding"].close().remove();
+                //showMsg("登陆失败,请联系管理员！", "Error");
+                //showTopContentDialog("login_loding_error", "<div class='dialog_ok'>登陆成功,正在跳转中...</div>", "登陆成功", 400, 75);
+                showTopDialog("show_loading", "<div class='dialog_loading'>正在退出，请稍后...</div>", "温馨提示", 400, 95);
+                setTimeout(function() {
+                    top.dialog.list["login_loding_error"].close().remove();
+                }, 1000);
+                //退出成功，跳转到首页
+                window.location.reload();
+            } else {
+                top.dialog.list["login_loding"].close().remove();
+                //showMsg("登陆失败,请联系管理员！", "Error");
+                //showTopContentDialog("login_loding_error", "<div class='dialog_error'>登陆失败,用户名或密码错误！</div>", "登陆出错", 400, 75, false);
+                showTopContentDialog("login_loding_error", "<div class='dialog_error'>" + data.msg + "</div>", "登录出错", 400, 75, false);
+                setTimeout(function() {
+                    top.dialog.list["login_loding_error"].close().remove();
+                }, 1000);
+            }
+        },
+        error: function() {
+            top.dialog.list["login_loding"].close().remove();
+            //showMsg("登陆失败,请联系管理员！", "Error");
+            showTopContentDialog("login_loding_error", "<div class='dialog_error'>网络连接错误！</div>", "登录出错", 400, 75);
+            setTimeout(function() {
+                top.dialog.list["login_loding_error"].close().remove();
+            }, 1000);
+        }
+    });
+    //必须有这个组织表单提交
+    return false;
+}

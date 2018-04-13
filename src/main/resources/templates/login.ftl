@@ -85,7 +85,7 @@
 		<!-- cookie -->
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js"></script>
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
-		<script src="${request.contextPath}/js/login.js"></script>
+		<script src="${request.contextPath}/js/login.js?v=201804140045"></script>
 	</body>
 
 </html>

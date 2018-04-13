@@ -10,6 +10,10 @@ body a {
 	text-decoration: none;
 }
 
+.input-group {
+	margin: 10px 0;
+}
+
 body a:focus,
 a:hover {
 	color: #48f510;
@@ -148,8 +152,9 @@ a:hover {
 
 .uc-mod-sign-up .uc-main .uc-tip {
 	display: block;
-	height: 20px;
-	margin: 7px 0
+	height: 15px;
+	/* margin: 7px 0; */
+	color: #e0d54b;
 }
 
 .uc-mod-sign-up .uc-main .uc-input {

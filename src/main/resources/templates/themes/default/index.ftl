@@ -30,7 +30,9 @@ ____________  _________    _____________  ___      ______      ___  _________   
 		<link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/css/fontico.css">
 		<!-- pace -->
 		<link rel="stylesheet" type="text/css" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/css/pace.css">
-		<!--[if lt IE 9]>
+        <!-- artDialog -->
+        <link rel="stylesheet" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/ui-dialog.css" />
+        <!--[if lt IE 9]>
     <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/html5.js"></script>
     <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/css3-mediaqueries.js"></script>
     <![endif]-->
@@ -140,15 +142,20 @@ ____________  _________    _____________  ___      ______      ___  _________   
 						</div>
 						<div class="menu-container">
 							<ul id="menu" class="top-menu">
-                                <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/reg"><i class="iconfont"></i> 注册
-                                    </a>
-                                </li>
-                                <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
+								<#if userDTO??>
+									<li>欢迎您：${userDTO.nickName}，<a id="logout" href="javascript:void(0);" title="退出">退出</a></li>
+									<#else>
+									<li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
+                                        <a target="_blank" href="${siteConfigDTO.weburl}/reg"><i class="iconfont"></i> 注册
+                                        </a>
+                                    </li>
+								<li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
                                     <a target="_blank" href="${siteConfigDTO.weburl}/login"><i class="iconfont"></i> 登录
                                     </a>
                                 </li>
-								<li id="menu-item-962" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-962">
+
+                                </#if>
+                                <li id="menu-item-962" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-962">
 									<a target="_blank" href="${siteConfigDTO.weburl}/shuoshuo.html"><i class="iconfont"></i> 说说
 									</a>
 								</li>
@@ -1023,7 +1030,10 @@ ____________  _________    _____________  ___      ______      ___  _________   
 			</script>
 			<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/layer.js"></script>
 			<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/pace.min.js"></script>
-			<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/default.js"></script>
+            <!-- artDialog -->
+            <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus-min.js"></script>
+            <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
+            <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/default.js?v=201804140507"></script>
 			<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/superfish.js"></script>
 			<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/gb2big5.js"></script>
 			<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/carousel.min.js"></script>

@@ -31,15 +31,15 @@ $(document).ready(function() {
 		focusInvalid: true,
 		errorPlacement: function(error, element) {
 			var errorMsg = error[0].innerHTML;
-			var elementName = element[0].name;
-			var parent = $("#" + elementName).parent();
-			$(parent).next(".uc-tip").show();
-			$(parent).siblings().next(".uc-tip").hide();
+			$("#errorMsg").html(errorMsg).show();
+			//			var elementName = element[0].name;
+			//			$("#" + elementName).formtip(errorMsg);
 		},
 		success: function(element) {
 			var elem = $(element)[0].htmlFor;
-			var parent = $("#" + elem).parent();
-			$(parent).next(".uc-tip").show();
+			$("#errorMsg").hide();
+			//			$("#" + elem).poshytip('disable');
+			//			$("#" + elem).poshytip('destroy');
 		}
 	});
 
