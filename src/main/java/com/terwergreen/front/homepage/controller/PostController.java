@@ -24,11 +24,12 @@ public class PostController extends BGBaseController {
     /**页面开始**/
     /***********/
 
-    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/{categoryId}/{postId}", method = RequestMethod.GET)
     public ModelAndView postById(HttpServletRequest request,
+                                 @PathVariable(name = "categoryId") String categoryId,
                                  @PathVariable(name = "postId") String postId) {
         //去除后缀
-        postId = postId.replace(".html","");
+        postId = postId.replace(".html", "");
         //文章ID和文章别名分开处理
         if (StringUtils.isNumeric(postId)) {
             logger.debug("文章ID为：" + postId);

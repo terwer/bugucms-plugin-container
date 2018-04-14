@@ -36,7 +36,6 @@ ____________  _________    _____________  ___      ______      ___  _________   
     <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/html5.js"></script>
     <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/css3-mediaqueries.js"></script>
     <![endif]-->
-		<link rel="stylesheet" id="default-style-css" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/style.css" type="text/css" media="all">
 		<!-- jquery -->
 		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/js/slides.js"></script>
