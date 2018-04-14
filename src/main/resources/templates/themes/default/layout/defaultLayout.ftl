@@ -7,6 +7,9 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=${charset}" />
         <meta http-equiv="Content-Language" content="${lang}" />
+        <!-- 禁止浏览器缓存 -->
+        <meta http-equiv="Cache-Control" content="no-transform">
+        <meta http-equiv="Cache-Control" content="no-siteapp">
         <meta name="renderer" content="webkit">
         <meta name="keywords" content="${siteConfigDTO.keywords}">
         <meta name="description" content="${siteConfigDTO.description}">
@@ -16,6 +19,8 @@
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <title>${title}</title>
         <link rel="shortcut icon" href="${basePath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
+        <link rel="apple-touch-icon" sizes="114x114" href="${basePath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
+        <link rel="profile" href="http://gmpg.org/xfn/11">
         <!-- 自定义页面头部开始 -->
         <#nested>
         <!-- 自定义页面头部结束 -->
