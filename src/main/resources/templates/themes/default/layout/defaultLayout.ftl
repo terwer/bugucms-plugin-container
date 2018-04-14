@@ -14,7 +14,6 @@ ____________  _________    _____________  ___      ______      ___  _________   
 <#macro htmlHead title charset="utf-8" lang="zh-CN">
 <!DOCTYPE html>
 <html lang="zh-CN">
-
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=${charset}" />
         <meta http-equiv="Content-Language" content="${lang}" />
@@ -32,29 +31,42 @@ ____________  _________    _____________  ___      ______      ___  _________   
         <link rel="shortcut icon" href="${basePath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
         <link rel="apple-touch-icon" sizes="114x114" href="${basePath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
         <link rel="profile" href="http://gmpg.org/xfn/11">
+        <!-- jquery -->
+        <script type="text/javascript" src="${basePath}/webjars/jquery/jquery.min.js"></script>
+        <!-- pace -->
+        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/css/pace.css">
         <!-- 自定义页面头部开始 -->
         <#nested>
+        <link rel="stylesheet" id="default-style-css" type="text/css" media="all" href="${basePath}/themes/${siteConfigDTO.webtheme}/style.css">
+        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/default.css">
         <!-- 自定义页面头部结束 -->
     </head>
 </#macro>
 
 <#macro htmlBody>
     <body>
-        <!-- 头部内容开始 -->
-        <#include "header.ftl">
-        <!-- 头部内容开始 -->
-        <!-- 自定义正文开始 -->
-        <#nested>
-        <!-- 自定义正文结束 -->
-        <!-- 侧边栏开始 -->
-        <#include "sidebar.ftl">
+        <!-- 进度条开始-->
+        <div class="pace  pace-inactive">
+            <div class="pace-progress" data-progress-text="100%" data-progress="99" style="transform: translate3d(100%, 0px, 0px);">
+                <div class="pace-progress-inner"></div>
+            </div>
+            <div class="pace-activity"></div>
+        </div>
+        <!-- 进度条结束-->
+        <div id="page" class="hfeed site">
+            <!-- 头部内容开始 -->
+            <#include "header.ftl">
+            <!-- 头部内容结束 -->
+            <!-- 自定义正文开始 -->
+            <#nested>
+            <!-- 自定义正文结束 -->
+            <!-- 底部开始 -->
+            <#include "footer.ftl">
 
-        <!-- 侧边栏结束 -->
-        <!-- 底部开始 -->
-        <#include "footer.ftl">
-
-        <!-- 底部结束 -->
+            <!-- 底部结束 -->
+        </div>
+        <!-- pace -->
+        <script src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/js/pace.min.js"></script>
     </body>
-
 </html>
 </#macro>
