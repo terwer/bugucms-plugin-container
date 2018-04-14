@@ -53,8 +53,8 @@ $(document).ready(function(a) {
 
 $(document).ready(function() {
 	// 跟随
-	var $account = $('#sidebar');
-	var $header = $('.sidebar-roll');
+	var $account = $('#sidebar.ftl');
+	var $header = $('.sidebar.ftl-roll');
 	var $minisb = $('#content');
 	var $footer = $('#footer');
 
@@ -318,11 +318,11 @@ $(document).ready(function() {
 function pr() {
 	var R = document.getElementById("sidebar");
 	var L = document.getElementById("primary");
-	if (R.className == "sidebar") {
-		R.className = "sidebar-hide";
+	if (R.className == "sidebar.ftl") {
+		R.className = "sidebar.ftl-hide";
 		L.className = "";
 	} else {
-		R.className = "sidebar";
+		R.className = "sidebar.ftl";
 		L.className = "primary";
 	}
 }
