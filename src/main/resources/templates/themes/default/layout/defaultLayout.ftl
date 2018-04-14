@@ -33,6 +33,8 @@ ____________  _________    _____________  ___      ______      ___  _________   
         <link rel="profile" href="http://gmpg.org/xfn/11">
         <!-- jquery -->
         <script type="text/javascript" src="${basePath}/webjars/jquery/jquery.min.js"></script>
+        <!-- jquery.qrcode -->
+        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/js/jquery.qrcode.min.js"></script>
         <!-- pace -->
         <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/css/pace.css">
         <!-- 自定义页面头部开始 -->
