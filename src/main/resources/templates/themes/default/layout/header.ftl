@@ -64,28 +64,24 @@
                                 <div class="menu-container">
                                     <ul id="menu" class="down-menu nav-menu sf-js-enabled sf-arrows">
                                         <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-26">
-                                            <a href="${siteConfigDTO.weburl}/"><i class="iconfont icon-shouye"></i> 网站首页</a>
+                                            <a href="${siteConfigDTO.weburl}/"><i class="iconfont icon-shouye"></i> 首页</a>
                                         </li>
                                         <li id="menu-item-2917" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2917">
-                                            <a href="${siteConfigDTO.weburl}/category/coding/"><i class="iconfont"></i> 代码编程</a>
-                                        </li>
-                                        <li id="menu-item-2504" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2504">
-                                            <a href="${siteConfigDTO.weburl}/category/toss-more-than/"><i class="iconfont"></i> 折腾不止
-                                            </a>
+                                            <a href="${siteConfigDTO.weburl}/category/coding/"><i class="iconfont"></i> 后端</a>
                                         </li>
                                         <li id="menu-item-1639" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1639">
-                                            <a href="${siteConfigDTO.weburl}/category/web/"><i class="fa fa-html5"></i> 前端技术</a>
+                                            <a href="${siteConfigDTO.weburl}/category/web/"><i class="fa fa-html5"></i> 前端</a>
                                         </li>
                                         <li id="menu-item-87" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-87">
-                                            <a href="${siteConfigDTO.weburl}/category/resource-sharing/"><i class="iconfont"></i> 资源分享
+                                            <a href="${siteConfigDTO.weburl}/category/resource/"><i class="iconfont"></i> 资源
                                             </a>
                                         </li>
                                         <li id="menu-item-34" class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34">
-                                            <a href="${siteConfigDTO.weburl}/category/talk/"><i class="iconfont icon-youxian"></i> 谈笑风生
+                                            <a href="${siteConfigDTO.weburl}/category/talk/"><i class="iconfont icon-youxian"></i> 随笔
                                             </a>
                                         </li>
                                         <li id="menu-item-288" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-288">
-                                            <a href="${siteConfigDTO.weburl}/messaged.html"><i class="iconfont icon-liuyan"></i> 留言板
+                                            <a href="${siteConfigDTO.weburl}/guestbook.html"><i class="iconfont icon-liuyan"></i> 留言板
                                             </a>
                                         </li>
                                     </ul>

@@ -8,17 +8,8 @@
 
 <#-- 正文 -->
 <@htmlBody>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
-        <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
+        <h1 class="post-title">${post.postTitle}</h1>
+        <p class="post-content">${post.postContent}</p>
 </@htmlBody>
 
 <#-- 底部 -->

@@ -2,6 +2,10 @@ package com.terwergreen.front.homepage.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.middle.post.dto.PostDTO;
+import com.terwergreen.middle.post.service.PostService;
+import net.minidev.json.JSONValue;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,11 +18,15 @@ import com.terwergreen.framework.core.bg.controller.BGBaseController;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
 
+import java.util.List;
+
 @Controller
 public class PostController extends BGBaseController {
 
     @Autowired
     private CommonService commonService;
+    @Autowired
+    private PostService postService;
 
     /***********/
     /**页面开始**/
@@ -27,7 +35,7 @@ public class PostController extends BGBaseController {
     @RequestMapping(value = "/post/{categoryId}/{postId}", method = RequestMethod.GET)
     public ModelAndView postById(HttpServletRequest request,
                                  @PathVariable(name = "categoryId") String categoryId,
-                                 @PathVariable(name = "postId") String postId) {
+                                 @PathVariable(name = "postId") String postId) throws Exception {
         //去除后缀
         postId = postId.replace(".html", "");
         //文章ID和文章别名分开处理
@@ -36,14 +44,27 @@ public class PostController extends BGBaseController {
         } else {
             logger.debug("文章别名为：" + postId);
         }
+        logger.debug("分类为：" + categoryId);
+        ModelAndView mv = new ModelAndView();
+
         SiteConfigDTO siteConfigDTO = null;
+        PostDTO post = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();
+            post = postService.getPost(postId);
+            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/post");
+            mv.addObject("siteConfigDTO", siteConfigDTO);
+            mv.addObject("post", post);
+            if(post == null){
+                logger.error("文章不存在");
+                throw new WebException("文章不存在");
+            }
+            logger.info("获取文章成功:siteConfigDTO=" + JSONValue.toJSONString(siteConfigDTO) + ",post=" + post);
         } catch (Exception e) {
-            super.logger.error("接口异常:error=", e);
-            new ModelAndView("error", "message", "接口异常");
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
         }
-        return new ModelAndView("themes/" + siteConfigDTO.getWebtheme() + "/post", "siteConfigDTO", siteConfigDTO);
+        return mv;
     }
 
     /***********/

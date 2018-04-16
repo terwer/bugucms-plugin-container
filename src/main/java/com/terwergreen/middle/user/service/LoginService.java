@@ -1,7 +1,6 @@
 package com.terwergreen.middle.user.service;
 
-import com.terwergreen.middle.user.UserDTO;
-import org.springframework.util.StringUtils;
+import com.terwergreen.middle.user.dto.UserDTO;
 
 import javax.servlet.http.HttpSession;
 import java.util.Map;
