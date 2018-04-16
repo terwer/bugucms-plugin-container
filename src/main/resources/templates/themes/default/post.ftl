@@ -2,7 +2,7 @@
 <#include "layout/defaultLayout.ftl"/>
 <#-- 调用布局指令 -->
 <#-- 头部 -->
-<@htmlHead title="这里是文章标题 - ${siteConfigDTO.webname}">
+<@htmlHead title="${post.postTitle} - ${siteConfigDTO.webname}">
         <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/css/post.css">
 </@htmlHead>
 
