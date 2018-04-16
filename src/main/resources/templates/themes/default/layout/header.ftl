@@ -2,83 +2,8 @@
                 <nav id="top-header">
                     <div class="top-nav">
                         <div id="user-profile">
-                            <script type="text/javascript">
-                                today = new Date();
-                                var day;
-                                var date;
-                                var hello;
-                                hour = new Date().getHours();
-                                if(hour < 6) {
-                                    hello = ' 凌晨好！ ';
-                                } else if(hour < 9) {
-                                    hello = ' 早上好！';
-                                } else if(hour < 12) {
-                                    hello = ' 上午好！';
-                                } else if(hour < 14) {
-                                    hello = ' 中午好！ ';
-                                } else if(hour < 17) {
-                                    hello = ' 下午好！ ';
-                                } else if(hour < 19) {
-                                    hello = ' 傍晚好！';
-                                } else if(hour < 22) {
-                                    hello = ' 晚上好！ ';
-                                } else {
-                                    hello = '夜深了！ ';
-                                }
-
-                                function GetCookie(sName) {
-                                    var arr = document.cookie.match(new RegExp("(^| )" + sName + "=([^;]*)(;|$)"));
-                                    if(arr != null) {
-                                        return unescape(arr[2])
-                                    };
-                                    return null;
-                                }
-
-                                var Guest_Name = decodeURIComponent(GetCookie('author'));
-                                var webUrl = webUrl;
-                                if(Guest_Name != "null" && Guest_Name != "") {
-                                    hello = Guest_Name + ' , ' + hello + ' 欢迎回来。';
-                                }
-                                document.write(' ' + hello);
-                            </script>
-                            <span id="localtime">现在是：<i id="nowTime">2018年4月1日 06:44:47 星期日</i>
-                            <script type="text/javascript">
-                                function showTime(){
-                                    today = new Date();
-                                    var tdate, year;
-                                    var x = new Array("星期日", "星期一", "星期二", "星期三", "星期四", "星期五", "星期六");
-                                    var MSIE = navigator.userAgent.indexOf("MSIE");
-                                    if (MSIE != -1) {
-                                        year = (today.getFullYear());
-                                    } else {
-                                        year = (today.getYear() + 1900);
-                                    }
-                                    tdate = year + "年" + (today.getMonth() + 1) + "月" + today.getDate() + "日" + " ";
-
-                                    var h,m,s;
-                                    h=today.getHours();
-                                    m=today.getMinutes();
-                                    s=today.getSeconds();
-                                    if (h >= 1 && h <= 9) {
-                                        h = "0" + h;
-                                    }
-                                    if (m >= 0 && m <= 9) {
-                                        m = "0" + m;
-                                    }
-
-                                    if (s >= 0 && s <= 9) {
-                                        s = "0" + s;
-                                    }
-
-                                    ttime =  h + ":" + m + ":" + s + " ";
-                                    var now = tdate + ttime + x[today.getDay()];
-                                    //console.log("now:" + now);
-                                    $("#nowTime").html(now);
-                                }
-                                //延时器
-                                setInterval("showTime()",1000);
-                            </script>
-                            </span>
+                            <span id="sayHello">早上好，</span>
+                            <span id="localtime">现在是：<i id="nowTime">2018年4月1日 06:44:47 星期日</i></span>
                         </div>
                         <div class="menu-container">
                             <ul id="menu" class="top-menu">

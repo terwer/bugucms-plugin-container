@@ -3,7 +3,7 @@
 <#-- 调用布局指令 -->
 <#-- 头部 -->
 <@htmlHead title="这里是文章标题 - ${siteConfigDTO.webname}">
-        <link rel="stylesheet" href="${basePath}/themes/${siteConfigDTO.webtheme}/css/post.css">
+        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/css/post.css">
 </@htmlHead>
 
 <#-- 正文 -->
@@ -20,3 +20,8 @@
         <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
         <p>这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容这里是文章内容.${siteConfigDTO.webname}</p>
 </@htmlBody>
+
+<#-- 底部 -->
+<@htmlFoot>
+        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/js/post.js"></script>
+</@htmlFoot>

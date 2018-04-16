@@ -8150,8 +8150,8 @@ li.search-inf {
     font-weight: 400;
     font-style: normal;
     font-family: FontAwesome;
-    src: url(css/fonts/fontawesome-webfont.eot?v=4.4.0);
-    src: url(css/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0) format('embedded-opentype'), url(css/fonts/fontawesome-webfont.woff2?v=4.4.0) format('woff2'), url(css/fonts/fontawesome-webfont.woff?v=4.4.0) format('woff'), url(css/fonts/fontawesome-webfont.ttf?v=4.4.0) format('truetype'), url(css/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular) format('svg');
+    src: url(lib/fontico/fonts/fontawesome-webfont.eot?v=4.4.0);
+    src: url(lib/fontico/fonts/fontawesome-webfont.eot?#iefix&v=4.4.0) format('embedded-opentype'), url(lib/fontico/fonts/fontawesome-webfont.woff2?v=4.4.0) format('woff2'), url(lib/fontico/fonts/fontawesome-webfont.woff?v=4.4.0) format('woff'), url(lib/fontico/fonts/fontawesome-webfont.ttf?v=4.4.0) format('truetype'), url(lib/fontico/fonts/fontawesome-webfont.svg?v=4.4.0#fontawesomeregular) format('svg');
 }
 
 .fa {
