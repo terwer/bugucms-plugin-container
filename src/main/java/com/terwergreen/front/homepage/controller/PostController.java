@@ -3,6 +3,7 @@ package com.terwergreen.front.homepage.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.front.common.util.MarkdownUtils;
 import com.terwergreen.middle.post.dto.PostDTO;
 import com.terwergreen.middle.post.service.PostService;
 import net.minidev.json.JSONValue;
@@ -52,6 +53,9 @@ public class PostController extends BGBaseController {
         try {
             siteConfigDTO = commonService.getSiteConfig();
             post = postService.getPost(postId);
+            //将Markdown转换为Html显示
+            String htmlContent = MarkdownUtils.md2html(post.getPostContent());
+            post.setPostContent(htmlContent);
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/post");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("post", post);

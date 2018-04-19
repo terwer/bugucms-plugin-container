@@ -91,6 +91,12 @@
             <artifactId>kaptcha</artifactId>
             <version>2.3.2</version>
         </dependency>
+        <!-- Markdown -->
+        <dependency>
+            <groupId>com.vladsch.flexmark</groupId>
+            <artifactId>flexmark-all</artifactId>
+            <version>0.32.20</version>
+        </dependency>
 
         <!-- Web前端开发库 -->
         <dependency>

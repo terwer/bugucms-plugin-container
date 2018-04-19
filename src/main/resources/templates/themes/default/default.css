@@ -143,14 +143,18 @@ section {
 
 pre {
     overflow: auto;
-    margin: 0 0 1.75em;
-    padding: 15px;
+    /* margin: 0 0 1.75em; */
+    /* padding: 15px; */
     max-width: 100%;
-    border: 1px solid #d1d1d1;
+    /* border: 1px solid #d1d1d1; */
     white-space: pre;
     white-space: pre-wrap;
     word-wrap: break-word;
     line-height: 190%;
+}
+
+pre code {
+    border-radius: 5px;
 }
 
 ol,
@@ -566,6 +570,17 @@ input {
     margin: 0 auto;
     width: 1080px;
     transition-duration: .5s;
+}
+
+.post-title {
+    text-align: center;
+    margin: 0 auto;
+    width: 1080px;
+}
+
+.post-content {
+    margin: 0 auto;
+    width: 1080px
 }
 
 .shadow #top-menu {
@@ -11298,6 +11313,17 @@ span#timeShow {
 
     #top-menu {
         width: 95%
+    }
+
+    .post-title {
+        text-align: center;
+        margin: 0 auto;
+        width: 90%;
+    }
+
+    .post-content {
+        margin: 0 auto;
+        width: 96%;
     }
 
     #main-search.shadow,

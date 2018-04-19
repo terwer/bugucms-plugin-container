@@ -40,7 +40,7 @@ ____________  _________    _____________  ___      ______      ___  _________   
         <!-- pace -->
         <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/css/pace.css">
         <!-- 自定义页面头部开始 -->
-        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/default.css">
+        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/default.css?v=201804192254">
         <#nested>
         <!-- 自定义页面头部结束 -->
     </head>
@@ -81,7 +81,7 @@ ____________  _________    _____________  ___      ______      ___  _________   
 	    <!-- cookie -->
 		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js"></script>
         <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
-        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/default.js?v=201804160946"></script>
+        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/default.js?v=201804192315"></script>
         <!-- 自定义底部开始 -->
         <#nested>
         <!-- 自定义底部结束 -->
