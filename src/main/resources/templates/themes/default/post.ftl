@@ -25,5 +25,5 @@
 <@htmlFoot>
         <!-- hilightjs -->
         <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
-        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/js/post.js"></script>
+        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/js/post.js?v=201804200053"></script>
 </@htmlFoot>
