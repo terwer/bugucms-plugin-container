@@ -2,7 +2,7 @@ package com.terwergreen.middle.user.service.impl;
 
 import com.terwergreen.framework.core.bg.biz.service.BaseService;
 import com.terwergreen.middle.common.dao.CommonDAO;
-import com.terwergreen.middle.user.UserDTO;
+import com.terwergreen.middle.user.dto.UserDTO;
 import com.terwergreen.middle.user.service.LoginService;
 import com.terwergreen.middle.user.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;

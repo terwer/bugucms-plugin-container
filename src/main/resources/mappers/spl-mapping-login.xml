@@ -12,7 +12,7 @@
 		select count(1) from bg_users where mobile = #{account} and password = md5(#{password})
 	</select>
     <!-- 获取用户信息 -->
-    <select id="get_user_by_account" resultType="com.terwergreen.middle.user.UserDTO">
+    <select id="get_user_by_account" resultType="com.terwergreen.middle.user.dto.UserDTO">
         select user_name as accoutId,nick_name as nickName, user_profile as userProfile,mobile from bg_users where mobile = #{account}
     </select>
 </mapper>

@@ -1,4 +1,4 @@
-package com.terwergreen.middle.user;
+package com.terwergreen.middle.user.dto;
 
 public class UserDTO {
     /**

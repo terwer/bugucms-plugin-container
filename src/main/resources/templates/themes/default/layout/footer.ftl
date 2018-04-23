@@ -93,19 +93,4 @@
             </span>
                     </a>
                 </li>
-                <script type="text/javascript">
-                    $(document).ready(function() {
-                        if(!+[1, ]) {
-                            present = "table";
-                        } else {
-                            present = "canvas";
-                        }
-                        $('#output').qrcode({
-                            render: present,
-                            text: window.location.href,
-                            width: "150",
-                            height: "150"
-                        });
-                    });
-                </script>
             </ul>

@@ -4,11 +4,12 @@ import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.exception.WebException;
 import com.terwergreen.framework.core.bg.controller.BGBaseController;
 import com.terwergreen.front.common.dto.RestResponseDTO;
+import com.terwergreen.front.common.util.HttpUtils;
 import com.terwergreen.front.common.util.RestResponseStates;
 import com.terwergreen.front.user.util.Constants;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
-import com.terwergreen.middle.user.UserDTO;
+import com.terwergreen.middle.user.dto.UserDTO;
 import com.terwergreen.middle.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -105,6 +106,10 @@ public class LoginController extends BGBaseController {
                 //返回登录信息
                 UserDTO userDTO = loginService.getLoginUserInfo(request.getSession());
                 resultMap.put("userInfo", userDTO);
+
+                //写入cookie
+                HttpUtils.setCookie(request, response, Constants.COOKIE_AUTHOR, userDTO.getNickName());
+
                 restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
                 restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
                 //账号不存在
