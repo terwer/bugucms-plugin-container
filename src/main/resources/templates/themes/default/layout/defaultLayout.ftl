@@ -36,7 +36,7 @@ ____________  _________    _____________  ___      ______      ___  _________   
         <!-- fontico -->
         <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/fontico/fontico.css">
         <!-- artDialog -->
-        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/ui-dialog.css" />
+        <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/dialog.css" />
         <!-- pace -->
         <link rel="stylesheet" type="text/css" href="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/css/pace.css">
         <!-- 自定义页面头部开始 -->
@@ -73,7 +73,7 @@ ____________  _________    _____________  ___      ______      ___  _________   
         <!-- jquery -->
         <script type="text/javascript" src="${basePath}/webjars/jquery/jquery.min.js"></script>
         <!-- artDialog -->
-        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus-min.js"></script>
+        <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus.js"></script>
         <!-- pace -->
         <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/js/pace.min.js"></script>
         <!-- jquery.qrcode -->
