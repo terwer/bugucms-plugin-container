@@ -6,7 +6,7 @@ Centos 7.4
 JDK1.8.162   
 Spring Boot 2.0.0   
 LogBack      
-FreeMarker 模板引擎         
+Thymeleaf模板引擎         
 Maven 3.5.3 (使用阿里云Maven仓库)          
 Tomcat 8.5.28   
 MySQL 5.7.19   
