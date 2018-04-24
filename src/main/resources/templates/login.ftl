@@ -13,7 +13,7 @@
 		<title>登录 - ${siteConfigDTO.webname}</title>
 		<link rel="shortcut icon" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
 		<!-- artDialog -->
-		<link rel="stylesheet" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/ui-dialog.css" />
+		<link rel="stylesheet" href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/dialog.css" />
 		<!-- poshytip -->
 		<link href="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/tip-yellow/tip-yellow.css" rel="stylesheet" />
 		<link rel="stylesheet" href="${request.contextPath}/css/main.css">
@@ -74,7 +74,7 @@
 		<!-- jquery -->
 		<script type="text/javascript" src="${request.contextPath}/webjars/jquery/jquery.min.js"></script>
 		<!-- artDialog -->
-		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus-min.js"></script>
+		<script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus.js"></script>
 		<!-- jquery-validate -->
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.min.js"></script>
 		<script type="text/javascript" src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/additional-methods.min.js"></script>
