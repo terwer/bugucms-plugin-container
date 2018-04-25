@@ -28,8 +28,7 @@ public class AccountController extends BGBaseController {
         // resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
         // resultMap.put("msg", RestResponseStates.SUCCESS.getMsg());
         // return super.processResultAll(resultMap);
-
-        return new ModelAndView();
+        return new ModelAndView("accountInfo");
     }
 
     @RequestMapping(value = "/account/activate", method = RequestMethod.GET)

@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>An Error Occured - Bugucms Error Pages</title>
+</head>
+<body>
+<div>Url:<span th:text="${errorMap.data.body.URL}"></span></div>
+<div>Error:<span th:text="${errorMap.data.body.error}"></div>
+<div>Status:<span th:text="${errorMap.data.body.status}"></span></div>
+<div>Timestamp:<span th:text="${errorMap.data.body.timestamp}"></span></div>
+<div>ResponseEntity:<span th:text="${errorMap.data}"></span></div>
+</body>
+</html>
