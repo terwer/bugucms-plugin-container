@@ -1,4 +1,4 @@
-package com.terwergreen.framework.core.bg.controller;
+package com.terwergreen.framework.controller;
 
 import java.util.HashMap;
 import java.util.Map;

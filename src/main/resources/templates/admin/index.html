@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:include="/include/head::commonHeaderCustom('登录',~{::style})">
+    <style>
+        body{
+            overflow:hidden;
+        }
+        .loginMain{
+            position: absolute;
+            width: 100%;
+            min-width: 10rem;
+            height: 100%;
+            top: 0;
+            left:0;
+        }
+        .loginMain  #mapMain{
+            flex: 1;
+            -webkit-flex: 1;
+        }
+        .loginMain .loginForm{
+            width: 620px;
+            min-height: 420px;
+            padding:0.32rem 1rem;
+            font-size: 0.12rem;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            border-radius:0.08rem;
+            transform: translate(-50%, -50%);
+            -webkit-transform: translate(-50%, -50%);
+            box-sizing:border-box;
+            -webkit-box-sizing:border-box;
+        }
+        .loginMain .loginForm h3{
+            font-size:0.28rem;
+            color: #1D9CE5;
+            font-weight: normal;
+            width: 100%;
+            text-align:center;
+            margin-bottom: 0.22rem;
+        }
+        .loginMain .loginForm form{
+            width: 100%;
+            height: auto;
+        }
+        .loginMain .loginForm form div{
+            padding-bottom:0.12rem;
+        }
+        .loginMain .loginForm form div>input{
+            width: 100%;
+            height: 0.48rem;
+            padding: 0.1rem 0.2rem 0.1rem 0.4rem;
+            border: 1px solid #E4E4E4;
+            border-radius: 0.04rem;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            background: #fff;
+            color: #999999;
+            background-repeat: no-repeat;
+            background-position: 0.1rem 0.1rem;
+            background-size: 0.25rem;
+            font-size: 0.14rem;
+        }
+        .loginMain .loginForm form div>#vcode{
+            width: 70%;
+        }
+        .loginMain .loginForm form div>.vcodeimg{
+            width: 30%;
+            height: 0.48rem;
+            display: inline-block;
+            float: right;
+        }
+        .loginMain .loginForm form div>.vcodeimg img{
+            cursor: pointer;
+            vertical-align: middle;
+            margin-left: 15%;
+        }
+        .loginMain .loginForm form div input[type="checkbox"]{
+            width:0.15rem;
+            height:0.15rem;
+            vertical-align: text-bottom;
+            margin-right: 0.1rem;
+        }
+        .loginMain .loginForm form div label{
+            color: #999999;
+            font-size:0.12rem;
+            cursor:pointer;
+            margin-bottom: 0.1rem;
+        }
+        .loginMain .loginForm form div a{
+            color: #1D9CE5;
+            font-size:0.12rem;
+            float: right;
+            cursor:pointer;
+        }
+        .loginMain .loginForm form div button{
+            width: 100%;
+            height: 0.48rem;
+            border: none;
+            background: #1D9CE5;
+            color: #fff;
+            border-radius:0.04rem;
+            cursor: pointer;
+            margin-top: 0.1rem;
+        }
+        .loginMain .loginForm form div p{
+            text-align: center;
+            font-size:0.12rem;
+            color: #1D9CE5;
+        }
+        .loginMain .loginForm form strong{
+            width: 100%;
+            color: #e1504a;
+            font-weight:normal;
+            display:none;
+        }
+        #container {
+            position: absolute;
+            height: 100%;
+            width: 100%;
+        }
+        #output {
+            width: 100%;
+            height: 100%;
+        }
+    </style>
+
+</head>
+<body>
+<div id="container"><div id="output"></div></div>
+<div class="loginMain">
+    <div>
+        <div class="loginForm">
+            <h3>Bugu CMS</h3>
+            <form action="/login" method="post" onsubmit="return checkout()">
+                <div><input type="text" name="loginName" class="loginName" placeholder="登录名" th:value="${loginName}" style="background-image: url('/img/icon/usericon.png');"></div>
+                <div><input type="password" name="loginPwd" class="loginPwd" placeholder="密码" th:value="${loginPwd}" style="background-image: url('/img/icon/pwdicon.png');"></div>
+                <div><input maxlength="4" type="text" placeholder="验证码" id="vcode" name="vcode" style="background-image: url('/img/icon/identifyicon.png');">
+                    <span class="vcodeimg"><img id="rand" style="cursor: pointer;" src="servlet/imageRandServlet?width=100&height=43&codeCount=4"></span></div>
+                <div>
+                    <label><input type="checkbox" name="remember" value="1" th:checked="${remember==1}"/>记住密码</label>
+                    <a>忘记密码？</a>
+                </div>
+                <strong class="errHint" th:text="${message}" th:style="${message==null}?'':'display:block;'"></strong>
+                <div><button type="submit">登录</button></div>
+                <div><p><a th:href="${siteConfigDTO.weburl}">技术支持：Terwer</a></p></div>
+            </form>
+        </div>
+    </div>
+</div>
+<div th:include="/include/onload_js::onloadJSCustom(~{::script})">
+    <script src="../static/js/vector.js" th:src="|${#request.contextPath}/js/vector.js|"></script>
+    <script>
+        $(function () {
+            var victor = new Victor("container", "output");
+            victor(["#1b71b7", "#2595df"]).set();
+            $(".loginName").select();
+        })
+        function checkout () {
+            var reguser = /^(\w){3,20}$/
+            var regpwd = /^[(\w),@]{6,20}$/
+            if (!reguser.test($('.loginName').val())){
+                $('.errHint').text('用户名格式错误').show('fast')
+                return false
+            }
+            if (!regpwd.test($('.loginPwd').val())){
+                $('.errHint').text('密码格式错误').show('fast')
+                return false
+            }
+            if ($('#vcode').val() === '') {
+                $('.errHint').text('验证码不能为空').show('fast')
+                return false
+            }
+            $('.errHint').text('').hide('fast')
+            return true
+        }
+    </script>
+</div>
+</body>
+</html>

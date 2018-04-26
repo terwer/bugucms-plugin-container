@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="commonHeaderCustom(title,styles)">
+    <title th:text="${title}"></title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../static/favicon.png" th:href="@{/static/favicon.png}">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+    <link href="../../static/css/charisma-app.css" th:href="|${#request.contextPath}/css/charisma-app.css|" rel="stylesheet" type="text/css">
+    <link href="https://hkres.etalk365.com/public/css/common.css" rel="stylesheet" type="text/css">
+    <th:block th:replace="${styles}" />
+</head>
+<head th:fragment="commonHeader(title)">
+    <title th:text="${title}"></title>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/x-icon" href="../static/favicon.png" th:href="@{/static/favicon.png}">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="../../static/css/charisma-app.css" th:href="@{/static/css/charisma-app.css}" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.3.5/jquery.fancybox.min.css" />
+    <link href="https://hkres.etalk365.com/public/css/common.css" rel="stylesheet" type="text/css">
+</head>
+</html>

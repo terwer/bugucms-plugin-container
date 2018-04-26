@@ -1,4 +1,4 @@
-package com.terwergreen.framework.core.bg.app.dto;
+package com.terwergreen.framework.app.dto;
 
 import java.io.Serializable;
 

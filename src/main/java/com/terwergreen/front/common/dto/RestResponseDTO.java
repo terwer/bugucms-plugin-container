@@ -2,7 +2,7 @@ package com.terwergreen.front.common.dto;
 
 import org.springframework.util.StringUtils;
 
-import com.terwergreen.framework.core.bg.app.dto.BGDTO;
+import com.terwergreen.framework.app.dto.BGDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
 
 /**

@@ -3,7 +3,6 @@ package com.terwergreen.front.homepage.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.terwergreen.bugucms.exception.WebException;
-import com.terwergreen.front.common.util.ImageUtils;
 import com.terwergreen.front.common.util.MarkdownUtils;
 import com.terwergreen.middle.post.dto.PostDTO;
 import com.terwergreen.middle.post.service.PostService;
@@ -16,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
-
-import java.util.List;
 
 @Controller
 public class PostController extends BGBaseController {

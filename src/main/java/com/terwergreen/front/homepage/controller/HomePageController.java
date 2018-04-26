@@ -1,8 +1,7 @@
 package com.terwergreen.front.homepage.controller;
 
 import com.terwergreen.bugucms.exception.WebException;
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
-import com.terwergreen.front.common.util.ImageUtils;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
 import com.terwergreen.middle.post.dto.PostDTO;

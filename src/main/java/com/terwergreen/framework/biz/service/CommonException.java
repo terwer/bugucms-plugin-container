@@ -1,4 +1,4 @@
-package com.terwergreen.framework.core.bg.biz.service;
+package com.terwergreen.framework.biz.service;
 
 /**
  * 公共异常类

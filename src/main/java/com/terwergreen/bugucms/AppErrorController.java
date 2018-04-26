@@ -1,7 +1,6 @@
 package com.terwergreen.bugucms;
 
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
-import com.terwergreen.front.common.dto.RestResponseDTO;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.front.common.util.Constants;
 import com.terwergreen.front.common.util.RestResponseStates;
 import net.minidev.json.JSONValue;
@@ -15,10 +14,8 @@ import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.RequestAttributes;
 import org.springframework.web.context.request.ServletRequestAttributes;
-import com.terwergreen.front.common.dto.RestResponseDTO;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;

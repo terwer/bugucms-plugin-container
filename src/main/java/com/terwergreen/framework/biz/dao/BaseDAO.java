@@ -1,4 +1,4 @@
-package com.terwergreen.framework.core.bg.biz.dao;
+package com.terwergreen.framework.biz.dao;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

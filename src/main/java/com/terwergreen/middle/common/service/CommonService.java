@@ -1,6 +1,6 @@
 package com.terwergreen.middle.common.service;
 
-import com.terwergreen.framework.core.bg.biz.service.BusinessServiceException;
+import com.terwergreen.framework.biz.service.BusinessServiceException;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 
 /**

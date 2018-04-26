@@ -1,6 +1,6 @@
 package com.terwergreen.middle.common.dao;
 
-import com.terwergreen.framework.core.bg.app.integration.dao.BGDAOException;
+import com.terwergreen.framework.app.integration.dao.BGDAOException;
 
 import java.util.List;
 import java.util.Map;
