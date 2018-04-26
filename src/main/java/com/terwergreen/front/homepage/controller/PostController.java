@@ -33,9 +33,8 @@ public class PostController extends BGBaseController {
     /**页面开始**/
     /***********/
 
-    @RequestMapping(value = "/post/{categoryId}/{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public ModelAndView postById(HttpServletRequest request,
-                                 @PathVariable(name = "categoryId") String categoryId,
                                  @PathVariable(name = "postId") String postId) throws Exception {
         //去除后缀
         postId = postId.replace(".html", "");
@@ -45,7 +44,8 @@ public class PostController extends BGBaseController {
         } else {
             logger.debug("文章别名为：" + postId);
         }
-        logger.debug("分类为：" + categoryId);
+        //查询分类
+        //logger.debug("分类为：" + categoryId);
         ModelAndView mv = new ModelAndView();
 
         SiteConfigDTO siteConfigDTO = null;
