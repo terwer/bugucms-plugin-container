@@ -3,6 +3,7 @@ package com.terwergreen.front.homepage.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.front.common.util.ImageUtils;
 import com.terwergreen.front.common.util.MarkdownUtils;
 import com.terwergreen.middle.post.dto.PostDTO;
 import com.terwergreen.middle.post.service.PostService;
@@ -59,6 +60,7 @@ public class PostController extends BGBaseController {
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/post");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("post", post);
+
             if(post == null){
                 logger.error("文章不存在");
                 throw new WebException("文章不存在");

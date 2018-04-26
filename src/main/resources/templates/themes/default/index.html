@@ -30,14 +30,16 @@ __________  _________    _____________  ___      ______      ___  _________    _
                 <postList th:each="post,i : ${postList}" th:remove="tag">
                     <div class="wow fadeInUp" data-wow-delay="0.3s">
                         <article th:id="|post-${post.postId}|" class="post type-post status-publish format-standard tag-java">
-                            <figure class="thumbnail">
-                                <div class="load">
-                                    <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|">
-                                        <img th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/loading.png|" data-original="" th:alt="${post.postTitle}">
-                                    </a>
-                                </div>
-                                <span class="cat"><a th:href="|${siteConfigDTO.weburl}/backend/java/|">Java</a></span>
-                            </figure>
+                            <thumbnail th:if="${post.thumbnails.size() > 0}" th:remove="tag">
+                                <figure class="thumbnail">
+                                    <div class="load">
+                                        <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|">
+                                            <img th:src="${post.thumbnails.get(0)}" data-original="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/loading.png|" th:alt="${post.postTitle}" width="280" height="210">
+                                        </a>
+                                    </div>
+                                    <span class="cat"><a th:href="|${siteConfigDTO.weburl}/backend/java/|">Java</a></span>
+                                </figure>
+                            </thumbnail>
                             <header class="entry-header">
                                 <h2 class="entry-title">
                                     <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|" rel="bookmark" th:text="${post.postTitle}">postTitle</a>
@@ -45,10 +47,7 @@ __________  _________    _____________  ___      ______      ___  _________    _
                             </header>
                             <!-- .entry-header -->
                             <div class="entry-content">
-                                <div class="archive-content"> 前言
-                                    今天在日常敲代码中，给SpringBoot自定义错误页，但是本来一件简单的事情却变得复杂起来了，页面总是空白的而且没有输出，后面新建了一个项目，但是在新项目中一切都是OK的，于是我进行一步步的对比调试，最终确定了是Shiro的FreeMarker
-                                    Tag出的错导致页面渲染终止。 解决...
-                                </div>
+                                <div class="archive-content" th:text="${post.postDesc}">postDesc</div>
                                 <span class="title-l"></span> <span class="entry-meta"> <span class="date">2018年03月18日&nbsp;&nbsp;</span><span
                                     class="views">阅读 48</span><span class="comment">&nbsp;&nbsp;<a
                                     th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html#respond|" rel="external nofollow"><i

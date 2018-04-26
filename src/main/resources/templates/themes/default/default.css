@@ -1329,7 +1329,7 @@ input[type=password] {
 }
 
 .entry-meta {
-    position: absolute;
+    /* position: absolute; */
     bottom: 14px;
     left: 240px;
     color: #999;
