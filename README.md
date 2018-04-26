@@ -41,7 +41,7 @@ Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点�
 （3）将war包放到tomcat的webapps目录下  
 
 ## 发布流程
-（1）打包之前copy``pom-prd-tomcat.xml``到``pom.xml``      
+（1）打包之前copy``pom-pro-tomcat.xml``到``pom.xml``      
 （2）打包之前``application-pro.properties``配置数据库用户名，密码 copy到``application.properties``  
 （3）部署之前初始化ddl表结构（如果需要）      
 （4）部署之前``20180407-pro.sql``初始化数据    
