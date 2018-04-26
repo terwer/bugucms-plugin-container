@@ -17,56 +17,56 @@
                             <ul id="menu" class="menu">
                                 <li id="menu-item-2342"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2342">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/links.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/links|">
                                         <i class="iconfont"></i>
                                         友情链接
                                     </a>
                                 </li>
                                 <li id="menu-item-2343"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2343">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/history.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/history|">
                                         <i class="iconfont"></i>
                                         发展历史
                                     </a>
                                 </li>
                                 <li id="menu-item-2347"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2347">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/sitemap.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/sitemap|">
                                         <i class="iconfont"></i>
                                         网站地图
                                     </a>
                                 </li>
                                 <li id="menu-item-2348"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2348">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/blog.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/blog|">
                                         <i class="iconfont"></i>
                                         博客风格
                                     </a>
                                 </li>
                                 <li id="menu-item-2349"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2349">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/label-overview.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/label-overview|">
                                         <i class="iconfont"></i>
                                         标签总览
                                     </a>
                                 </li>
                                 <li id="menu-item-2350"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2350">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/sponsor.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/|">
                                         <i class="iconfont"></i>
                                         赞助本站
                                     </a>
                                 </li>
                                 <li id="menu-item-2355"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2355">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/recent-comments.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/recent-comments|">
                                         <i class="iconfont"></i>
                                         近期留言
                                     </a>
                                 </li>
                                 <li id="menu-item-2361"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2361">
-                                    <a target="_blank" href="${siteConfigDTO.weburl}/random.html">
+                                    <a th:href="|${siteConfigDTO.weburl}/random|">
                                         <i class="iconfont"></i>
                                         随机文章
                                     </a>
@@ -80,8 +80,8 @@
                             <div class="s-icon"></div>
                             关于本站
                         </h3>
-                        <div class="textwidget widget-text">
-                            ${siteConfigDTO.description}
+                        <div class="textwidget widget-text" th:text="${siteConfigDTO.description}">
+                            description
                         </div>
                         <div class="clear"></div>
                     </aside>
@@ -92,11 +92,11 @@
                 <div class="site-info">
                     Copyright ©&nbsp;2011-
                     <span id="currentYear">2018</span>
-                    <a href="${siteConfigDTO.weburl}" target="_blank">${siteConfigDTO.domain}</a>
+                    <a href="${siteConfigDTO.weburl}" target="_blank" th:text="${siteConfigDTO.domain}">domain</a>
                     All Rights Reserved.
                     <br/>
-                    ${siteConfigDTO.webname} .
-                    <a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank">${siteConfigDTO.beianinfo}</a>
+                    <span th:text="${siteConfigDTO.webname}">webname</span> .
+                    <a href="http://www.miitbeian.gov.cn/" rel="nofollow" target="_blank" th:text="${siteConfigDTO.beianinfo}">beianinfo</a>
                     <span class="add-info">博客已稳定运行：
                         <span id="timeShow">2年303天22时22分48秒</span>
                         .
@@ -141,8 +141,7 @@
                         <i class="fa fa-qrcode"></i>
                         <span class="qr-img">
                             <div id="output">
-                                <img class="alignnone"
-                                     src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico">
+                                <img class="alignnone" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico|">
                             </div>
                         </span>
                     </a>

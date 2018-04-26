@@ -1,20 +1,27 @@
-<!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="layout">
-<head th:include="layout :: htmlhead" th:with="title='Hello'">
-    <meta charset="UTF-8">
-    <title>Content page 1</title>
-</head>
-<body>
 <!--
-<section layout:fragment="content">
-    <p>This is a paragraph from content page 1</p>
-</section>
-<footer>
-    <p layout:fragment="custom-footer">This is some footer content from content page 1</p>
-</footer>
-
+__________  _________    _____________  ___      ______      ___  _________    _____________
+| __________| / ______ /   |  __________ | \ \     | | \ \     | | | / ______  |  __________ |
+    |  |    | |          |    _________   \ \    | |  \ \    | || | |          |  __________
+   |  |     | | ______   |  /_________ |  \ \   | |   \ \   | |   | | ______   |  /_________|
+  |  |      | |______ | |  | \ \          \ \  | |    \ \  | |    | |______ | |  | \ \
+ |  |       | |________ |  |  \ \_______  \ \| |      \ \ |_|     | |________ |  |  \ \_______
+|__|        /_/______ | | _|   \______/   \_\_|       \_ |_|      /_/______ | | _|   \______/
 -->
-</body>
-</html>
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="themes/default/layout/layout"
+      th:with="title=|${siteConfigDTO.webname} - ${siteConfigDTO.webslogen}|">
+
+<customHead layout:fragment="customHead">
+    <!-- 头部 -->
+    <link rel="stylesheet" type="text/css" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/css/index.css|">
+</customHead>
+
+<div layout:fragment="content" id="content">
+    <h1 th:text="${siteConfigDTO.webname}">webname</h1>
+</div>
+
+<customFoot layout:fragment="customFoot">
+    <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/js/index.js|"></script>
+</customFoot>

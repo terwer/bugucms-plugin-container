@@ -7,23 +7,19 @@
     <body>
         <div th:fragment="footerJS" id="footerJS">
             <!-- jquery -->
-            <script type="text/javascript" src="${basePath}/webjars/jquery/jquery.min.js"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/webjars/jquery/jquery.min.js|"></script>
             <!-- artDialog -->
-            <script type="text/javascript"
-                    src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus.js"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus.js|"></script>
             <!-- pace -->
-            <script type="text/javascript"
-                    src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/pace/js/pace.min.js"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/pace/js/pace.min.js|"></script>
             <!-- jquery.qrcode -->
-            <script type="text/javascript"
-                    src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/qrcode/jquery.qrcode.min.js"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/qrcode/jquery.qrcode.min.js|"></script>
             <!-- cookie -->
-            <script src="${request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js"></script>
-            <script type="text/javascript" src="${basePath}/themes/${siteConfigDTO.webtheme}/lib/function.js"></script>
-            <script type="text/javascript"
-                    src="${basePath}/themes/${siteConfigDTO.webtheme}/default.js?v=201804192315"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js|"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js|"></script>
+            <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/default.js?v=201804192315|"></script>
             <!-- 自定义底部开始 -->
-            <#nested>
+            <customFoot layout:fragment="customFoot" th:remove="tag"></customFoot>
             <!-- 自定义底部结束 -->
             <script type="text/javascript">
                 $(document).ready(function () {
