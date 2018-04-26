@@ -2,7 +2,7 @@ package com.terwergreen.front.user.controller;
 
 import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.exception.WebException;
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.HttpUtils;
 import com.terwergreen.front.common.util.RestResponseStates;
@@ -13,6 +13,7 @@ import com.terwergreen.middle.user.dto.UserDTO;
 import com.terwergreen.middle.user.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -36,6 +38,33 @@ public class LoginController extends BGBaseController {
     /***********/
     /**页面开始**/
     /***********/
+
+    @RequestMapping("/index")
+    public ModelAndView index(Model model, HttpServletRequest request) throws Exception {
+//        Cookie[] cookie=request.getCookies();
+//        if (cookie!=null) {
+//            //获取cookie中保存的用户名和密码
+//            for (Cookie aCookie : cookie) {
+//                if (aCookie.getName().equalsIgnoreCase(EncryptAndDecrypt.MD5("loginUser"))) {
+//                    byte[] cookieValue = java.util.Base64.getDecoder().decode(aCookie.getValue().getBytes("UTF-8"));
+//                    String loginUser = new String(Objects.requireNonNull(EncryptAndDecrypt.decrypt(cookieValue, "bugucms.terwer")), "UTF-8");
+//                    int num = loginUser.indexOf("@");
+//                    model.addAttribute("loginName", loginUser.substring(0, num));
+//                    model.addAttribute("loginPwd", loginUser.substring(num + 1));
+//                    model.addAttribute("remember", 1);
+//                    break;
+//                }
+//            }
+//        }
+        SiteConfigDTO siteConfigDTO = null;
+        try {
+            siteConfigDTO = commonService.getSiteConfig();
+        } catch (Exception e) {
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
+        }
+        return new ModelAndView("admin/index", "siteConfigDTO", siteConfigDTO);
+    }
 
     @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login() throws Exception {
@@ -106,6 +135,8 @@ public class LoginController extends BGBaseController {
                 //返回登录信息
                 UserDTO userDTO = loginService.getLoginUserInfo(request.getSession());
                 resultMap.put("userInfo", userDTO);
+
+                request.getSession().setAttribute(Constants.SESSION_USER_ID, userDTO.getUserId());
 
                 //写入cookie
                 HttpUtils.setCookie(request, response, Constants.COOKIE_AUTHOR, userDTO.getNickName());

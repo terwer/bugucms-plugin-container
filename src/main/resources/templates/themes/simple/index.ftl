@@ -1,1 +1,0 @@
-<h1>This is simple theme</h1>

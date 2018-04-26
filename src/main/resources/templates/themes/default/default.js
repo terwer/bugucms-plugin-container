@@ -24,7 +24,6 @@ $(document).ready(function () {
 $(document).keydown(function () {
     if (event.ctrlKey == true && event.keyCode == 83) {
         console.log("You enter Ctrl+S!");
-        showMsg("aaaa");
         return false;
     }
 });
@@ -37,16 +36,14 @@ function logout_ajax() {
         data: {},
         dataType: "json",
         beforeSend: function () {
-            showTopContentDialog("login_loding", "<div class='dialog_loading'>正在登录中，请稍后...</div>", "登陆提示", 400, 75);
+            showTopContentDialog("logout_loding", "<div class='dialog_loading'>正在退出中，请稍后...</div>", "退出提示", 400, 75);
         },
         complete: function () {
         },
         success: function (data) {
             //退出成功
             if (data.flag == "1") {
-                top.dialog.list["login_loding"].close().remove();
-                //showMsg("登陆失败,请联系管理员！", "Error");
-                //showTopContentDialog("login_loding_error", "<div class='dialog_ok'>登陆成功,正在跳转中...</div>", "登陆成功", 400, 75);
+                top.dialog.list["logout_loding"].close().remove();
                 showTopDialog("show_loading", "<div class='dialog_loading'>正在退出，请稍后...</div>", "温馨提示", 400, 95);
                 setTimeout(function () {
                     top.dialog.list["login_loding_error"].close().remove();
@@ -55,20 +52,17 @@ function logout_ajax() {
                 window.location.reload();
             } else {
                 top.dialog.list["login_loding"].close().remove();
-                //showMsg("登陆失败,请联系管理员！", "Error");
-                //showTopContentDialog("login_loding_error", "<div class='dialog_error'>登陆失败,用户名或密码错误！</div>", "登陆出错", 400, 75, false);
-                showTopContentDialog("login_loding_error", "<div class='dialog_error'>" + data.msg + "</div>", "登录出错", 400, 75, false);
+                showTopContentDialog("logout_loding_error", "<div class='dialog_error'>" + data.msg + "</div>", "退出出错", 400, 75, false);
                 setTimeout(function () {
-                    top.dialog.list["login_loding_error"].close().remove();
+                    top.dialog.list["logout_loding_error"].close().remove();
                 }, 1000);
             }
         },
         error: function () {
-            top.dialog.list["login_loding"].close().remove();
-            //showMsg("登陆失败,请联系管理员！", "Error");
-            showTopContentDialog("login_loding_error", "<div class='dialog_error'>网络连接错误！</div>", "登录出错", 400, 75);
+            top.dialog.list["logout_loding"].close().remove();
+            showTopContentDialog("logout_loding_error", "<div class='dialog_error'>网络连接错误！</div>", "退出出错", 400, 75);
             setTimeout(function () {
-                top.dialog.list["login_loding_error"].close().remove();
+                top.dialog.list["logout_loding_error"].close().remove();
             }, 1000);
         }
     });

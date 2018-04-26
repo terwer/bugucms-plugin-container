@@ -15,11 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;
 import com.terwergreen.middle.common.service.CommonService;
-
-import java.util.List;
 
 @Controller
 public class PostController extends BGBaseController {
@@ -33,9 +31,8 @@ public class PostController extends BGBaseController {
     /**页面开始**/
     /***********/
 
-    @RequestMapping(value = "/post/{categoryId}/{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
     public ModelAndView postById(HttpServletRequest request,
-                                 @PathVariable(name = "categoryId") String categoryId,
                                  @PathVariable(name = "postId") String postId) throws Exception {
         //去除后缀
         postId = postId.replace(".html", "");
@@ -45,7 +42,8 @@ public class PostController extends BGBaseController {
         } else {
             logger.debug("文章别名为：" + postId);
         }
-        logger.debug("分类为：" + categoryId);
+        //查询分类
+        //logger.debug("分类为：" + categoryId);
         ModelAndView mv = new ModelAndView();
 
         SiteConfigDTO siteConfigDTO = null;
@@ -59,6 +57,7 @@ public class PostController extends BGBaseController {
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/post");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("post", post);
+
             if(post == null){
                 logger.error("文章不存在");
                 throw new WebException("文章不存在");

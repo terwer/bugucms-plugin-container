@@ -1,7 +1,7 @@
 package com.terwergreen.middle.common.service.impl;
 
-import com.terwergreen.framework.core.bg.biz.service.BaseService;
-import com.terwergreen.framework.core.bg.biz.service.BusinessServiceException;
+import com.terwergreen.framework.biz.service.BaseService;
+import com.terwergreen.framework.biz.service.BusinessServiceException;
 import com.terwergreen.front.common.util.BeanUtils;
 import com.terwergreen.middle.common.dao.CommonDAO;
 import com.terwergreen.middle.common.dto.SiteConfigDTO;

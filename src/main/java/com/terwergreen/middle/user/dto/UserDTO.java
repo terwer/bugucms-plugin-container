@@ -4,6 +4,10 @@ public class UserDTO {
     /**
      * 账户ID
      */
+    private String userId;
+    /**
+     * 账户ID
+     */
     private String accoutId;
     /**
      * 昵称
@@ -17,6 +21,14 @@ public class UserDTO {
      * 手机
      */
     private String mobile;
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
 
     public String getAccoutId() {
         return accoutId;

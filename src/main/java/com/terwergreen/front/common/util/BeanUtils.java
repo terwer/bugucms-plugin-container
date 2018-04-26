@@ -1,6 +1,6 @@
 package com.terwergreen.front.common.util;
 
-import com.terwergreen.framework.core.bg.biz.service.CommonException;
+import com.terwergreen.framework.biz.service.CommonException;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;

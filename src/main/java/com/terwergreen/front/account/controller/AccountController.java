@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.terwergreen.framework.core.bg.controller.BGBaseController;
+import com.terwergreen.framework.controller.BGBaseController;
 import com.terwergreen.front.common.dto.RestResponseDTO;
 import com.terwergreen.front.common.util.RestResponseStates;
 
@@ -28,8 +28,7 @@ public class AccountController extends BGBaseController {
         // resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
         // resultMap.put("msg", RestResponseStates.SUCCESS.getMsg());
         // return super.processResultAll(resultMap);
-
-        return new ModelAndView();
+        return new ModelAndView("accountInfo");
     }
 
     @RequestMapping(value = "/account/activate", method = RequestMethod.GET)

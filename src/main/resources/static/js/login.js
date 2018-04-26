@@ -166,7 +166,7 @@ function login_ajax(account, password) {
 					top.dialog.list["login_loding_error"].close().remove();
 				}, 1000);
 				//登录成功，跳转到首页
-                window.location.href = "/";
+                window.location.href = "/admin";
 			} else {
 				top.dialog.list["login_loding"].close().remove();
 				//showMsg("登陆失败,请联系管理员！", "Error");
