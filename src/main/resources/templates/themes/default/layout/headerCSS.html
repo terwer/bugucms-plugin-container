@@ -14,8 +14,6 @@
         <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
         <!-- apple这行是告诉iOS这是个应用，就不会像网页一样可以滚动到顶部回弹一下的效果，就是可以看到苹果默认背景灰色部分的那个效果 -->
         <meta name="apple-mobile-web-app-capable" content="yes"/>
-        <!-- 百度联盟 -->
-        <meta name="baidu_union_verify" content="bd76270fb5a06c40f25bd1703d7d220b">
         <title th:text="${title}">Title</title>
         <link rel="shortcut icon" type="image/x-icon" href="../favicon.ico" th:href="@{|/themes/${siteConfigDTO.webtheme}/favicon.ico|}">
         <link rel="apple-touch-icon" sizes="114x114" href="../favicon.ico" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/favicon.ico|">
