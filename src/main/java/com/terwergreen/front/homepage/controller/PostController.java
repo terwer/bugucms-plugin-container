@@ -58,7 +58,7 @@ public class PostController extends BGBaseController {
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("post", post);
 
-            if(post == null){
+            if (post == null) {
                 logger.error("文章不存在");
                 throw new WebException("文章不存在");
             }
