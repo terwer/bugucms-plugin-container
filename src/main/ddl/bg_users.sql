@@ -1,3 +1,4 @@
+-- 创建用户表
 DROP TABLE IF EXISTS `bg_users`;
 CREATE TABLE `bg_users`  (
   `user_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '用户ID',

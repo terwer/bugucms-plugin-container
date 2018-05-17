@@ -1,3 +1,4 @@
+--  创建站点选项表
 DROP TABLE IF EXISTS `bg_options`;
 CREATE TABLE `bg_options`  (
   `option_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '配置ID',
