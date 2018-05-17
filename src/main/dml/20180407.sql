@@ -1,7 +1,7 @@
 -- 初始化站点配置
 INSERT INTO bg_options (option_group, option_name, option_value)
 VALUES ('siteConfig', 'domain', 'localhost'),
-  ('siteConfig', 'weburl', 'http://localhost:8080'),
+  ('siteConfig', 'weburl', 'http://localhost:8081'),
   ('siteConfig', 'webtheme', 'default'),
   ('siteConfig', 'webname', '远方的灯塔'),
   ('siteConfig', 'webslogen', '专注于服务端技术分享'),
