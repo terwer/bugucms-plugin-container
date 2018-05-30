@@ -43,6 +43,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
             list = commonDAO.queryList("get_option_by_group", paramMap);
         } catch (Exception e) {
             logger.error("获取配置项异常", e);
+            throw new BusinessServiceException(e);
         }
         //多个结果返回List，只有一个结果的时候直接返回
         if (list.size() > 0) {
