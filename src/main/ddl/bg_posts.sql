@@ -1,3 +1,4 @@
+-- 创建文章表
 DROP TABLE IF EXISTS `bg_posts`;
 CREATE TABLE `bg_posts`  (
   `post_id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT COMMENT '文章ID',
