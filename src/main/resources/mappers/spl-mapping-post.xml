@@ -4,11 +4,11 @@
 
 <mapper namespace="bgapp">
     <!-- 获取最新文章 -->
-    <select id="get_posts_by_user" resultType="com.terwergreen.middle.post.dto.PostDTO">
+    <select id="get_posts_by_user" resultType="com.terwergreen.bugucms.middle.post.dto.PostDTO">
         select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent from bg_posts where post_author = 1 order by post_modified desc limit 0,10
     </select>
     <!-- 获取单个文章 -->
-    <select id="get_post_by_slug" resultType="com.terwergreen.middle.post.dto.PostDTO">
+    <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.middle.post.dto.PostDTO">
         select post_title as postTitle,post_content as postContent from bg_posts where post_name = #{slug}
     </select>
 </mapper>

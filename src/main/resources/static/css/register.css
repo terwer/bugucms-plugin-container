@@ -3,9 +3,9 @@
 	cursor: pointer;
 }
 
-.layout-login {
+.layout-register {
 	position: absolute;
-	top: 30%;
+	top: 25%;
 	width: 100%;
 }
 
@@ -131,7 +131,7 @@ input:focus {
 	border: 0 none;
 	background: none;
 	position: absolute;
-	top: 73px;
+	top: 135px;
 	right: 4px;
 	z-index: 10;
 	width: 44px;
