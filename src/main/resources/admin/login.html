@@ -50,16 +50,18 @@ ____________  _________    _____________  ___      ______      ___  _________   
                 </div>
                 <div class="form-container" id="form_container">
                     <div class="ng-form-area show-place" id="form-area">
-                        <form id="loginForm" action="javascript:void(0);" onsubmit="return false;">
+                        <p th:if="${param.logout}" class="bg-warning">已成功注销</p><!-- 1 -->
+                        <p th:if="${param.error}" class="bg-danger">用户名或密码错误</p> <!-- 2 -->
+                        <form class="form-horizontal" name="form" th:action="@{/auth/login}" action="/auth/login" method="POST"> <!-- 3 -->
                             <div class="shake-area" id="shake_area" style="z-index: 30;">
                                 <div class="enter-area">
-                                    <input type="text" class="enter-item first-enter-item" id="account" name="account" placeholder="请输入手机号">
+                                    <input type="text" class="enter-item first-enter-item" id="username" name="username" placeholder="请输入账号">
                                 </div>
                                 <div class="enter-area" style="z-index: 20;">
                                     <input type="password" class="enter-item last-enter-item" id="password" name="password" placeholder="请输入密码">
                                 </div>
                             </div>
-                            <input id="btnSubmit" class="button orange" type="submit" onsubmit="return false;" title="立即登录" value="立即登录">
+                            <input class="button orange" type="submit"  title="立即登录" value="立即登录">
                         </form>
                     </div>
                 </div>
@@ -94,6 +96,6 @@ ____________  _________    _____________  ___      ______      ___  _________   
 <!-- cookie -->
 <script type="text/javascript" src="../templates/themes/default/lib/cookie/jquery.cookie.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js|"></script>
 <script type="text/javascript" src="../templates/themes/default/lib/function.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js|"></script>
-<script type="text/javascript" src="../static/js/login.js?v=201804262020" th:src="|${#request.contextPath}/js/login.js?v=201804262020|"></script>
+<!--<script type="text/javascript" src="../static/js/login.js?v=201804262020" th:src="|${#request.contextPath}/js/login.js?v=201804262020|"></script>-->
 </body>
 </html>

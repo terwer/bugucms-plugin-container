@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
     <head>
         <meta charset="UTF-8">
         <title>Title</title>
@@ -18,62 +18,82 @@
                     <div class="menu-container">
                         <ul id="menu" class="top-menu">
                         <div th:with="condition=${userDTO != null}" th:remove="tag">
-                            <span th:if="${condition}" th:remove="tag">
-                                <li>欢迎您：<span th:text="${userDTO.nickName}">nickName</span>，
-                                    <a id="logout" href="javascript:void(0);" title="退出">退出</a>
+                            <!--<span th:if="${condition}" th:remove="tag">-->
+                                <!--<li>欢迎您：<span th:text="${userDTO.nickName}">nickName</span>，-->
+                                    <!--<a id="logout" href="javascript:void(0);" title="退出">退出</a>-->
+                                <!--</li>-->
+                            <!--</span>-->
+                            <!--<span th:unless="${condition}" th:remove="tag">-->
+                                <!--<li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
+                                    <!--<a th:href="|${siteConfigDTO.weburl}/auth/register|"><i class="iconfont"></i>注册</a>-->
+                                <!--</li>-->
+                                <!--<li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
+                                    <!--<a th:href="|${siteConfigDTO.weburl}/auth/login|"><i class="iconfont"></i>登录</a>-->
+                                <!--</li>-->
+                            <!--</span>-->
+
+                            <span sec:authorize="!hasRole('ROLE_ADMIN')">
+                                <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
+                                    <a th:href="|${siteConfigDTO.weburl}/auth/login|"><i class="iconfont"></i>登录</a>
                                 </li>
                             </span>
-                            <span th:unless="${condition}" th:remove="tag">
-                                <li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
-                                    <a th:href="|${siteConfigDTO.weburl}/reg|"><i class="iconfont"></i>注册</a>
+
+                            <span th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+                                <li>当前登录用户: <span sec:authentication="name"></span> |
+                                角色: <span sec:authentication="principal.authorities"></span></li>
+                                <li>
+                                    <form action="#" th:action="@{/logout}" method="post">
+                                        <input type="submit" class="btn btn-primary" value="注销"/>
+                                    </form>
                                 </li>
-                                <li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
-                                    <a th:href="|${siteConfigDTO.weburl}/login|"><i class="iconfont"></i>登录</a>
-                                </li>
+                            </span>
+
+                            <span sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a th:href="@{/admin/workspace}"> 后台管理 </a></li>
                             </span>
                         </div>
                         <li id="menu-item-962"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-962">
                             <a th:href="|${siteConfigDTO.weburl}/shuoshuo|">
                                 <i class="iconfont"></i>
-                                说说
+                                随笔
                             </a>
                         </li>
-                        <li id="menu-item-2458"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2458">
-                            <a th:href="|${siteConfigDTO.weburl}/music|">
-                                <i class="iconfont icon-yinle"></i>
-                                音乐
-                            </a>
-                        </li>
-                        <li id="menu-item-2169"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2169">
-                            <a th:href="|${siteConfigDTO.weburl}/plan-thin|">
-                                <i class="iconfont"></i>
-                                计划薄
-                            </a>
-                        </li>
-                        <li id="menu-item-964"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-964">
-                            <a th:href="|${siteConfigDTO.weburl}/read-people|">
-                                <i class="iconfont"></i>
-                                读者墙
-                            </a>
-                        </li>
-                        <li id="menu-item-968"
-                            class="menu-item menu-item-type-post_type menu-item-object-page menu-item-968">
-                            <a th:href="|${siteConfigDTO.weburl}/file|">
-                                <i class="iconfont"></i>
-                                博客归档
-                            </a>
-                        </li>
-                        <li id="menu-item-2689"
-                            class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2689">
-                            <a th:href="|${siteConfigDTO.weburl}/go/luck|">
-                                <i class="iconfont"></i>
-                                试试手气
-                            </a>
-                        </li>
+                        <!--<li id="menu-item-2458"-->
+                            <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2458">-->
+                            <!--<a th:href="|${siteConfigDTO.weburl}/music|">-->
+                                <!--<i class="iconfont icon-yinle"></i>-->
+                                <!--音乐-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li id="menu-item-2169"-->
+                            <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2169">-->
+                            <!--<a th:href="|${siteConfigDTO.weburl}/plan-thin|">-->
+                                <!--<i class="iconfont"></i>-->
+                                <!--计划薄-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li id="menu-item-964"-->
+                            <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-964">-->
+                            <!--<a th:href="|${siteConfigDTO.weburl}/read-people|">-->
+                                <!--<i class="iconfont"></i>-->
+                                <!--读者墙-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li id="menu-item-968"-->
+                            <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-968">-->
+                            <!--<a th:href="|${siteConfigDTO.weburl}/file|">-->
+                                <!--<i class="iconfont"></i>-->
+                                <!--博客归档-->
+                            <!--</a>-->
+                        <!--</li>-->
+                        <!--<li id="menu-item-2689"-->
+                            <!--class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2689">-->
+                            <!--<a th:href="|${siteConfigDTO.weburl}/go/luck|">-->
+                                <!--<i class="iconfont"></i>-->
+                                <!--试试手气-->
+                            <!--</a>-->
+                        <!--</li>-->
                         <li id="menu-item-2196"
                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
                             <a th:href="|${siteConfigDTO.weburl}/about|">
@@ -110,7 +130,7 @@
                                 <i class="fa fa-bars"></i>
                             </a>
                             <div class="menu-container">
-                                <ul id="menu" class="down-menu nav-menu sf-js-enabled sf-arrows">
+                                <ul class="down-menu nav-menu sf-js-enabled sf-arrows">
                                     <li id="menu-item-26"
                                         class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-26">
                                         <a th:href="|${siteConfigDTO.weburl}/|">

@@ -38,9 +38,9 @@ function validate_form() {
 		rules: {
 			account: {
 				required: true,
-				minlength: 11,
-				maxlength: 11,
-				mobile: true
+				// minlength: 11,
+				// maxlength: 11,
+				// mobile: true
 				// remote: {
 				// 	url: '/user/validateAccount',
 				// 	data: {
@@ -77,10 +77,10 @@ function validate_form() {
 		},
 		messages: {
 			account: {
-				required: "请输入手机号",
-				minlength: "手机号必须为11位",
-				maxlength: "手机号必须为11位",
-				mobile: "手机号不合法"
+				required: "请输入账号",
+				// minlength: "手机号必须为11位",
+				// maxlength: "手机号必须为11位",
+				// mobile: "手机号不合法"
 				//remote: "该手机号尚未注册"
 			},
 			password: {

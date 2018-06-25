@@ -5,14 +5,30 @@
 <mapper namespace="bgapp">
     <!-- 校验用户名 -->
     <select id="vali_by_account" resultType="int">
-		select count(1) from bg_users where mobile = #{account}
+		select count(1) from sys_user where mobile = #{account}
 	</select>
     <!-- 校验密码 -->
     <select id="vali_by_password" resultType="int">
-		select count(1) from bg_users where mobile = #{account} and password = md5(#{password})
+		select count(1) from sys_user where mobile = #{account} and password = md5(#{password})
 	</select>
     <!-- 获取用户信息 -->
     <select id="get_user_by_account" resultType="com.terwergreen.bugucms.middle.user.dto.UserDTO">
-        select user_id as userId, user_name as accoutId,nick_name as nickName, user_profile as userProfile,mobile from bg_users where mobile = #{account}
+        select user_id as userId, user_name as accoutId,nick_name as nickName, user_profile as userProfile,mobile from sys_user where mobile = #{account}
+    </select>
+    <!-- 查询用户及角色 -->
+    <resultMap id="userMap" type="com.terwergreen.bugucms.middle.admin.dto.SysUserDTO">
+        <id property="id" column="id"/>
+        <result property="username" column="user_name"/>
+        <result property="password" column="password"/>
+        <collection property="roles" ofType="com.terwergreen.bugucms.middle.admin.dto.SysRoleDTO">
+            <result column="name" property="name"/>
+        </collection>
+    </resultMap>
+    <select id="selectByUserName" parameterType="String" resultMap="userMap">
+        SELECT su.user_name,su.password,sr.name
+        FROM sys_user su
+        LEFT JOIN sys_role_user sru on su.id= sru.sys_user_id
+        LEFT JOIN sys_role sr on sru.sys_role_id = sr.id
+        WHERE su.user_name = #{username}
     </select>
 </mapper>

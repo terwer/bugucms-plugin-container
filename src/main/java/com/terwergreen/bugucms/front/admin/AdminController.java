@@ -25,76 +25,14 @@ public class AdminController extends BGBaseController {
     /** 页面开始 **/
     /***********/
 
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public String login(Model model) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        model.addAttribute("siteConfigDTO", siteConfigDTO);
-        return "login";
+    @RequestMapping("workspace")
+    public String workspace() {
+        return "workspace/workspace_index";
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String register(Model model) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        model.addAttribute("siteConfigDTO", siteConfigDTO);
-        return "register";
-    }
-
-    @RequestMapping(value = "/admin", method = RequestMethod.GET)
-    public ModelAndView home(HttpServletRequest request) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        ModelAndView mv = new ModelAndView("admin/main");
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-            if (null == siteConfigDTO) {
-                logger.error("站点配置异常:siteConfigDTO=null");
-                throw new WebException("站点配置异常:siteConfigDTO=null");
-            }
-            mv.addObject("siteConfigDTO", siteConfigDTO);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSONValue.toJSONString(siteConfigDTO));
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return mv;
-    }
-
-    @RequestMapping("/index")
-    public ModelAndView index(Model model, HttpServletRequest request) throws Exception {
-//        Cookie[] cookie=request.getCookies();
-//        if (cookie!=null) {
-//            //获取cookie中保存的用户名和密码
-//            for (Cookie aCookie : cookie) {
-//                if (aCookie.getName().equalsIgnoreCase(EncryptAndDecrypt.MD5("loginUser"))) {
-//                    byte[] cookieValue = java.util.Base64.getDecoder().decode(aCookie.getValue().getBytes("UTF-8"));
-//                    String loginUser = new String(Objects.requireNonNull(EncryptAndDecrypt.decrypt(cookieValue, "bugucms.terwer")), "UTF-8");
-//                    int num = loginUser.indexOf("@");
-//                    model.addAttribute("loginName", loginUser.substring(0, num));
-//                    model.addAttribute("loginPwd", loginUser.substring(num + 1));
-//                    model.addAttribute("remember", 1);
-//                    break;
-//                }
-//            }
-//        }
-        SiteConfigDTO siteConfigDTO = null;
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return new ModelAndView("admin/index", "siteConfigDTO", siteConfigDTO);
+    @RequestMapping("user")
+    public String userIndex() {
+        return "user/user_index";
     }
 
     /***********/
