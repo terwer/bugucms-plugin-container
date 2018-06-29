@@ -23,7 +23,7 @@ public class HomePageController extends BGBaseController {
 
     @Autowired
     private CommonService commonService;
-//    @Autowired
+    //    @Autowired
 //    private SysUserService sysUserService;
     @Autowired
     private PostService postService;
@@ -44,8 +44,11 @@ public class HomePageController extends BGBaseController {
                 logger.error("站点配置异常:siteConfigDTO=null");
                 throw new WebException("站点配置异常:siteConfigDTO=null");
             }
-             //获得当前登陆用户对应的对象。
-         sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            //获得当前登陆用户对应的对象。
+            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (currentUser != "anonymousUser") {
+                sysUserDTO = (SysUserDTO) currentUser;
+            }
             postList = postService.getPosts();
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
             mv.addObject("siteConfigDTO", siteConfigDTO);

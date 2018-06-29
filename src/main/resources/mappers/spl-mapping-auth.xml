@@ -25,10 +25,11 @@
         <collection property="sysRoles" ofType="com.terwergreen.bugucms.admin.dto.SysRoleDTO" javaType="java.util.List">
             <result column="role_id" property="id"/>
             <result column="role_name" property="name"/>
+            <result column="cn_name" property="cnName"/>
         </collection>
     </resultMap>
     <select id="selectByUserName" parameterType="String" resultMap="userMap">
-        SELECT su.id,su.user_name,su.password,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,sr.id as role_id,sr.name as role_name
+        SELECT su.id,su.user_name,su.password,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,sr.id as role_id,sr.name as role_name,sr.cn_name
         FROM sys_user su
         LEFT JOIN sys_role_user sru on su.id= sru.sys_user_id
         LEFT JOIN sys_role sr on sru.sys_role_id = sr.id

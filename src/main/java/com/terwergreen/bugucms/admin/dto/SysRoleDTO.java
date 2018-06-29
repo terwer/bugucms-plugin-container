@@ -14,4 +14,5 @@ import lombok.Setter;
 public class SysRoleDTO {
     private Integer id;
     private String name;
+    private String cnName;
 }

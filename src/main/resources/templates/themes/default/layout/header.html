@@ -40,7 +40,7 @@
 
                             <span th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
                                 <li>当前登录用户: <span sec:authentication="name"></span> | <span th:text="${sysUserDTO.nickName}"></span> |
-                                角色: <span sec:authentication="principal.authorities"></span></li>
+                                    角色: <span sec:authentication="principal.authorities"></span> | <span th:text="${sysUserDTO.sysRoles.get(0).cnName}"></span></li>
                                 <li>
                                     <form action="#" th:action="@{/logout}" method="post">
                                         <input type="submit" class="btn btn-primary" value="注销"/>
