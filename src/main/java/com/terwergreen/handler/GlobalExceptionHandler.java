@@ -2,8 +2,8 @@ package com.terwergreen.handler;
 
 import com.terwergreen.exception.RestException;
 import com.terwergreen.exception.WebException;
-import com.terwergreen.bugucms.front.common.dto.RestResponseDTO;
-import com.terwergreen.bugucms.front.common.util.RestResponseStates;
+import com.terwergreen.bugucms.common.dto.RestResponseDTO;
+import com.terwergreen.bugucms.common.util.RestResponseStates;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;

@@ -15,8 +15,8 @@
  */
 package com.terwergreen.config;
 
-import com.terwergreen.bugucms.middle.admin.service.SysUserService;
-import com.terwergreen.bugucms.middle.admin.service.impl.SysUserServiceImpl;
+import com.terwergreen.bugucms.admin.service.SysUserService;
+import com.terwergreen.bugucms.admin.service.impl.SysUserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,14 +39,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private Log logger = LogFactory.getLog(this.getClass());
-
-    @Autowired
-    PasswordEncoder passwordEncoder;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
     @Bean
     UserDetailsService customUserService() { //注册UserDetailsService 的bean
@@ -72,9 +64,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //内存中缓存权限数据
         //auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("123456")).roles("ADMIN");
-        //String encodePassword = passwordEncoder.encode("123456");
-        //logger.info("encodePassword:" + encodePassword);
-        auth.userDetailsService(customUserService()).passwordEncoder(passwordEncoder());
+        String encodePassword = BugucmsConfig.passwordEncoder().encode("123456");
+        logger.info("source:123456,encodePassword:" + encodePassword);
+        auth.userDetailsService(customUserService()).passwordEncoder(BugucmsConfig.passwordEncoder());
     }
     // @formatter:on
 }

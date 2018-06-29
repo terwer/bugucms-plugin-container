@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 import javax.sql.DataSource;
 
 public class MyBatisConfig implements TransactionManagementConfigurer {
+
     @Autowired
     private DataSource dataSource;
 
@@ -24,7 +25,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     public SqlSessionFactory sqlSessionFactoryBean() {
         SqlSessionFactoryBean bean = new SqlSessionFactoryBean();
         bean.setDataSource(dataSource);
-
         try {
             return bean.getObject();
         } catch (Exception e) {

@@ -22,6 +22,10 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 public class AppConfig {
+    /**
+     * 设置Admin模板引擎查找目录
+     * @return
+     */
     @Bean
     public ClassLoaderTemplateResolver adminTemplateResolver() {
         ClassLoaderTemplateResolver adminTemplateResolver = new ClassLoaderTemplateResolver();

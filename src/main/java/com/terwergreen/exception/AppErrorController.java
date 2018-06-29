@@ -1,8 +1,8 @@
 package com.terwergreen.exception;
 
 import com.terwergreen.core.controller.BGBaseController;
-import com.terwergreen.bugucms.front.common.util.Constants;
-import com.terwergreen.bugucms.front.common.util.RestResponseStates;
+import com.terwergreen.bugucms.common.util.Constants;
+import com.terwergreen.bugucms.common.util.RestResponseStates;
 import net.minidev.json.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
