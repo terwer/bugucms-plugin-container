@@ -23,8 +23,6 @@ public class HomePageController extends BGBaseController {
 
     @Autowired
     private CommonService commonService;
-    //    @Autowired
-//    private SysUserService sysUserService;
     @Autowired
     private PostService postService;
 
