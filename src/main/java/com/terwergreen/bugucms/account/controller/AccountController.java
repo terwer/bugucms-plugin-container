@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.bugucms.common.dto.RestResponseDTO;
 import com.terwergreen.bugucms.common.util.RestResponseStates;
 

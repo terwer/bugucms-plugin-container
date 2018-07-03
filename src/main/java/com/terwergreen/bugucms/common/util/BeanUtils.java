@@ -1,6 +1,6 @@
 package com.terwergreen.bugucms.common.util;
 
-import com.terwergreen.core.service.CommonException;
+import com.terwergreen.base.service.CommonException;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Field;

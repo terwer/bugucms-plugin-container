@@ -3,8 +3,8 @@ package com.terwergreen.bugucms.core.dao.impl;
 import java.util.List;
 import java.util.Map;
 
-import com.terwergreen.core.dao.BGDAOException;
-import com.terwergreen.core.dao.BaseDAO;
+import com.terwergreen.base.dao.BGDAOException;
+import com.terwergreen.base.dao.BaseDAO;
 import com.terwergreen.bugucms.core.dao.CommonDAO;
 import org.apache.ibatis.session.RowBounds;
 import org.springframework.dao.DataAccessException;

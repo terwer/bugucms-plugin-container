@@ -1,14 +1,30 @@
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>An Error Occured - Bugucms Error Pages</title>
+    <link rel="stylesheet" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{/static/css/bugucms.css}">
+    <link rel="stylesheet" th:href="@{/static/css/admin.css}">
 </head>
 <body>
-<div>Url:<span th:text="${errorMap.data.body.URL}"></span></div>
-<div>Error:<span th:text="${errorMap.data.body.error}"></div>
-<div>Status:<span th:text="${errorMap.data.body.status}"></span></div>
-<div>Timestamp:<span th:text="${errorMap.data.body.timestamp}"></span></div>
-<div>ResponseEntity:<span th:text="${errorMap.data}"></span></div>
+<div class="layui-fluid">
+    <div class="lying-tips bg-center">
+        <i class="layui-icon">&#x1007;</i>
+        <span class="layui-text">好像出错了呢</span>
+    </div>
+    <hr>
+    <div class="layui-text bg-center"><a th:href="${siteConfigDTO.weburl}">Bugucms</a></div>
+
+    <div th:if="${siteConfigDTO.debug == 'true'}">
+        <div>Url:<span th:text="${errorMap.data.body.URL}"></span></div>
+        <div>Error:<span th:text="${errorMap.data.body.error}"></span></div>
+        <div>Status:<span th:text="${errorMap.data.body.status}"></span></div>
+        <div>Timestamp:<span th:text="${errorMap.data.body.timestamp}"></span></div>
+        <div>ResponseEntity:<span th:text="${errorMap.data}"></span></div>
+    </div>
+</div>
 </body>
 </html>

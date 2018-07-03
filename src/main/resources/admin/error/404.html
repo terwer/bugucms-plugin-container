@@ -1,10 +1,28 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>404</title>
+    <title>404 - Bugucms</title>
+    <script type="text/javascript">
+        //获取根路径
+        var rootPath = window.location.href;
+        var idx = rootPath.lastIndexOf("/");
+        rootPath = rootPath.substring(0, idx);
+        //3s后跳转到主页
+        setTimeout(function () {
+            window.location.href = rootPath;
+        }, 3000);
+    </script>
 </head>
 <body>
-    <h1>404 Not Found</h1>
+<h1>404 Not Found</h1>
 </body>
 </html>

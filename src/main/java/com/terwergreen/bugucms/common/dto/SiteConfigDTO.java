@@ -9,6 +9,7 @@ public class SiteConfigDTO {
     private String keywords;
     private String description;
     private String beianinfo;
+    private String debug;
 
     public String getDomain() {
         return domain;
@@ -72,5 +73,13 @@ public class SiteConfigDTO {
 
     public void setBeianinfo(String beianinfo) {
         this.beianinfo = beianinfo;
+    }
+
+    public String getDebug() {
+        return debug;
+    }
+
+    public void setDebug(String debug) {
+        this.debug = debug;
     }
 }

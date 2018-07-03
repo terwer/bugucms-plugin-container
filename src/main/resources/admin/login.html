@@ -1,101 +1,76 @@
 <!--
-____________  _________    _____________  ___      ______      ___  _________    _____________
-| __________| / ______ /   |  __________ | \ \     | | \ \     | | | / ______  |  __________ |
-   |  |    | |          |    _________   \ \    | |  \ \    | || | |          |  __________
-  |  |     | | ______   |  /_________ |  \ \   | |   \ \   | |   | | ______   |  /_________|
- |  |      | |______ | |  | \ \          \ \  | |    \ \  | |    | |______ | |  | \ \
-|  |       | |________ |  |  \ \_______  \ \| |      \ \ |_|     | |________ |  |  \ \_______
-|__|        /_/______ | | _|   \______/   \_\_|       \_ |_|      /_/______ | | _|   \______/
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
 -->
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="renderer" content="webkit">
-    <meta name="keywords" th:content="${siteConfigDTO.keywords}">
-    <meta name="description" th:content="${siteConfigDTO.description}">
-    <!-- viewport可以控制用户在手机上两个手指缩放的行为范围，这行代码的意思是宽度为设备宽度，初始缩放为1，最大缩放也是1倍，用户不能缩放 -->
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
-    <!-- apple这行是告诉iOS这是个应用，就不会像网页一样可以滚动到顶部回弹一下的效果，就是可以看到苹果默认背景灰色部分的那个效果 -->
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <title th:text="|登录| + ' - ' + |${siteConfigDTO.webname}|">Title</title>
-    <link rel="shortcut icon" type="text/css" href="../templates/themes/default/favicon.ico" th:href="@{|/themes/${siteConfigDTO.webtheme}/favicon.ico|}">
-    <!-- artDialog -->
-    <link rel="stylesheet" type="text/css" href="themes/default/lib/artDialog/css/dialog.css" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/css/dialog.css|"/>
-    <!-- poshytip -->
-    <link rel="stylesheet" type="text/css" href="../templates/themes/default/lib/poshytip/tip-yellow/tip-yellow.css" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/tip-yellow/tip-yellow.css|"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/main.css" th:href="|${#request.contextPath}/css/main.css|">
-    <link rel="stylesheet" type="text/css" href="../static/css/login.css" th:href="|${#request.contextPath}/css/login.css|">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>登录 - Bugucms</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/sign.css}">
+    <script type="text/javascript" th:inline="javascript">
+        (window.top === window.self) || (window.top.location.href = window.self.location.href);
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+    </script>
 </head>
+<body class="layui-unselect lau-sign-body">
 
-<body>
-<div id="main" class="container-fluid">
-    <!--固定顶部部分开始-->
-    <div class="header clearfix">
-        <a href="/" th:href="${siteConfigDTO.weburl}" target="_blank" class="current-nav" style="display: block;"><em class="menu-more-ico"></em><span id="g_mod_name" th:text="${siteConfigDTO.webname}">webname</span></a>
-        <div class="vh-avator-area">
-            <div class="gl-lang-container">
-                <span class="help-center" id="g_help_center" onclick="show_help(this);">帮助中心</span>
-            </div>
+<div class="layui-form layui-form-pane lau-sign-form">
+    <h1 class="lau-sign-title">SIGN IN BUGUCMS</h1>
+    <p class="lau-sign-subtitle">一套简单易用的后台框架</p>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-username"></i> 账　号</label>
+        <div class="layui-input-block">
+            <input type="text" name="username" placeholder="请输入用户名" autocomplete="off" class="layui-input">
         </div>
     </div>
-    <!--固定顶部部分结束-->
-    <!-- 登录界面开始 -->
-    <div class="layout-login">
-        <div class="book-container">
-            <div>
-                <div class="logo-area">
-                    <img src="../static/img/logo-uc.png" th:src="|${#request.contextPath}/img/logo-uc.png|" alt="${siteConfigDTO.webname}">
-                    <p class="logo-intro" id="logo-intro" th:text="${siteConfigDTO.webslogen}">webslogen</p>
-                </div>
-                <div class="form-container" id="form_container">
-                    <div class="ng-form-area show-place" id="form-area">
-                        <p th:if="${param.logout}" class="bg-warning">已成功注销</p><!-- 1 -->
-                        <p th:if="${param.error}" class="bg-danger">用户名或密码错误</p> <!-- 2 -->
-                        <form class="form-horizontal" name="form" th:action="@{/auth/login}" action="/auth/login" method="POST"> <!-- 3 -->
-                            <div class="shake-area" id="shake_area" style="z-index: 30;">
-                                <div class="enter-area">
-                                    <input type="text" class="enter-item first-enter-item" id="username" name="username" placeholder="请输入账号">
-                                </div>
-                                <div class="enter-area" style="z-index: 20;">
-                                    <input type="password" class="enter-item last-enter-item" id="password" name="password" placeholder="请输入密码">
-                                </div>
-                            </div>
-                            <input class="button orange" type="submit"  title="立即登录" value="立即登录">
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="other-tips">
-            <!--<a href="|${#request.contextPath}/findpwd|" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>-->
-            <a href="javascript:void(0);" id="forget_pwd"><em class="forget-ico"></em><span>忘记密码？</span></a>
-            <a href="reg.html" th:href="|${#request.contextPath}/admin/register|" id="cloud_register"><em class="register-ico"></em><span>注册</span></a>
-        </div>
-        <div id="ft">
-            Copyright©2011-<span id="currentYear">2018</span> <span th:text="${siteConfigDTO.domain}">domain</span> All Rights Reserved
-            <span th:text="${siteConfigDTO.webname}">webname</span>
-            <p>
-                <a target="_blank" href="http://www.miibeian.gov.cn/" th:text="${siteConfigDTO.beianinfo}">beianinfo</a>
-            </p>
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-password"></i> 密　码</label>
+        <div class="layui-input-block">
+            <input type="password" name="password" placeholder="请输入密码" autocomplete="off" class="layui-input">
         </div>
     </div>
-    <!-- 登录界面结束 -->
+    <div class="layui-form-item">
+        <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i> 验证码</label>
+        <div class="layui-input-block lau-sign-code">
+            <input type="text" name="captcha" value="1234" placeholder="请输入图形验证码" autocomplete="off" class="layui-input">
+            <img src="https://www.oschina.net/action/user/captcha" alt="图形验证码" class="lau-sign-captcha">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <input type="checkbox" name="remember" lay-skin="primary" title="记住密码">
+        <a class="lau-sign-forgot lau-sign-link" href="/auth/forgot">忘记密码？</a>
+    </div>
+    <div class="layui-form-item">
+        <button type="button" class="layui-btn layui-btn-fluid" lay-submit lay-filter="login">登 入</button>
+    </div>
+    <div class="layui-form-item lau-sign-other">
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-qq"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-wechat"></i></a>
+        <a href="javascript:;"><i class="layui-icon layui-icon-login-weibo"></i></a>
+        <a href="/auth/register" class="lau-sign-reg lau-sign-link">还没有账号？立即注册</a>
+    </div>
 </div>
-<!-- jquery -->
-<script type="text/javascript" src="https://cdn.bootcss.com/jquery/1.10.1/jquery.min.js" th:src="|${#request.contextPath}/webjars/jquery/jquery.min.js|"></script>
-<!-- artDialog -->
-<script type="text/javascript" src="themes/default/lib/artDialog/dist/dialog-plus.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/artDialog/dist/dialog-plus.js|"></script>
-<!-- jquery-validate -->
-<script type="text/javascript" src="../templates/themes/default/lib/jquery-validate/jquery.validate.min.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.min.js|"></script>
-<script type="text/javascript" src="../templates/themes/default/lib/jquery-validate/additional-methods.min.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/additional-methods.min.js|"></script>
-<script type="text/javascript" src="../templates/themes/default/lib/jquery-validate/jquery.validate.extend.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/jquery.validate.extend.js|"></script>
-<script type="text/javascript" src="../templates/themes/default/lib/jquery-validate/messages_zh.min.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/jquery-validate/messages_zh.min.js|"></script>
-<!-- poshytip -->
-<script type="text/javascript" src="../templates/themes/default/lib/poshytip/jquery.poshytip.min.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/poshytip/jquery.poshytip.min.js|"></script>
-<!-- cookie -->
-<script type="text/javascript" src="../templates/themes/default/lib/cookie/jquery.cookie.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/cookie/jquery.cookie.js|"></script>
-<script type="text/javascript" src="../templates/themes/default/lib/function.js" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/lib/function.js|"></script>
-<!--<script type="text/javascript" src="../static/js/login.js?v=201804262020" th:src="|${#request.contextPath}/js/login.js?v=201804262020|"></script>-->
+<div class="layui-trans lau-sign-footer">
+    <p>@ 2018 <a href="http://lau.revoke.cc/" target="_blank">lau.revoke.cc</a> SATA License</p>
+    <p>
+        <span><a href="https://jq.qq.com/?_wv=1027&k=5qarx5y" target="_blank">获取授权</a></span>
+        <span><a href="http://lau.revoke.cc/" target="_blank">在线演示</a></span>
+        <span><a href="https://github.com/carolkey/lying-admin" target="_blank">源码下载</a></span>
+        <span><a href="mailto:su@revoke.cc" target="_blank">联系作者</a></span>
+    </p>
+</div>
+
 </body>
+<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
+<script type="text/javascript">
+    layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('login');
+</script>
 </html>

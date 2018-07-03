@@ -5,7 +5,7 @@ import com.terwergreen.bugucms.cms.dto.PostDTO;
 import com.terwergreen.bugucms.cms.service.PostService;
 import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.exception.WebException;
 import net.minidev.json.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;

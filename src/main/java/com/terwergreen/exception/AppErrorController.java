@@ -1,11 +1,15 @@
 package com.terwergreen.exception;
 
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
+import com.terwergreen.base.service.BusinessServiceException;
+import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
+import com.terwergreen.bugucms.common.service.CommonService;
 import com.terwergreen.bugucms.common.util.Constants;
 import com.terwergreen.bugucms.common.util.RestResponseStates;
 import net.minidev.json.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +38,9 @@ public class AppErrorController extends BGBaseController implements ErrorControl
 
     private final static String ERROR_PATH = "/error";
 
+    @Autowired
+    private CommonService commonService;
+
     /**
      * Supports the HTML Error View
      *
@@ -58,8 +65,28 @@ public class AppErrorController extends BGBaseController implements ErrorControl
             //输出JSON
             return super.processResultAll(resultMap);
         } else {
-            //输出XML
-            return new ModelAndView("errorInfo", "errorMap", resultMap);
+            //输出页面
+            if (HttpStatus.NOT_FOUND == status) {
+                String rootPath = responseEntity.getBody().get("URL").toString().replace(ERROR_PATH, "");
+                return new ModelAndView("forward:static/error/404.html?rootPath=" + rootPath);
+            }
+            if (HttpStatus.INTERNAL_SERVER_ERROR == status) {
+                return new ModelAndView("forward:static/error/500.html");
+            }
+            if (HttpStatus.METHOD_NOT_ALLOWED == status) {
+                return new ModelAndView("forward:static/error/405.html");
+            }
+            ModelAndView mv = new ModelAndView("errorInfo", "errorMap", resultMap);
+
+            SiteConfigDTO siteConfigDTO = new SiteConfigDTO();
+            try {
+                siteConfigDTO = commonService.getSiteConfig();
+            } catch (BusinessServiceException e) {
+                logger.error("获取站点信息失败", e);
+            }
+
+            mv.addObject("siteConfigDTO", siteConfigDTO);
+            return mv;
         }
     }
 

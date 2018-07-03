@@ -16,7 +16,8 @@ JSON
 kaptcha图片验证码组件  
 HTML5      
 jQuery 1.10.1     
-bootstrap 3.3.7        
+bootstrap 3.3.7   
+[LAU](https://github.com/carolkey/lying-admin/)（基于layui的后台管理模板）     
 
 # 启动
 ## 注意

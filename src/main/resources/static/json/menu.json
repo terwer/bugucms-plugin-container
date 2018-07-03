@@ -1,0 +1,78 @@
+[[{
+  "title": "控制台",
+  "icon": "layui-icon-home",
+  "href": "/html/console.html"
+}, {
+  "title": "项目文档",
+  "open": true,
+  "list": [{
+    "title": "快速开始",
+    "href": "/doc/quickstart.html"
+  }, {
+    "title": "菜单操作",
+    "href": "/doc/menu.html"
+  }, {
+    "title": "标签操作",
+    "href": "/doc/tabs.html"
+  }, {
+    "title": "其他操作",
+    "href": "/doc/other.html"
+  }, {
+    "title": "更新日志",
+    "href": "/doc/changelog.html"
+  }, {
+    "title": "授权说明",
+    "href": "/doc/license.html"
+  }]
+}, {
+  "title": "系统设置",
+  "list": [{
+    "title": "站点配置"
+  }, {
+    "title": "缓存配置"
+  }, {
+    "title": "短信配置"
+  }, {
+    "title": "其他配置"
+  }]
+}, {
+  "title": "会员管理",
+  "list": [{
+    "title": "会员列表"
+  }, {
+    "title": "注册列表"
+  }, {
+    "title": "封禁会员"
+  }]
+}, {
+  "title": "无子菜单"
+}], [{
+  "title": "示例菜单",
+  "list": [{
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }]
+}, {
+  "title": "示例菜单",
+  "open": true,
+  "list": [{
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }, {
+    "title": "示例菜单"
+  }]
+}]]

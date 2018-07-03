@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 
 @Controller
 public class DeviceController extends BGBaseController {

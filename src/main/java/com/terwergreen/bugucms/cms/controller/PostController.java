@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
 

@@ -17,7 +17,7 @@ package com.terwergreen.bugucms.admin.controller;
 
 import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.exception.WebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -66,6 +66,19 @@ public class AuthController extends BGBaseController {
         }
         model.addAttribute("siteConfigDTO", siteConfigDTO);
         return "register";
+    }
+
+    @RequestMapping(value = "/forgot", method = RequestMethod.GET)
+    public String forgot(Model model) throws Exception {
+        SiteConfigDTO siteConfigDTO = null;
+        try {
+            siteConfigDTO = commonService.getSiteConfig();
+        } catch (Exception e) {
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new WebException(e);
+        }
+        model.addAttribute("siteConfigDTO", siteConfigDTO);
+        return "forgot";
     }
 
     /***********/

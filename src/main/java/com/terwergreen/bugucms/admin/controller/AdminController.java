@@ -2,7 +2,7 @@ package com.terwergreen.bugucms.admin.controller;
 
 import com.terwergreen.bugucms.admin.dto.SysUserDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
-import com.terwergreen.core.controller.BGBaseController;
+import com.terwergreen.base.controller.BGBaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +23,7 @@ public class AdminController extends BGBaseController {
     /** 页面开始 **/
     /***********/
 
-    @RequestMapping("workspace")
+    @RequestMapping("console")
     public String workspace(Model model) {
         //获得当前登陆用户对应的对象。
         SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -31,7 +31,7 @@ public class AdminController extends BGBaseController {
         Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
         model.addAttribute("sysUserDTO",sysUserDTO);
         model.addAttribute("authorities",authorities);
-        return "workspace/workspace_index";
+        return "console";
     }
 
     @RequestMapping("user")
