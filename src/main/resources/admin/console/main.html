@@ -10,7 +10,8 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>BUGUCMS管理后台</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
@@ -27,10 +28,14 @@
         <a class="lau-logo-mini"><i class="layui-icon layui-icon-tree"></i></a>
         <a class="layui-logo" th:href="@{/admin/main}">Bugucms</a>
         <ul class="layui-nav layui-layout-left">
-            <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu0"><i class="layui-icon layui-icon-set"> 博客设置</i></a></li>
-            <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu1"><i class="layui-icon layui-icon-tips"> 操作指引</i></a></li>
-            <li class="layui-nav-item" lay-unselect><a lau-event="messageBox"><i class="layui-icon layui-icon-notice"> 0</i></a></li>
-            <li class="layui-nav-item" lay-unselect><a lau-event="newPost"><i class="layui-icon layui-icon-add-1"> 添加新文章</i></a></li>
+            <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu0"><i class="layui-icon layui-icon-set">
+                博客设置</i></a></li>
+            <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu1"><i class="layui-icon layui-icon-tips">
+                操作指引</i></a></li>
+            <li class="layui-nav-item" lay-unselect><a lau-event="messageBox"><i class="layui-icon layui-icon-notice">
+                0</i></a></li>
+            <li class="layui-nav-item" lay-unselect><a lau-event="newPost"><i class="layui-icon layui-icon-add-1">
+                添加新文章</i></a></li>
         </ul>
         <ul class="layui-nav layui-layout-right">
             <li class="layui-nav-item" lay-unselect>
@@ -41,8 +46,10 @@
                     <dd><a th:href="@{/logout}">安全退出</a></dd>
                 </dl>
             </li>
-            <li class="layui-nav-item" lay-unselect><a lau-event="about"><i class="layui-icon layui-icon-more-vertical"></i></a></li>
-            <li class="layui-nav-item" lay-unselect><a th:href="@{/}" target="_blank"><i class="layui-icon layui-icon-home"></i></a></li>
+            <li class="layui-nav-item" lay-unselect><a lau-event="about"><i
+                    class="layui-icon layui-icon-more-vertical"></i></a></li>
+            <li class="layui-nav-item" lay-unselect><a th:href="@{/}" target="_blank"><i
+                    class="layui-icon layui-icon-home"></i></a></li>
         </ul>
     </div>
     <!--顶部导航结束-->
@@ -59,7 +66,8 @@
     <!--侧边菜单结束-->
 
     <!--内容主体区域开始-->
-    <div class="layui-body" data-type="" data-title="控制台" data-icon="layui-icon-home" th:data-href="@{/admin/console}"></div>
+    <div class="layui-body" data-type="" data-title="控制台" data-icon="layui-icon-home"
+         th:data-href="@{/admin/console}"></div>
     <!--内容主体区域结束-->
 </div>
 </body>
@@ -90,6 +98,12 @@
                     break;
                 case "sideMenu1":
                     lau.sideMenuChange(1);
+                    break;
+                case 'messageBox':
+                    alert("messageBox");
+                    break;
+                case 'newPost':
+                    lau.go(BUGUCMS_BASE_URL + 'post/new', "添加文章");
                     break;
             }
         });
