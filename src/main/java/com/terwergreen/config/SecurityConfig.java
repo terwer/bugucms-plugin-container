@@ -15,7 +15,6 @@
  */
 package com.terwergreen.config;
 
-import com.terwergreen.bugucms.admin.service.SysUserService;
 import com.terwergreen.bugucms.admin.service.impl.SysUserServiceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -26,14 +25,12 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 /**
  * @Author Terwer
  * @Date 2018/6/22 15:55
  * @Version 1.0
- * @Description TODO
+ * @Description 安全配置
  **/
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -48,6 +45,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     // @formatter:off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        //运行加载iframe
+        http.headers().frameOptions().disable();
+        //关闭csrf
+        http.csrf().disable();
+        //配置权限及登录验证
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
@@ -58,10 +60,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll()
                 .and()
                 .logout()
-                .permitAll()
-                .and()
-                .csrf()
-                .disable();
+                .permitAll();
     }
     // @formatter:on
 

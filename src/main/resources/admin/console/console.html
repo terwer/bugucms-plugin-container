@@ -12,10 +12,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta http-equiv="X-Frame-Options" content="SAMEORIGIN">
     <title>控制台</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
     <link rel="stylesheet" type="text/css" th:href="@{/static/css/common.css}">
+    <script type="text/javascript" th:inline="javascript">
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+    </script>
 </head>
 <body>
 
@@ -37,43 +39,43 @@
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层2</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层3</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层4</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层5</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层6</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层7</cite>
                                 </a>
                             </li>
                             <li class="layui-col-xs3">
                                 <a>
                                     <i class="layui-icon layui-icon-website"></i>
-                                    <cite>弹层</cite>
+                                    <cite>弹层8</cite>
                                 </a>
                             </li>
                         </ul>
@@ -217,11 +219,15 @@
             <div class="layui-card-body">
                 <div class="layui-tab layui-tab-brief">
                     <ul class="layui-tab-title">
-                        <li class="layui-this">今日热搜</li>
-                        <li>今日热帖</li>
+                        <li class="layui-this">最近发布</li>
+                        <li>今日热搜</li>
+                        <li>今日热文</li>
                     </ul>
                     <div class="layui-tab-content">
                         <div class="layui-tab-item layui-show">
+                            <table id="recent-publish"></table>
+                        </div>
+                        <div class="layui-tab-item">
                             <table id="hot-search"></table>
                         </div>
                         <div class="layui-tab-item">
@@ -243,7 +249,7 @@
                     <tbody>
                     <tr>
                         <td>当前版本</td>
-                        <td>v1.0.0 <a lau-href="/doc/changelog.html">更新日志</a></td>
+                        <td>v1.0.0 <a th:lau-href="@{/admin/changelog}">更新日志</a></td>
                     </tr>
                     <tr>
                         <td>基于框架</td>
@@ -252,8 +258,8 @@
                     <tr>
                         <td>联系作者</td>
                         <td>
-                            <a href="http://wpa.qq.com/msgrd?v=3&uin=296399959&site=qq&menu=yes" target="_blank">QQ</a> /
-                            <a href="mailto:su@revoke.cc">邮件</a> /
+                            <a href="http://wpa.qq.com/msgrd?v=3&uin=1035136784&site=qq&menu=yes" target="_blank">QQ</a> /
+                            <a href="mailto:youweics@sina.com">邮件</a> /
                             <a href="http://shang.qq.com/wpa/qunwpa?idkey=a4235da100d79f46b030940e2b41b80bd02d8ca5f21c6988e7759aac8d5700a9" target="_blank">QQ群</a>
                         </td>
                     </tr>
@@ -272,10 +278,10 @@
             <div class="layui-card-header">相关说明</div>
             <div class="layui-card-body layui-text">
                 <ul>
-                    <li>LAU是经过<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>正版授权二次开发的项目，并非盗用源码，请知悉。</li>
-                    <li>LAU的部分样式是抄袭自<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>，基本都是控制台的样式。</li>
-                    <li>LAU不包含<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>源码。</li>
-                    <li>LAU秉承开源精神，如果源码用于个人学习完全是免费的，如果用于商业项目，请向作者<a lau-href="/doc/license.html">购买授权</a>。</li>
+                    <li>Bugucms是由<a href="http://weibo.com/youweics" target="_blank">Terwer</a>，<a href="http://www.terwergreen.com" target="_blank">自主研发</a>的项目，请知悉。</li>
+                    <li>Bugucms的部分样式是取自<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>，基本都是控制台的样式。</li>
+                    <li>Bugucms不包含<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>源码。</li>
+                    <li>Bugucms秉承开源精神，如果源码用于个人学习完全是免费的，如果用于商业项目，请向作者<a th:lau-href="@{/admin/license}">购买授权</a>。</li>
                 </ul>
             </div>
         </div>
@@ -286,7 +292,7 @@
 </body>
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script type="text/javascript">
-    layui.config({base: '/static/'}).extend({common: 'js/common'}).use(['table', 'common', 'carousel', 'element'], function() {
+    layui.config({base: BUGUCMS_BASE_URL + 'static/'}).extend({common: 'js/common'}).use(['table', 'common', 'carousel', 'element'], function () {
         var common = layui.common,
             $ = layui.$,
             layer = layui.layer,
@@ -300,7 +306,7 @@
             var _this = $(this);
             switch (_this.attr('lau-event')) {
                 case 'about':
-                    $.get('/html/about.html', function (html) {
+                    $.get(BUGUCMS_BASE_URL + 'admin/about', function (html) {
                         common.drawer({content: html});
                     });
                     break;
@@ -321,36 +327,68 @@
             });
         });
 
+        //最近发布
+        var recentPublish = table.render({
+            elem: '#recent-publish',
+            url: BUGUCMS_BASE_URL + 'static/json/recent-publish.json',
+            page: true,
+            cols:
+                [
+                    [
+                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+                        {
+                            field: 'title', title: '标题', templet: function (d) {
+                                return '<a class="layui-table-link">' + d.title + '</a>';
+                            }
+                        },
+                        {field: 'username', title: '文章作者'},
+                        {field: 'channel', title: '类别'},
+                        {field: 'crt', title: '点击率', sort: true}
+                    ]
+                ]
+        });
+
         //今日热搜
         var hotSearch = table.render({
             elem: '#hot-search',
-            url: '/json/hot-search.json',
+            url: BUGUCMS_BASE_URL + 'static/json/hot-search.json',
             page: true,
-            cols: [[
-                {title: 'ID', width:40, type: 'numbers', fixed: 'left'},
-                {field: 'keywords', title: '标题', templet: function (d) {
-                    return '<a class="layui-table-link">' + d.keywords + '</a>';
-                }},
-                {field: 'frequency', title: '搜索次数', sort: true},
-                {field: 'userNums', title: '用户数', sort: true}
-            ]]
+            cols:
+                [
+                    [
+                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+                        {
+                            field: 'keywords', title: '标题', templet: function (d) {
+                                return '<a class="layui-table-link">' + d.keywords + '</a>';
+                            }
+                        },
+                        {field: 'frequency', title: '搜索次数', sort: true},
+                        {field: 'userNums', title: '用户数', sort: true}
+                    ]
+                ]
         });
 
         //今日热帖
         var hotArticle = table.render({
             elem: '#hot-article',
-            url: '/json/hot-article.json',
+            url: BUGUCMS_BASE_URL + 'static/json/hot-article.json',
             page: true,
-            cols: [[
-                {title: 'ID', width:40, type: 'numbers', fixed: 'left'},
-                {field: 'title', title: '标题', templet: function (d) {
-                    return '<a class="layui-table-link">' + d.title + '</a>';
-                }},
-                {field: 'username', title: '发帖者'},
-                {field: 'channel', title: '类别'},
-                {field: 'crt', title: '点击率', sort: true}
-            ]]
+            cols:
+                [
+                    [
+                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+                        {
+                            field: 'title', title: '标题', templet: function (d) {
+                                return '<a class="layui-table-link">' + d.title + '</a>';
+                            }
+                        },
+                        {field: 'username', title: '文章作者'},
+                        {field: 'channel', title: '类别'},
+                        {field: 'crt', title: '点击率', sort: true}
+                    ]
+                ]
         });
+
     });
 </script>
 </html>

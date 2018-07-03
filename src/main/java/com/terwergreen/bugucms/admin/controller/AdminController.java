@@ -45,6 +45,39 @@ public class AdminController extends BGBaseController {
         return "console/console";
     }
 
+    @RequestMapping("about")
+    public String about(Model model) {
+        //获得当前登陆用户对应的对象。
+        SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //获得当前登陆用户所拥有的所有权限。
+        Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
+        model.addAttribute("sysUserDTO",sysUserDTO);
+        model.addAttribute("authorities",authorities);
+        return "console/about";
+    }
+
+    @RequestMapping("changelog")
+    public String changelog(Model model) {
+        //获得当前登陆用户对应的对象。
+        SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //获得当前登陆用户所拥有的所有权限。
+        Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
+        model.addAttribute("sysUserDTO",sysUserDTO);
+        model.addAttribute("authorities",authorities);
+        return "console/changelog";
+    }
+
+    @RequestMapping("license")
+    public String license(Model model) {
+        //获得当前登陆用户对应的对象。
+        SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //获得当前登陆用户所拥有的所有权限。
+        Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
+        model.addAttribute("sysUserDTO",sysUserDTO);
+        model.addAttribute("authorities",authorities);
+        return "console/license";
+    }
+
     @RequestMapping("user")
     public String userIndex() {
         return "user/user_index";
