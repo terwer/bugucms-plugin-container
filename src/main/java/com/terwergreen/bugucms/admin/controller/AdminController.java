@@ -23,8 +23,19 @@ public class AdminController extends BGBaseController {
     /** 页面开始 **/
     /***********/
 
+    @RequestMapping("main")
+    public String main(Model model) {
+        //获得当前登陆用户对应的对象。
+        SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        //获得当前登陆用户所拥有的所有权限。
+        Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
+        model.addAttribute("sysUserDTO",sysUserDTO);
+        model.addAttribute("authorities",authorities);
+        return "console/main";
+    }
+
     @RequestMapping("console")
-    public String workspace(Model model) {
+    public String console(Model model) {
         //获得当前登陆用户对应的对象。
         SysUserDTO sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         //获得当前登陆用户所拥有的所有权限。
