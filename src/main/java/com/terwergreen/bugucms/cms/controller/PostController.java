@@ -2,6 +2,7 @@ package com.terwergreen.bugucms.cms.controller;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.terwergreen.bugucms.admin.dto.SysUserDTO;
 import com.terwergreen.exception.WebException;
 import com.terwergreen.bugucms.common.util.MarkdownUtils;
 import com.terwergreen.bugucms.cms.dto.PostDTO;
@@ -9,6 +10,7 @@ import com.terwergreen.bugucms.cms.service.PostService;
 import net.minidev.json.JSONValue;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,15 +49,25 @@ public class PostController extends BGBaseController {
         ModelAndView mv = new ModelAndView();
 
         SiteConfigDTO siteConfigDTO = null;
+        SysUserDTO sysUserDTO = null;
+
         PostDTO post = null;
         try {
             siteConfigDTO = commonService.getSiteConfig();
+
+            //获得当前登陆用户对应的对象。
+            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+            if (currentUser != "anonymousUser") {
+                sysUserDTO = (SysUserDTO) currentUser;
+            }
+
             post = postService.getPost(postId);
             //将Markdown转换为Html显示
             String htmlContent = MarkdownUtils.md2html(post.getPostContent());
             post.setPostContent(htmlContent);
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/post");
             mv.addObject("siteConfigDTO", siteConfigDTO);
+            mv.addObject("sysUserDTO", sysUserDTO);
             mv.addObject("post", post);
 
             if (post == null) {
