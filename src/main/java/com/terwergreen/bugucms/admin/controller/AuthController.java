@@ -52,7 +52,7 @@ public class AuthController extends BGBaseController {
             throw new WebException(e);
         }
         model.addAttribute("siteConfigDTO", siteConfigDTO);
-        return "login";
+        return "auth/login";
     }
 
     @RequestMapping(value = "/register", method = RequestMethod.GET)
@@ -65,7 +65,7 @@ public class AuthController extends BGBaseController {
             throw new WebException(e);
         }
         model.addAttribute("siteConfigDTO", siteConfigDTO);
-        return "register";
+        return "auth/register";
     }
 
     @RequestMapping(value = "/forgot", method = RequestMethod.GET)
@@ -78,7 +78,7 @@ public class AuthController extends BGBaseController {
             throw new WebException(e);
         }
         model.addAttribute("siteConfigDTO", siteConfigDTO);
-        return "forgot";
+        return "auth/forgot";
     }
 
     /***********/

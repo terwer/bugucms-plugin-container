@@ -31,7 +31,7 @@ public class AdminController extends BGBaseController {
         Collection<? extends GrantedAuthority> authorities = sysUserDTO.getAuthorities();
         model.addAttribute("sysUserDTO",sysUserDTO);
         model.addAttribute("authorities",authorities);
-        return "console";
+        return "console/console";
     }
 
     @RequestMapping("user")

@@ -1,4 +1,4 @@
-layui.define(['layer', 'form', 'tips'], function(exports) {
+layui.define(['layer', 'form', 'tips'], function (exports) {
     var form = layui.form,
         layer = layui.layer,
         $ = layui.$,
@@ -35,19 +35,21 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
         //登陆中
         tips.loading('登陆中...', 0, -1);
 
+        console.log("formData:" + JSON.stringify(data.field));
         //发送登陆表单
-        $.get('/static/json/login.json', data.field, function (json) {
-            if (json.errcode == 0) {
-                tips.success(json.errmsg, function () {
-                    location.href = '/';
-                });
-            } else {
-                tips.error(json.errmsg, function () {
+        $.post(BUGUCMS_BASE_URL + 'auth/login', data.field, function (result) {
+            console.log("login ajax result:" + result);
+            if (result.length < 10 || result.substring(4, 9) == "login") {
+                tips.error("用户名或者密码错误", function () {
                     captchaImg.attr('src', captchaSrc + '?_t=' + Math.random());
                 });
+                return false;
             }
-        }, 'json');
-
+            tips.success("登录成功", function () {
+                location.href = BUGUCMS_BASE_URL;
+            });
+        });
+        //}, 'json');
         return false;
     });
 
