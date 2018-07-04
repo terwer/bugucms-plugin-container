@@ -9,7 +9,6 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class BGBaseController {
 
 	protected final Log logger = LogFactory.getLog(getClass());

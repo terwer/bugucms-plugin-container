@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Controller
+@RequestMapping(value = "/")
 public class HomePageController extends BGBaseController {
 
     @Autowired

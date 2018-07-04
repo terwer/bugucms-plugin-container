@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.terwergreen.base.controller.BGBaseController;
 
 @Controller
+@RequestMapping(value = "/common/device")
 public class DeviceController extends BGBaseController {
     /**
      * 发送短信校验码接口

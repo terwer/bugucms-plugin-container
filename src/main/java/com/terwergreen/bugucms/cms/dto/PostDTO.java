@@ -3,7 +3,9 @@ package com.terwergreen.bugucms.cms.dto;
 import com.terwergreen.bugucms.common.util.HtmlUtils;
 import com.terwergreen.bugucms.common.util.ImageUtils;
 import com.terwergreen.bugucms.common.util.MarkdownUtils;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.util.Date;
 import java.util.List;
 
 public class PostDTO {
@@ -35,7 +37,11 @@ public class PostDTO {
      * 文章摘要，数据库不保存
      */
     private String postDesc;
-
+    /**
+     * 发布时间
+     */
+    @DateTimeFormat(pattern="yyyy-MM-dd hh:MM:ss")
+    private Date postDate;
 
     public int getPostId() {
         return postId;
@@ -69,7 +75,7 @@ public class PostDTO {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
-        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(),320);
+        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 320);
     }
 
     public String getPostRawContent() {
@@ -82,5 +88,13 @@ public class PostDTO {
 
     public String getPostDesc() {
         return postDesc;
+    }
+
+    public Date getPostDate() {
+        return postDate;
+    }
+
+    public void setPostDate(Date postDate) {
+        this.postDate = postDate;
     }
 }

@@ -1,0 +1,44 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="include/edit_inc"
+      th:with="title='所有文章'">
+
+<header layout:fragment="customHeader">
+    <style type="text/css">
+
+    </style>
+</header>
+
+<div layout:fragment="content">
+    <table id="postTable"></table>
+</div>
+
+<footer layout:fragment="customFooter">
+    <script type="text/javascript">
+        layui.use('table', function () {
+            var table = layui.table;
+
+            //第一个实例
+            table.render({
+                elem: '#postTable',
+                height: 315,
+                url: BUGUCMS_BASE_URL + 'admin/postManage/api/post/list', //数据接口
+                page: true,//开启分页
+                cols: [
+                    [ //表头
+                        {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                    ]
+                ]
+            });
+        });
+    </script>
+</footer>

@@ -23,6 +23,7 @@ import com.google.code.kaptcha.impl.DefaultKaptcha;
 import com.terwergreen.base.controller.BGBaseController;
 
 @Controller
+@RequestMapping(value = "/common/image")
 public class ImageController extends BGBaseController {
 
 	@Autowired

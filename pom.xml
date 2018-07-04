@@ -125,6 +125,12 @@
             <version>1.16.20</version>
             <scope>provided</scope>
         </dependency>
+        <!-- 分页插件 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <version>1.2.5</version>
+        </dependency>
 
         <!-- Web前端开发库 -->
         <dependency>

@@ -20,9 +20,10 @@ import org.springframework.web.servlet.ModelAndView;
  * Created by terwergreen on 2017-11-30.
  */
 @Controller
+@RequestMapping(value = "/account")
 public class AccountController extends BGBaseController {
 
-    @RequestMapping(value = "/account/accountInfo", method = RequestMethod.GET)
+    @RequestMapping(value = "/accountInfo", method = RequestMethod.GET)
     public ModelAndView accountInfo(HttpServletRequest request) {
         // Map<String, String> resultMap = new HashMap<String, String>();
         // resultMap.put("flag", RestResponseStates.SUCCESS.getValue());
@@ -31,7 +32,7 @@ public class AccountController extends BGBaseController {
         return new ModelAndView("accountInfo");
     }
 
-    @RequestMapping(value = "/account/activate", method = RequestMethod.GET)
+    @RequestMapping(value = "/activate", method = RequestMethod.GET)
     @ResponseBody
     public RestResponseDTO activate(HttpServletRequest request) {
         RestResponseDTO restResponseDTO = new RestResponseDTO();

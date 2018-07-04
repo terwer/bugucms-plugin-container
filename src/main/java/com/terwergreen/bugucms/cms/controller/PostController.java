@@ -22,6 +22,7 @@ import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
 
 @Controller
+@RequestMapping(value = "/post", method = RequestMethod.GET)
 public class PostController extends BGBaseController {
 
     @Autowired
@@ -33,7 +34,7 @@ public class PostController extends BGBaseController {
     /**页面开始**/
     /***********/
 
-    @RequestMapping(value = "/post/{postId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/{postId}", method = RequestMethod.GET)
     public ModelAndView postById(HttpServletRequest request,
                                  @PathVariable(name = "postId") String postId) throws Exception {
         //去除后缀
@@ -61,7 +62,7 @@ public class PostController extends BGBaseController {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
 
-            post = postService.getPost(postId);
+            post = postService.getPostBySlug(postId);
             //将Markdown转换为Html显示
             String htmlContent = MarkdownUtils.md2html(post.getPostContent());
             post.setPostContent(htmlContent);

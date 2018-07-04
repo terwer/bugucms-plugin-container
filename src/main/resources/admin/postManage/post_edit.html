@@ -1,0 +1,102 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="include/edit_inc"
+      th:with="title='写文章'">
+
+<header layout:fragment="customHeader">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/SimpleMDE/css/simplemde.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="http://www.layui.com/admin/std/dist/layuiadmin/style/admin.css"/>
+    <style type="text/css">
+
+    </style>
+</header>
+
+<div layout:fragment="content">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">写文章</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <form class="layui-form" action="" method="post" lay-filter="component-form-group" onsubmit="return false;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文章内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="content" name="content" th:utext="${post?.postRawContent}" placeholder="请输入内容" class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="postDdate" name="postDdate" th:value="${post?.postDate}" lay-verify="datetime" placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;">
+                                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer layout:fragment="customFooter">
+    <script type="text/javascript" th:src="@{/static/lib/SimpleMDE/js/simplemde.min.js}"></script>
+    <script type="text/javascript">
+        var simplemde = null;
+        $(document).ready(function () {
+            simplemde = new SimpleMDE({element: $("#content")[0]});
+        });
+
+        $(function () {
+        })
+
+        layui.config({
+            base: BUGUCMS_BASE_URL + 'static/lib/layui/lay/' //静态资源所在路径
+        }).extend({
+            index: 'index' //主入口模块
+        }).use(['index', 'form', 'laydate'], function () {
+            var laydate = layui.laydate,
+                form = layui.form;
+
+            laydate.render({
+                elem: '#postDdate',
+                type: 'datetime',
+                value: new Date()
+            });
+
+            /* 监听提交 */
+            form.on('submit(component-form-demo1)', function (data) {
+                var content = simplemde.value();
+                if (content == "") {
+                    parent.layer.msg('文章内容不能为空', {icon: 2});
+                    return false;
+                } else {
+                    data.field.content = content;
+                }
+                parent.layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })
+                return false;
+            });
+        });
+    </script>
+</footer>

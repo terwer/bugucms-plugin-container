@@ -1,4 +1,4 @@
-layui.define(['layer', 'laytpl', 'element'], function(exports) {
+layui.define(['layer', 'laytpl', 'element'], function (exports) {
     var layer = layui.layer,
         laytpl = layui.laytpl,
         element = layui.element,
@@ -11,49 +11,49 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
     var Tpl = {
         sideMenu: [
             '{{# layui.each(d, function(index, item) { ',
-                'var href = layui.$.trim(item.href), ',
-                    'href = href ? \' lau-href="\' + href + \'"\' : \'\', ',
-                    'title = layui.$.trim(item.title), ',
-                    'icon = layui.$.trim(item.icon), ',
-                    'hasItem = typeof item.list === \'object\' && item.list.length > 0, ',
-                    'open = Boolean(item.open) && hasItem ? \' lau-open\' : \'\'; ',
-                'if (icon) { ',
-                    'if (icon.split(" ").filter(function(x){ return Boolean(x); }).length < 2) { ',
-                        'icon = \'layui-icon \' + icon; ',
-                    '} ',
-                '} else { ',
-                    'icon = \'layui-icon layui-icon-right\'; ',
-                '} ',
+            'var href = layui.$.trim(item.href), ',
+            'href = href ? \' lau-href="\' + href + \'"\' : \'\', ',
+            'title = layui.$.trim(item.title), ',
+            'icon = layui.$.trim(item.icon), ',
+            'hasItem = typeof item.list === \'object\' && item.list.length > 0, ',
+            'open = Boolean(item.open) && hasItem ? \' lau-open\' : \'\'; ',
+            'if (icon) { ',
+            'if (icon.split(" ").filter(function(x){ return Boolean(x); }).length < 2) { ',
+            'icon = \'layui-icon \' + icon; ',
+            '} ',
+            '} else { ',
+            'icon = \'layui-icon layui-icon-right\'; ',
+            '} ',
             '}}',
             '<li class="lau-nav-item{{ open }}">',
-                '<a class="lau-nav-header"{{ href }}>',
-                    '<i class="{{ icon }}"></i>',
-                    '<cite>{{ title }}</cite>',
-                '</a>',
-                '{{# if (hasItem) { }}',
-                '<dl class="lau-nav-child">',
-                    '{{# layui.each(item.list, function(index2, item2) { ',
-                        'var href = layui.$.trim(item2.href), ',
-                            'href = href ? \' lau-href="\' + href + \'"\' : \'\', ',
-                            'title = layui.$.trim(item2.title), ',
-                            'icon = layui.$.trim(item2.icon); ',
-                        'if (icon) { ',
-                            'if (icon.split(" ").filter(function(x){ return Boolean(x); }).length < 2) { ',
-                                'icon = \'layui-icon \' + icon; ',
-                            '} ',
-                        '} else { ',
-                            'icon = \'layui-icon layui-icon-circle\'; ',
-                        '} ',
-                    '}}',
-                    '<dd>',
-                        '<a{{ href }}>',
-                            '<i class="{{ icon }}"></i>',
-                            '<cite>{{ title }}</cite>',
-                        '</a>',
-                    '</dd>',
-                    '{{# }); }}',
-                '</dl>',
-                '{{# } }}',
+            '<a class="lau-nav-header"{{ href }}>',
+            '<i class="{{ icon }}"></i>',
+            '<cite>{{ title }}</cite>',
+            '</a>',
+            '{{# if (hasItem) { }}',
+            '<dl class="lau-nav-child">',
+            '{{# layui.each(item.list, function(index2, item2) { ',
+            'var href = layui.$.trim(item2.href), ',
+            'href = href ? \' lau-href="\' + href + \'"\' : \'\', ',
+            'title = layui.$.trim(item2.title), ',
+            'icon = layui.$.trim(item2.icon); ',
+            'if (icon) { ',
+            'if (icon.split(" ").filter(function(x){ return Boolean(x); }).length < 2) { ',
+            'icon = \'layui-icon \' + icon; ',
+            '} ',
+            '} else { ',
+            'icon = \'layui-icon layui-icon-circle\'; ',
+            '} ',
+            '}}',
+            '<dd>',
+            '<a{{ href }}>',
+            '<i class="{{ icon }}"></i>',
+            '<cite>{{ title }}</cite>',
+            '</a>',
+            '</dd>',
+            '{{# }); }}',
+            '</dl>',
+            '{{# } }}',
             '</li>',
             '{{# }); }}'
         ].join(''),
@@ -62,26 +62,26 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             '<div class="layui-icon lau-tabs-ctrl layui-icon-next"></div>',
             '<div class="layui-icon lau-tabs-ctrl layui-icon-refresh-3"></div>',
             '<div class="layui-icon lau-tabs-ctrl layui-icon-down">',
-                '<ul class="layui-nav lau-tabs-more" lay-filter="lau-tabs-more">',
-                    '<li class="layui-nav-item" lay-unselect>',
-                        '<a></a>',
-                        '<dl class="layui-nav-child layui-anim-fadein">',
-                            '<dd><a class="lau-tabs-close-this">关闭当前标签页</a></dd>',
-                            '<dd><a class="lau-tabs-close-siblings">关闭其它标签页</a></dd>',
-                            '<dd><a class="lau-tabs-close-all">关闭全部标签页</a></dd>',
-                        '</dl>',
-                    '</li>',
-                '</ul>',
+            '<ul class="layui-nav lau-tabs-more" lay-filter="lau-tabs-more">',
+            '<li class="layui-nav-item" lay-unselect>',
+            '<a></a>',
+            '<dl class="layui-nav-child layui-anim-fadein">',
+            '<dd><a class="lau-tabs-close-this">关闭当前标签页</a></dd>',
+            '<dd><a class="lau-tabs-close-siblings">关闭其它标签页</a></dd>',
+            '<dd><a class="lau-tabs-close-all">关闭全部标签页</a></dd>',
+            '</dl>',
+            '</li>',
+            '</ul>',
             '</div>',
             '<div class="layui-tab layui-tab-brief" lay-allowClose="true" lay-filter="lau-tabs">',
-                '<ul class="layui-tab-title">',
-                    '<li class="layui-this" lay-id="{{ d.href }}"><i class="{{ d.icon ? (d.icon.split(\'/\s+/\').length > 1 ? d.icon : \'layui-icon \' + d.icon) : \'layui-icon layui-icon-home\' }}"></i> {{ d.title || \'控制台\' }}</li>',
-                '</ul>',
-                '<div class="layui-tab-content">',
-                    '<div class="layui-tab-item layui-show">',
-                        '<iframe src="{{ d.href }}"></iframe>',
-                    '</div>',
-                '</div>',
+            '<ul class="layui-tab-title">',
+            '<li class="layui-this" lay-id="{{ d.href }}"><i class="{{ d.icon ? (d.icon.split(\'/\s+/\').length > 1 ? d.icon : \'layui-icon \' + d.icon) : \'layui-icon layui-icon-home\' }}"></i> {{ d.title || \'控制台\' }}</li>',
+            '</ul>',
+            '<div class="layui-tab-content">',
+            '<div class="layui-tab-item layui-show">',
+            '<iframe src="{{ d.href }}"></iframe>',
+            '</div>',
+            '</div>',
             '</div>'
         ].join(''),
         bodySingle: '<iframe src="{{ d.href }}"></iframe>'
@@ -91,7 +91,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
      * 布局对象
      * @constructor
      */
-    var Layout = function () {
+    var Layout = function (base) {
         var THIS = this,
             BODY = $('.layui-body'),
             SIDE = $('.layui-side'),
@@ -121,10 +121,24 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
                 url: sideHref,
                 dataType: 'json',
                 success: function (data, textStatus, jqXHR) {
+                    //console.log("base:" + base);
+                    if (typeof base == "undefined") {
+                        console.error("base url can not be undefined");
+                    } else {
+                        for (var i in data[0]) {
+                            //var firstMenu = data[0][i];
+                            //var secondMenu = data[0][i].list;
+                            data[0][i].href += base + data[0][i].href;
+                            for (var j in data[0][i].list) {
+                                data[0][i].list[j].href = base + data[0][i].list[j].href;
+                            }
+                        }
+                    }
                     THIS.sideMenuLoad(data);
+                    //console.log("menu data load success:" + JSON.stringify(data));
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
-
+                    //console.log("menu data request error");
                 }
             });
         }
@@ -168,7 +182,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             typeof menu === "object" && laytpl(Tpl.sideMenu).render(menu, function (html) {
                 var sideNav = SIDE.find('.layui-nav.layui-nav-tree');
                 sideNav[0] && sideNav.fadeOut(200, function () {
-                    sideNav.html(html).fadeIn(200,function () {
+                    sideNav.html(html).fadeIn(200, function () {
                         SINGLE || traceMenu();
                     });
                 });
@@ -343,7 +357,9 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
              * @returns {Layout}
              */
             this.tabPrev = function () {
+                console.log("tabPrev start:tabTitleOffset->" + tabTitleOffset + ",tabTitleWidth->" + tabTitleWidth);
                 setOffset(tabTitleOffset + tabTitleWidth);
+                console.log("tabPrev end:tabTitleOffset->" + tabTitleOffset + ",tabTitleWidth->" + tabTitleWidth);
                 return this;
             };
 
@@ -352,7 +368,9 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
              * @returns {Layout}
              */
             this.tabNext = function () {
+                console.log("tabNext start:tabTitleOffset->" + tabTitleOffset + ",tabTitleWidth->" + tabTitleWidth);
                 setOffset(tabTitleOffset - tabTitleWidth);
+                console.log("tabNext end:tabTitleOffset->" + tabTitleOffset + ",tabTitleWidth->" + tabTitleWidth);
                 return this;
             };
 
@@ -478,7 +496,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             calcTabWidth();
 
             //监听选项卡切换
-            element.on('tab(' + tabFilter + ')', function(data) {
+            element.on('tab(' + tabFilter + ')', function (data) {
                 tabThis = $(this);
                 LAYID = tabThis.attr('lay-id');
                 tabThisWidth = tabThis.outerWidth();
@@ -493,7 +511,7 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             });
 
             //监听选项卡关闭
-            element.on('tabDelete(' + tabFilter + ')', function(data) {
+            element.on('tabDelete(' + tabFilter + ')', function (data) {
                 tabThisLeft = tabThis.position().left;
                 calcTabWidth();
                 THIS.resize();
@@ -520,12 +538,18 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
             });
 
             //监听选项卡的更多操作
-            element.on('nav(lau-tabs-more)', function(elem) {
+            element.on('nav(lau-tabs-more)', function (elem) {
                 elem.parent().removeClass('layui-this').parent().removeClass('layui-show');
                 switch (elem.prop('class')) {
-                    case 'lau-tabs-close-this':THIS.tabCloseThis();break;
-                    case 'lau-tabs-close-siblings':THIS.tabCloseSiblings();break;
-                    case 'lau-tabs-close-all':THIS.tabCloseAll();break;
+                    case 'lau-tabs-close-this':
+                        THIS.tabCloseThis();
+                        break;
+                    case 'lau-tabs-close-siblings':
+                        THIS.tabCloseSiblings();
+                        break;
+                    case 'lau-tabs-close-all':
+                        THIS.tabCloseAll();
+                        break;
                 }
             });
         }
@@ -573,5 +597,5 @@ layui.define(['layer', 'laytpl', 'element'], function(exports) {
         }, 1000);
     };
 
-    exports('lau', new Layout());
+    exports('lau', new Layout(window.BUGUCMS_BASE_URL));
 });

@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * @Description TODO
  **/
 @Controller
-@RequestMapping("auth")
+@RequestMapping("/auth")
 public class AuthController extends BGBaseController {
 
     @Autowired

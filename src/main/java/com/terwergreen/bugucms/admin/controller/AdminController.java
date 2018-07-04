@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.Collection;
 
 @Controller
-@RequestMapping(value = "admin")
+@RequestMapping(value = "/admin")
 public class AdminController extends BGBaseController {
 
     @Autowired
