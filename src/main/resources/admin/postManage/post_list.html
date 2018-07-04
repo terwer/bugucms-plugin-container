@@ -7,8 +7,8 @@
     |_| \___||_|     \_/\_/  \___||_|
 -->
 <!DOCTYPE html>
-<html lang="zh" xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="zh"
       layout:decorate="include/edit_inc"
       th:with="title='所有文章'">
 
@@ -35,7 +35,9 @@
                 page: true,//开启分页
                 cols: [
                     [ //表头
-                        {field: 'id', title: 'ID', width: 80, sort: true, fixed: 'left'}
+                        {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'left'},
+                        {field: 'postTitle', title: '文章标题', width: 480, sort: true, fixed: 'left'},
+                        {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'left'}
                     ]
                 ]
             });

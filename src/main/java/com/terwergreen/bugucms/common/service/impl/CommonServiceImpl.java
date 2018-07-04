@@ -40,7 +40,7 @@ public class CommonServiceImpl extends BaseService implements CommonService {
         try {
             Map paramMap = new HashMap();
             paramMap.put("optionGroup", optionGroup);
-            list = commonDAO.queryList("get_option_by_group", paramMap);
+            list = commonDAO.queryListByMap("get_option_by_group", paramMap);
         } catch (Exception e) {
             logger.error("获取配置项异常", e);
             throw new BusinessServiceException(e);

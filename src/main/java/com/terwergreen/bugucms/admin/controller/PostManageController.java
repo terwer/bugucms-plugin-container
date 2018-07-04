@@ -89,7 +89,7 @@ public class PostManageController extends AdminBaseController {
         return "postManage/post_tag";
     }
 
-    @RequestMapping("/api/post/list")
+    @RequestMapping(value = "/api/post/list", produces = "application/json;charset=utf-8")
     @ResponseBody
     public String getPosts(Model model, Integer page, Integer limit) throws Exception {
         Map resultMap = new HashMap();

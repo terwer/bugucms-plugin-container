@@ -26,7 +26,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public List<PostDTO> getPosts() {
         Map paramMap = new HashMap();
-        List<PostDTO> posts = (List<PostDTO>) commonDAO.queryList("get_posts_by_user", paramMap);
+        List<PostDTO> posts = (List<PostDTO>) commonDAO.queryListByMap("get_posts_by_user", paramMap);
         if (CollectionUtils.isEmpty(posts)) {
             return null;
         } else {
@@ -59,8 +59,7 @@ public class PostServiceImpl implements PostService {
     @Override
     public PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        Map paramMap = new HashMap();
-        List<PostDTO> list = (List<PostDTO>) commonDAO.queryList("get_posts_by_page", paramMap);
+        List<PostDTO> list = (List<PostDTO>) commonDAO.queryList("get_posts_by_page");
         // 分页信息
         PageInfo<PostDTO> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();

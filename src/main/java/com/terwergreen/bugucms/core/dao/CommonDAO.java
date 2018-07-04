@@ -1,27 +1,27 @@
 package com.terwergreen.bugucms.core.dao;
 
-import com.terwergreen.base.dao.BGDAOException;
+import com.terwergreen.exception.DAOException;
 
 import java.util.List;
 import java.util.Map;
 
 /**
- * *****************************************************
- * <br>数据库访问接口</br>
- * <br>功能描述：提供数据库增删改查 (应用于所有模块)</br>
- *
- * @author terwergreen
- * @version v1.0
- * *****************************************************
- * @ClassName：IBaseCommonDAO
- * @date 2018-03-31
- */
-@SuppressWarnings({ "rawtypes" })
+ * @Author Terwer
+ * @Date 2018/3/31 15:07
+ * @Version 1.0
+ * @Description 提供公共数据库增删改查
+ **/
 public interface CommonDAO {
-    /**
-     * 查询最大记录数
-     */
+
     int MAX_ROW = 9999;
+
+    /**
+     * 查询列表
+     *
+     * @param sql
+     * @return
+     */
+    List queryList(String sql);
 
     /**
      * 查询列表
@@ -39,7 +39,7 @@ public interface CommonDAO {
      * @param paraMap
      * @return List
      */
-    List queryList(String sql, Map paraMap);
+    List queryListByMap(String sql, Map paraMap);
 
     /**
      * 查询列表
@@ -82,6 +82,14 @@ public interface CommonDAO {
      * @return
      */
     List queryPageListByObject(String sql, Object object, int start, int pageSize);
+
+    /**
+     * 查询单个信息
+     *
+     * @param sql
+     * @return
+     */
+    Object querySingleByString(String sql);
 
     /**
      * 查询单个信息
@@ -206,9 +214,9 @@ public interface CommonDAO {
      * @param sql
      * @param updateList
      * @return
-     * @throws BGDAOException
+     * @throws DAOException
      */
-    Integer updateBatch(final String sql, final List updateList) throws BGDAOException;
+    Integer updateBatch(final String sql, final List updateList) throws DAOException;
 
     /**
      * 批量新增
@@ -216,8 +224,8 @@ public interface CommonDAO {
      * @param sql
      * @param insertList
      * @return
-     * @throws BGDAOException
+     * @throws DAOException
      */
-    Integer insertBatch(final String sql, final List insertList) throws BGDAOException;
+    Integer insertBatch(final String sql, final List insertList) throws DAOException;
 }
 
