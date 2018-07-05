@@ -1,3 +1,17 @@
+/***
+ *      _______
+ *     |__   __|
+ *        | |  ___  _ __ __      __ ___  _ __
+ *        | | / _ \| '__|\ \ /\ / // _ \| '__|
+ *        | ||  __/| |    \ V  V /|  __/| |
+ *        |_| \___||_|     \_/\_/  \___||_|
+ *
+ */
+/*通用提示*/
+.bg-center {text-align: center;}
+.bg-warning{color: #a58d17;}
+.bg-danger{color:red;}
+
 a, *[lau-href], *[lau-event] {
     cursor: pointer;
 }
@@ -334,4 +348,3 @@ a, *[lau-href], *[lau-event] {
     border-radius: 0!important;
     overflow: auto;
 }
-

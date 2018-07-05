@@ -1,12 +1,12 @@
 package com.terwergreen.exception;
 
+import com.alibaba.fastjson.JSON;
 import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
 import com.terwergreen.bugucms.common.util.Constants;
 import com.terwergreen.bugucms.common.util.RestResponseStates;
-import net.minidev.json.JSONValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -149,7 +149,7 @@ public class AppErrorController extends BGBaseController implements ErrorControl
     private Map<String, Object> getErrorAttributes(HttpServletRequest request,
                                                    boolean includeStackTrace) {
         RequestAttributes requestAttributes = new ServletRequestAttributes(request);
-        logger.debug("Request Attributes:" + JSONValue.toJSONString(requestAttributes.getAttributeNames(SCOPE_REQUEST)));
+        logger.debug("Request Attributes:" + JSON.toJSONString(requestAttributes.getAttributeNames(SCOPE_REQUEST)));
         Map<String, Object> map = new HashMap<String, Object>();
         String URL = request.getRequestURL().toString();
         map.put("URL", URL);

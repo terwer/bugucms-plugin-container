@@ -1,5 +1,18 @@
-layui.define(['layer', 'laytpl', 'element'], function (exports) {
-    var layer = layui.layer,
+/***
+ *      _______
+ *     |__   __|
+ *        | |  ___  _ __ __      __ ___  _ __
+ *        | | / _ \| '__|\ \ /\ / // _ \| '__|
+ *        | ||  __/| |    \ V  V /|  __/| |
+ *        |_| \___||_|     \_/\_/  \___||_|
+ *
+ *
+ */
+layui.extend({
+    conf: 'bugucms/conf'
+}).define(['conf', 'layer', 'laytpl', 'element'], function (exports) {
+    var conf = layui.conf,
+        layer = layui.layer,
         laytpl = layui.laytpl,
         element = layui.element,
         $ = layui.$;
@@ -88,10 +101,13 @@ layui.define(['layer', 'laytpl', 'element'], function (exports) {
     };
 
     /**
-     * 布局对象
+     * 初始化配置
      * @constructor
      */
     var Layout = function (base) {
+        //输出站点配置
+        this.config = conf;
+
         var THIS = this,
             BODY = $('.layui-body'),
             SIDE = $('.layui-side'),
@@ -595,7 +611,7 @@ layui.define(['layer', 'laytpl', 'element'], function (exports) {
                 SIDE.removeClass('lau-mini') && SINGLE || THIS.resize(200);
             }
         }, 1000);
-    };
+    }
 
-    exports('lau', new Layout(window.BUGUCMS_BASE_URL));
+    exports('bugucms', new Layout(window.BUGUCMS_BASE_URL));
 });

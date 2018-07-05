@@ -75,5 +75,6 @@
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script>
     layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('forgot');
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
 </script>
 </html>

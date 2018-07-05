@@ -1,4 +1,4 @@
-layui.define(['layer', 'form', 'tips'], function(exports) {
+layui.define(['layer', 'form', 'tips'], function (exports) {
     var form = layui.form,
         layer = layui.layer,
         $ = layui.$,
@@ -28,7 +28,7 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
 
         var that = $(this);
         that.attr('disabled', true).addClass('layui-btn-disabled');
-        $.post('/json/sms.json', {phone: phone}, function (json) {
+        $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone}, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg);
                 var expire = json.data.expire;

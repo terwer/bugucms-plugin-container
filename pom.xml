@@ -31,10 +31,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- reactive -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.springframework.boot</groupId>-->
+            <!--<artifactId>spring-boot-starter-webflux</artifactId>-->
+        <!--</dependency>-->
         <!-- 自动配置 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -101,10 +101,15 @@
             <scope>test</scope>
         </dependency>
         <!-- JSON -->
+        <!--<dependency>-->
+            <!--<groupId>net.minidev</groupId>-->
+            <!--<artifactId>json-smart</artifactId>-->
+            <!--<version>RELEASE</version>-->
+        <!--</dependency>-->
         <dependency>
-            <groupId>net.minidev</groupId>
-            <artifactId>json-smart</artifactId>
-            <version>RELEASE</version>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>1.2.47</version>
         </dependency>
         <!-- kaptcha验证码库 -->
         <dependency>
@@ -143,11 +148,11 @@
             <artifactId>jquery</artifactId>
             <version>1.10.1</version>
         </dependency>
-        <dependency>
-            <groupId>org.webjars</groupId>
-            <artifactId>bootstrap</artifactId>
-            <version>3.3.7</version>
-        </dependency>
+        <!--<dependency>-->
+            <!--<groupId>org.webjars</groupId>-->
+            <!--<artifactId>bootstrap</artifactId>-->
+            <!--<version>3.3.7</version>-->
+        <!--</dependency>-->
     </dependencies>
 
     <build>

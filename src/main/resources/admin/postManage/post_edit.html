@@ -10,7 +10,7 @@
 <html lang="zh" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="include/edit_inc"
-      th:with="title='写文章'">
+      th:with="id=${post?.postId},title='写文章,更新文章'">
 
 <header layout:fragment="customHeader">
     <link rel="stylesheet" type="text/css" th:href="@{/static/lib/SimpleMDE/css/simplemde.min.css}"/>
@@ -41,7 +41,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">发布日期</label>
                         <div class="layui-input-block">
-                            <input type="text" id="postDdate" name="postDdate" th:value="${post?.postDate}" lay-verify="datetime" placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off" class="layui-input">
+                            <input type="text" id="postDdate" name="postDate" th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}" lay-verify="datetime" placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
+                                   class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item layui-layout-admin">
@@ -79,8 +80,7 @@
 
             laydate.render({
                 elem: '#postDdate',
-                type: 'datetime',
-                value: new Date()
+                type: 'datetime'
             });
 
             /* 监听提交 */

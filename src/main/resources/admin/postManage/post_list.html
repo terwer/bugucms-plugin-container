@@ -9,12 +9,14 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       lang="zh"
-      layout:decorate="include/edit_inc"
+      layout:decorate="include/list_inc"
       th:with="title='所有文章'">
 
 <header layout:fragment="customHeader">
     <style type="text/css">
-
+        .layui-btn i {
+            font-size: 14px !important;
+        }
     </style>
 </header>
 
@@ -24,23 +26,112 @@
 
 <footer layout:fragment="customFooter">
     <script type="text/javascript">
-        layui.use('table', function () {
-            var table = layui.table;
-
-            //第一个实例
-            table.render({
-                elem: '#postTable',
-                height: 315,
-                url: BUGUCMS_BASE_URL + 'admin/postManage/api/post/list', //数据接口
-                page: true,//开启分页
-                cols: [
-                    [ //表头
-                        {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'left'},
-                        {field: 'postTitle', title: '文章标题', width: 480, sort: true, fixed: 'left'},
-                        {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'left'}
-                    ]
-                ]
-            });
+        layui.define(['layer', 'form', 'tips'], function () {
+            var form = layui.form,
+                layer = layui.layer,
+                $ = layui.$,
+                tips = layui.tips;
         });
+        // layui.config({
+        //     base: BUGUCMS_BASE_URL + 'static/lib/layui/lay/' //静态资源所在路径
+        // }).extend({
+        //     index: 'index' //主入口模块
+        // }).define("tips").use(['table', 'layer', 'form'], function () {
+        //     var table = layui.table,
+        //         layer = layui.layer,
+        //         form = layui.form,
+        //         $ = layui.$,
+        //         tips = layui.tips;
+        //
+        //     //第一个实例
+        //     table.render({
+        //         elem: '#postTable',
+        //         url: BUGUCMS_BASE_URL + 'admin/postManage/api/post/list', //数据接口
+        //         page: true,//开启分页
+        //         cols: [
+        //             [ //表头
+        //                 {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'center'},
+        //                 {
+        //                     field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
+        //                         return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + d.postSlug + '.html" target="_blank">' + d.postTitle + '</a>';
+        //                     }
+        //                 },
+        //                 {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'center'},
+        //                 {
+        //                     field: 'action', title: '操作', width: 180, sort: true, fixed: 'center', templet: function (d) {
+        //                         var m = '<button class="layui-btn layui-btn-sm" lau-action="edit" lau-title="事故发生大哥" lau-href="admin/postManage/edit/' + d.postId + '"><i class="layui-icon">&#xe642;修改</i></button>';
+        //                         var r = '<button class="layui-btn layui-btn-danger layui-btn-sm" lau-action="delete" lau-title="vds" lau-href="admin/postManage/delete/' + d.postId + '"><i class="layui-icon">&#xe640;删除</i></button>';
+        //                         return '<div class="layui-btn-group">' + m + r + '</div>';
+        //                     }
+        //                 }
+        //             ]
+        //         ]
+        //     });
+        //
+        //     //ajax请求出错提示
+        //     $(document).ajaxError(function (event, request, setting) {
+        //         if (request.status === 200) {
+        //             tips.error('Invalid response');
+        //         } else {
+        //             tips.error(request.status + ': ' + request.statusText);
+        //         }
+        //     });
+        //
+        //     //监听事件,这个不一定要用lau-event,可以自己写
+        //     $(document).on('click', '[lau-href]', function () {
+        //         var _this = $(this);
+        //         var action = _this.attr('lau-action');
+        //         var title = _this.attr('lau-title');
+        //         var href = _this.attr('lau-href');
+        //
+        //         switch (action) {
+        //             case "edit": {
+        //                 // lau.go(BUGUCMS_BASE_URL + href, title);
+        //                 tips.error('error');
+        //                 // lau.go(BUGUCMS_BASE_URL + href, title);
+        //                 break;
+        //             }
+        //             case "delete": {
+        //                 deletePost(href);
+        //                 break;
+        //             }
+        //         }
+        //
+        //         /**
+        //          * 删除文章
+        //          * @param id 文章ID
+        //          * @param obj 点击的当前元素
+        //          */
+        //         function deletePost(url) {
+        //             //询问框
+        //             layer.confirm('您确认删除该题目么？', {
+        //                 btn: ['确认', '取消'] //按钮
+        //             }, function () {
+        //
+        //                 layer.closeAll('dialog');
+        //
+        //                 $.get(url, {}, function (res) {
+        //                     doDeleteResult(res);
+        //                 }, 'json');
+        //
+        //                 function doDeleteResult(res) {
+        //                     console.log(res);
+        //                     if (res != null && res.status == 1) {
+        //                         layer.msg('删除成功', {icon: 1});
+        //                         window.location.href = BUGUCMS_BASE_URL + "admin/postManage/list";
+        //                     } else {
+        //                         layer.msg('操作失败', {icon: 2});
+        //                     }
+        //                 }
+        //             }, function () {
+        //                 layer.msg('您放弃了操作', {
+        //                     time: 20000, //20s后自动关闭
+        //                     btn: ['明白了', '知道了']
+        //                 });
+        //             });
+        //         }
+        //     });
+        //
+        // });
     </script>
 </footer>

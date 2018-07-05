@@ -1,13 +1,14 @@
 package com.terwergreen.bugucms.cms.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
+import com.alibaba.fastjson.JSON;
+import com.terwergreen.base.controller.BGBaseController;
 import com.terwergreen.bugucms.admin.dto.SysUserDTO;
-import com.terwergreen.exception.WebException;
-import com.terwergreen.bugucms.common.util.MarkdownUtils;
 import com.terwergreen.bugucms.cms.dto.PostDTO;
 import com.terwergreen.bugucms.cms.service.PostService;
-import net.minidev.json.JSONValue;
+import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
+import com.terwergreen.bugucms.common.service.CommonService;
+import com.terwergreen.bugucms.common.util.MarkdownUtils;
+import com.terwergreen.exception.WebException;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -17,9 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.terwergreen.base.controller.BGBaseController;
-import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
-import com.terwergreen.bugucms.common.service.CommonService;
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/post", method = RequestMethod.GET)
@@ -75,7 +74,7 @@ public class PostController extends BGBaseController {
                 logger.error("文章不存在");
                 throw new WebException("文章不存在");
             }
-            logger.info("获取文章成功:siteConfigDTO=" + JSONValue.toJSONString(siteConfigDTO) + ",post=" + post);
+            logger.info("获取文章成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",post=" + post);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

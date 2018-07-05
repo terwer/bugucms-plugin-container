@@ -1,4 +1,4 @@
-layui.define(['layer', 'form', 'tips'], function(exports) {
+layui.define(['layer', 'form', 'tips'], function (exports) {
     var form = layui.form,
         layer = layui.layer,
         $ = layui.$,
@@ -33,7 +33,7 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
 
         var that = $(this);
         that.attr('disabled', true).addClass('layui-btn-disabled');
-        $.post('/json/sms.json', {phone: phone, captcha: captcha}, function (json) {
+        $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone, captcha: captcha}, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg);
                 var expire = json.data.expire;
@@ -75,10 +75,10 @@ layui.define(['layer', 'form', 'tips'], function(exports) {
         tips.loading('请稍后...', 0, -1);
 
         //发送重置表单
-        $.post('/json/forgot.json', data.field, function (json) {
+        $.post(BUGUCMS_BASE_URL + 'static/json/forgot.json', data.field, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg, function () {
-                    location.href = '/html/login.html';
+                    location.href = BUGUCMS_BASE_URL + 'auth/login';
                 });
             } else {
                 tips.error(json.errmsg);

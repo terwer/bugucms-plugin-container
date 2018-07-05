@@ -1,5 +1,6 @@
 package com.terwergreen.bugucms.admin.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.base.controller.AdminBaseController;
 import com.terwergreen.bugucms.cms.dto.PostDTO;
@@ -7,7 +8,6 @@ import com.terwergreen.bugucms.cms.service.PostService;
 import com.terwergreen.bugucms.common.util.Constants;
 import com.terwergreen.exception.RestException;
 import com.terwergreen.exception.WebException;
-import net.minidev.json.JSONValue;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -116,7 +116,7 @@ public class PostManageController extends AdminBaseController {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new RestException(e);
         }
-        return JSONValue.toJSONString(resultMap);
+        return JSON.toJSONString(resultMap);
     }
 
     /**

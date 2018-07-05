@@ -183,6 +183,7 @@
 </body>
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script type="text/javascript">
-    layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('login');
+    layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('register');
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
 </script>
 </html>

@@ -14,7 +14,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>控制台</title>
     <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/common.css}">
     <script type="text/javascript" th:inline="javascript">
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
     </script>
@@ -292,14 +292,13 @@
 </body>
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script type="text/javascript">
-    layui.config({base: BUGUCMS_BASE_URL + 'static/'}).extend({common: 'js/common'}).use(['table', 'common', 'carousel', 'element'], function () {
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({common: 'bugucms/common'}).use(['table', 'common', 'carousel', 'element'], function () {
         var common = layui.common,
             $ = layui.$,
             layer = layui.layer,
             carousel = layui.carousel,
             element = layui.element,
             table = layui.table;
-
 
         //监听事件,这个不一定要用lau-event,可以自己写
         $(document).on('click', '[lau-event]', function () {

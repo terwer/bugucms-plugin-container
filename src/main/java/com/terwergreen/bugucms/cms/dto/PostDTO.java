@@ -1,5 +1,6 @@
 package com.terwergreen.bugucms.cms.dto;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.terwergreen.bugucms.common.util.HtmlUtils;
 import com.terwergreen.bugucms.common.util.ImageUtils;
 import com.terwergreen.bugucms.common.util.MarkdownUtils;
@@ -55,7 +56,8 @@ public class PostDTO {
     /**
      * 发布时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:MM:ss")
+    @JSONField(format = "yyyy-MM-dd HH:mm:ss")  //FastJson包使用注解
+    @DateTimeFormat(pattern = "yyyy-MM-dd hh:MM")  //格式化前台日期参数注解
     @Getter
     @Setter
     private Date postDate;
