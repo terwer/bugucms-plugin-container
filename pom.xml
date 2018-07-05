@@ -136,6 +136,18 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>
+        <!-- xmlrpc server -->
+        <dependency>
+            <groupId>org.apache.xmlrpc</groupId>
+            <artifactId>xmlrpc-server</artifactId>
+            <version>3.1.3</version>
+        </dependency>
+        <!-- xmlrpc client -->
+        <dependency>
+            <groupId>org.apache.xmlrpc</groupId>
+            <artifactId>xmlrpc-client</artifactId>
+            <version>3.1.3</version>
+        </dependency>
 
         <!-- Web前端开发库 -->
         <dependency>

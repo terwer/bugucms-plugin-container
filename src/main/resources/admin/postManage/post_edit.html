@@ -25,23 +25,28 @@
         <div class="layui-card">
             <div class="layui-card-header">写文章</div>
             <div class="layui-card-body" style="padding: 15px;">
-                <form class="layui-form" action="" method="post" lay-filter="component-form-group" onsubmit="return false;">
+                <form class="layui-form" action="" method="post" lay-filter="component-form-group"
+                      onsubmit="return false;">
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle"
+                                   autocomplete="off" placeholder="请输入标题" class="layui-input">
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
                         <label class="layui-form-label">文章内容</label>
                         <div class="layui-input-block">
-                            <textarea id="content" name="content" th:utext="${post?.postRawContent}" placeholder="请输入内容" class="layui-textarea"></textarea>
+                            <textarea id="content" name="content" th:utext="${post?.postRawContent}" placeholder="请输入内容"
+                                      class="layui-textarea"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">发布日期</label>
                         <div class="layui-input-block">
-                            <input type="text" id="postDdate" name="postDate" th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}" lay-verify="datetime"
+                            <input type="text" id="postDdate" name="postDate"
+                                   th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}"
+                                   lay-verify="datetime"
                                    placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
                                    class="layui-input">
                         </div>
@@ -50,7 +55,8 @@
                         <div class="layui-input-block">
                             <div class="layui-footer" style="left: 0;">
                                 <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
-                                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                                <button type="reset" class="layui-btn layui-btn-danger">重置</button>
+                                <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
                             </div>
                         </div>
                     </div>
@@ -65,11 +71,84 @@
     <script type="text/javascript">
         var simplemde = null;
         $(document).ready(function () {
-            simplemde = new SimpleMDE({element: $("#content")[0]});
+            simplemde = new SimpleMDE({
+                element: $("#content")[0],
+                placeholder: "请输入文章内容...",
+            });
+            // simplemde.toggleSideBySide()//打开实时全屏预览
         });
 
         $(function () {
-        })
+            fullscreen("screenButton");
+        });
+
+        /**
+         * 子iframe全屏
+         *
+         *@param objId 点击按钮的ID
+         */
+        function fullscreen(objId) {
+            // 判断是否允许全屏
+            var fullscreenEnabled =
+                document.fullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.msFullscreenEnabled;
+
+            // 全屏
+            function launchFullscreen(element) {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                } else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                } else if (element.webkitRequestFullscreen) {
+                    element.webkitRequestFullScreen();
+                }
+            }
+
+            // 退出全屏
+            function exitFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+
+            var btn = document.querySelector('#' + objId);
+            if (fullscreenEnabled) {
+                btn.addEventListener('click', function () {
+                    var fullscreenElement =
+                        document.fullscreenElement ||
+                        document.mozFullScreenElement ||
+                        document.webkitFullscreenElement;
+                    if (fullscreenElement) {
+                        exitFullscreen();
+                        btn.innerHTML = '全屏';
+                    } else {
+                        launchFullscreen(document.documentElement);
+                        btn.innerHTML = '退出全屏';
+                    }
+                }, false);
+            }
+            // 监听全屏事件
+            document.addEventListener('webkitfullscreenchange', function fullscreenChange() {
+                if (document.fullscreenEnabled ||
+                    document.webkitIsFullScreen ||
+                    document.mozFullScreen ||
+                    document.msFullscreenElement) {
+                    console.log('enter fullscreen');
+                } else {
+                    console.log('exit fullscreen');
+                }
+            }, false);
+        }
 
         layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
             conf: 'bugucms/conf',
