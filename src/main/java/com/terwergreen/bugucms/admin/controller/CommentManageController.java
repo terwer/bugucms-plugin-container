@@ -10,6 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Description 评论管理
  **/
 @Controller
-@RequestMapping(value = "/admin/Controller")
+@RequestMapping(value = "/{adminpath}/Controller")
 public class CommentManageController {
 }

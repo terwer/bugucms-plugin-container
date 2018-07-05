@@ -51,7 +51,7 @@
 </body>
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script>
-    layui.config({base: BUGUCMS_BASE_URL + 'static/'}).extend({common: 'js/common'}).use(['common'], function () {
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({common: 'bugucms/common'}).use(['common'], function () {
         var common = layui.common;
     });
 </script>

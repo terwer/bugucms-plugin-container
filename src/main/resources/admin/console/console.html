@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/common.css}">
     <script type="text/javascript" th:inline="javascript">
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+        window.BUGUCMS_ADMIN_PATH = /*[[${siteConfigDTO.adminpath}]]*/'admin';
     </script>
 </head>
 <body>

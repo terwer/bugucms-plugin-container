@@ -17,6 +17,7 @@
         /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
         //设置项目根路径
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+        window.BUGUCMS_ADMIN_PATH = /*[[${siteConfigDTO.adminpath}]]*/'admin';
     </script>
 </head>
 <body>

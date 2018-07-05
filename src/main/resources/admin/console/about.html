@@ -7,7 +7,7 @@
             </colgroup>
             <tr>
                 <td>当前版本</td>
-                <td>lau-v1.0.0 <a th:lau-href="@{/admin/changelog}">更新日志</a></td>
+                <td>lau-v1.0.0 <a lau-title="更新日志" th:lau-href="@{|/${siteConfigDTO.adminpath}/changelog|}">更新日志</a></td>
             </tr>
             <tr>
                 <td>基于框架</td>
@@ -38,7 +38,7 @@
     <div class="layui-card-body layui-text">
         <div class="layui-row layui-col-space15">
             <div class="layui-col-xs6">
-                <button th:lau-href="@{/admin/license}" class="layui-btn layui-btn-fluid layui-btn-danger">获取授权</button>
+                <button lau-title="获取授权" th:lau-href="@{|/${siteConfigDTO.adminpath}/license|}" class="layui-btn layui-btn-fluid layui-btn-danger">获取授权</button>
             </div>
             <div class="layui-col-xs6">
                 <button lau-event="download" class="layui-btn layui-btn-fluid">下载源码</button>

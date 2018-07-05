@@ -3,7 +3,7 @@
     {
       "title": "控制台",
       "icon": "layui-icon-console",
-      "href": "admin/console"
+      "href": "console"
     },
     {
       "title": "文章",
@@ -13,22 +13,22 @@
         {
           "title": "所有文章",
           "icon": "layui-icon-read",
-          "href": "admin/postManage/list"
+          "href": "postManage/list"
         },
         {
           "title": "写文章",
           "icon": "layui-icon-add-1",
-          "href": "admin/postManage/new"
+          "href": "postManage/new"
         },
         {
           "title": "分类目录",
           "icon": "layui-icon-file-b",
-          "href": "admin/postManage/cat"
+          "href": "postManage/cat"
         },
         {
           "title": "标签",
           "icon": "layui-icon-component",
-          "href": "admin/postManage/tag"
+          "href": "postManage/tag"
         }
       ]
     },
@@ -228,27 +228,27 @@
       "list": [
         {
           "title": "快速开始",
-          "href": "/static/doc/quickstart.html"
+          "href": "static/doc/quickstart.html"
         },
         {
           "title": "菜单操作",
-          "href": "/doc/menu.html"
+          "href": "static/doc/menu.html"
         },
         {
           "title": "标签操作",
-          "href": "/doc/tabs.html"
+          "href": "static/doc/tabs.html"
         },
         {
           "title": "其他操作",
-          "href": "/doc/other.html"
+          "href": "static/doc/other.html"
         },
         {
           "title": "更新日志",
-          "href": "/doc/changelog.html"
+          "href": "changelog"
         },
         {
           "title": "授权说明",
-          "href": "/doc/license.html"
+          "href": "license"
         }
       ]
     }

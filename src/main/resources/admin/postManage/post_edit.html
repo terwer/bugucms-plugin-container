@@ -41,7 +41,8 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">发布日期</label>
                         <div class="layui-input-block">
-                            <input type="text" id="postDdate" name="postDate" th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}" lay-verify="datetime" placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
+                            <input type="text" id="postDdate" name="postDate" th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}" lay-verify="datetime"
+                                   placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
@@ -70,12 +71,13 @@
         $(function () {
         })
 
-        layui.config({
-            base: BUGUCMS_BASE_URL + 'static/lib/layui/lay/' //静态资源所在路径
-        }).extend({
-            index: 'index' //主入口模块
-        }).use(['index', 'form', 'laydate'], function () {
-            var laydate = layui.laydate,
+        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+            conf: 'bugucms/conf',
+            // common: 'bugucms/common',
+            tips: 'bugucms/extend/tips'
+        }).use(['conf', 'tips', 'form', 'layer', 'laydate'], function () {
+            var bugucms = top.layui.bugucms,
+                laydate = layui.laydate,
                 form = layui.form;
 
             laydate.render({

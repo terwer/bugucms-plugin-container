@@ -48,4 +48,9 @@ public class Constants {
      * 默认每页展示的数目
      */
     public static final int DEFAULT_PAGE_SIZE = 10;
+
+    /**
+     * 后台路径错误信息
+     */
+    public static final String ADMIN_PATH_ERROR_MESSAGE = "站点后台路径配置错误，不允许访问";
 }

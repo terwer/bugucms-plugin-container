@@ -46,7 +46,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
                 return false;
             }
             tips.success("登录成功", function () {
-                location.href = BUGUCMS_BASE_URL + "admin/main";
+                location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/";
             });
         });
         //}, 'json');

@@ -19,6 +19,11 @@
         //不能在子页面调用
         (window.top === window.self) || (window.top.location.href = window.self.location.href);
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+        window.BUGUCMS_ADMIN_PATH = /*[[${siteConfigDTO.adminpath}]]*/'admin';
+        window.BUGUCMS_SERVER_CONFIG = /*[[${siteConfigDTO}]]*/'{}';
+        if (BUGUCMS_SERVER_CONFIG.debug) {
+            console.log("server config:" + JSON.stringify(BUGUCMS_SERVER_CONFIG));
+        }
     </script>
 </head>
 <body class="layui-layout-body layui-unselect">
@@ -26,7 +31,7 @@
     <!--顶部导航开始-->
     <div class="layui-header">
         <a class="lau-logo-mini"><i class="layui-icon layui-icon-tree"></i></a>
-        <a class="layui-logo" th:href="@{/admin/main}">Bugucms</a>
+        <a class="layui-logo" th:href="@{|/${siteConfigDTO.adminpath}/|}">Bugucms</a>
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu0"><i class="layui-icon layui-icon-set"> 博客设置</i></a></li>
             <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu1"><i class="layui-icon layui-icon-tips"> 操作指引</i></a></li>
@@ -60,7 +65,7 @@
     <!--侧边菜单结束-->
 
     <!--内容主体区域开始-->
-    <div class="layui-body" data-type="" data-title="控制台" data-icon="layui-icon-home" th:data-href="@{/admin/console}"></div>
+    <div class="layui-body" data-type="" data-title="控制台" data-icon="layui-icon-home" th:data-href="@{|/${siteConfigDTO.adminpath}/console|}"></div>
     <!--内容主体区域结束-->
 </div>
 </body>
@@ -74,7 +79,7 @@
             layer = layui.layer,
             $ = layui.$;
         if (config.debug) {
-            console.log("config:" + JSON.stringify(config));
+            console.log("client config:" + JSON.stringify(config));
         }
 
         //监听事件,这个不一定要用lau-event,可以自己写
@@ -82,8 +87,8 @@
             var _this = $(this);
             switch (_this.attr('lau-event')) {
                 case 'about':
-                    $.get(BUGUCMS_BASE_URL + 'admin/about', function (html) {
-                        lau.drawer({content: html});
+                    $.get(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/about', function (html) {
+                        bugucms.drawer({content: html});
                     });
                     break;
                 case 'download':
@@ -93,10 +98,10 @@
                     });
                     break;
                 case "sideMenu0":
-                    lau.sideMenuChange(0);
+                    bugucms.sideMenuChange(0);
                     break;
                 case "sideMenu1":
-                    lau.sideMenuChange(1);
+                    bugucms.sideMenuChange(1);
                     break;
                 case 'messageBox':
                     if (config.debug) {
@@ -104,7 +109,7 @@
                     }
                     break;
                 case 'newPost':
-                    bugucms.go(BUGUCMS_BASE_URL + 'admin/postManage/new', "写文章");
+                    bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/postManage/new', "写文章");
                     break;
             }
         });

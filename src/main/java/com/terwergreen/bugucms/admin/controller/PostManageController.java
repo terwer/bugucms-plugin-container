@@ -25,16 +25,16 @@ import java.util.Map;
  * @Description 文章管理
  **/
 @Controller
-@RequestMapping(value = "/admin/postManage")
+@RequestMapping(value = "/{adminpath}/postManage")
 public class PostManageController extends AdminBaseController {
 
     @Autowired
     private PostService postService;
 
     @RequestMapping("new")
-    public String add(Model model) throws Exception {
+    public String add(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
             initPage(model, 0);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
@@ -44,10 +44,10 @@ public class PostManageController extends AdminBaseController {
     }
 
     @RequestMapping("edit/{postId}")
-    public String edit(Model model, @PathVariable("postId") Integer postId) throws Exception {
+    public String edit(Model model, @PathVariable("postId") Integer postId, @PathVariable("adminpath") String adminpath) throws Exception {
 
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
             initPage(model, postId);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
@@ -57,9 +57,9 @@ public class PostManageController extends AdminBaseController {
     }
 
     @RequestMapping("list")
-    public String list(Model model) throws Exception {
+    public String list(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -68,9 +68,9 @@ public class PostManageController extends AdminBaseController {
     }
 
     @RequestMapping("cat")
-    public String cat(Model model) throws Exception {
+    public String cat(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -79,9 +79,9 @@ public class PostManageController extends AdminBaseController {
     }
 
     @RequestMapping("tag")
-    public String tag(Model model) throws Exception {
+    public String tag(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -91,7 +91,7 @@ public class PostManageController extends AdminBaseController {
 
     @RequestMapping(value = "/api/post/list", produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String getPosts(Model model, Integer page, Integer limit) throws Exception {
+    public String getPosts(Model model, Integer page, Integer limit, @PathVariable("adminpath") String adminpath) throws Exception {
         Map resultMap = new HashMap();
 
         if (page == null) {
@@ -102,7 +102,7 @@ public class PostManageController extends AdminBaseController {
         }
 
         try {
-            super.preCheck(model);
+            super.preCheck(model, adminpath);
             PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
             resultMap.put("code", 0);
             resultMap.put("msg", "success");

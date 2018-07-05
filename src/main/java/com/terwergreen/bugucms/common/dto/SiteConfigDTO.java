@@ -10,6 +10,7 @@ public class SiteConfigDTO {
     private String description;
     private String beianinfo;
     private String debug;
+    private String adminpath;
 
     public String getDomain() {
         return domain;
@@ -81,5 +82,13 @@ public class SiteConfigDTO {
 
     public void setDebug(String debug) {
         this.debug = debug;
+    }
+
+    public String getAdminpath() {
+        return adminpath;
+    }
+
+    public void setAdminpath(String adminpath) {
+        this.adminpath = adminpath;
     }
 }

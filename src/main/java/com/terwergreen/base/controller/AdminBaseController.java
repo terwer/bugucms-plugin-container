@@ -3,6 +3,7 @@ package com.terwergreen.base.controller;
 import com.terwergreen.bugucms.admin.dto.SysUserDTO;
 import com.terwergreen.bugucms.common.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.common.service.CommonService;
+import com.terwergreen.bugucms.common.util.Constants;
 import com.terwergreen.exception.WebException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -22,13 +23,18 @@ public class AdminBaseController {
     @Autowired
     private CommonService commonService;
 
-    public void preCheck(Model model) throws Exception {
+    public void preCheck(Model model,String adminpath) throws Exception {
         try {
             //获取站点配置
             SiteConfigDTO siteConfigDTO = commonService.getSiteConfig();
             if (null == siteConfigDTO) {
                 logger.error("站点配置异常:siteConfigDTO=null");
                 throw new WebException("站点配置异常:siteConfigDTO=null");
+            }
+
+            //检测后台路径配置
+            if (!siteConfigDTO.getAdminpath().equals(adminpath)) {
+                throw new WebException(Constants.ADMIN_PATH_ERROR_MESSAGE);
             }
 
             //获得当前登陆用户对应的对象

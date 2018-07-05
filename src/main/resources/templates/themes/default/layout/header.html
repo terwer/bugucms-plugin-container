@@ -54,7 +54,7 @@
 
                                     <span sec:authorize="hasRole('ROLE_ADMIN')">
                                         <li>
-                                            <a th:href="@{/admin/main}">后台管理</a>
+                                            <a th:href="@{|/${siteConfigDTO.adminpath}/|}">后台管理</a>
                                         </li>
                                     </span>
                                 </div>
