@@ -4,13 +4,13 @@
 
 <mapper namespace="bgapp">
     <!-- 获取用户信息 -->
-    <select id="get_user_by_username" resultType="com.terwergreen.bugucms.admin.dto.SysUserDTO">
+    <select id="get_user_by_username" resultType="com.terwergreen.bugucms.dto.SysUserDTO">
         SELECT su.id,su.user_name as username,su.password,su.nick_name as nickName,su.user_profile as userProfile,su.user_url as userUrl,su.mobile,su.email,su.status,su.user_desc as userDesc,su.user_registered as userRegistered
         FROM sys_user su
         where su.user_name = #{username}
     </select>
     <!-- 查询用户及角色 -->
-    <resultMap id="userMap" type="com.terwergreen.bugucms.admin.dto.SysUserDTO">
+    <resultMap id="userMap" type="com.terwergreen.bugucms.dto.SysUserDTO">
         <id property="id" column="id"/>
         <result column="user_name" property="username" />
         <result column="password" property="password"/>
@@ -22,7 +22,7 @@
         <result column="status" property="status"/>
         <result column="user_desc" property="userDesc"/>
         <result column="user_registered" property="userRegistered"/>
-        <collection property="sysRoles" ofType="com.terwergreen.bugucms.admin.dto.SysRoleDTO" javaType="java.util.List">
+        <collection property="sysRoles" ofType="com.terwergreen.bugucms.dto.SysRoleDTO" javaType="java.util.List">
             <result column="role_id" property="id"/>
             <result column="role_name" property="name"/>
             <result column="cn_name" property="cnName"/>

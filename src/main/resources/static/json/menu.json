@@ -228,27 +228,27 @@
       "list": [
         {
           "title": "快速开始",
-          "href": "static/doc/quickstart.html"
+          "href": "doc/quickstart"
         },
         {
           "title": "菜单操作",
-          "href": "static/doc/menu.html"
+          "href": "doc/menu"
         },
         {
           "title": "标签操作",
-          "href": "static/doc/tabs.html"
+          "href": "doc/tabs"
         },
         {
           "title": "其他操作",
-          "href": "static/doc/other.html"
+          "href": "doc/other"
         },
         {
           "title": "更新日志",
-          "href": "changelog"
+          "href": "doc/changelog"
         },
         {
           "title": "授权说明",
-          "href": "license"
+          "href": "doc/license"
         }
       ]
     }

@@ -1,12 +1,15 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>菜单操作</title>
-    <link rel="stylesheet" href="/static/layui/css/layui.css">
-    <link rel="stylesheet" href="/static/lib/bugucms/css/common.css">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/common.css}">
+    <script type="text/javascript" th:inline="javascript">
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+    </script>
 </head>
 <body>
 
@@ -112,7 +115,8 @@
                 </pre>
                 <blockquote class="layui-elem-quote">知道了怎么加载菜单,我们还要知道菜单的格式不是？</blockquote>
                 <pre class="layui-code" lay-title="菜单数据格式">
-[[{
+[
+[{
   &quot;title&quot;: &quot;控制台&quot;,
   &quot;icon&quot;: &quot;layui-icon-home&quot;,
   &quot;href&quot;: &quot;/html/console.html&quot;
@@ -140,7 +144,8 @@
   }, {
     &quot;title&quot;: &quot;示例菜单&quot;
   }]
-}]]
+}]
+]
                 </pre>
                 <p>看仔细了吗？是的，上面有两组菜单，可以使用 lau.sideMenuLoad(menu) 载入菜单,并且使用 lau.sideMenuChange(index) 切换菜单列表</p>
                 <p>接下来，我们看一看菜单操作的相关方法</p>
@@ -155,16 +160,16 @@
                     <li>lau.sideMenuChange(index) 这个函数用于切换到第index个菜单</li>
                     <li>lau.sideMenuRender(menu) 这个函数用于实时渲染菜单数据，menu数据只需要完整的menus里面的一维就行</li>
                 </ul>
-                <p>好了，现在进军到下一步 <a lau-href="/doc/tabs.html">标签操作</a></p>
+                <p>好了，现在进军到下一步 <a th:lau-href="@{|/${siteConfigDTO.adminpath}/doc/tabs|}">标签操作</a></p>
             </div>
         </fieldset>
     </div>
 </div>
 
 </body>
-<script src="/static/layui/layui.js"></script>
+<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script>
-    layui.config({base: '/static/'}).extend({common: 'js/common'}).use(['common', 'code'], function() {
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({common: 'bugucms/common'}).use(['common', 'code'], function () {
         var common = layui.common;
 
         layui.code({about: false, encode: true});

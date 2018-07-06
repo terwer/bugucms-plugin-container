@@ -87,7 +87,7 @@
             var _this = $(this);
             switch (_this.attr('lau-event')) {
                 case 'about':
-                    $.get(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/about', function (html) {
+                    $.get(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/doc/about', function (html) {
                         bugucms.drawer({content: html});
                     });
                     break;

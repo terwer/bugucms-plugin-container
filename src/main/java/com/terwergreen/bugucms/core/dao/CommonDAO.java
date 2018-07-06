@@ -1,6 +1,6 @@
 package com.terwergreen.bugucms.core.dao;
 
-import com.terwergreen.exception.DAOException;
+import com.terwergreen.bugucms.exception.DAOException;
 
 import java.util.List;
 import java.util.Map;
