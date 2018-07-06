@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.servlet;
+package com.terwergreen.bugucms.util.security;
 
 import java.awt.*;
 import java.io.ByteArrayInputStream;
@@ -9,7 +9,7 @@ import java.io.ByteArrayInputStream;
  * @author dsna
  * 
  */
-public class ImgFontByte {
+public class ImgFont {
 	public Font getFont(int fontHeight) {
 		try {
 			Font baseFont = Font.createFont(Font.TRUETYPE_FONT,

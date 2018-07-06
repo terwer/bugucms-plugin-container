@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.servlet;
+package com.terwergreen.bugucms.util.security;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -94,7 +94,7 @@ public class ValidateCode {
 		g.setColor(new Color(254,253,254));
 		g.fillRect(0, 0, width, height);
 		// 创建字体
-		ImgFontByte imgFont = new ImgFontByte();
+		ImgFont imgFont = new ImgFont();
 		Font font = imgFont.getFont(fontHeight);
 		g.setFont(font);
 

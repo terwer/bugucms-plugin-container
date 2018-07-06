@@ -45,7 +45,7 @@
         <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i> 验证码</label>
         <div class="layui-input-block lau-sign-code">
             <input type="text" name="captcha" value="1234" placeholder="请输入图形验证码" autocomplete="off" class="layui-input">
-            <img src="https://www.oschina.net/action/user/captcha" alt="图形验证码" class="lau-sign-captcha">
+            <img th:src="@{/common/image/captcha}" alt="图形验证码" class="lau-sign-captcha">
         </div>
     </div>
     <div class="layui-form-item">
