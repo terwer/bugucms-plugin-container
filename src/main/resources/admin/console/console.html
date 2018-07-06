@@ -250,7 +250,7 @@
                     <tbody>
                     <tr>
                         <td>当前版本</td>
-                        <td>v1.0.0 <a th:lau-href="@{/admin/changelog}">更新日志</a></td>
+                        <td>v1.0.0 <a lau-title="更新日志" th:lau-href="@{|/${siteConfigDTO.adminpath}/doc/changelog|}">更新日志</a></td>
                     </tr>
                     <tr>
                         <td>基于框架</td>
@@ -282,7 +282,7 @@
                     <li>Bugucms是由<a href="http://weibo.com/youweics" target="_blank">Terwer</a>，<a href="http://www.terwergreen.com" target="_blank">自主研发</a>的项目，请知悉。</li>
                     <li>Bugucms的部分样式是取自<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>，基本都是控制台的样式。</li>
                     <li>Bugucms不包含<a href="http://www.layui.com/admin/" target="_blank">layuiAdmin</a>源码。</li>
-                    <li>Bugucms秉承开源精神，如果源码用于个人学习完全是免费的，如果用于商业项目，请向作者<a th:lau-href="@{/admin/license}">购买授权</a>。</li>
+                    <li>Bugucms秉承开源精神，如果源码用于个人学习完全是免费的，如果用于商业项目，请向作者<a lau-title="购买授权" th:lau-href="@{|/${siteConfigDTO.adminpath}/doc/license|}">购买授权</a>。</li>
                 </ul>
             </div>
         </div>
@@ -306,7 +306,7 @@
             var _this = $(this);
             switch (_this.attr('lau-event')) {
                 case 'about':
-                    $.get(BUGUCMS_BASE_URL + 'admin/about', function (html) {
+                    $.get(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/doc/about', function (html) {
                         common.drawer({content: html});
                     });
                     break;

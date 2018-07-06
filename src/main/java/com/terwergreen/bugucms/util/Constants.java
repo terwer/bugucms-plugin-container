@@ -53,4 +53,19 @@ public class Constants {
      * 后台路径错误信息
      */
     public static final String ADMIN_PATH_ERROR_MESSAGE = "站点后台路径配置错误，不允许访问";
+
+    /**
+     * 登录失效提示
+     */
+    public static final String ADMIN_USER_NOT_LOGIN = "尚未登录或者登录失败，请重新登录";
+
+    /**
+     * 登录地址
+     */
+    public static final String AUTH_LOGIN_PAGE = "/auth/login";
+    /**
+     * 登录出错地址
+     */
+    public static final String AUTH_ERROR_URL = "/auth/login";
+
 }
