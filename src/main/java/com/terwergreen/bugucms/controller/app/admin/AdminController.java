@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 @Controller
 @RequestMapping(value = "/{adminpath}")
 public class AdminController extends AdminBaseController {
@@ -16,9 +19,9 @@ public class AdminController extends AdminBaseController {
     /***********/
 
     @RequestMapping("/")
-    public String main(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String main(Model model, HttpServletRequest request, HttpServletResponse response,@PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -27,9 +30,9 @@ public class AdminController extends AdminBaseController {
     }
 
     @RequestMapping("console")
-    public String console(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String console(Model model, HttpServletRequest request, HttpServletResponse response,@PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

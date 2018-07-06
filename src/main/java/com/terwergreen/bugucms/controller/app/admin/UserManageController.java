@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @Author Terwer
  * @Date 2018/7/6 10:53
@@ -21,9 +24,9 @@ public class UserManageController extends AdminBaseController{
     /***********/
 
     @RequestMapping("list")
-    public String userIndex(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String userIndex(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

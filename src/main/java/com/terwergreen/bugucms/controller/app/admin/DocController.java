@@ -7,6 +7,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 /**
  * @Author Terwer
  * @Date 2018/7/6 10:52
@@ -22,9 +25,9 @@ public class DocController extends AdminBaseController {
     /***********/
 
     @RequestMapping("quickstart")
-    public String quickstart(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String quickstart(Model model,HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -33,9 +36,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("menu")
-    public String menu(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String menu(Model model, HttpServletRequest request, HttpServletResponse response,@PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -44,9 +47,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("tabs")
-    public String tabs(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String tabs(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -55,9 +58,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("other")
-    public String other(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String other(Model model,HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model, request,response,adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -66,9 +69,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("about")
-    public String about(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String about(Model model,HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -77,9 +80,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("changelog")
-    public String changelog(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String changelog(Model model, HttpServletRequest request, HttpServletResponse response,@PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -88,9 +91,9 @@ public class DocController extends AdminBaseController {
     }
 
     @RequestMapping("license")
-    public String license(Model model, @PathVariable("adminpath") String adminpath) throws Exception {
+    public String license(Model model,HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath) throws Exception {
         try {
-            super.preCheck(model, adminpath);
+            super.preCheck(model,request,response, adminpath);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

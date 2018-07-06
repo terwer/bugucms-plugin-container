@@ -25,16 +25,16 @@
                                     <!--</span>-->
                                     <!--<span th:unless="${condition}" th:remove="tag">-->
                                     <!--<li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
-                                    <!--<a th:href="|${siteConfigDTO.weburl}/auth/register|"><i class="iconfont"></i>注册</a>-->
+                                    <!--<a th:href="@{/auth/register}"><i class="iconfont"></i>注册</a>-->
                                     <!--</li>-->
                                     <!--<li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
-                                    <!--<a th:href="|${siteConfigDTO.weburl}/auth/login|"><i class="iconfont"></i>登录</a>-->
+                                    <!--<a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>-->
                                     <!--</li>-->
                                     <!--</span>-->
 
                                     <span sec:authorize="!hasRole('ROLE_ADMIN')">
                                         <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
-                                            <a th:href="|${siteConfigDTO.weburl}/auth/login|"><i class="iconfont"></i>登录
+                                            <a th:href="@{/auth/login}"><i class="iconfont"></i>登录
                                             </a>
                                         </li>
                                     </span>
@@ -60,49 +60,49 @@
                                 </div>
                                 <li id="menu-item-962"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-962">
-                                    <a th:href="|${siteConfigDTO.weburl}/shuoshuo|">
+                                    <a th:href="@{/shuoshuo}">
                                         <i class="iconfont"></i>
                                         随笔
                                     </a>
                                 </li>
                                 <!--<li id="menu-item-2458"-->
                                 <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2458">-->
-                                <!--<a th:href="|${siteConfigDTO.weburl}/music|">-->
+                                <!--<a th:href="@{/music}">-->
                                 <!--<i class="iconfont icon-yinle"></i>-->
                                 <!--音乐-->
                                 <!--</a>-->
                                 <!--</li>-->
                                 <!--<li id="menu-item-2169"-->
                                 <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2169">-->
-                                <!--<a th:href="|${siteConfigDTO.weburl}/plan-thin|">-->
+                                <!--<a th:href="@{/plan-thin}">-->
                                 <!--<i class="iconfont"></i>-->
                                 <!--计划薄-->
                                 <!--</a>-->
                                 <!--</li>-->
                                 <!--<li id="menu-item-964"-->
                                 <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-964">-->
-                                <!--<a th:href="|${siteConfigDTO.weburl}/read-people|">-->
+                                <!--<a th:href="@{/read-people}">-->
                                 <!--<i class="iconfont"></i>-->
                                 <!--读者墙-->
                                 <!--</a>-->
                                 <!--</li>-->
                                 <!--<li id="menu-item-968"-->
                                 <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-968">-->
-                                <!--<a th:href="|${siteConfigDTO.weburl}/file|">-->
+                                <!--<a th:href="@{/file}">-->
                                 <!--<i class="iconfont"></i>-->
                                 <!--博客归档-->
                                 <!--</a>-->
                                 <!--</li>-->
                                 <!--<li id="menu-item-2689"-->
                                 <!--class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2689">-->
-                                <!--<a th:href="|${siteConfigDTO.weburl}/go/luck|">-->
+                                <!--<a th:href="@{/go/luck}">-->
                                 <!--<i class="iconfont"></i>-->
                                 <!--试试手气-->
                                 <!--</a>-->
                                 <!--</li>-->
                                 <li id="menu-item-2196"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
-                                    <a th:href="|${siteConfigDTO.weburl}/about|">
+                                    <a th:href="@{/about}">
                                         <i class="iconfont"></i>
                                         关于本站
                                     </a>
@@ -119,7 +119,7 @@
                         </span>
                         <hgroup class="logo-site">
                             <h1 class="site-title">
-                                <a th:href="|${siteConfigDTO.weburl}/|">
+                                <a th:href="@{/}">
                                     <img th:src="@{|/static/themes/${siteConfigDTO.webtheme}/logo-big.png|}"
                                          th:title="|${siteConfigDTO.webname}|" rel="home">
                                     <span class="site-name" th:text="${siteConfigDTO.webname}">webname</span>
@@ -129,52 +129,52 @@
                         <!-- .logo-site -->
                         <div id="site-nav-wrap">
                             <div id="sidr-close">
-                                <a th:href="|${siteConfigDTO.weburl}/#sidr-close|" class="toggle-sidr-close">×</a>
+                                <a th:href="@{/#sidr-close}" class="toggle-sidr-close">×</a>
                             </div>
                             <nav id="site-nav" class="main-nav">
-                                <a th:href="|${siteConfigDTO.weburl}/#sidr-main|" id="navigation-toggle" class="bars">
+                                <a th:href="@{/#sidr-main}" id="navigation-toggle" class="bars">
                                     <i class="fa fa-bars"></i>
                                 </a>
                                 <div class="menu-container">
                                     <ul class="down-menu nav-menu sf-js-enabled sf-arrows">
                                         <li id="menu-item-26"
                                             class="menu-item menu-item-type-custom menu-item-object-custom current-menu-item current_page_item menu-item-home menu-item-26">
-                                            <a th:href="|${siteConfigDTO.weburl}/|">
+                                            <a th:href="@{/}">
                                                 <i class="iconfont icon-shouye"></i>
                                                 首页
                                             </a>
                                         </li>
                                         <li id="menu-item-2917"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2917">
-                                            <a th:href="|${siteConfigDTO.weburl}/backend/|">
+                                            <a th:href="@{/backend/}">
                                                 <i class="iconfont"></i>
                                                 后端
                                             </a>
                                         </li>
                                         <li id="menu-item-1639"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1639">
-                                            <a th:href="|${siteConfigDTO.weburl}/web/|">
+                                            <a th:href="@{/web/}">
                                                 <i class="fa fa-html5"></i>
                                                 前端
                                             </a>
                                         </li>
                                         <li id="menu-item-87"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-87">
-                                            <a th:href="|${siteConfigDTO.weburl}/resource/|">
+                                            <a th:href="@{resource}">
                                                 <i class="iconfont"></i>
                                                 资源
                                             </a>
                                         </li>
                                         <li id="menu-item-34"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34">
-                                            <a th:href="|${siteConfigDTO.weburl}/talk/|">
+                                            <a th:href="@{/talk/}">
                                                 <i class="iconfont icon-youxian"></i>
                                                 随笔
                                             </a>
                                         </li>
                                         <li id="menu-item-288"
                                             class="menu-item menu-item-type-post_type menu-item-object-page menu-item-288">
-                                            <a th:href="|${siteConfigDTO.weburl}/guestbook|">
+                                            <a th:href="@{/guestbook}">
                                                 <i class="iconfont icon-liuyan"></i>
                                                 留言板
                                             </a>
@@ -197,7 +197,7 @@
                     <i class="fa fa-times"></i>
                 </a>
                 <div id="searchbar">
-                    <form method="get" id="searchform" th:action="|${siteConfigDTO.weburl}/|">
+                    <form method="get" id="searchform" th:action="@{/}">
                         <input type="text" value="" name="s" id="s" placeholder="输入搜索内容" required="">
                         <button type="submit" id="searchsubmit">搜索</button>
                     </form>

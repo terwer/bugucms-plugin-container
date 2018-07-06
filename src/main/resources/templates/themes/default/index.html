@@ -32,16 +32,16 @@
                             <thumbnail th:if="${post.thumbnails.size() > 0}" th:remove="tag">
                                 <figure class="thumbnail">
                                     <div class="load">
-                                        <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|">
+                                        <a th:href="@{|/post/${post.postSlug}.html|}">
                                             <img th:src="${post.thumbnails.get(0)}" data-original="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/loading.png|" th:alt="${post.postTitle}" width="280" height="210">
                                         </a>
                                     </div>
-                                    <span class="cat"><a th:href="|${siteConfigDTO.weburl}/backend/java/|">Java</a></span>
+                                    <span class="cat"><a th:href="@{|/backend/java/|}">Java</a></span>
                                 </figure>
                             </thumbnail>
                             <header class="entry-header">
                                 <h2 class="entry-title">
-                                    <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|" rel="bookmark" th:text="${post.postTitle}">postTitle</a>
+                                    <a th:href="@{|/post/${post.postSlug}.html|}" rel="bookmark" th:text="${post.postTitle}">postTitle</a>
                                 </h2>
                             </header>
                             <!-- .entry-header -->
@@ -49,13 +49,13 @@
                                 <div class="archive-content" th:text="${post.postDesc}">postDesc</div>
                                 <span class="title-l"></span> <span class="entry-meta"> <span class="date">2018年03月18日&nbsp;&nbsp;</span><span
                                     class="views">阅读 48</span><span class="comment">&nbsp;&nbsp;<a
-                                    th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html#respond|" rel="external nofollow"><i
+                                    th:href="@{|/post/${post.postSlug}.html#respond|}" rel="external nofollow"><i
                                     class="fa fa-comment-o"></i> 发表评论</a></span> </span>
                                 <div class="clear"></div>
                             </div>
                             <!-- .entry-content -->
                             <span class="entry-more">
-                                <a th:href="|${siteConfigDTO.weburl}/post/${post.postSlug}.html|" rel="bookmark">阅读全文</a>
+                                <a th:href="@{|/post/${post.postSlug}.html|}" rel="bookmark">阅读全文</a>
                             </span>
                         </article>
                         <!-- #post -->
@@ -101,7 +101,7 @@
                                        rel="external nofollow"><i class="fa fa-weibo"></i></a>
 								</li>
 								<li class="feed">
-									<a title="" th:href="|${siteConfigDTO.weburl}/feed/|" target="_blank"
+									<a title="" th:href="@{|/feed/|}" target="_blank"
                                        rel="external nofollow"><i class="fa fa-rss"></i></a>
 								</li>
 								</ul>
@@ -124,7 +124,7 @@
         <div id="links" class="wow fadeInUp" data-wow-delay="0.3s">
             <ul>
                 <span class="lx7"><span class="link-f link-name"><a href="http://www.cnblogs.com/tangyouwei" target="_blank">cnblogs</a></span></span>
-                <span class="lx7"><span class="link-f"><li><a th:href="|${siteConfigDTO.weburl}/links|" title="全部链接">更多链接<i class="icon-li"></i></a></li></span></span>
+                <span class="lx7"><span class="link-f"><li><a th:href="@{|/links|}" title="全部链接">更多链接<i class="icon-li"></i></a></li></span></span>
             </ul>
             <div class="clear"></div>
         </div>

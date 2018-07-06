@@ -28,6 +28,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.Resource;
 
+import static com.terwergreen.bugucms.util.Constants.AUTH_ERROR_URL;
+import static com.terwergreen.bugucms.util.Constants.AUTH_LOGIN_PAGE;
+
 /**
  * @Author Terwer
  * @Date 2018/6/22 15:55
@@ -65,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .loginPage("/auth/login").failureUrl("/auth/login?error")
+                .loginPage(AUTH_LOGIN_PAGE).failureUrl(AUTH_ERROR_URL)
                 .permitAll()
                 .and()
                 .logout()
