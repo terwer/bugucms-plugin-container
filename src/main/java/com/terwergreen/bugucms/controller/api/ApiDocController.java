@@ -14,6 +14,8 @@ import springfox.documentation.annotations.ApiIgnore;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
+import static com.terwergreen.bugucms.util.Constants.API_DOC_BASE_PATH;
+
 /**
  * @author Terwer
  */
@@ -26,7 +28,7 @@ public class ApiDocController {
     private CommonService commonService;
 
     @ApiIgnore
-    @RequestMapping("/doc")
+    @RequestMapping(API_DOC_BASE_PATH)
     public String index(Model model, HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         try {

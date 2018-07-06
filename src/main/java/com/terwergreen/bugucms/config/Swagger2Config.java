@@ -30,7 +30,7 @@ public class Swagger2Config {
     }
 
     private ApiInfo apiInfo() {
-        return new ApiInfoBuilder().title("Etalk CRM APIs")
+        return new ApiInfoBuilder().title("Bugucms APIs")
                 .description("Bugucms API 接口文档")
                 .termsOfServiceUrl("http://www.terwergreen.com")
                 .contact(new Contact("Terwer", "www.terwergreen.com", "youweics@sina.com"))

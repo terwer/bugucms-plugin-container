@@ -67,5 +67,12 @@ public class Constants {
      * 登录出错地址
      */
     public static final String AUTH_ERROR_URL = "/auth/login";
-
+    /**
+     * 自定义Servlet根路径
+     */
+    public static final String SERVLET_BASE_PATH = "/servlet";
+    /**
+     * 自定义Api文档根路径
+     */
+    public static final String API_DOC_BASE_PATH = "/doc";
 }

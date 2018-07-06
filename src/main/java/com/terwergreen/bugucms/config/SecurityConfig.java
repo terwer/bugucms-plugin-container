@@ -30,8 +30,10 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.Resource;
 
+import static com.terwergreen.bugucms.util.Constants.API_DOC_BASE_PATH;
 import static com.terwergreen.bugucms.util.Constants.AUTH_ERROR_URL;
 import static com.terwergreen.bugucms.util.Constants.AUTH_LOGIN_PAGE;
+import static com.terwergreen.bugucms.util.Constants.SERVLET_BASE_PATH;
 
 /**
  * @Author Terwer
@@ -76,8 +78,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/doc").permitAll()
-                .antMatchers("/servlet").permitAll()
+                .antMatchers(API_DOC_BASE_PATH).permitAll()
+                .antMatchers(SERVLET_BASE_PATH).permitAll()
                 .antMatchers("/" + siteConfigDTO.getAdminpath() + "/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
