@@ -1,0 +1,58 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>授权说明</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/common.css}">
+    <style>
+        .layui-field-box img {
+            width: 300px;
+            height: 300px;
+            padding-right: 20px;
+        }
+    </style>
+    <script type="text/javascript" th:inline="javascript">
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+    </script>
+</head>
+<body>
+
+<div class="layui-card">
+    <div class="layui-card-header">授权说明</div>
+    <div class="layui-card-body layui-text">
+        <ul>
+            <li>Bugucms秉承开源精神，开放源代码并托管在 <a href="https://github.com/terwer/bugucms" target="_blank">Github</a> 上。</li>
+            <li>开放源代码仅用于个人的学习使用，下载前需要star本项目。</li>
+            <li>开源!=免费，如果商业项目将使用Bugucms，需要向作者购买以获得授权。</li>
+            <li>在任何情况下使用本项目都需要注明来源。</li>
+        </ul>
+
+        <fieldset class="layui-elem-field layui-field-title">
+            <legend>购买授权 / 赞助 (购买后请加QQ<a href="http://wpa.qq.com/msgrd?v=3&uin=1035136784&site=qq&menu=yes" target="_blank">1035136784</a>)</legend>
+            <!--<div class="layui-field-box">-->
+                <!--<img src="" alt="微信">-->
+                <!--<img src="" alt="支付宝">-->
+            <!--</div>-->
+        </fieldset>
+    </div>
+</div>
+
+</body>
+<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
+<script>
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({common: 'bugucms/common'}).use(['common'], function () {
+        var common = layui.common;
+    });
+</script>
+</html>

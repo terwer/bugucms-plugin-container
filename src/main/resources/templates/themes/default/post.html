@@ -1,14 +1,13 @@
 <!--
-__________  _________    _____________  ___      ______      ___  _________    _____________
-| __________| / ______ /   |  __________ | \ \     | | \ \     | | | / ______  |  __________ |
-    |  |    | |          |    _________   \ \    | |  \ \    | || | |          |  __________
-   |  |     | | ______   |  /_________ |  \ \   | |   \ \   | |   | | ______   |  /_________|
-  |  |      | |______ | |  | \ \          \ \  | |    \ \  | |    | |______ | |  | \ \
- |  |       | |________ |  |  \ \_______  \ \| |      \ \ |_|     | |________ |  |  \ \_______
-|__|        /_/______ | | _|   \______/   \_\_|       \_ |_|      /_/______ | | _|   \______/
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
 -->
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="themes/default/layout/layout"
       th:with="title=|${post.postTitle} - ${siteConfigDTO.webname}|">
@@ -24,7 +23,7 @@ __________  _________    _____________  ___      ______      ___  _________    _
     http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/default.min.css
     -->
     <link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/atelier-forest-light.min.css">
-    <link rel="stylesheet" type="text/css" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/css/post.css?v=201804192240|">
+    <link rel="stylesheet" type="text/css" th:href="@{|/static/themes/${siteConfigDTO.webtheme}/css/post.css?v=201804192240|}">
 </customHead>
 
 <div layout:fragment="content" id="content">
@@ -35,7 +34,7 @@ __________  _________    _____________  ___      ______      ___  _________    _
 <customFoot layout:fragment="customFoot">
     <!-- hilightjs -->
     <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
-    <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/js/post.js?v=201804200053|"></script>
+    <script type="text/javascript" th:src="@{|/static/themes/${siteConfigDTO.webtheme}/js/post.js?v=201804200053|}"></script>
 </customFoot>
 
 

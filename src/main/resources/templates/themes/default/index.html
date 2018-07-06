@@ -1,24 +1,23 @@
 <!--
-__________  _________    _____________  ___      ______      ___  _________    _____________
-| __________| / ______ /   |  __________ | \ \     | | \ \     | | | / ______  |  __________ |
-    |  |    | |          |    _________   \ \    | |  \ \    | || | |          |  __________
-   |  |     | | ______   |  /_________ |  \ \   | |   \ \   | |   | | ______   |  /_________|
-  |  |      | |______ | |  | \ \          \ \  | |    \ \  | |    | |______ | |  | \ \
- |  |       | |________ |  |  \ \_______  \ \| |      \ \ |_|     | |________ |  |  \ \_______
-|__|        /_/______ | | _|   \______/   \_\_|       \_ |_|      /_/______ | | _|   \______/
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
 -->
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="themes/default/layout/layout"
       th:with="title=|${siteConfigDTO.webname} - ${siteConfigDTO.webslogen}|">
 
 <customHead layout:fragment="customHead">
     <!-- 头部 -->
-    <link rel="stylesheet" type="text/css" th:href="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/css/index.css|">
+    <link rel="stylesheet" type="text/css" th:href="@{|/static/themes/${siteConfigDTO.webtheme}/css/index.css|}">
 </customHead>
 
-<div layout:fragment="content" id="content">
+<div layout:fragment="content">
     <div id="content" class="site-content">
         <div class="clear"></div>
         <div id="primary" class="content-area">
@@ -83,7 +82,7 @@ __________  _________    _____________  ___      ______      ___  _________    _
                     <div id="feed_widget">
 								<span class="feed-about">
                             <div class="about-main">
-                                <div class="about-img"> <img th:src="|${#request.contextPath}/uploads/images/me.jpg|"> </div>
+                                <div class="about-img"> <img th:src="@{|/static/uploads/images/me.jpg|}"> </div>
                                 <div class="about-name" th:text="${siteConfigDTO.webname}">webname</div>
                                 <div class="about-the" th:text="${siteConfigDTO.description}">description</div>
                             </div>
@@ -134,5 +133,5 @@ __________  _________    _____________  ___      ______      ___  _________    _
 </div>
 
 <customFoot layout:fragment="customFoot">
-    <script type="text/javascript" th:src="|${#request.contextPath}/themes/${siteConfigDTO.webtheme}/js/index.js|"></script>
+    <script type="text/javascript" th:src="@{|/static/themes/${siteConfigDTO.webtheme}/js/index.js|}"></script>
 </customFoot>

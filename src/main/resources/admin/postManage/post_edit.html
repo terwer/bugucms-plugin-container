@@ -1,0 +1,183 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="include/edit_inc"
+      th:with="id=${post?.postId},title='写文章,更新文章'">
+
+<header layout:fragment="customHeader">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/SimpleMDE/css/simplemde.min.css}"/>
+    <link rel="stylesheet" type="text/css" href="http://www.layui.com/admin/std/dist/layuiadmin/style/admin.css"/>
+    <style type="text/css">
+
+    </style>
+</header>
+
+<div layout:fragment="content">
+    <div class="layui-fluid">
+        <div class="layui-card">
+            <div class="layui-card-header">写文章</div>
+            <div class="layui-card-body" style="padding: 15px;">
+                <form class="layui-form" action="" method="post" lay-filter="component-form-group"
+                      onsubmit="return false;">
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章标题</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle"
+                                   autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-form-text">
+                        <label class="layui-form-label">文章内容</label>
+                        <div class="layui-input-block">
+                            <textarea id="content" name="content" th:utext="${post?.postRawContent}" placeholder="请输入内容"
+                                      class="layui-textarea"></textarea>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">发布日期</label>
+                        <div class="layui-input-block">
+                            <input type="text" id="postDdate" name="postDate"
+                                   th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}"
+                                   lay-verify="datetime"
+                                   placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
+                                   class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item layui-layout-admin">
+                        <div class="layui-input-block">
+                            <div class="layui-footer" style="left: 0;">
+                                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                <button type="reset" class="layui-btn layui-btn-danger">重置</button>
+                                <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer layout:fragment="customFooter">
+    <script type="text/javascript" th:src="@{/static/lib/SimpleMDE/js/simplemde.min.js}"></script>
+    <script type="text/javascript">
+        var simplemde = null;
+        $(document).ready(function () {
+            simplemde = new SimpleMDE({
+                element: $("#content")[0],
+                placeholder: "请输入文章内容...",
+            });
+            // simplemde.toggleSideBySide()//打开实时全屏预览
+        });
+
+        $(function () {
+            fullscreen("screenButton");
+        });
+
+        /**
+         * 子iframe全屏
+         *
+         *@param objId 点击按钮的ID
+         */
+        function fullscreen(objId) {
+            // 判断是否允许全屏
+            var fullscreenEnabled =
+                document.fullscreenEnabled ||
+                document.mozFullScreenEnabled ||
+                document.webkitFullscreenEnabled ||
+                document.msFullscreenEnabled;
+
+            // 全屏
+            function launchFullscreen(element) {
+                if (element.requestFullscreen) {
+                    element.requestFullscreen();
+                } else if (element.mozRequestFullScreen) {
+                    element.mozRequestFullScreen();
+                } else if (element.msRequestFullscreen) {
+                    element.msRequestFullscreen();
+                } else if (element.webkitRequestFullscreen) {
+                    element.webkitRequestFullScreen();
+                }
+            }
+
+            // 退出全屏
+            function exitFullscreen() {
+                if (document.exitFullscreen) {
+                    document.exitFullscreen();
+                } else if (document.msExitFullscreen) {
+                    document.msExitFullscreen();
+                } else if (document.mozCancelFullScreen) {
+                    document.mozCancelFullScreen();
+                } else if (document.webkitExitFullscreen) {
+                    document.webkitExitFullscreen();
+                }
+            }
+
+            var btn = document.querySelector('#' + objId);
+            if (fullscreenEnabled) {
+                btn.addEventListener('click', function () {
+                    var fullscreenElement =
+                        document.fullscreenElement ||
+                        document.mozFullScreenElement ||
+                        document.webkitFullscreenElement;
+                    if (fullscreenElement) {
+                        exitFullscreen();
+                        btn.innerHTML = '全屏';
+                    } else {
+                        launchFullscreen(document.documentElement);
+                        btn.innerHTML = '退出全屏';
+                    }
+                }, false);
+            }
+            // 监听全屏事件
+            document.addEventListener('webkitfullscreenchange', function fullscreenChange() {
+                if (document.fullscreenEnabled ||
+                    document.webkitIsFullScreen ||
+                    document.mozFullScreen ||
+                    document.msFullscreenElement) {
+                    console.log('enter fullscreen');
+                } else {
+                    console.log('exit fullscreen');
+                }
+            }, false);
+        }
+
+        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+            conf: 'bugucms/conf',
+            // common: 'bugucms/common',
+            tips: 'bugucms/extend/tips'
+        }).use(['conf', 'tips', 'form', 'layer', 'laydate'], function () {
+            var bugucms = top.layui.bugucms,
+                laydate = layui.laydate,
+                form = layui.form;
+
+            laydate.render({
+                elem: '#postDdate',
+                type: 'datetime'
+            });
+
+            /* 监听提交 */
+            form.on('submit(component-form-demo1)', function (data) {
+                var content = simplemde.value();
+                if (content == "") {
+                    parent.layer.msg('文章内容不能为空', {icon: 2});
+                    return false;
+                } else {
+                    data.field.content = content;
+                }
+                parent.layer.alert(JSON.stringify(data.field), {
+                    title: '最终的提交信息'
+                })
+                return false;
+            });
+        });
+    </script>
+</footer>

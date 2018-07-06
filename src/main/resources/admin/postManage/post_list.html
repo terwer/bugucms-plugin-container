@@ -1,0 +1,142 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      lang="zh"
+      layout:decorate="include/list_inc"
+      th:with="title='所有文章'">
+
+<header layout:fragment="customHeader">
+    <style type="text/css">
+        .layui-btn i {
+            font-size: 14px !important;
+        }
+    </style>
+</header>
+
+<div layout:fragment="content">
+    <table id="postTable"></table>
+</div>
+
+<footer layout:fragment="customFooter">
+    <script type="text/javascript">
+        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+            conf: 'bugucms/conf',
+            // common: 'bugucms/common',
+            tips: 'bugucms/extend/tips'
+        }).use(['conf', 'tips', 'table', 'layer', 'form'], function () {
+            var bugucms = top.layui.bugucms,
+                conf = layui.conf,
+                // common = layui.common,
+                table = layui.table,
+                layer = layui.layer,
+                form = layui.form,
+                $ = layui.$,
+                tips = layui.tips;
+
+            if (typeof bugucms == "undefined") {
+                //询问框
+                layer.confirm('不允许单独打开此页面', {
+                    btn: ['确认', '取消'] //按钮
+                }, function () {
+                    window.location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/";
+                });
+            }
+
+            //第一个实例
+            table.render({
+                elem: '#postTable',
+                url: BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/postManage/api/post/list', //数据接口
+                page: true,//开启分页
+                cols: [
+                    [ //表头
+                        {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'center'},
+                        {
+                            field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
+                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + d.postSlug + '.html" target="_blank">' + d.postTitle + '</a>';
+                            }
+                        },
+                        {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'center'},
+                        {
+                            field: 'action', title: '操作', width: 180, sort: true, fixed: 'center', templet: function (d) {
+                                var m = '<button class="layui-btn layui-btn-sm" bg-form-action="edit" bg-form-title="更新文章" bg-form-icon="layui-icon-release" bg-form-href="/postManage/edit/' + d.postId + '"><i class="layui-icon">&#xe642;修改</i></button>';
+                                var r = '<button class="layui-btn layui-btn-danger layui-btn-sm" bg-form-action="delete" bg-form-title="删除文章" bg-form-icon="layui-icon-release" bg-form-href="/postManage/delete/' + d.postId + '"><i class="layui-icon">&#xe640;删除</i></button>';
+                                return '<div class="layui-btn-group">' + m + r + '</div>';
+                            }
+                        }
+                    ]
+                ]
+            });
+
+            //ajax请求出错提示
+            $(document).ajaxError(function (event, request, setting) {
+                if (request.status === 200) {
+                    tips.error('Invalid response');
+                } else {
+                    tips.error(request.status + ': ' + request.statusText);
+                }
+            });
+
+            //监听事件,这个不一定要用lau-href,可以自己写
+            $(document).on('click', '[bg-form-href]', function () {
+                var _this = $(this);
+                var action = _this.attr('bg-form-action');
+                var title = _this.attr('bg-form-title');
+                var href = _this.attr('bg-form-href');
+                var icon = _this.attr('bg-form-icon');
+
+                switch (action) {
+                    case "edit": {
+                        bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + href, title, icon);
+                        break;
+                    }
+                    case "delete": {
+                        deletePost(href);
+                        break;
+                    }
+                }
+
+                /**
+                 * 删除文章
+                 * @param id 文章ID
+                 * @param obj 点击的当前元素
+                 */
+                function deletePost(url) {
+                    //询问框
+                    layer.confirm('您确认删除该题目么？', {
+                        btn: ['确认', '取消'] //按钮
+                    }, function () {
+
+                        layer.closeAll('dialog');
+
+                        $.get(url, {}, function (res) {
+                            doDeleteResult(res);
+                        }, 'json');
+
+                        function doDeleteResult(res) {
+                            console.log(res);
+                            if (res != null && res.status == 1) {
+                                layer.msg('删除成功', {icon: 1});
+                                window.location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/postManage/list";
+                            } else {
+                                layer.msg('操作失败', {icon: 2});
+                            }
+                        }
+                    }, function () {
+                        layer.msg('您放弃了操作', {
+                            time: 20000, //20s后自动关闭
+                            btn: ['明白了', '知道了']
+                        });
+                    });
+                }
+            });
+
+        });
+    </script>
+</footer>
