@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.handler;
+package com.terwergreen.bugucms.exception;
 
 import com.terwergreen.bugucms.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.core.service.CommonService;

@@ -18,7 +18,7 @@ import static com.terwergreen.bugucms.util.Constants.SERVLET_BASE_PATH;
  * @Version 1.0
  * @Description TODO
  **/
-@WebServlet(name = "testServlet", urlPatterns = SERVLET_BASE_PATH+"/testServlet")
+@WebServlet(name = "testServlet", urlPatterns = SERVLET_BASE_PATH + "/testServlet")
 public class TestServlet extends HttpServlet {
     private Logger logger = LogManager.getLogger(this.getClass());
 
