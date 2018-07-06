@@ -92,36 +92,6 @@ public class PostManageController extends AdminBaseController {
         return "postManage/post_tag";
     }
 
-    @RequestMapping(value = "/api/post/list", produces = "application/json;charset=utf-8")
-    @ResponseBody
-    public String getPosts(Model model, HttpServletRequest request, HttpServletResponse response, Integer page, Integer limit, @PathVariable("adminpath") String adminpath) throws Exception {
-        Map resultMap = new HashMap();
-
-        if (page == null) {
-            page = Constants.DEFAULT_PAGE_NUM;
-        }
-        if (limit == null) {
-            limit = Constants.DEFAULT_PAGE_SIZE;
-        }
-
-        try {
-            super.preCheck(model, request, response, adminpath);
-            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
-            resultMap.put("code", 0);
-            resultMap.put("msg", "success");
-            resultMap.put("count", posts.getTotal());
-            resultMap.put("data", posts.getList());
-        } catch (Exception e) {
-            resultMap.put("code", 0);
-            resultMap.put("msg", "");
-            resultMap.put("count", 0);
-            resultMap.put("data", null);
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new RestException(e);
-        }
-        return JSON.toJSONString(resultMap);
-    }
-
     /**
      * 初始化页面
      *

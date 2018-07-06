@@ -7,4 +7,5 @@ package com.terwergreen.bugucms.servlet;
  * @Description Xmlrpc支持
  **/
 public class XmlrpcServlet {
+
 }

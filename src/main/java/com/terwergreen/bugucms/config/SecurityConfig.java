@@ -76,6 +76,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
+                .antMatchers("/doc").permitAll()
                 .antMatchers("/servlet").permitAll()
                 .antMatchers("/" + siteConfigDTO.getAdminpath() + "/**").hasRole("ADMIN")
                 .and()

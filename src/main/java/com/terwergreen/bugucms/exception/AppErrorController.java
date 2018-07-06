@@ -23,6 +23,8 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Enumeration;
@@ -48,7 +50,7 @@ public class AppErrorController extends BGBaseController implements ErrorControl
      * @return
      */
     @RequestMapping(value = ERROR_PATH, produces = "text/html")
-    public ModelAndView errorHtml(HttpServletRequest request) {
+    public ModelAndView errorHtml(HttpServletRequest request, HttpServletResponse response) throws Exception {
         Map<String, Object> body = getErrorAttributes(request, getTraceParameter(request));
         MultiValueMap<String, String> headers = getHeaders(request);
         HttpStatus status = getStatus(request);
@@ -61,23 +63,11 @@ public class AppErrorController extends BGBaseController implements ErrorControl
 
         String isAPI = request.getParameter("isAPI");
         //API访问输出JSON，否则输出HTML页面
-        if (Constants.YES_FLAG.equals(isAPI)) {
+        if (Constants.YES_FLAG.equals(isAPI) || responseEntity.getBody().get("URL").toString().contains("api")) {
             //输出JSON
             return super.processResultAll(resultMap);
         } else {
-            //输出页面
-            if (HttpStatus.NOT_FOUND == status) {
-                String rootPath = responseEntity.getBody().get("URL").toString().replace(ERROR_PATH, "");
-                return new ModelAndView("forward:static/error/404.html?rootPath=" + rootPath);
-            }
-            if (HttpStatus.INTERNAL_SERVER_ERROR == status) {
-                return new ModelAndView("forward:static/error/500.html");
-            }
-            if (HttpStatus.METHOD_NOT_ALLOWED == status) {
-                return new ModelAndView("forward:static/error/405.html");
-            }
-            ModelAndView mv = new ModelAndView("errorInfo", "errorMap", resultMap);
-
+            ModelAndView mv = new ModelAndView();
             SiteConfigDTO siteConfigDTO = new SiteConfigDTO();
             try {
                 siteConfigDTO = commonService.getSiteConfig();
@@ -85,7 +75,11 @@ public class AppErrorController extends BGBaseController implements ErrorControl
                 logger.error("获取站点信息失败", e);
             }
 
+            mv.setViewName("errorInfo");
+            String contextPath = request.getServletContext().getContextPath();
+            mv.addObject("contextPath", contextPath);
             mv.addObject("siteConfigDTO", siteConfigDTO);
+            mv.addObject("errorMap", resultMap);
             return mv;
         }
     }
