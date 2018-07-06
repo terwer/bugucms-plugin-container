@@ -15,6 +15,8 @@
  */
 package com.terwergreen.bugucms.config;
 
+import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.service.SysUserService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,8 +47,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private SysUserService sysUserService;
 
+    @Resource
+    private CommonService commonService;
+
     /**
      * 注册UserDetailsService的bean
+     *
      * @return
      */
     @Bean
@@ -59,13 +65,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         //运行加载iframe
         http.headers().frameOptions().disable();
+
         //关闭csrf
         http.csrf().disable();
+
+        //获取站点配置
+        SiteConfigDTO siteConfigDTO = commonService.getSiteConfig();
+
         //配置权限及登录验证
         http
                 .authorizeRequests()
                 .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
+                .antMatchers("/servlet").permitAll()
+                .antMatchers("/" + siteConfigDTO.getAdminpath() + "/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
                 .loginPage(AUTH_LOGIN_PAGE).failureUrl(AUTH_ERROR_URL)

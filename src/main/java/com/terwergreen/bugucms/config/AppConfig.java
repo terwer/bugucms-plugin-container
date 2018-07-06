@@ -15,8 +15,10 @@
  */
 package com.terwergreen.bugucms.config;
 
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
@@ -24,6 +26,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public class AppConfig {
     /**
      * 设置Admin模板引擎查找目录
+     *
      * @return
      */
     @Bean
