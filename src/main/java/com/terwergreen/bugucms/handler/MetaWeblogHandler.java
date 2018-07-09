@@ -4,9 +4,9 @@ package com.terwergreen.bugucms.handler;
  * @Author Terwer
  * @Date 2018/7/6 19:28
  * @Version 1.0
- * @Description xmlrpc的文章处理器
+ * @Description MetaWeblogHandler xmlrpc的文章处理器
  **/
-public interface metaWeblog {
+public interface MetaWeblogHandler {
     /**
      * Retrieve a post.
      *
@@ -57,4 +57,20 @@ public interface metaWeblog {
      * @see <a href="https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getPost">https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getPost</a>
      */
     String getPost(int postid, String username, String password);
+
+    /**
+     *
+     * @param appkey Not applicable for Bugucms, can be any value and will be ignored
+     * @param username
+     * @param password
+     * @return array
+     * struct
+     * string blogid
+     * string url: Homepage URL for this blog.
+     * string blogName
+     * bool isAdmin†
+     * string xmlrpc†: URL endpoint to use for XML-RPC requests on this blog.
+     * @see <a href="https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs">https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs</a>
+     */
+    public Object getUsersBlogs(String appkey,String username,String password);
 }

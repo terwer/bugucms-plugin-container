@@ -1,12 +1,15 @@
 package com.terwergreen.bugucms.servlet;
 
-import com.terwergreen.bugucms.handler.impl.metaWeblogImpl;
+import com.terwergreen.bugucms.servlet.xmlrpc.CustomRequestProcessorFactoryFactory;
+import com.terwergreen.bugucms.handler.MetaWeblogHandler;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.apache.xmlrpc.XmlRpcException;
 import org.apache.xmlrpc.server.PropertyHandlerMapping;
 import org.apache.xmlrpc.server.XmlRpcServerConfigImpl;
 import org.apache.xmlrpc.webserver.XmlRpcServletServer;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
@@ -28,7 +31,7 @@ import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
 @WebServlet(name = "xmlrpc", urlPatterns = XMLRPC_URL)
 public class XmlrpcServlet extends HttpServlet {
     private Logger logger = LogManager.getLogger(this.getClass());
-
+    protected static ApplicationContext ctx = null;
     private XmlRpcServletServer server;
 
     public void init(ServletConfig pConfig) throws ServletException {
@@ -36,11 +39,25 @@ public class XmlrpcServlet extends HttpServlet {
         try {
             // create a new XmlRpcServletServer object
             server = new XmlRpcServletServer();
+            if (ctx == null) {
+                ctx = WebApplicationContextUtils.getRequiredWebApplicationContext(this.getServletContext());
+            }
 
             // set up handler mapping of XmlRpcServletServer object
             PropertyHandlerMapping phm = new PropertyHandlerMapping();
-            phm.addHandler("metaWeblog", metaWeblogImpl.class);
+            MetaWeblogHandler service = (MetaWeblogHandler) ctx.getBean("metaWeblog");
+            phm.setRequestProcessorFactoryFactory(new CustomRequestProcessorFactoryFactory(service));
+            // 类似于Wordpress的API
+            phm.addHandler("metaWeblog", MetaWeblogHandler.class);
+            // 支持Windows Live Writer格式的metaWeblog API
+            phm.addHandler("blogger", MetaWeblogHandler.class);
             server.setHandlerMapping(phm);
+            // PropertyHandlerMapping phm = new PropertyHandlerMapping();
+            // 类似于Wordpress的API
+            // phm.addHandler("MetaWeblogHandler", MetaWeblogHandelerImpl.class);
+            // 支持Windows Live Writer格式的metaWeblog API
+            // phm.addHandler("blogger", MetaWeblogHandelerImpl.class);
+            // server.setHandlerMapping(phm);
 
             // more config of XmlRpcServletServer object
             XmlRpcServerConfigImpl serverConfig = (XmlRpcServerConfigImpl) server.getConfig();
@@ -58,10 +75,11 @@ public class XmlrpcServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("text/plain");
+        response.setStatus(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
         PrintWriter out = response.getWriter();
-        logger.info("XML-RPC Server is running...");
-        out.print("XML-RPC Server accepts POST requests only.");
+        logger.info("XML-RPC server is running...");
+        out.print("XML-RPC server accepts POST requests only.");
     }
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
