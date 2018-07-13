@@ -9,11 +9,8 @@
         <result column="option_value" property="optionValue"/>
     </resultMap>
     <select id="get_option_by_group" resultMap="resultMap">
-      SELECT
-        option_name,option_value
-      FROM
-        bg_options
-      WHERE
-        option_group = #{optionGroup}#
+      SELECT option_name,option_value
+      FROM bg_options
+      WHERE option_group = #{optionGroup}
 </select>
 </mapper>

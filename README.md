@@ -1,6 +1,11 @@
 # bugucms
 轻量级、插件化的内容管理系统
 
+# 亮点
+## 插件支持，支持自定义插件和扩展
+## 多模板引擎支持，支持主流模板引擎Thymeleaf、Freemarker、Velocity
+## 多数据库支持，主持主流数据库Oracle、SQL Server、MySQL
+
 # 相关技术
 Centos 7.4      
 JDK1.8.162   
