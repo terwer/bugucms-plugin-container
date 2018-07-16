@@ -1,17 +1,27 @@
 package com.terwergreen.bugucms.base.controller;
 
-import java.util.HashMap;
-import java.util.Map;
-
+import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.dto.SiteConfigDTO;
+import com.terwergreen.bugucms.exception.WebException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.json.MappingJackson2JsonView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
+
 public class BGBaseController {
 
 	protected final Log logger = LogFactory.getLog(getClass());
+
+    @Autowired
+    private CommonService commonService;
 
 	/**
 	 * 封装放回结果信息 {"flag":"","msg":"","data":""} flag-msg:0-未登录,1-操作成功,2.....
@@ -74,4 +84,28 @@ public class BGBaseController {
 		return new ModelAndView(json, model);
 	}
 
+	public void preCheck(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		try {
+			//获取站点配置
+			SiteConfigDTO siteConfigDTO = commonService.getSiteConfig();
+			if (null == siteConfigDTO) {
+				logger.error("站点配置异常:siteConfigDTO=null");
+				throw new WebException("站点配置异常:siteConfigDTO=null");
+			}
+
+			//获得当前登陆用户对应的对象
+			//SysUserDTO sysUserDTO = null;
+			//if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof SysUserDTO) {
+			//	sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+			//} else {
+			//	throw new WebException(Constants.ADMIN_USER_NOT_LOGIN);
+			//}
+
+			model.addAttribute("siteConfigDTO", siteConfigDTO);
+			//model.addAttribute("sysUserDTO", sysUserDTO);
+		} catch (Exception e) {
+			logger.error("系统异常" + e.getLocalizedMessage(), e);
+			throw new WebException(e);
+		}
+	}
 }

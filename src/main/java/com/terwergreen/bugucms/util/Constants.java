@@ -37,7 +37,7 @@ public class Constants {
     /**
      * Cookie的过期时间为12个小时
      */
-    public static final int COOKIE_MAX_AGE=43200;
+    public static final int COOKIE_MAX_AGE = 43200;
 
     /**
      * 默认页面
@@ -67,5 +67,16 @@ public class Constants {
      * 登录出错地址
      */
     public static final String AUTH_ERROR_URL = "/auth/login";
-
+    /**
+     * 自定义Servlet根路径
+     */
+    public static final String SERVLET_BASE_PATH = "/servlet";
+    /**
+     * 自定义Api文档根路径
+     */
+    public static final String API_DOC_BASE_PATH = "/doc";
+    /**
+     * xmlrpc地址
+     */
+    public static final String XMLRPC_URL = "/xmlrpc";
 }

@@ -1,6 +1,7 @@
 package com.terwergreen.bugucms.service;
 
 import com.github.pagehelper.PageInfo;
+import com.terwergreen.bugucms.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.dto.PostDTO;
 
 import java.util.List;
@@ -11,7 +12,7 @@ public interface PostService {
      *
      * @return
      */
-    List<PostDTO> getPosts();
+    List<PostDTO> getPosts() throws BusinessServiceException;
 
     /**
      * 查询单个文章
@@ -19,7 +20,7 @@ public interface PostService {
      * @param slug
      * @return
      */
-    PostDTO getPostBySlug(String slug);
+    PostDTO getPostBySlug(String slug) throws BusinessServiceException;
 
     /**
      * 查询单个文章
@@ -27,7 +28,7 @@ public interface PostService {
      * @param postId
      * @return
      */
-    PostDTO getPostById(Integer postId);
+    PostDTO getPostById(Integer postId) throws BusinessServiceException;
 
     /**
      * 获取分页数据
@@ -36,5 +37,8 @@ public interface PostService {
      * @param pageSize
      * @return
      */
-    PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize);
+    PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize) throws BusinessServiceException;
+
+    List getUsersBlogs(String appkey, String username, String password) throws BusinessServiceException;
+
 }

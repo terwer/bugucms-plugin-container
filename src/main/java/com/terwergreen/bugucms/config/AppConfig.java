@@ -15,6 +15,8 @@
  */
 package com.terwergreen.bugucms.config;
 
+import com.terwergreen.bugucms.handler.MetaWeblogHandler;
+import com.terwergreen.bugucms.handler.impl.MetaWeblogHandelerImpl;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.templatemode.TemplateMode;
@@ -24,6 +26,7 @@ import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 public class AppConfig {
     /**
      * 设置Admin模板引擎查找目录
+     *
      * @return
      */
     @Bean
@@ -36,5 +39,14 @@ public class AppConfig {
         adminTemplateResolver.setOrder(0);
         adminTemplateResolver.setCheckExistence(true);
         return adminTemplateResolver;
+    }
+
+    /**
+     * 将metaWeblog的bean交给Spring
+     * @return
+     */
+    @Bean
+    public MetaWeblogHandler metaWeblog() {
+        return new MetaWeblogHandelerImpl();
     }
 }
