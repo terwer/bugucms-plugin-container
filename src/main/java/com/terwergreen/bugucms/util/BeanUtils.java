@@ -1,11 +1,15 @@
 package com.terwergreen.bugucms.util;
 
 import com.terwergreen.bugucms.base.service.CommonException;
+import oracle.sql.CLOB;
+import oracle.sql.NCLOB;
 import org.springframework.util.StringUtils;
 
+import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -48,7 +52,15 @@ public class BeanUtils {
                         fieldName = field.getName();
                         if (map.get("optionName").equals(fieldName)) {
                             // 获取data里的对应值
-                            methodSetValue = map.get("optionValue");
+                            // 如果是CLOB类型，则需要手动转换
+                            String dataType = map.get("optionValue").getClass().getTypeName();
+                            if (CLOB.class.getTypeName().equals(dataType)) {
+                                methodSetValue = OracleUtils.ClobToString((CLOB) map.get("optionValue"));
+                            } else if (NCLOB.class.getTypeName().equals(dataType)) {
+                                methodSetValue = OracleUtils.ClobToString((NCLOB) map.get("optionValue"));
+                            } else {
+                                methodSetValue = map.get("optionValue");
+                            }
                             // 拼接set方法
                             methodName = "set" + StringUtils.capitalize(fieldName);
                             // 赋值给字段
@@ -69,6 +81,10 @@ public class BeanUtils {
         } catch (IllegalArgumentException e) {
             throw new CommonException("[" + methodName + "] 方法赋值异常", e);
         } catch (InvocationTargetException e) {
+            throw new CommonException("[" + methodName + "] 方法赋值异常", e);
+        } catch (SQLException e) {
+            throw new CommonException("[" + methodName + "] 方法赋值异常", e);
+        } catch (IOException e) {
             throw new CommonException("[" + methodName + "] 方法赋值异常", e);
         }
         // 返回
