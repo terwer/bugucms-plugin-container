@@ -1,6 +1,8 @@
 # bugucms
 轻量级、插件化的内容管理系统
 
+![BuguCMS](logo.jpg)
+
 # 亮点
 ## 插件支持，支持自定义插件和扩展
 ## 多模板引擎支持，支持主流模板引擎Thymeleaf、Freemarker、Velocity
