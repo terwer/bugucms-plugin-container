@@ -63,7 +63,7 @@ Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点�
 
 ## 发布流程
 （1）打包之前copy``pom-pro-tomcat.xml``到``pom.xml``      
-（2）打包之前修改``application.properties``改为``spring.profiles.active=dev`` 
+（2）打包之前修改``application.properties``改为``spring.profiles.active=dev``          
 （3）部署之前初始化ddl表结构（如果需要），例如MySQL目录为db/MySQL      
 （4）部署之前``20180720-pro.sql``初始化数据（如果需要），例如MySQL目录为db/MySQL        
 
