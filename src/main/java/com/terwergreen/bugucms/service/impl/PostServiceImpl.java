@@ -85,12 +85,12 @@ public class PostServiceImpl implements PostService {
         pageNum = pageInfo.getPageNum();
         pageSize = pageInfo.getPageSize();
         logger.info("分页信息：total=" + total + "，pages=" + pages + "，pageNum=" + pageNum + "，pageSize=" + pageSize);
-
-        if (CollectionUtils.isEmpty(pageInfo.getList())) {
-            return null;
-        } else {
-            return pageInfo;
-        }
+        return pageInfo;
+        //if (CollectionUtils.isEmpty(pageInfo.getList())) {
+        //    return null;
+        //} else {
+        //    return pageInfo;
+        //}
     }
 
     @Override
@@ -116,12 +116,12 @@ public class PostServiceImpl implements PostService {
         if (!isDbAdminPasswordEncoded) {
             password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
         }
-        if(!password.equals(sysUserDTO.getPassword())){
+        if (!password.equals(sysUserDTO.getPassword())) {
             throw new BusinessServiceException("密码错误");
         }
         for (SysRoleDTO role : sysUserDTO.getSysRoles()) {
             logger.info("role：" + role.getName());
-            if("ADMIN".equals(role.getName())){
+            if ("ADMIN".equals(role.getName())) {
                 isAdmin = true;
                 break;
             }
