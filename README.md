@@ -59,14 +59,13 @@ bootstrap 3.3.7
 Build --> Build Artifacts --> 选择要打包编译的war --> 在项目target文件夹下出现新的war包   
 或者使用eclipse    
 Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点击run，等待任务完成出现 ``BUILD SUCCES``，``ROOT.war``就会被打包好在``target``目录下     
-
 （3）将war包放到tomcat的webapps目录下  
 
 ## 发布流程
 （1）打包之前copy``pom-pro-tomcat.xml``到``pom.xml``      
-（2）打包之前``application-pro.properties``配置数据库用户名，密码 copy到``application.properties``  
-（3）部署之前初始化ddl表结构（如果需要）      
-（4）部署之前``20180407-pro.sql``初始化数据    
+（2）打包之前修改``application.properties``改为``spring.profiles.active=dev`` 
+（3）部署之前初始化ddl表结构（如果需要），例如MySQL目录为db/MySQL      
+（4）部署之前``20180720-pro.sql``初始化数据（如果需要），例如MySQL目录为db/MySQL        
 
 ## 参考
 [玩转spring boot——负载均衡与session共享](http://www.cnblogs.com/GoodHelper/p/6263240.html)  
