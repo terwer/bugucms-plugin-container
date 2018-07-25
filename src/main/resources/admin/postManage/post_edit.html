@@ -13,7 +13,7 @@
       th:with="id=${post?.postId},title='写文章,更新文章'">
 
 <header layout:fragment="customHeader">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/SimpleMDE/css/simplemde.min.css}"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/SimpleMDE/css/simplemde.min.css}"/>
     <link rel="stylesheet" type="text/css" href="http://www.layui.com/admin/std/dist/layuiadmin/style/admin.css"/>
     <style type="text/css">
 
@@ -67,7 +67,7 @@
 </div>
 
 <footer layout:fragment="customFooter">
-    <script type="text/javascript" th:src="@{/static/lib/SimpleMDE/js/simplemde.min.js}"></script>
+    <script type="text/javascript" th:src="@{/lib/SimpleMDE/js/simplemde.min.js}"></script>
     <script type="text/javascript">
         var simplemde = null;
         $(document).ready(function () {
@@ -150,7 +150,7 @@
             }, false);
         }
 
-        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+        layui.config({base: BUGUCMS_BASE_URL + 'lib/'}).extend({
             conf: 'bugucms/conf',
             // common: 'bugucms/common',
             tips: 'bugucms/extend/tips'
