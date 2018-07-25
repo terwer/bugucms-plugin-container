@@ -31,9 +31,9 @@ public class BugucmsDispatcherServlet extends DispatcherServlet {
         boolean isGet = HttpMethod.GET.toString().equals(method);
         if (isGet) {
             logger.debug("Bugucms BugucmsDispatcherServlet.service,process get request:" + request.getRequestURL().toString() + ",queryString:" + request.getQueryString());
-            if (request.getQueryString().contains("json")) {
-                Integer json = Integer.valueOf(request.getParameter("json"));
-                if (1 == json) {
+            if (null != request.getQueryString() && request.getQueryString().contains("json")) {
+                String[] json = request.getParameterMap().getOrDefault("json", null);
+                if (json.length > 0 && "1".equals(json[0])) {
                     logger.info("Bugucms json api is open...");
                     handleJSONApi(request, response);
                     logger.info("Bugucms json api end.");
