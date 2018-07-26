@@ -73,4 +73,8 @@ public interface MetaWeblogHandler {
      * @see <a href="https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs">https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs</a>
      */
     Object getUsersBlogs(String appkey, String username, String password);
+
+    //metaWeblog.getCategories
+    //metaWeblog.getRecentPosts
+    //metaWeblog.newPost
 }

@@ -54,7 +54,7 @@ public class XmlrpcServlet extends HttpServlet {
             server.setHandlerMapping(phm);
             // PropertyHandlerMapping phm = new PropertyHandlerMapping();
             // 类似于Wordpress的API
-            // phm.addHandler("MetaWeblogHandler", MetaWeblogHandelerImpl.class);
+            // phm.addHandler("metaWeblog", MetaWeblogHandelerImpl.class);
             // 支持Windows Live Writer格式的metaWeblog API
             // phm.addHandler("blogger", MetaWeblogHandelerImpl.class);
             // server.setHandlerMapping(phm);

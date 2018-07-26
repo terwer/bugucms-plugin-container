@@ -17,8 +17,8 @@ public class metaWeblogHanderImplTest {
         try {
             // config client
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-            // config.setServerURL(new URL("http://localhost:8081/bg/xmlrpc"));      // should be modified according to your configuration of jsp container
-            config.setServerURL(new URL("http://localhost/wordpress/xmlrpc.php"));
+            config.setServerURL(new URL("http://localhost:8081/bg/xmlrpc"));      // should be modified according to your configuration of jsp container
+            // config.setServerURL(new URL("http://localhost/wordpress/xmlrpc.php"));
 
             // create a new XmlRpcClient object and bind above config object with it
             XmlRpcClient client = new XmlRpcClient();
@@ -31,7 +31,7 @@ public class metaWeblogHanderImplTest {
             params.addElement("123456");
 
             // execute XML-RPC call
-            Object result = client.execute("MetaWeblogHandler.getPost", params);
+            Object result = client.execute("metaWeblog.getPost", params);
             System.out.println(JSON.toJSONString(result));
 
         } catch (MalformedURLException e) {
@@ -46,8 +46,8 @@ public class metaWeblogHanderImplTest {
         try {
             // config client
             XmlRpcClientConfigImpl config = new XmlRpcClientConfigImpl();
-            // config.setServerURL(new URL("http://localhost:8081/bg/xmlrpc"));      // should be modified according to your configuration of jsp container
-            config.setServerURL(new URL("http://localhost/wordpress/xmlrpc.php"));
+            config.setServerURL(new URL("http://localhost:8081/bg/xmlrpc"));      // should be modified according to your configuration of jsp container
+            // config.setServerURL(new URL("http://localhost/wordpress/xmlrpc.php"));
 
             // create a new XmlRpcClient object and bind above config object with it
             XmlRpcClient client = new XmlRpcClient();
@@ -55,12 +55,12 @@ public class metaWeblogHanderImplTest {
 
             // create parameter list
             Vector params = new Vector<String>();
-            params.addElement(1);
+            params.addElement("appkey");
             params.addElement("admin");
             params.addElement("123456");
 
             // execute XML-RPC call
-            Object result = client.execute("MetaWeblogHandler.getUsersBlogs", params);
+            Object result = client.execute("metaWeblog.getUsersBlogs", params);
             System.out.println(JSON.toJSONString(result));
 
         } catch (MalformedURLException e) {

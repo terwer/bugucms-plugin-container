@@ -16,6 +16,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -113,10 +114,13 @@ public class PostServiceImpl implements PostService {
         if (sysUserDTO == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }
-        if (!isDbAdminPasswordEncoded) {
-            password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
-        }
-        if (!password.equals(sysUserDTO.getPassword())) {
+        //if (isDbAdminPasswordEncoded) {
+        //    password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
+        //}
+        //hashed就是明文密码password加密后的结果，存储到数据库
+        //String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        //candidate是明文密码，checkpw方法返回的是boolean
+        if (!BCrypt.checkpw(password, sysUserDTO.getPassword())) {
             throw new BusinessServiceException("密码错误");
         }
         for (SysRoleDTO role : sysUserDTO.getSysRoles()) {
