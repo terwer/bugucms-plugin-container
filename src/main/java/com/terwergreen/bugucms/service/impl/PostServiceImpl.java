@@ -13,6 +13,7 @@ import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.service.PostService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.xmlrpc.XmlRpcException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -104,15 +105,12 @@ public class PostServiceImpl implements PostService {
         Map userBlog = new HashMap();
         userBlog.put("blogName", siteConfigDTO.getWebname());
         String url = siteConfigDTO.getWeburl();
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
         userBlog.put("xmlrpc", url + XMLRPC_URL);
         //检测是否是管理员
         boolean isAdmin = false;
         SysUserDTO sysUserDTO = (SysUserDTO) commonDAO.querySingleByString("selectByUserName", username);
         if (sysUserDTO == null) {
-            throw new UsernameNotFoundException("用户名不存在");
+            throw new UsernameNotFoundException("用户名不存在。");
         }
         //if (isDbAdminPasswordEncoded) {
         //    password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
@@ -121,8 +119,12 @@ public class PostServiceImpl implements PostService {
         //String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
         //candidate是明文密码，checkpw方法返回的是boolean
         if (!BCrypt.checkpw(password, sysUserDTO.getPassword())) {
-            throw new BusinessServiceException("密码错误");
+            throw new BusinessServiceException("密码错误。");
         }
+        //if (sysUserDTO == null || !BCrypt.checkpw(password, sysUserDTO.getPassword())) {
+        //    // 用户名或密码不正确。
+        //    throw new BusinessServiceException("用户名或密码不正确。");
+        //}
         for (SysRoleDTO role : sysUserDTO.getSysRoles()) {
             logger.info("role：" + role.getName());
             if ("ADMIN".equals(role.getName())) {
@@ -132,6 +134,9 @@ public class PostServiceImpl implements PostService {
         }
         userBlog.put("isAdmin", isAdmin);
         userBlog.put("blogid", sysUserDTO.getId());
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
         userBlog.put("url", url);
 
         usersBlogs.add(userBlog);
