@@ -9,6 +9,7 @@ import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.util.Constants;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.HashMap;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * @Author Terwer
@@ -53,6 +54,68 @@ public class PostApiController extends BGBaseController {
             resultMap.put("msg", "success");
             resultMap.put("count", posts.getTotal());
             resultMap.put("data", posts.getList());
+        } catch (Exception e) {
+            resultMap.put("code", 0);
+            resultMap.put("msg", "");
+            resultMap.put("count", 0);
+            resultMap.put("data", null);
+            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            throw new RestException(e);
+        }
+        return JSON.toJSONString(resultMap);
+    }
+
+    @RequestMapping(value = "/api/post/shuoshuo", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public String getShuoshuo(Model model, HttpServletRequest request, HttpServletResponse response, Integer page, Integer limit) throws Exception {
+        Map resultMap = new HashMap();
+
+        if (page == null) {
+            page = Constants.DEFAULT_PAGE_NUM;
+        }
+        if (limit == null) {
+            limit = Constants.DEFAULT_PAGE_SIZE;
+        }
+
+        try {
+            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
+
+            //转换成说说需要的格式
+            List<Map> dates = new ArrayList<>();
+            List<Map> issues = new ArrayList<>();
+            for (PostDTO post : posts.getList()) {
+                Date postDate = post.getPostDate();
+                String postTitle = post.getPostTitle();
+                String postDesc = post.getPostDesc();
+                String postContent = post.getPostContent();
+                Map dateMap = new HashMap();
+                SimpleDateFormat keySdf = new SimpleDateFormat("yyyyMMddhhMMss");
+                dateMap.put("key", keySdf.format(postDate));
+                SimpleDateFormat dateSdf = new SimpleDateFormat("yy MM-dd");
+                dateMap.put("date", dateSdf.format(postDate));
+                dates.add(dateMap);
+
+                Map issueMap = new HashMap();
+                issueMap.put("key", keySdf.format(postDate));
+//                if(!StringUtils.isEmpty(postTitle)){
+//                    issueMap.put("title", postTitle);
+//                    issueMap.put("content", postDesc);
+//                }else{
+                    SimpleDateFormat titleSdf = new SimpleDateFormat("yyyy年MM月dd日 hh:MM:ss");
+                    issueMap.put("title", titleSdf.format(postDate));
+                    issueMap.put("content", postContent);
+//                }
+                issues.add(issueMap);
+            }
+
+            Map jsonMap = new HashMap();
+            jsonMap.put("dates", dates);
+            jsonMap.put("issues", issues);
+
+            resultMap.put("code", 0);
+            resultMap.put("msg", "success");
+            resultMap.put("count", posts.getTotal());
+            resultMap.put("data", jsonMap);
         } catch (Exception e) {
             resultMap.put("code", 0);
             resultMap.put("msg", "");

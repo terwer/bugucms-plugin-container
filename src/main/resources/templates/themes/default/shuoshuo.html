@@ -13,13 +13,200 @@
       th:with="title=|留言板 - ${siteConfigDTO.webname}|">
 
 <customHead layout:fragment="customHead">
+    <style type="text/css">
+        #content div, span, h1, h2, h3, h4, h5, h6, p, pre, a, code, em, img, small, strong, sub, sup, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label {
+            margin: 0;
+            padding: 0;
+            border: 0;
+            outline: 0;
+            font-size: 100%;
+            vertical-align: baseline;
+            background: transparent
+        }
+
+        #content a {
+            color: #007bc4 /*#424242*/;
+            text-decoration: none;
+            outline: none;
+        }
+
+        #content a:hover {
+            text-decoration: underline
+        }
+
+        #content a:focus {
+            outline: none;
+            -moz-outline: none;
+        }
+
+        #content ol, ul {
+            list-style: none
+        }
+
+        #content img {
+            border: none
+        }
+
+        #timeline {
+            width: 760px;
+            height: 440px;
+            overflow: hidden;
+            margin-top: 40px; /* position: relative; */
+            margin: 100px auto !important;;
+        }
+
+        #btn {
+            padding-bottom: 60px;
+        }
+
+        #btn li {
+            list-style: none;
+            width: 100px;
+            height: 28px;
+            line-height: 1px;
+            font-size: 12px;
+            padding-right: 20px;
+            text-align: right; /* padding-bottom: 10px; *//* color: red; */
+            font-weight: bold;
+        }
+
+        #btn a {
+            line-height: 38px;
+            padding-bottom: 10px;
+        }
+
+        #dates {
+            width: 115px;
+            height: 440px;
+            overflow: hidden;
+            float: left;
+        }
+
+        #dates li {
+            list-style: none;
+            width: 100px;
+            height: 100px;
+            line-height: 100px;
+            font-size: 24px;
+            padding-right: 20px;
+            text-align: right;
+        }
+
+        #dates a {
+            font-size: 16px;
+            line-height: 168px;
+            padding-bottom: 10px;
+        }
+
+        #dates .selected {
+            color: orangered
+        }
+
+        #issues {
+            width: 630px;
+            height: 440px;
+            overflow: hidden;
+            float: right;
+        }
+
+        #issues li {
+            width: 630px;
+            height: 440px;
+            list-style: none;
+        }
+
+        #issues li h1 {
+            color: #ffcc00;
+            font-size: 42px;
+            height: 52px;
+            line-height: 52px;
+            text-shadow: #000 1px 1px 2px;
+        }
+
+        #issues li p {
+            font-size: 14px;
+            margin: 10px;
+            line-height: 26px;
+        }
+
+        [v-cloak] {
+            display: none;
+        }
+    </style>
+    <script type="text/javascript" th:inline="javascript">
+        //不能在子页面调用
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
+        window.BUGUCMS_THEME = /*[[${siteConfigDTO.webtheme}]]*/'default';
+        window.BUGUCMS_STATIC_LIB_PREFIX = /*[[@{/themes/}]]*/ 'themes';
+        window.BUGUCMS_STATIC_LIB_URL = BUGUCMS_STATIC_LIB_PREFIX + BUGUCMS_THEME + "/lib/";
+    </script>
 </customHead>
 
 <div layout:fragment="content" id="content">
-    说说
+    <div id="timeline" th:alt="@{|/themes/${siteConfigDTO.webtheme}/lib/timelinr/dot.gif|}"
+         th:style="|background: url() 110px top repeat-y;|">
+        <ul id="btn">
+            <li><a href="#" id="next">下一个</a></li><!-- optional -->
+            <li><a href="#" id="prev">上一个</a></li><!-- optional -->
+        </ul>
+
+        <ul id="dates">
+            <li v-for="date in dates"><a v-bind:href="'#' + date.key" v-cloak>{{ date.date }}</a></li>
+        </ul>
+
+        <ul id="issues">
+            <!--<li><h1>没有了</h1><p>暂无数据</p></li>-->
+            <li v-for="issue in issues" v-bind:id="issue.key">
+                <h1 v-cloak>{{ issue.title }}</h1>
+                <p v-html="issue.content"></p>
+            </li>
+        </ul>
+    </div>
 </div>
 
 <customFoot layout:fragment="customFoot">
+    <script type="text/javascript"
+            th:src="@{|/themes/${siteConfigDTO.webtheme}/lib/timelinr/jquery.timelinr.js|}"></script>
+    <script type="text/javascript"
+            th:src="@{|/themes/${siteConfigDTO.webtheme}/lib/timelinr/jquery.mousewheel.js|}"></script>
+    <!-- vuejs开发环境版本，包含了有帮助的命令行警告 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript">
+        var app = new Vue({
+            el: '#timeline',
+            data: {
+                dates: [
+                    // {key: '20180823100000', date: '18 08-23'},
+                    // {key: '20180822100000', date: '18 08-22'}
+                ],
+                issues: [
+                    // {key: '20180823100000', title: 'Hello content1!', content: 'content1'},
+                    // {key: '20180822100000', title: 'Hello content2!', content: 'content2'}
+                ]
+            }
+        })
+
+        $(function () {
+            $('#timeline').css('background-image', 'url(' + $("#timeline").attr("alt") + ')');
+
+            $.post(BUGUCMS_BASE_URL + "api/post/shuoshuo", function (res) {
+                console.log("dates:" + JSON.stringify(res.data.dates[0]));
+                //console.log("issues:" + JSON.stringify(res.data.issues));
+                app.dates.push(res.data.dates[0]);
+                app.issues.push(res.data.issues[0]);
+
+                // $().timelinr({
+                //     orientation: 'vertical',
+                //     issuesSpeed: 300,
+                //     datesSpeed: 100,
+                //     arrowKeys: 'true',
+                //     startAt: 1,
+                //     mousewheel: 'true'
+                // });
+            })
+        });
+
+    </script>
 </customFoot>
 
 
