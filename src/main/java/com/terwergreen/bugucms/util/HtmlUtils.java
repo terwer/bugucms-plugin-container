@@ -14,9 +14,10 @@ public class HtmlUtils {
          * "<.*?"表示<尖括号后的所有字符，此方法可以去掉残缺的标签，及后面的内容
          * " "，若有多种此种字符，可用同一方法去除
          */
-        html = html.replaceAll("<.*?>", "  ").replaceAll(" ", " ");
+        html = html.replaceAll("<.*?>", "").replaceAll(" ", "");
         html = html.replaceAll("<.*?", "");
-        return (html + "...");
+        //html = html.replaceAll("\\n","");
+        return (html);
     }
 
     /**
@@ -29,8 +30,8 @@ public class HtmlUtils {
     public static String parseHtml(String html, int length) {
         if (html.length() < length) {
             //return "截取长度超过文件内容总长";
-            return html;
+            return parseHtml(html);
         }
-        return parseHtml(html.substring(0, length));
+        return parseHtml(html.substring(0, length) + "...");
     }
 }

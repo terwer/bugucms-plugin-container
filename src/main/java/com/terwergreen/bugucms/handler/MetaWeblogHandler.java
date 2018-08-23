@@ -72,5 +72,9 @@ public interface MetaWeblogHandler {
      * string xmlrpc†: URL endpoint to use for XML-RPC requests on this blog.
      * @see <a href="https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs">https://codex.wordpress.org/XML-RPC_MetaWeblog_API#metaWeblog.getUsersBlogs</a>
      */
-    public Object getUsersBlogs(String appkey,String username,String password);
+    Object getUsersBlogs(String appkey, String username, String password);
+
+    //metaWeblog.getCategories
+    //metaWeblog.getRecentPosts
+    //metaWeblog.newPost
 }

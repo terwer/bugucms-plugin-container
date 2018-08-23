@@ -38,7 +38,8 @@ public class MetaWeblogHandelerImpl implements MetaWeblogHandler {
         try {
             usersBlogs = postService.getUsersBlogs(appkey, username, password);
         } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
+            logger.error("系统异常：" + e.getLocalizedMessage(), e);
+            return e.getClass().toString() + "：" + e.getLocalizedMessage();
         }
         return usersBlogs;
     }

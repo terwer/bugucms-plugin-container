@@ -13,9 +13,11 @@ import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.service.PostService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.apache.xmlrpc.XmlRpcException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -85,12 +87,12 @@ public class PostServiceImpl implements PostService {
         pageNum = pageInfo.getPageNum();
         pageSize = pageInfo.getPageSize();
         logger.info("分页信息：total=" + total + "，pages=" + pages + "，pageNum=" + pageNum + "，pageSize=" + pageSize);
-
-        if (CollectionUtils.isEmpty(pageInfo.getList())) {
-            return null;
-        } else {
-            return pageInfo;
-        }
+        return pageInfo;
+        //if (CollectionUtils.isEmpty(pageInfo.getList())) {
+        //    return null;
+        //} else {
+        //    return pageInfo;
+        //}
     }
 
     @Override
@@ -103,31 +105,38 @@ public class PostServiceImpl implements PostService {
         Map userBlog = new HashMap();
         userBlog.put("blogName", siteConfigDTO.getWebname());
         String url = siteConfigDTO.getWeburl();
-        if (!url.endsWith("/")) {
-            url += "/";
-        }
         userBlog.put("xmlrpc", url + XMLRPC_URL);
         //检测是否是管理员
         boolean isAdmin = false;
         SysUserDTO sysUserDTO = (SysUserDTO) commonDAO.querySingleByString("selectByUserName", username);
         if (sysUserDTO == null) {
-            throw new UsernameNotFoundException("用户名不存在");
+            throw new UsernameNotFoundException("用户名不存在。");
         }
-        if (!isDbAdminPasswordEncoded) {
-            password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
+        //if (isDbAdminPasswordEncoded) {
+        //    password = BugucmsConfig.passwordEncoder().encode(sysUserDTO.getPassword());
+        //}
+        //hashed就是明文密码password加密后的结果，存储到数据库
+        //String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
+        //candidate是明文密码，checkpw方法返回的是boolean
+        if (!BCrypt.checkpw(password, sysUserDTO.getPassword())) {
+            throw new BusinessServiceException("密码错误。");
         }
-        if(!password.equals(sysUserDTO.getPassword())){
-            throw new BusinessServiceException("密码错误");
-        }
+        //if (sysUserDTO == null || !BCrypt.checkpw(password, sysUserDTO.getPassword())) {
+        //    // 用户名或密码不正确。
+        //    throw new BusinessServiceException("用户名或密码不正确。");
+        //}
         for (SysRoleDTO role : sysUserDTO.getSysRoles()) {
             logger.info("role：" + role.getName());
-            if("ADMIN".equals(role.getName())){
+            if ("ADMIN".equals(role.getName())) {
                 isAdmin = true;
                 break;
             }
         }
         userBlog.put("isAdmin", isAdmin);
         userBlog.put("blogid", sysUserDTO.getId());
+        if (!url.endsWith("/")) {
+            url += "/";
+        }
         userBlog.put("url", url);
 
         usersBlogs.add(userBlog);

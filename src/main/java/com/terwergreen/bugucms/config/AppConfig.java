@@ -17,13 +17,41 @@ package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.handler.MetaWeblogHandler;
 import com.terwergreen.bugucms.handler.impl.MetaWeblogHandelerImpl;
+import com.terwergreen.bugucms.servlet.BugucmsDispatcherServlet;
+import org.springframework.boot.autoconfigure.web.servlet.DispatcherServletAutoConfiguration;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.DispatcherServlet;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
 @Configuration
 public class AppConfig {
+
+    /**
+     * 自定义DispatcherServlet
+     *
+     * @return
+     */
+    @Bean
+    public DispatcherServlet dispatcherServlet() {
+        return new BugucmsDispatcherServlet();
+    }
+
+    /**
+     * 注入自定义DispatcherServlet
+     *
+     * @return
+     */
+    @Bean
+    public ServletRegistrationBean dispatcherServletRegistration() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(dispatcherServlet());
+        registration.setLoadOnStartup(0);
+        registration.setName(DispatcherServletAutoConfiguration.DEFAULT_DISPATCHER_SERVLET_REGISTRATION_BEAN_NAME);
+        return registration;
+    }
+
     /**
      * 设置Admin模板引擎查找目录
      *
@@ -43,6 +71,7 @@ public class AppConfig {
 
     /**
      * 将metaWeblog的bean交给Spring
+     *
      * @return
      */
     @Bean

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>其他操作</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/common.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/bugucms/css/common.css}">
     <script type="text/javascript" th:inline="javascript">
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
     </script>
@@ -33,7 +33,7 @@
         <fieldset class="layui-elem-field layui-field-title">
             <legend>子页操作</legend>
             <div class="layui-field-box">
-                <blockquote class="layui-elem-quote">子页内的锚点没有强制设置，可自行修改监听模式，请参考static/js/common.js</blockquote>
+                <blockquote class="layui-elem-quote">子页内的锚点没有强制设置，可自行修改监听模式，请参考js/common.js</blockquote>
                 <pre class="layui-code" lay-title="common.js">
 layui.define([&#x27;jquery&#x27;], function(exports) {
     var $ = layui.$,
@@ -51,14 +51,14 @@ layui.define([&#x27;jquery&#x27;], function(exports) {
 
                 <p>然后可以这样使用：</p>
                 <pre class="layui-code" lay-title="common.js使用">
-layui.config({base: &#x27;/static/&#x27;}).extend({common: &#x27;js/common&#x27;}).use([&#x27;common&#x27;], function() {
+layui.config({base: &#x27;/&#x27;}).extend({common: &#x27;js/common&#x27;}).use([&#x27;common&#x27;], function() {
     var common = layui.common;
 
     common.tabNext();
 });
                 </pre>
 
-                <blockquote class="layui-elem-quote">由于使用iframe，chrome有个BUG，就是iframe隐藏后显示滚动条丢失或者出现异常的情况，请加入以下CSS，参考static/css/common.css</blockquote>
+                <blockquote class="layui-elem-quote">由于使用iframe，chrome有个BUG，就是iframe隐藏后显示滚动条丢失或者出现异常的情况，请加入以下CSS，参考css/common.css</blockquote>
                 <pre class="layui-code" lay-title="common.css">
 /*全局*/
 html {
@@ -82,7 +82,7 @@ body {
         <fieldset class="layui-elem-field layui-field-title">
             <legend>控制台</legend>
             <div class="layui-field-box">
-                <blockquote class="layui-elem-quote">控制台的样式只是个demo，样式写在 static/css/common.css 里面，你可以自定义你的布局</blockquote>
+                <blockquote class="layui-elem-quote">控制台的样式只是个demo，样式写在 css/common.css 里面，你可以自定义你的布局</blockquote>
             </div>
         </fieldset>
     </div>
@@ -90,9 +90,9 @@ body {
 
 </body>
 
-<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
 <script>
-    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({common: 'bugucms/common'}).use(['common', 'code'], function () {
+    layui.config({base: BUGUCMS_BASE_URL + 'lib/'}).extend({common: 'bugucms/common'}).use(['common', 'code'], function () {
         var common = layui.common;
 
         layui.code({about: false, encode: true});

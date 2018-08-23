@@ -7,6 +7,7 @@ import com.terwergreen.bugucms.util.MarkdownUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -22,7 +23,6 @@ public class PostDTO {
      * 文章别名
      */
     @Getter
-    @Setter
     private String postSlug;
     /**
      * 文章标题
@@ -62,10 +62,18 @@ public class PostDTO {
     @Setter
     private Date postDate;
 
+    public void setPostSlug(String postSlug) {
+        if (StringUtils.isEmpty(postSlug)) {
+            this.postSlug = String.valueOf(this.getPostId());
+        } else {
+            this.postSlug = postSlug;
+        }
+    }
+
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
-        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 320);
+        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 240);
     }
 }
