@@ -84,6 +84,9 @@ public class PostServiceImpl implements PostService {
         PageInfo<PostDTO> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
         int pages = pageInfo.getPages();
+        if(pageNum > pages){
+            pageInfo.setList(new ArrayList<>());
+        }
         pageNum = pageInfo.getPageNum();
         pageSize = pageInfo.getPageSize();
         logger.info("分页信息：total=" + total + "，pages=" + pages + "，pageNum=" + pageNum + "，pageSize=" + pageSize);
