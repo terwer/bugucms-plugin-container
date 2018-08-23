@@ -2,7 +2,6 @@ package com.terwergreen.bugucms.controller.api.admin;
 
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
-import com.terwergreen.bugucms.base.controller.AdminBaseController;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.exception.RestException;
@@ -10,7 +9,6 @@ import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.util.Constants;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -81,36 +79,32 @@ public class PostApiController extends BGBaseController {
             PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
 
             //转换成说说需要的格式
-            List<Map> dates = new ArrayList<>();
-            List<Map> issues = new ArrayList<>();
+            List<Map> timelines = new ArrayList<>();
             for (PostDTO post : posts.getList()) {
+                Integer postId = post.getPostId();
                 Date postDate = post.getPostDate();
                 String postTitle = post.getPostTitle();
                 String postDesc = post.getPostDesc();
-                String postContent = post.getPostContent();
-                Map dateMap = new HashMap();
-                SimpleDateFormat keySdf = new SimpleDateFormat("yyyyMMddhhMMss");
-                dateMap.put("key", keySdf.format(postDate));
-                SimpleDateFormat dateSdf = new SimpleDateFormat("yy MM-dd");
-                dateMap.put("date", dateSdf.format(postDate));
-                dates.add(dateMap);
+                // String postContent = post.getPostContent();
 
-                Map issueMap = new HashMap();
-                issueMap.put("key", keySdf.format(postDate));
-//                if(!StringUtils.isEmpty(postTitle)){
-//                    issueMap.put("title", postTitle);
-//                    issueMap.put("content", postDesc);
-//                }else{
-                    SimpleDateFormat titleSdf = new SimpleDateFormat("yyyy年MM月dd日 hh:MM:ss");
-                    issueMap.put("title", titleSdf.format(postDate));
-                    issueMap.put("content", postContent);
-//                }
-                issues.add(issueMap);
+                Map timelineMap = new HashMap();
+                // SimpleDateFormat keySdf = new SimpleDateFormat("yyyyMMddHHmmss");
+                // timelineMap.put("key", keySdf.format(postDate));
+                timelineMap.put("key", postId);
+                SimpleDateFormat yearSdf = new SimpleDateFormat("yyyy");
+                timelineMap.put("year", yearSdf.format(postDate));
+                if (!StringUtils.isEmpty(postTitle.trim())) {
+                    timelineMap.put("title", postTitle);
+                } else {
+                    SimpleDateFormat titleSdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                    timelineMap.put("title", titleSdf.format(postDate));
+                }
+                timelineMap.put("content", postDesc);
+                timelines.add(timelineMap);
             }
 
             Map jsonMap = new HashMap();
-            jsonMap.put("dates", dates);
-            jsonMap.put("issues", issues);
+            jsonMap.put("timelines", timelines);
 
             resultMap.put("code", 0);
             resultMap.put("msg", "success");

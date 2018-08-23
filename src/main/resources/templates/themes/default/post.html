@@ -27,6 +27,7 @@
 </customHead>
 
 <div layout:fragment="content" id="content">
+    <div class="post-date" th:text="${#dates.format(post.postDate, 'yyyy-MM-dd HH:mm:ss')}"></div>
     <div class="post-title"><h1 th:text="${post.postTitle}">postTitle</h1></div>
     <div class="post-content" th:utext="${post.postContent}">postContent</div>
 </div>
