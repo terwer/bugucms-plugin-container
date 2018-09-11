@@ -4,11 +4,19 @@
 
 <mapper namespace="bgapp">
     <!-- 获取最新文章 -->
-    <select id="get_posts_by_user" resultType="com.terwergreen.middle.post.dto.PostDTO">
-        select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent from bg_posts where post_author = 1 order by post_modified desc limit 0,10
+    <select id="get_posts_by_user" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_id AS postId, post_name AS postSlug, post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_type <![CDATA[ <> ]]> 'page' ORDER BY post_modified DESC limit 0,10
     </select>
-    <!-- 获取单个文章 -->
-    <select id="get_post_by_slug" resultType="com.terwergreen.middle.post.dto.PostDTO">
-        select post_title as postTitle,post_content as postContent from bg_posts where post_name = #{slug}
+    <!-- 根据别名获取单个文章 -->
+    <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_name = #{slug}
+    </select>
+    <!-- 根据ID获取单个文章 -->
+    <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_id = #{postId}
+    </select>
+    <!-- 获取分页文章 -->
+    <select id="get_posts_by_page" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_id AS postId, post_name AS postSlug, post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_type <![CDATA[ <> ]]> 'page' ORDER BY post_modified DESC
     </select>
 </mapper>

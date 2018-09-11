@@ -1,0 +1,256 @@
+[
+  [
+    {
+      "title": "控制台",
+      "icon": "layui-icon-console",
+      "href": "console"
+    },
+    {
+      "title": "文章",
+      "icon": "layui-icon-read",
+      "open": true,
+      "list": [
+        {
+          "title": "所有文章",
+          "icon": "layui-icon-read",
+          "href": "postManage/list"
+        },
+        {
+          "title": "写文章",
+          "icon": "layui-icon-add-1",
+          "href": "postManage/new"
+        },
+        {
+          "title": "分类目录",
+          "icon": "layui-icon-file-b",
+          "href": "postManage/cat"
+        },
+        {
+          "title": "标签",
+          "icon": "layui-icon-component",
+          "href": "postManage/tag"
+        }
+      ]
+    },
+    {
+      "title": "媒体",
+      "icon": "layui-icon-play",
+      "list": [
+        {
+          "title": "媒体库",
+          "icon": "layui-icon-headset",
+          "href": "postManage/media"
+        },
+        {
+          "title": "添加",
+          "icon": "layui-icon-add-1",
+          "href": "postManage/media/new"
+        }
+      ]
+    },
+    {
+      "title": "页面",
+      "icon": "layui-icon-form",
+      "list": [
+        {
+          "title": "所有页面",
+          "icon": "layui-icon-tabs",
+          "href": "postManage/media/new"
+        },
+        {
+          "title": "新建页面",
+          "icon": "layui-icon-add-1",
+          "href": "postManage/media/new"
+        }
+      ]
+    },
+    {
+      "title": "评论",
+      "icon": "layui-icon-dialogue",
+      "list": [
+        {
+          "title": "所有评论",
+          "icon": "layui-icon-chat",
+          "href": "commentManage/list"
+        }
+      ]
+    },
+    {
+      "title": "外观",
+      "icon": "layui-icon-theme",
+      "list": [
+        {
+          "title": "主题",
+          "icon": "layui-icon-template-1",
+          "href": "postManage/skin/themes"
+        },
+        {
+          "title": "自定义",
+          "icon": "layui-icon-survey",
+          "href": "postManage/skin/custom"
+        },
+        {
+          "title": "小工具",
+          "icon": "layui-icon-util",
+          "href": "postManage/skin/tools"
+        },
+        {
+          "title": "菜单",
+          "icon": "layui-icon-layouts",
+          "href": "postManage/skin/menu"
+        },
+        {
+          "title": "顶部",
+          "icon": "layui-icon-up",
+          "href": "postManage/skin/top"
+        },
+        {
+          "title": "编辑",
+          "icon": "layui-icon-edit",
+          "href": "postManage/skin/edit"
+        }
+      ]
+    },
+    {
+      "title": "插件",
+      "icon": "layui-icon-app",
+      "list": [
+        {
+          "title": "已安装插件",
+          "icon": "layui-icon-app",
+          "href": "plugin/list"
+        },
+        {
+          "title": "安装插件",
+          "icon": "layui-icon-add-1",
+          "href": "plugin/install"
+        },
+        {
+          "title": "编辑",
+          "icon": "layui-icon-edit",
+          "href": "postManage/edit"
+        }
+      ]
+    },
+    {
+      "title": "用户",
+      "icon": "layui-icon-user",
+      "list": [
+        {
+          "title": "所有用户",
+          "icon": "layui-icon-user",
+          "href": "user"
+        },
+        {
+          "title": "添加用户",
+          "icon": "layui-icon-add-1",
+          "href": "user/new"
+        },
+        {
+          "title": "我的个人资料",
+          "icon": "layui-icon-user",
+          "href": "account/accountInfo"
+        }
+      ]
+    },
+    {
+      "title": "工具",
+      "icon": "layui-icon-util",
+      "list": [
+        {
+          "title": "可用工具",
+          "icon": "layui-icon-engine",
+          "href": "tools/available"
+        },
+        {
+          "title": "导入",
+          "icon": "layui-icon-down",
+          "href": "tools/import"
+        },
+        {
+          "title": "导出",
+          "icon": "layui-icon-up",
+          "href": "tools/export"
+        }
+      ]
+    },
+    {
+      "title": "设置",
+      "icon": "layui-icon-set",
+      "list": [
+        {
+          "title": "站点配置",
+          "icon": "layui-icon-website"
+        },
+        {
+          "title": "缓存配置",
+          "icon": "layui-icon-engine"
+        },
+        {
+          "title": "短信配置",
+          "icon": "layui-icon-reply-fill"
+        },
+        {
+          "title": "邮件配置",
+          "icon": "layui-icon-share"
+        },
+        {
+          "title": "发布设置",
+          "icon": "layui-icon-release"
+        },
+        {
+          "title": "阅读设置",
+          "icon": "layui-icon-read"
+        },
+        {
+          "title": "评论设置",
+          "icon": "layui-icon-face-smile"
+        },
+        {
+          "title": "媒体设置",
+          "icon": "layui-icon-camera"
+        },
+        {
+          "title": "固定链接",
+          "icon": "layui-icon-unlink"
+        },
+        {
+          "title": "隐私设置",
+          "icon": "layui-icon-friends"
+        }
+      ]
+    }
+  ],
+  [
+    {
+      "title": "项目文档",
+      "open": true,
+      "list": [
+        {
+          "title": "快速开始",
+          "href": "doc/quickstart"
+        },
+        {
+          "title": "菜单操作",
+          "href": "doc/menu"
+        },
+        {
+          "title": "标签操作",
+          "href": "doc/tabs"
+        },
+        {
+          "title": "其他操作",
+          "href": "doc/other"
+        },
+        {
+          "title": "更新日志",
+          "href": "doc/changelog"
+        },
+        {
+          "title": "授权说明",
+          "href": "doc/license"
+        }
+      ]
+    }
+  ]
+]
