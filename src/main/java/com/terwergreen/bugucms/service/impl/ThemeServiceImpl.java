@@ -1,5 +1,8 @@
 package com.terwergreen.bugucms.service.impl;
 
+import com.terwergreen.bugucms.base.service.BusinessServiceException;
+import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.dto.ThemeDTO;
 import com.terwergreen.bugucms.service.ThemeService;
 import org.apache.commons.compress.compressors.FileNameUtil;
 import org.apache.commons.io.FilenameUtils;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.ArrayList;
@@ -22,14 +26,22 @@ public class ThemeServiceImpl implements ThemeService {
     @Value("${bugucms.theme.path}")
     String themePath;
 
+    @Resource
+    private CommonService commonService;
+
     @Override
-    public boolean changeTheme(String theme) {
+    public boolean changeTheme(String theme) throws BusinessServiceException {
+        logger.debug("开始更换主题：" + theme);
+        int result = commonService.updateSiteConfig("webtheme", theme);
+        if (result > 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
-    public List<String> getAvailableThemes(HttpServletRequest request) {
-        List<String> resultList = new ArrayList<>();
+    public List<ThemeDTO> getAvailableThemes(HttpServletRequest request) throws BusinessServiceException {
+        List<ThemeDTO> resultList = new ArrayList<>();
         // 获取项目根路径
         String realPath = request.getSession().getServletContext().getRealPath("/");
         // 获取主题所在的文件夹
@@ -41,7 +53,10 @@ public class ThemeServiceImpl implements ThemeService {
             for (File d : dirs) {
                 //添加主题文件夹
                 if (d.isDirectory()) {
-                    resultList.add(d.getName());
+                    ThemeDTO themeDTO = new ThemeDTO();
+                    themeDTO.setName(d.getName());
+                    themeDTO.setSnapshort(d.getPath());
+                    resultList.add(themeDTO);
                 }
             }
         }

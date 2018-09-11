@@ -1,5 +1,8 @@
 package com.terwergreen.bugucms.service;
 
+import com.terwergreen.bugucms.base.service.BusinessServiceException;
+import com.terwergreen.bugucms.dto.ThemeDTO;
+
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
@@ -10,7 +13,7 @@ public interface ThemeService {
      * @param theme 主题名
      * @return
      */
-    boolean changeTheme(String theme);
+    boolean changeTheme(String theme) throws BusinessServiceException;
 
     /**
      * 获取系统可用的主题列表
@@ -18,5 +21,5 @@ public interface ThemeService {
      * @param request
      * @return
      */
-    List<String> getAvailableThemes(HttpServletRequest request);
+    List<ThemeDTO> getAvailableThemes(HttpServletRequest request) throws BusinessServiceException;
 }

@@ -2,6 +2,7 @@ package com.terwergreen.bugucms.controller.api.admin;
 
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.RestResponseDTO;
+import com.terwergreen.bugucms.dto.ThemeDTO;
 import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.service.ThemeService;
 import com.terwergreen.bugucms.util.RestResponseStates;
@@ -61,7 +62,7 @@ public class ThemeApiController extends BGBaseController {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
             super.preCheck(model, request, response);
-            List<String> themes = themeService.getAvailableThemes(request);
+            List<ThemeDTO> themes = themeService.getAvailableThemes(request);
             if (!CollectionUtils.isEmpty(themes)) {
                 Map<String, Object> resultMap = new HashMap<>();
                 resultMap.put("themes", themes);
