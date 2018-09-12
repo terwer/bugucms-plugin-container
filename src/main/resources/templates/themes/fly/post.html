@@ -21,8 +21,10 @@
         <div class="layui-container">
             <ul class="layui-clear">
                 <li class="layui-hide-xs layui-this"><a th:href="@{/}">首页</a></li>
-                <li><a th:href="@{/guestbook.html}">留言</a></li>
-                <li><a th:href="@{/essay.html}">随笔<span class="layui-badge-dot"></span></a></li>
+                <li><a th:href="@{/guestbook.html}">留言<span class="layui-badge-dot"></span></a></li>
+                <div th:if="${sysUserDTO!=null}" th:remove="tag">
+                    <li><a th:href="@{/essay.html}">随笔<span class="layui-badge-dot"></span></a></li>
+                </div>
                 <li><a th:href="@{/about.html}">关于</a></li>
                 <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
                 <div th:if="${sysUserDTO!=null}" th:remove="tag">
