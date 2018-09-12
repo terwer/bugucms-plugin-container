@@ -17,7 +17,9 @@ import org.springframework.web.servlet.ModelAndView;
 import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping(value = "/")
@@ -36,6 +38,7 @@ public class HomePageController extends BGBaseController {
     public ModelAndView home(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
+        List<PostDTO> dingPostList = null;
         List<PostDTO> postList = null;
         ModelAndView mv = new ModelAndView();
         try {
@@ -49,10 +52,16 @@ public class HomePageController extends BGBaseController {
             if (currentUser != "anonymousUser") {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
-            postList = postService.getPosts();
+
+            Map paramMap = new HashMap();
+            postList = postService.getRecentPosts(paramMap);
+            paramMap.put("metaKey", "ding");
+            dingPostList = postService.getRecentPosts(paramMap);
+
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
+            mv.addObject("dingPostList", dingPostList);
             mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
         } catch (TemplateInputException tie) {
@@ -68,7 +77,7 @@ public class HomePageController extends BGBaseController {
     public ModelAndView shuoshuo(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
-        List<PostDTO> postList = null;
+        List<PostDTO> essayList = null;
         ModelAndView mv = new ModelAndView();
         try {
             siteConfigDTO = commonService.getSiteConfig();
@@ -81,10 +90,14 @@ public class HomePageController extends BGBaseController {
             if (currentUser != "anonymousUser") {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
+            Map paramMap = new HashMap();
+            paramMap.put("postType", "essay");
+            essayList = postService.getRecentPosts(paramMap);
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/essay");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
+            mv.addObject("essayList", essayList);
+            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",essayList=" + essayList);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

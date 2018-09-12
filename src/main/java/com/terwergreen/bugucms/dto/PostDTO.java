@@ -51,7 +51,6 @@ public class PostDTO {
      * 文章摘要，数据库不保存
      */
     @Getter
-    @Setter
     private String postDesc;
     /**
      * 发布时间
@@ -61,6 +60,26 @@ public class PostDTO {
     @Getter
     @Setter
     private Date postDate;
+
+    @Getter
+    @Setter
+    private Integer postFinished;
+
+    @Getter
+    @Setter
+    private Integer commentCount;
+
+    @Getter
+    @Setter
+    private String metaKey;
+
+    @Getter
+    @Setter
+    private String metaValue;
+
+    @Getter
+    @Setter
+    private SysUserDTO sysUser;
 
     public void setPostSlug(String postSlug) {
         if (StringUtils.isEmpty(postSlug)) {
@@ -75,5 +94,13 @@ public class PostDTO {
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
         this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 240);
+    }
+
+    public void setPostTitle(String postTitle) {
+        if (StringUtils.isEmpty(postTitle.trim())) {
+            this.postTitle = this.getPostSlug();
+        } else {
+            this.postTitle = postTitle;
+        }
     }
 }

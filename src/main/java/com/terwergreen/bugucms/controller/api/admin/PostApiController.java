@@ -47,7 +47,8 @@ public class PostApiController extends BGBaseController {
 
         try {
             super.preCheck(model, request, response);
-            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
+            Map paramMap = new HashMap();
+            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit, paramMap);
             resultMap.put("code", 0);
             resultMap.put("msg", "success");
             resultMap.put("count", posts.getTotal());
@@ -76,7 +77,8 @@ public class PostApiController extends BGBaseController {
         }
 
         try {
-            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit);
+            Map paramMap = new HashMap();
+            PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit,paramMap );
 
             //转换成说说需要的格式
             List<Map> timelines = new ArrayList<>();

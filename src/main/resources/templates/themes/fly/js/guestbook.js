@@ -119,7 +119,7 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
     var elemCont = $('#LAY-msg-content')
     ,content = elemCont.val();
     if(content.replace(/\s/g, '') == ""){
-      layer.msg('先写点随笔再提交吧');
+      layer.msg('先写点留言再提交吧');
       return elemCont.focus();
     }
 
@@ -137,7 +137,7 @@ layui.define(['element', 'form','laypage','jquery','laytpl'],function(exports){
     laytpl(view).render(data, function(html){
       $('#LAY-msg-box').prepend(html);
       elemCont.val('');
-      layer.msg('随笔发布成功', {
+      layer.msg('留言发布成功', {
         icon: 1
       })
     });
