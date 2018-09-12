@@ -18,15 +18,15 @@
             <a href="http://www.layui.com/template/fly/" target="_blank">交流QQ群：116817010</a>
             <a href="http://fly.layui.com/jie/2461/" target="_blank">微信公众号</a>
         </p>
+        <!--  cnzz数据统计 -->
+        <script type="text/javascript">
+            var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
+            document.write(unescape("%3Cspan id='cnzz_stat_icon_4445524'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D4445524%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
+        </script>
     </div>
 
     <!-- layui -->
     <script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
-    <!--  cnzz数据统计 -->
-    <script type="text/javascript">
-        var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");
-        document.write(unescape("%3Cspan id='cnzz_stat_icon_4445524'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s5.cnzz.com/stat.php%3Fid%3D4445524%26show%3Dpic' type='text/javascript'%3E%3C/script%3E"));
-    </script>
 
     <th:block th:replace="${scripts}"/>
 </div>
