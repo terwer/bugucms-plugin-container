@@ -21,5 +21,4 @@ public class BaseDAO extends SqlSessionDaoSupport {
     public void setSqlSessionTemplate(SqlSessionTemplate sqlSessionTemplate) {
         super.setSqlSessionTemplate(sqlSessionTemplate);
     }
-
 }

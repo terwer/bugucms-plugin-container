@@ -24,7 +24,8 @@ public class DeviceController extends BGBaseController {
      * @author terwergreen
      * @date 2018-04-03 13:36:00
      */
-    @RequestMapping(value = "common/sendSMS")
+    @RequestMapping(value = "/sendSMS")
+    @ResponseBody
     public RestResponseDTO sendSMS(HttpServletRequest request, HttpServletResponse response) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
@@ -59,7 +60,7 @@ public class DeviceController extends BGBaseController {
      * @author terwergreen
      * @date 2018-04-03 13:36:00
      */
-    @RequestMapping("/common/verifySMS")
+    @RequestMapping("/verifySMS")
     @ResponseBody
     public RestResponseDTO verifySMS(HttpServletRequest request, HttpServletResponse response,
                                      @RequestParam(value = "smsCode", required = true) String smsCode) throws Exception {

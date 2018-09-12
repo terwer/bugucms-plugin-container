@@ -14,7 +14,7 @@
 
 <customHead layout:fragment="customHead">
     <!-- 头部 -->
-    <link rel="stylesheet" type="text/css" th:href="@{|/static/themes/${siteConfigDTO.webtheme}/css/index.css|}">
+    <link rel="stylesheet" type="text/css" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/index.css|}">
 </customHead>
 
 <div layout:fragment="content">
@@ -82,7 +82,7 @@
                     <div id="feed_widget">
 								<span class="feed-about">
                             <div class="about-main">
-                                <div class="about-img"> <img th:src="@{|/static/uploads/images/me.jpg|}"> </div>
+                                <div class="about-img"> <img th:src="@{|/uploads/images/me.jpg|}"> </div>
                                 <div class="about-name" th:text="${siteConfigDTO.webname}">webname</div>
                                 <div class="about-the" th:text="${siteConfigDTO.description}">description</div>
                             </div>
@@ -133,5 +133,5 @@
 </div>
 
 <customFoot layout:fragment="customFoot">
-    <script type="text/javascript" th:src="@{|/static/themes/${siteConfigDTO.webtheme}/js/index.js|}"></script>
+    <script type="text/javascript" th:src="@{|/themes/${siteConfigDTO.webtheme}/js/index.js|}"></script>
 </customFoot>

@@ -13,9 +13,9 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>登录 - Bugucms</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/bugucms/css/bugucms.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/static/css/sign.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/bugucms/css/bugucms.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/css/sign.css}">
     <script type="text/javascript" th:inline="javascript">
         (window.top === window.self) || (window.top.location.href = window.self.location.href);
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
@@ -45,7 +45,7 @@
         <label class="layui-form-label"><i class="layui-icon layui-icon-vercode"></i> 验证码</label>
         <div class="layui-input-block lau-sign-code">
             <input type="text" name="captcha" value="1234" placeholder="请输入图形验证码" autocomplete="off" class="layui-input">
-            <img src="https://www.oschina.net/action/user/captcha" alt="图形验证码" class="lau-sign-captcha">
+            <img th:src="@{/common/image/captcha}" alt="图形验证码" class="lau-sign-captcha">
         </div>
     </div>
     <div class="layui-form-item">
@@ -73,9 +73,9 @@
 </div>
 
 </body>
-<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
 <script type="text/javascript">
-    layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('login');
-    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
+    layui.config({base: BUGUCMS_BASE_URL + 'js/'}).use('login');
+    layui.config({base: BUGUCMS_BASE_URL + 'lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
 </script>
 </html>

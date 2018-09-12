@@ -9,11 +9,12 @@
         <result column="option_value" property="optionValue"/>
     </resultMap>
     <select id="get_option_by_group" resultMap="resultMap">
-      SELECT
-        option_name,option_value
-      FROM
-        bg_options
-      WHERE
-        option_group = #{optionGroup}#
-</select>
+      SELECT option_name,option_value
+      FROM bg_options
+      WHERE option_group = #{optionGroup}
+    </select>
+    <update id="update_option_by_group">
+        UPDATE bg_options SET option_value = #{optionValue}
+        WHERE option_name = #{optionName} AND option_group = #{optionGroup}
+    </update>
 </mapper>

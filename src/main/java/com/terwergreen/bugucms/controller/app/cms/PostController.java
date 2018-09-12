@@ -38,12 +38,7 @@ public class PostController extends BGBaseController {
                                  @PathVariable(name = "postId") String postId) throws Exception {
         //去除后缀
         postId = postId.replace(".html", "");
-        //文章ID和文章别名分开处理
-        if (StringUtils.isNumeric(postId)) {
-            logger.debug("文章ID为：" + postId);
-        } else {
-            logger.debug("文章别名为：" + postId);
-        }
+
         //查询分类
         //logger.debug("分类为：" + categoryId);
         ModelAndView mv = new ModelAndView();
@@ -61,7 +56,15 @@ public class PostController extends BGBaseController {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
 
-            post = postService.getPostBySlug(postId);
+            //文章ID和文章别名分开处理
+            if (StringUtils.isNumeric(postId)) {
+                logger.debug("文章ID为：" + postId);
+                post = postService.getPostById(Integer.parseInt(postId));
+            } else {
+                logger.debug("文章别名为：" + postId);
+                post = postService.getPostBySlug(postId);
+            }
+
             //将Markdown转换为Html显示
             String htmlContent = MarkdownUtils.md2html(post.getPostContent());
             post.setPostContent(htmlContent);

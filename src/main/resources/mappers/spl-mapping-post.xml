@@ -3,20 +3,50 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bgapp">
-    <!-- 获取最新文章 -->
-    <select id="get_posts_by_user" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_author = 1 order by post_modified desc limit 0,10
+    <!-- 根据类型获取文章 -->
+    <resultMap id="postMap" type="com.terwergreen.bugucms.dto.PostDTO">
+        <id column="post_id" property="postId"/>
+        <result column="meta_key" property="metaKey" />
+        <result column="meta_value" property="metaValue" />
+        <result column="post_finished" property="postFinished" />
+        <result column="comment_count" property="commentCount" />
+        <result column="post_name" property="postSlug" />
+        <result column="post_title" property="postTitle" />
+        <result column="post_content" property="postContent" />
+        <result column="post_date" property="postDate" />
+        <!-- 定义多对一关联信息（每个文章对应一个作者） -->
+        <association property="sysUser" resultMap="userMap"/>
+    </resultMap>
+    <select id="get_posts_by_type" resultMap="postMap">
+        SELECT p.post_id,pm.meta_key,ifnull(pm.meta_value,'文章') as meta_value,p.post_finished,p.comment_count, p.post_name, p.post_title,p.post_content,p.post_date,
+        su.user_name,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,
+        sr.id as role_id,sr.name as role_name,sr.cn_name
+        FROM bg_posts p
+        LEFT JOIN bg_postmeta pm ON pm.post_id = p.post_id
+        LEFT JOIN sys_user su ON su.id = p.post_author
+        LEFT JOIN sys_role_user sru on su.id= sru.sys_user_id
+        LEFT JOIN sys_role sr on sru.sys_role_id = sr.id
+        WHERE p.post_status = 'publish'
+        <if test="postType!=null">
+            AND p.post_type = #{postType}
+        </if>
+        <if test="userId!=null">
+            AND p.post_author = #{userId}
+        </if>
+        <if test="metaKey!=null">
+            AND pm.meta_key = #{metaKey}
+        </if>
+        <if test="metaValue!=null">
+            AND pm.meta_value = #{metaValue}
+        </if>
+        ORDER BY post_modified DESC
     </select>
-    <!-- 获取单个文章 -->
+    <!-- 根据别名获取单个文章 -->
     <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_name = #{slug}
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_name = #{slug}
     </select>
-    <!-- 获取单个文章 -->
+    <!-- 根据ID获取单个文章 -->
     <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_id = #{postId}
-    </select>
-    <!-- 获取分页文章 -->
-    <select id="get_posts_by_page" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts order by post_modified desc
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_id = #{postId}
     </select>
 </mapper>

@@ -18,20 +18,6 @@
                         <div class="menu-container">
                             <ul id="menu" class="top-menu">
                                 <div th:with="condition=${userDTO != null}" th:remove="tag">
-                                    <!--<span th:if="${condition}" th:remove="tag">-->
-                                    <!--<li>欢迎您：<span th:text="${userDTO.nickName}">nickName</span>，-->
-                                    <!--<a id="logout" href="javascript:void(0);" title="退出">退出</a>-->
-                                    <!--</li>-->
-                                    <!--</span>-->
-                                    <!--<span th:unless="${condition}" th:remove="tag">-->
-                                    <!--<li id="menu-item-01" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
-                                    <!--<a th:href="@{/auth/register}"><i class="iconfont"></i>注册</a>-->
-                                    <!--</li>-->
-                                    <!--<li id="menu-item-02" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">-->
-                                    <!--<a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>-->
-                                    <!--</li>-->
-                                    <!--</span>-->
-
                                     <span sec:authorize="!hasRole('ROLE_ADMIN')">
                                         <li id="menu-item-03" class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
                                             <a th:href="@{/auth/login}"><i class="iconfont"></i>登录
@@ -54,7 +40,7 @@
 
                                     <span sec:authorize="hasRole('ROLE_ADMIN')">
                                         <li>
-                                            <a th:href="@{|/${siteConfigDTO.adminpath}/|}">后台管理</a>
+                                            <a th:href="@{|/${siteConfigDTO.adminpath}|}">后台管理</a>
                                         </li>
                                     </span>
                                 </div>
@@ -65,41 +51,6 @@
                                         随笔
                                     </a>
                                 </li>
-                                <!--<li id="menu-item-2458"-->
-                                <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2458">-->
-                                <!--<a th:href="@{/music}">-->
-                                <!--<i class="iconfont icon-yinle"></i>-->
-                                <!--音乐-->
-                                <!--</a>-->
-                                <!--</li>-->
-                                <!--<li id="menu-item-2169"-->
-                                <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2169">-->
-                                <!--<a th:href="@{/plan-thin}">-->
-                                <!--<i class="iconfont"></i>-->
-                                <!--计划薄-->
-                                <!--</a>-->
-                                <!--</li>-->
-                                <!--<li id="menu-item-964"-->
-                                <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-964">-->
-                                <!--<a th:href="@{/read-people}">-->
-                                <!--<i class="iconfont"></i>-->
-                                <!--读者墙-->
-                                <!--</a>-->
-                                <!--</li>-->
-                                <!--<li id="menu-item-968"-->
-                                <!--class="menu-item menu-item-type-post_type menu-item-object-page menu-item-968">-->
-                                <!--<a th:href="@{/file}">-->
-                                <!--<i class="iconfont"></i>-->
-                                <!--博客归档-->
-                                <!--</a>-->
-                                <!--</li>-->
-                                <!--<li id="menu-item-2689"-->
-                                <!--class="menu-item menu-item-type-custom menu-item-object-custom menu-item-2689">-->
-                                <!--<a th:href="@{/go/luck}">-->
-                                <!--<i class="iconfont"></i>-->
-                                <!--试试手气-->
-                                <!--</a>-->
-                                <!--</li>-->
                                 <li id="menu-item-2196"
                                     class="menu-item menu-item-type-post_type menu-item-object-page menu-item-2196">
                                     <a th:href="@{/about}">
@@ -120,7 +71,7 @@
                         <hgroup class="logo-site">
                             <h1 class="site-title">
                                 <a th:href="@{/}">
-                                    <img th:src="@{|/static/themes/${siteConfigDTO.webtheme}/logo-big.png|}"
+                                    <img th:src="@{|/themes/${siteConfigDTO.webtheme}/logo-big.png|}"
                                          th:title="|${siteConfigDTO.webname}|" rel="home">
                                     <span class="site-name" th:text="${siteConfigDTO.webname}">webname</span>
                                 </a>
@@ -146,30 +97,30 @@
                                         </li>
                                         <li id="menu-item-2917"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-2917">
-                                            <a th:href="@{/backend/}">
+                                            <a th:href="@{/backend}">
                                                 <i class="iconfont"></i>
                                                 后端
                                             </a>
                                         </li>
                                         <li id="menu-item-1639"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-1639">
-                                            <a th:href="@{/web/}">
+                                            <a th:href="@{/web}">
                                                 <i class="fa fa-html5"></i>
                                                 前端
                                             </a>
                                         </li>
                                         <li id="menu-item-87"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-87">
-                                            <a th:href="@{resource}">
+                                            <a th:href="@{/resource}">
                                                 <i class="iconfont"></i>
                                                 资源
                                             </a>
                                         </li>
                                         <li id="menu-item-34"
                                             class="menu-item menu-item-type-taxonomy menu-item-object-category menu-item-34">
-                                            <a th:href="@{/talk/}">
+                                            <a th:href="@{/skill}">
                                                 <i class="iconfont icon-youxian"></i>
-                                                随笔
+                                                技巧
                                             </a>
                                         </li>
                                         <li id="menu-item-288"
@@ -198,7 +149,7 @@
                 </a>
                 <div id="searchbar">
                     <form method="get" id="searchform" th:action="@{/}">
-                        <input type="text" value="" name="s" id="s" placeholder="输入搜索内容" required="">
+                        <input type="text" value="" name="s" id="s" placeholder="输入搜索内容" required>
                         <button type="submit" id="searchsubmit">搜索</button>
                     </form>
                 </div>

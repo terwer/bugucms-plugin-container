@@ -26,7 +26,7 @@
 
 <footer layout:fragment="customFooter">
     <script type="text/javascript">
-        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+        layui.config({base: BUGUCMS_BASE_URL + 'lib/'}).extend({
             conf: 'bugucms/conf',
             // common: 'bugucms/common',
             tips: 'bugucms/extend/tips'
@@ -52,7 +52,8 @@
             //第一个实例
             table.render({
                 elem: '#postTable',
-                url: BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/postManage/api/post/list', //数据接口
+                url: BUGUCMS_BASE_URL + 'api/post/list', //数据接口
+                method: 'post',
                 page: true,//开启分页
                 cols: [
                     [ //表头

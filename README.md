@@ -1,6 +1,27 @@
 # bugucms
 轻量级、插件化的内容管理系统
 
+![BuguCMS](logo.jpg)
+
+释义：BuguCMS，全称 Bugu Content Manage System，中文即布谷内容管理系统，灵感取自布谷鸟，鸣声响亮，二声一度，希望用户在使用时像耳边时刻响起布谷鸟叫声一样愉悦。
+
+# 亮点
+## 插件支持，支持自定义插件和扩展
+## 多模板引擎支持，支持主流模板引擎Thymeleaf、Freemarker、Velocity
+## 多数据库支持，主持主流数据库Oracle、SQL Server、MySQL
+
+# 演示
+
+http://www.terwergreen.com
+
+# 截图
+
+![首页](screenshorts/home.png)
+
+![后台登录](screenshorts/login.png)
+
+![后台管理](screenshorts/admin.png)
+
 # 相关技术
 Centos 7.4      
 JDK1.8.162   
@@ -38,14 +59,13 @@ bootstrap 3.3.7
 Build --> Build Artifacts --> 选择要打包编译的war --> 在项目target文件夹下出现新的war包   
 或者使用eclipse    
 Run as -->Maven Build -->  在弹出的框里面输入命令 ``package``，点击run，等待任务完成出现 ``BUILD SUCCES``，``ROOT.war``就会被打包好在``target``目录下     
-
 （3）将war包放到tomcat的webapps目录下  
 
 ## 发布流程
 （1）打包之前copy``pom-pro-tomcat.xml``到``pom.xml``      
-（2）打包之前``application-pro.properties``配置数据库用户名，密码 copy到``application.properties``  
-（3）部署之前初始化ddl表结构（如果需要）      
-（4）部署之前``20180407-pro.sql``初始化数据    
+（2）打包之前修改``application.properties``改为``spring.profiles.active=dev``          
+（3）部署之前初始化ddl表结构（如果需要），例如MySQL目录为db/MySQL      
+（4）部署之前``20180720-pro.sql``初始化数据（如果需要），例如MySQL目录为db/MySQL        
 
 ## 参考
 [玩转spring boot——负载均衡与session共享](http://www.cnblogs.com/GoodHelper/p/6263240.html)  

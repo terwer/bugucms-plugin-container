@@ -1,0 +1,63 @@
+/**
+ @Name：layuiBlog
+ @Author：xuzhiwen
+ @Site：http://www.layui.com/template/xianyan/
+ @License：MIT
+ */
+/* ===========
+	工具样式
+   =========== */
+.pull-right{
+    float: right !important;
+}
+
+.pull-left{
+    float: left !important;
+}
+
+/* 辅助 */
+.lay-blog .container .count .layblog-this{color: #FF5722 !important;}
+
+/* start container */
+.lay-blog .container-wrap{margin:0px auto 0;min-height:100%;padding:40px 0 160px 0;box-sizing: border-box;}
+.lay-blog .container{width:750px;margin:0 auto;}
+.lay-blog .container h4{margin-bottom: 15px; line-height: 70px;background: #fff;font-size:16px;}
+.lay-blog .container h4 p{padding-left:40px;color:#666666;}
+.lay-blog .container h4 p i{font-size:26px;padding-right:10px;position:relative;top:3px;}
+.lay-blog .container .item{margin-bottom: 15px; background: #fff; padding-top: 20px;}
+.lay-blog .container .item .item-box{padding:0 35px 24px;font-size:14px;}
+.lay-blog .container .item h3{line-height:36px;font-size:20px;}
+.lay-blog .container .item h5{line-height: 38px;color:#a5a5a5;}
+.lay-blog .container .item p{line-height:30px; padding-bottom: 10px;}
+.lay-blog .container .item .comment{width: 100%; line-height: 56px; background: #f9f9f9; font-size: 14px; overflow:hidden;}
+.lay-blog .container .item .comment a{display:inline-block;width:50%;text-align:center;float: left;}
+.lay-blog .container .item .comment a+a{border-left:1px solid #efefef;margin-left:-1px;}
+.lay-blog .container .item-btn{text-align:center;margin-top:20px;}
+
+
+@media only screen and (max-width:  750px) {
+    .lay-blog .container{width:100%; margin: 0 auto 70px;}
+    .lay-blog .container .contar-wrap{padding: 0 10px 10px;}
+
+    .lay-blog .container-wrap{padding-top: 20px;}
+}
+/* end container */
+
+/* start message*/
+.container-message textarea{
+    font-size:14px;
+}
+.lay-blog .container-message .item-btn{
+    text-align: right;
+}
+.lay-blog .container-message .item-btn{margin-bottom: 50px;}
+.lay-blog .container-message .info-item{font-size:14px;margin-bottom: 33px;}
+.lay-blog .container-message .info-img{cursor: pointer;float: left;padding-right:20px;width: 50px;}
+.lay-blog .container-message .info-text{padding-left:88px;}
+.lay-blog .container-message .title{overflow:hidden;margin-bottom:10px;}
+.lay-blog .container-message .title .name{float: left; display: block; line-height: 38px; color:#787878;}
+.info-intr{line-height: 24px;}
+.lay-blog .container-message .title .info-img{float: right;color:#4b5a75;    width: auto;}
+.lay-blog .container-message .title .info-img i{font-size: 24px;padding-right: 5px;position: relative;top: 4px;}
+.lay-blog .container-message .paging{text-align:center;/* padding-top:30px; */}
+/* end message*/

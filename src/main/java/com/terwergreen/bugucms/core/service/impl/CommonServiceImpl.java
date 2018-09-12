@@ -14,14 +14,14 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Service    
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@Service
+@SuppressWarnings({"unchecked", "rawtypes"})
 public class CommonServiceImpl extends BaseService implements CommonService {
 
     @Autowired
     private CommonDAO commonDAO;
 
-	@Override
+    @Override
     public SiteConfigDTO getSiteConfig() throws BusinessServiceException {
         SiteConfigDTO siteConfigDTO = null;
         try {
@@ -34,7 +34,12 @@ public class CommonServiceImpl extends BaseService implements CommonService {
         return siteConfigDTO;
     }
 
-	@Override
+    @Override
+    public Integer updateSiteConfig(String optionName, String optionValue) throws BusinessServiceException {
+        return updateOption(optionName, optionValue, Constants.SITE_CONFIG_KEY);
+    }
+
+    @Override
     public Object getOption(String optionGroup) throws BusinessServiceException {
         List list = null;
         try {
@@ -52,4 +57,22 @@ public class CommonServiceImpl extends BaseService implements CommonService {
             return list.get(0);
         }
     }
+
+
+    @Override
+    public Integer updateOption(String optionName, String optionValue, String optionGroup) throws BusinessServiceException {
+        Integer result = 0;
+        try {
+            Map paramMap = new HashMap();
+            paramMap.put("optionName", optionName);
+            paramMap.put("optionValue", optionValue);
+            paramMap.put("optionGroup", optionGroup);
+            result = commonDAO.update("update_option_by_group", paramMap);
+        } catch (Exception e) {
+            logger.error("获取站点配置异常", e);
+            throw new BusinessServiceException(e);
+        }
+        return result;
+    }
+
 }
