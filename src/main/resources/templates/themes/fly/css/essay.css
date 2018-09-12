@@ -15,18 +15,6 @@
     float: left !important;
 }
 
-/* ==============
-	自定义页面样式
-   ============== */
-html,body{
-    height: 100%;
-}
-body{
-    font-size: 1.2rem;
-    line-height: 1.5;
-    background: #f2f2f2;
-}
-
 /* 辅助 */
 .lay-blog .container .count .layblog-this{color: #FF5722 !important;}
 
