@@ -14,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -54,6 +55,8 @@ public class HomePageController extends BGBaseController {
             mv.addObject("sysUserDTO", sysUserDTO);
             mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
+        } catch (TemplateInputException tie) {
+
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);
@@ -61,8 +64,8 @@ public class HomePageController extends BGBaseController {
         return mv;
     }
 
-    @RequestMapping(value = "/backend", method = RequestMethod.GET)
-    public ModelAndView backend(HttpServletRequest request) throws Exception {
+    @RequestMapping(value = "/essay.html", method = RequestMethod.GET)
+    public ModelAndView shuoshuo(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
         List<PostDTO> postList = null;
@@ -78,11 +81,9 @@ public class HomePageController extends BGBaseController {
             if (currentUser != "anonymousUser") {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
-            postList = postService.getPosts();
-            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
+            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/essay");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
@@ -91,97 +92,7 @@ public class HomePageController extends BGBaseController {
         return mv;
     }
 
-    @RequestMapping(value = "/web", method = RequestMethod.GET)
-    public ModelAndView web(HttpServletRequest request) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        SysUserDTO sysUserDTO = null;
-        List<PostDTO> postList = null;
-        ModelAndView mv = new ModelAndView();
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-            if (null == siteConfigDTO) {
-                logger.error("站点配置异常:siteConfigDTO=null");
-                throw new WebException("站点配置异常:siteConfigDTO=null");
-            }
-            //获得当前登陆用户对应的对象。
-            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (currentUser != "anonymousUser") {
-                sysUserDTO = (SysUserDTO) currentUser;
-            }
-            postList = postService.getPosts();
-            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
-            mv.addObject("siteConfigDTO", siteConfigDTO);
-            mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("postList", postList);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return mv;
-    }
-
-    @RequestMapping(value = "/resource", method = RequestMethod.GET)
-    public ModelAndView resource(HttpServletRequest request) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        SysUserDTO sysUserDTO = null;
-        List<PostDTO> postList = null;
-        ModelAndView mv = new ModelAndView();
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-            if (null == siteConfigDTO) {
-                logger.error("站点配置异常:siteConfigDTO=null");
-                throw new WebException("站点配置异常:siteConfigDTO=null");
-            }
-            //获得当前登陆用户对应的对象。
-            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (currentUser != "anonymousUser") {
-                sysUserDTO = (SysUserDTO) currentUser;
-            }
-            postList = postService.getPosts();
-            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
-            mv.addObject("siteConfigDTO", siteConfigDTO);
-            mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("postList", postList);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return mv;
-    }
-
-    @RequestMapping(value = "/skill", method = RequestMethod.GET)
-    public ModelAndView skill(HttpServletRequest request) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        SysUserDTO sysUserDTO = null;
-        List<PostDTO> postList = null;
-        ModelAndView mv = new ModelAndView();
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-            if (null == siteConfigDTO) {
-                logger.error("站点配置异常:siteConfigDTO=null");
-                throw new WebException("站点配置异常:siteConfigDTO=null");
-            }
-            //获得当前登陆用户对应的对象。
-            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (currentUser != "anonymousUser") {
-                sysUserDTO = (SysUserDTO) currentUser;
-            }
-            postList = postService.getPosts();
-            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
-            mv.addObject("siteConfigDTO", siteConfigDTO);
-            mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("postList", postList);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return mv;
-    }
-
-    @RequestMapping(value = "/guestbook", method = RequestMethod.GET)
+    @RequestMapping(value = "/guestbook.html", method = RequestMethod.GET)
     public ModelAndView guestbook(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
@@ -209,7 +120,7 @@ public class HomePageController extends BGBaseController {
         return mv;
     }
 
-    @RequestMapping(value = "/about", method = RequestMethod.GET)
+    @RequestMapping(value = "/about.html", method = RequestMethod.GET)
     public ModelAndView about(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
@@ -227,34 +138,6 @@ public class HomePageController extends BGBaseController {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/about");
-            mv.addObject("siteConfigDTO", siteConfigDTO);
-            mv.addObject("sysUserDTO", sysUserDTO);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
-        } catch (Exception e) {
-            logger.error("系统异常" + e.getLocalizedMessage(), e);
-            throw new WebException(e);
-        }
-        return mv;
-    }
-
-    @RequestMapping(value = "/shuoshuo", method = RequestMethod.GET)
-    public ModelAndView shuoshuo(HttpServletRequest request) throws Exception {
-        SiteConfigDTO siteConfigDTO = null;
-        SysUserDTO sysUserDTO = null;
-        List<PostDTO> postList = null;
-        ModelAndView mv = new ModelAndView();
-        try {
-            siteConfigDTO = commonService.getSiteConfig();
-            if (null == siteConfigDTO) {
-                logger.error("站点配置异常:siteConfigDTO=null");
-                throw new WebException("站点配置异常:siteConfigDTO=null");
-            }
-            //获得当前登陆用户对应的对象。
-            Object currentUser = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-            if (currentUser != "anonymousUser") {
-                sysUserDTO = (SysUserDTO) currentUser;
-            }
-            mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/shuoshuo");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
