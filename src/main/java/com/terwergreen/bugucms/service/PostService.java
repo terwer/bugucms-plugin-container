@@ -40,6 +40,38 @@ public interface PostService {
      */
     PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize, Map paramMap) throws BusinessServiceException;
 
+    /**
+     * 获取博客信息
+     *
+     * @param appkey
+     * @param username
+     * @param password
+     * @return
+     * @throws BusinessServiceException
+     */
     List getUsersBlogs(String appkey, String username, String password) throws BusinessServiceException;
 
+    /**
+     * 新建文章
+     *
+     * @param post 文章
+     * @return 新文章的ID
+     */
+    Integer newPost(PostDTO post);
+
+    /**
+     * 更新文章
+     *
+     * @param post 文章
+     * @return 是否修改成功
+     */
+    boolean editPostById(PostDTO post);
+
+    /**
+     * 根据ID删除文章
+     *
+     * @param postId 文章ID
+     * @return 是否删除成功
+     */
+    boolean deletePostById(Integer postId);
 }

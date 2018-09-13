@@ -49,4 +49,10 @@
     <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
         SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_id = #{postId}
     </select>
+    <!-- 新增文章 -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="id" parameterType="com.terwergreen.bugucms.dto.PostDTO">
+        INSERT INTO bg_posts(post_type,post_author,post_date,post_modified,post_content)
+        VALUES
+        (#{postType},#{postAuthor},current_timestamp,current_timestamp,#{postContent})
+    </insert>
 </mapper>

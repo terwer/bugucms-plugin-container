@@ -146,4 +146,25 @@ public class PostServiceImpl implements PostService {
         usersBlogs.add(userBlog);
         return usersBlogs;
     }
+
+    @Override
+    public Integer newPost(PostDTO post) {
+        Integer postId = 0;
+        int count = (int) commonDAO.insertByObject("insertPost", post);
+        if (count > 0) {
+            logger.info("新增文章成功");
+            postId = post.getPostId();
+        }
+        return postId;
+    }
+
+    @Override
+    public boolean editPostById(PostDTO post) {
+        return false;
+    }
+
+    @Override
+    public boolean deletePostById(Integer postId) {
+        return false;
+    }
 }

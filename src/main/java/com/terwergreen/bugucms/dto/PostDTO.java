@@ -25,6 +25,18 @@ public class PostDTO {
     @Getter
     private String postSlug;
     /**
+     * 文章醉着
+     */
+    @Getter
+    @Setter
+    private Integer postAuthor;
+    /**
+     * 文章类型
+     */
+    @Getter
+    @Setter
+    private String postType;
+    /**
      * 文章标题
      */
     @Getter
