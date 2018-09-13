@@ -58,6 +58,7 @@ public class PostApiController extends BGBaseController {
         try {
             super.preCheck(model, request, response);
             Map paramMap = new HashMap();
+            paramMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
             PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit, paramMap);
             resultMap.put("code", 0);
             resultMap.put("msg", "success");
@@ -88,7 +89,7 @@ public class PostApiController extends BGBaseController {
 
         try {
             Map paramMap = new HashMap();
-            paramMap.put("postType", "essay");
+            paramMap.put("postType", PostTypeEmum.POST_TYPE_ESSAY.getName());
             PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit, paramMap);
 
             //转换成说说需要的格式
@@ -98,7 +99,7 @@ public class PostApiController extends BGBaseController {
                 Date postDate = post.getPostDate();
                 String postTitle = post.getPostTitle();
                 String postDesc = post.getPostDesc();
-                // String postContent = post.getPostContent();
+                String postContent = post.getPostContent();
 
                 Map timelineMap = new HashMap();
                 // SimpleDateFormat keySdf = new SimpleDateFormat("yyyyMMddHHmmss");
@@ -106,13 +107,12 @@ public class PostApiController extends BGBaseController {
                 timelineMap.put("key", postId);
                 SimpleDateFormat yearSdf = new SimpleDateFormat("yyyy");
                 timelineMap.put("year", yearSdf.format(postDate));
-                if (!StringUtils.isEmpty(postTitle.trim())) {
-                    timelineMap.put("title", postTitle);
-                } else {
-                    SimpleDateFormat titleSdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
-                    timelineMap.put("title", titleSdf.format(postDate));
+                SimpleDateFormat titleSdf = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss");
+                timelineMap.put("title", titleSdf.format(postDate));
+                if (postDesc.endsWith("...")) {
+                    postContent = postDesc;
                 }
-                timelineMap.put("content", postDesc);
+                timelineMap.put("content", postContent);
                 timelines.add(timelineMap);
             }
 
@@ -142,16 +142,19 @@ public class PostApiController extends BGBaseController {
     ) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
-            super.preCheck(model, request, response);
+            //登录检测艳后开发 TODO
+            //super.preCheck(model, request, response);
+
             PostDTO post = new PostDTO();
             //获得当前登陆用户对应的对象
             SysUserDTO sysUser = null;
             if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof SysUserDTO) {
                 sysUser = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+                post.setPostAuthor(sysUser.getId());
             } else {
-                throw new WebException(Constants.ADMIN_USER_NOT_LOGIN);
+                post.setPostAuthor(1);
+                //throw new WebException(Constants.ADMIN_USER_NOT_LOGIN);
             }
-            post.setPostAuthor(sysUser.getId());
             if (StringUtils.isEmpty(postType)) {
                 postType = PostTypeEmum.POST_TYPE_ESSAY.getName();
             }

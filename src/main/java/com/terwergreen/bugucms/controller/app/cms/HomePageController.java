@@ -8,6 +8,7 @@ import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.util.PostTypeEmum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -54,6 +55,7 @@ public class HomePageController extends BGBaseController {
             }
 
             Map paramMap = new HashMap();
+            paramMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
             postList = postService.getRecentPosts(paramMap);
             paramMap.put("metaKey", "ding");
             dingPostList = postService.getRecentPosts(paramMap);
@@ -74,10 +76,10 @@ public class HomePageController extends BGBaseController {
     }
 
     @RequestMapping(value = "/essay.html", method = RequestMethod.GET)
-    public ModelAndView shuoshuo(HttpServletRequest request) throws Exception {
+    public ModelAndView essay(HttpServletRequest request) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
-        List<PostDTO> essayList = null;
+        // List<PostDTO> essayList = null;
         ModelAndView mv = new ModelAndView();
         try {
             siteConfigDTO = commonService.getSiteConfig();
@@ -90,14 +92,14 @@ public class HomePageController extends BGBaseController {
             if (currentUser != "anonymousUser") {
                 sysUserDTO = (SysUserDTO) currentUser;
             }
-            Map paramMap = new HashMap();
-            paramMap.put("postType", "essay");
-            essayList = postService.getRecentPosts(paramMap);
+            // Map paramMap = new HashMap();
+            // paramMap.put("postType", PostTypeEmum.POST_TYPE_ESSAY.getName());
+            // essayList = postService.getRecentPosts(paramMap);
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/essay");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("essayList", essayList);
-            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",essayList=" + essayList);
+            // mv.addObject("essayList", essayList);
+            logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

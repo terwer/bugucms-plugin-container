@@ -32,6 +32,7 @@ public class HtmlUtils {
             //return "截取长度超过文件内容总长";
             return parseHtml(html);
         }
-        return parseHtml(html.substring(0, length) + "...");
+        String allText = parseHtml(html);
+        return allText.substring(0, length) + "...";
     }
 }
