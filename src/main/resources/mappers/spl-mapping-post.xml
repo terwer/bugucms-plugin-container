@@ -26,28 +26,34 @@
         LEFT JOIN sys_user su ON su.id = p.post_author
         LEFT JOIN sys_role_user sru on su.id= sru.sys_user_id
         LEFT JOIN sys_role sr on sru.sys_role_id = sr.id
-        WHERE p.post_status = 'publish'
-        <if test="postType!=null">
+        WHERE 1=1
+        <if test="postStatus!=null and postStatus!=''">
+            AND p.post_status = #{postStatus}
+        </if>
+        <if test="postType!=null and postType!=''">
             AND p.post_type = #{postType}
         </if>
         <if test="userId!=null">
             AND p.post_author = #{userId}
         </if>
-        <if test="metaKey!=null">
+        <if test="metaKey!=null and metaKey!=''">
             AND pm.meta_key = #{metaKey}
         </if>
-        <if test="metaValue!=null">
+        <if test="metaValue!=null and metaValue!=''">
             AND pm.meta_value = #{metaValue}
+        </if>
+        <if test="search!=null and search!=''">
+            AND ((p.post_title LIKE concat(concat('%',#{search}),'%')) OR (p.post_content LIKE concat(concat('%',#{search}),'%')))
         </if>
         ORDER BY post_modified DESC
     </select>
     <!-- 根据别名获取单个文章 -->
     <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_name = #{slug}
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
     </select>
     <!-- 根据ID获取单个文章 -->
     <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate FROM bg_posts WHERE post_id = #{postId}
+        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
     </select>
     <!-- 新增文章 -->
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="post_id" parameterType="com.terwergreen.bugucms.dto.PostDTO">

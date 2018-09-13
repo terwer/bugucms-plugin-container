@@ -8,10 +8,12 @@ import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.util.PostStatusEnum;
 import com.terwergreen.bugucms.util.PostTypeEmum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,7 +38,7 @@ public class HomePageController extends BGBaseController {
     /***********/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(HttpServletRequest request) throws Exception {
+    public ModelAndView home(HttpServletRequest request, String q) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
         List<PostDTO> dingPostList = null;
@@ -55,10 +57,17 @@ public class HomePageController extends BGBaseController {
             }
 
             Map paramMap = new HashMap();
+            paramMap.put("postStatus", PostStatusEnum.POST_STATUS_PUBLISH.getName());
             paramMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
+            if (!StringUtils.isEmpty(q)) {
+                paramMap.put("search", q);
+            }
             postList = postService.getRecentPosts(paramMap);
-            paramMap.put("metaKey", "ding");
-            dingPostList = postService.getRecentPosts(paramMap);
+
+            Map dingParamMap = new HashMap();
+            dingParamMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
+            dingParamMap.put("metaKey", "ding");
+            dingPostList = postService.getRecentPosts(dingParamMap);
 
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
             mv.addObject("siteConfigDTO", siteConfigDTO);

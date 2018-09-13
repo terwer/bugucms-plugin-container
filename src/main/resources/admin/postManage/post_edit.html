@@ -30,8 +30,26 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle"
-                                   autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章类型</label>
+                        <div class="layui-input-block">
+                            <select lay-filter="postTypeChange">
+                                <option value="post" selected>文章</option>
+                                <option value="essay">随笔</option>
+                                <option value="page">页面</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
+                        <label class="layui-form-label">文章状态</label>
+                        <div class="layui-input-block">
+                            <select>
+                                <option value="publish" selected>已发布</option>
+                                <option value="draft">草稿</option>
+                            </select>
                         </div>
                     </div>
                     <div class="layui-form-item layui-form-text">
@@ -177,6 +195,17 @@
                     title: '最终的提交信息'
                 })
                 return false;
+            });
+
+            form.on('select(postTypeChange)', function (data) {
+                console.log(data.value);
+                var postType = data.value;
+                alert(postType);
+                if (postType == 'essay') {
+                    $('input[name="postTitle"]').attr("disabled", true);
+                } else {
+                    $('input[name="postTitle"]').attr("disabled", false);
+                }
             });
         });
     </script>
