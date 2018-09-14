@@ -69,9 +69,9 @@
                         <label class="layui-form-label">发布日期</label>
                         <div class="layui-input-block">
                             <input type="text" id="postDdate" name="postDate"
-                                   th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd hh:MM:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd hh:MM:ss'))}"
+                                   th:value="${post?.postDate==null?(#dates.format(#dates.createNow(), 'yyyy-MM-dd HH:mm:ss')):(#dates.format(post.postDate, 'yyyy-MM-dd HH:mm:ss'))}"
                                    lay-verify="datetime"
-                                   placeholder="yyyy-MM-dd hh:MM:ss" autocomplete="off"
+                                   placeholder="yyyy-MM-dd HH:mm:ss" autocomplete="off"
                                    class="layui-input">
                         </div>
                     </div>
@@ -81,7 +81,7 @@
                                 <button class="layui-btn" lay-submit="" lay-filter="post-form-submit">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-danger">重置</button>
                                 <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
-                                <a th:href="@{|/post/${postId}.html|}">
+                                <a th:if="${postId>0}" th:href="@{|/post/${postId}.html|}">
                                     <button class="layui-btn layui-btn-normal" style="margin-left: 10px;" id="preview">预览</button>
                                 </a>
                             </div>
@@ -250,7 +250,6 @@
                         console.log("postId:" + postId);
                         if (postId > 0) {
                             layer.msg('发布成功', {icon: 1});
-                            window.location.reload();
                         } else {
                             layer.msg('发布失败', {icon: 2});
                         }

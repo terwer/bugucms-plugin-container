@@ -62,7 +62,7 @@
                         </a>
                         <h2>
                             <a class="layui-badge" style="top: 0;" th:text="${dingList.metaValue}">公告</a>
-                            <a th:href="@{|/post/${dingList.postSlug}.html|}" th:text="${dingList.postTitle}">标题</a>
+                            <a th:href="@{|/post/${dingList.postSlug eq '' ?dingList.postId:dingList.postSlug}.html|}" th:text="${dingList.postTitle}">标题</a>
                         </h2>
                         <div class="fly-list-info">
                             <a th:href="@{/}" link>
@@ -110,7 +110,7 @@
                         </a>
                         <h2>
                             <a class="layui-badge" th:text="${list?.metaValue}">动态</a>
-                            <a th:href="@{|/post/${list.postSlug}.html|}" th:text="${list.postTitle}">标题</a>
+                            <a th:href="@{|/post/${list.postSlug eq '' ?list.postId:list.postSlug}.html|}" th:text="${list.postTitle}">标题</a>
                         </h2>
                         <div class="fly-list-info">
                             <a th:href="@{/}" link>

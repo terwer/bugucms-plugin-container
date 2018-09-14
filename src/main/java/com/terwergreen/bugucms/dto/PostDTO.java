@@ -74,7 +74,7 @@ public class PostDTO {
      * 发布时间
      */
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")  //FastJson包使用注解
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:MM")  //格式化前台日期参数注解
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  //格式化前台日期参数注解
     @Getter
     @Setter
     private Date postDate;
