@@ -29,8 +29,8 @@
                 <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
                 <div th:if="${sysUserDTO!=null}" th:remove="tag">
                     <!-- 用户登入后显示 -->
-                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html">我发表的贴</a></li>
-                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="user/index.html#collection">我收藏的贴</a></li>
+                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我发表的贴</a></li>
+                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我收藏的贴</a></li>
                 </div>
             </ul>
 
@@ -90,7 +90,9 @@
                     </div>
                     <div class="detail-hits" id="LAY_jieAdmin" data-id="123">
                         <span style="padding-right: 10px; color: #FF7200">悬赏：60飞吻</span>
-                        <span class="layui-btn layui-btn-xs jie-admin" type="edit" sec:authorize="hasRole('ROLE_ADMIN')"><a href="add.html">编辑此贴</a></span>
+                        <span class="layui-btn layui-btn-xs jie-admin" type="edit" sec:authorize="hasRole('ROLE_ADMIN')">
+                            <a th:href="@{|/${siteConfigDTO.adminpath}/?action=postManage/edit/${post.postId}&title=编辑文章|}">编辑</a>
+                        </span>
                     </div>
                 </div>
                 <div class="detail-body photos">

@@ -81,6 +81,9 @@
                                 <button class="layui-btn" lay-submit="" lay-filter="post-form-submit">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-danger">重置</button>
                                 <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
+                                <a th:href="@{|/post/${postId}.html|}">
+                                    <button class="layui-btn layui-btn-normal" style="margin-left: 10px;" id="preview">预览</button>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -104,6 +107,11 @@
 
         $(function () {
             fullscreen("screenButton");
+            
+            $("#preview").on("click",function () {
+                var url = $(this).parent().attr("href");
+                top.window.location.href = url;
+            });
         });
 
         /**
