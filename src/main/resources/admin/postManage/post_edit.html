@@ -30,25 +30,25 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                            <input type="text" name="postTitle" th:value="${post?.postTitle}" lay-verify="postTitle" autocomplete="off" placeholder="请输入标题" class="layui-input" th:disabled="${post.postType!=null && post.postType eq 'essay'}">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章类型</label>
                         <div class="layui-input-block">
-                            <select lay-filter="postTypeChange">
-                                <option value="post" selected>文章</option>
-                                <option value="essay">随笔</option>
-                                <option value="page">页面</option>
+                            <select name="postType" lay-filter="post-type-change">
+                                <option value="post" th:selected="${post.postType==null || post.postType eq 'post'}">文章</option>
+                                <option value="essay" th:selected="${post.postType!=null && post.postType eq 'essay'}">随笔</option>
+                                <option value="page" th:selected="${post.postType!=null && post.postType eq 'page'}">页面</option>
                             </select>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">文章状态</label>
                         <div class="layui-input-block">
-                            <select>
-                                <option value="publish" selected>已发布</option>
-                                <option value="draft">草稿</option>
+                            <select name="postStatus">
+                                <option value="publish" selected th:selected="${post.postStatus==null || post.postStatus eq 'publish'}">已发布</option>
+                                <option value="draft" th:selected="${post.postStatus!=null && post.postStatus eq 'draft'}">草稿</option>
                             </select>
                         </div>
                     </div>
@@ -72,7 +72,7 @@
                     <div class="layui-form-item layui-layout-admin">
                         <div class="layui-input-block">
                             <div class="layui-footer" style="left: 0;">
-                                <button class="layui-btn" lay-submit="" lay-filter="component-form-demo1">立即提交</button>
+                                <button class="layui-btn" lay-submit="" lay-filter="post-form-submit">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-danger">重置</button>
                                 <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
                             </div>
@@ -86,7 +86,7 @@
 
 <footer layout:fragment="customFooter">
     <script type="text/javascript" th:src="@{/lib/SimpleMDE/js/simplemde.min.js}"></script>
-    <script type="text/javascript">
+    <script type="text/javascript" th:inline="javascript">
         var simplemde = null;
         $(document).ready(function () {
             simplemde = new SimpleMDE({
@@ -183,21 +183,64 @@
             });
 
             /* 监听提交 */
-            form.on('submit(component-form-demo1)', function (data) {
+            form.on('submit(post-form-submit)', function (data) {
                 var content = simplemde.value();
+                if (data.field.postType == 'post' && data.field.postTitle == '') {
+                    parent.layer.msg('文章标题不能为空', {icon: 2});
+                    return false;
+                }
+                if (data.field.postType == 'page' && data.field.postTitle == '') {
+                    parent.layer.msg('页面标题不能为空', {icon: 2});
+                    return false;
+                }
                 if (content == "") {
-                    parent.layer.msg('文章内容不能为空', {icon: 2});
+                    parent.layer.msg('内容不能为空', {icon: 2});
                     return false;
                 } else {
                     data.field.content = content;
                 }
-                parent.layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                })
+                console.log('最终的提交信息:'+JSON.stringify(data.field))
+                //提交数据到服务器
+                var postId = /*[[${postId}]]*/'/';
+                console.log('postId:' + postId);
+                if (postId > 0) {//修改文章
+                    console.log("修改文章");
+                    $.post(BUGUCMS_BASE_URL + "api/post/update", {
+                        postType: data.field.postType,
+                        postStatus: data.field.postStatus,
+                        postTitle: data.field.postTitle,
+                        postContent: data.field.content,
+                        postDate: data.field.postDate
+                    }, function (res) {
+                        console.log(JSON.stringify(res));
+                        if (res.flag == 1) {
+                            layer.msg('修改成功', {icon: 1});
+                        } else {
+                            layer.msg('修改失败', {icon: 2});
+                        }
+                    });
+                } else {//写文章
+                    console.log("写文章");
+                    $.post(BUGUCMS_BASE_URL + "api/post/new", {
+                        postType: data.field.postType,
+                        postStatus: data.field.postStatus,
+                        postTitle: data.field.postTitle,
+                        postContent: data.field.content,
+                        postDate: data.field.postDate
+                    }, function (res) {
+                        var postId = JSON.stringify(res.data.postId);
+                        console.log("postId:" + postId);
+                        if (postId > 0) {
+                            layer.msg('发布成功', {icon: 1});
+                        } else {
+                            layer.msg('发布失败', {icon: 2});
+                        }
+                    });
+                }
                 return false;
             });
 
-            form.on('select(postTypeChange)', function (data) {
+            form.on('select(post-type-change)', function (data) {
                 console.log(data.value);
                 var postType = data.value;
                 if (postType == 'essay') {

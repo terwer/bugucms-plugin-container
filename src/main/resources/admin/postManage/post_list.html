@@ -17,10 +17,20 @@
         .layui-btn i {
             font-size: 14px !important;
         }
+
+        .table-header {
+            padding: 16px 10px 0 15px;
+        }
     </style>
 </header>
 
 <div layout:fragment="content">
+    <div class="table-header" id="tableHeader">
+        <div class="layui-inline">
+            <input class="layui-input" data-type="reload" id="search" name="search" placeholder="关键字..." autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
     <table id="postTable"></table>
 </div>
 
@@ -62,7 +72,11 @@
                         {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'center'},
                         {
                             field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
-                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + d.postSlug + '.html" target="_blank">' + d.postTitle + '</a>';
+                                var postName = d.postId;
+                                if(isNaN(d.postSlug)){
+                                    postName = d.postSlug;
+                                }
+                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + postName + '.html" target="_blank">' + d.postTitle + '</a>';
                             }
                         },
                         {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'center'},
@@ -77,6 +91,37 @@
                 ],
                 done: function (res, curr, count) {
                     layer.close(myindex);
+                }
+            });
+
+            var active = {
+                reload: function () {
+                    // if($('#search').val()==''){
+                    //     layer.msg('关键字不能为空', {icon: 2});
+                    //     return false;
+                    // }
+                    //执行重载
+                    myindex = layer.load();
+                    table.reload('postTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            search: $('#search').val()
+                        }
+                    });
+                }
+            };
+
+            $('#tableHeader .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+
+            $('#search').on('keypress', function(event){
+                if(event.keyCode == "13") {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
                 }
             });
 

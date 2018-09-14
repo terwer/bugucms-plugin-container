@@ -10,6 +10,7 @@ import com.terwergreen.bugucms.exception.RestException;
 import com.terwergreen.bugucms.exception.WebException;
 import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.util.Constants;
+import com.terwergreen.bugucms.util.PostStatusEnum;
 import com.terwergreen.bugucms.util.PostTypeEmum;
 import com.terwergreen.bugucms.util.RestResponseStates;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -46,7 +47,7 @@ public class PostApiController extends BGBaseController {
 
     @RequestMapping(value = "/api/post/list", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public String getPosts(Model model, HttpServletRequest request, HttpServletResponse response, Integer page, Integer limit) throws Exception {
+    public String getPosts(Model model, HttpServletRequest request, HttpServletResponse response, String postType, String search, Integer page, Integer limit) throws Exception {
         Map resultMap = new HashMap();
 
         if (page == null) {
@@ -59,7 +60,12 @@ public class PostApiController extends BGBaseController {
         try {
             super.preCheck(model, request, response);
             Map paramMap = new HashMap();
-            paramMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
+            if (!StringUtils.isEmpty(postType)) {
+                paramMap.put("postType", postType);
+            }
+            if (!StringUtils.isEmpty(search)) {
+                paramMap.put("search", search);
+            }
             PageInfo<PostDTO> posts = postService.getPostsByPage(page, limit, paramMap);
             resultMap.put("code", 0);
             resultMap.put("msg", "success");
@@ -139,7 +145,10 @@ public class PostApiController extends BGBaseController {
     @ResponseBody
     public RestResponseDTO newPost(Model model, HttpServletRequest request, HttpServletResponse response,
                                    String postType,
-                                   String postContent
+                                   String postStatus,
+                                   String postTitle,
+                                   String postContent,
+                                   String postDate
     ) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
@@ -159,8 +168,21 @@ public class PostApiController extends BGBaseController {
             if (StringUtils.isEmpty(postType)) {
                 postType = PostTypeEmum.POST_TYPE_ESSAY.getName();
             }
+            if (StringUtils.isEmpty(postStatus)) {
+                postStatus = PostStatusEnum.POST_STATUS_PUBLISH.getName();
+            }
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date dtPostDate = sdf.parse(sdf.format(new Date()));
+            if (!StringUtils.isEmpty(postDate)) {
+                dtPostDate = sdf.parse(postDate);
+            }
             post.setPostType(postType);
+            post.setPostStatus(postStatus);
+            if (!StringUtils.isEmpty(postTitle)) {
+                post.setPostTitle(postTitle);
+            }
             post.setPostContent(postContent);
+            post.setPostDate(dtPostDate);
             if (StringUtils.isEmpty(postContent)) {
                 logger.error("文章信息内容不能为空");
                 restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
@@ -179,6 +201,29 @@ public class PostApiController extends BGBaseController {
                 Map<String, Object> resultMap = new HashMap<>();
                 resultMap.put("postId", 0);
                 restResponseDTO.setData(resultMap);
+                restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            }
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+            restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            throw new RestException(e);
+        }
+        return restResponseDTO;
+    }
+
+    @RequestMapping(value = "/api/post/update", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public RestResponseDTO newPost(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+        RestResponseDTO restResponseDTO = new RestResponseDTO();
+        try {
+            boolean flag = false;
+            if (flag) {
+                logger.info("文章信息修改");
+                restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
+            } else {
                 restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
                 restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
             }

@@ -37,6 +37,12 @@ public class PostDTO {
     @Setter
     private String postType;
     /**
+     * 文章状态
+     */
+    @Getter
+    @Setter
+    private String postStatus;
+    /**
      * 文章标题
      */
     @Getter

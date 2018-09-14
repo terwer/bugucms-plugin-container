@@ -49,17 +49,31 @@
     </select>
     <!-- 根据别名获取单个文章 -->
     <select id="getPostBySlug" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
+        SELECT post_id as postId, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
     </select>
     <!-- 根据ID获取单个文章 -->
     <select id="getPostById" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
+        SELECT post_id as postId, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
     </select>
     <!-- 新增文章 -->
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="post_id" parameterType="com.terwergreen.bugucms.dto.PostDTO">
-        INSERT INTO bg_posts(post_type,post_author,post_date,post_modified,post_content)
+        INSERT INTO bg_posts(post_type,post_author,post_date,post_modified,
+        <if test="postStatus!=null and postStatus!=''">
+            post_status,
+        </if>
+        <if test="postTitle!=null and postTitle!=''">
+            post_title,
+        </if>
+        post_content)
         VALUES
-        (#{postType},#{postAuthor},current_timestamp,current_timestamp,#{postContent})
+        (#{postType},#{postAuthor},#{postDate},current_timestamp,
+        <if test="postStatus!=null and postStatus!=''">
+            #{postStatus},
+        </if>
+        <if test="postTitle!=null and postTitle!=''">
+            #{postTitle},
+        </if>
+        #{postContent})
     </insert>
     <!-- 根据别名删除文章 -->
     <delete id="deletePostBySlug">
