@@ -65,7 +65,7 @@
                         </h2>
                         <div class="fly-list-info">
                             <a th:href="@{/}" link>
-                                <cite th:text="${dingList.sysUser.nickName}">贤心</cite>
+                                <cite th:text="${dingList?.sysUser?.nickName}">贤心</cite>
                                 <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
                                 <i class="layui-badge fly-badge-vip">VIP3</i>
                             </a>
