@@ -144,18 +144,13 @@ public class PostApiController extends BGBaseController {
     @RequestMapping(value = "/api/post/new", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public RestResponseDTO newPost(Model model, HttpServletRequest request, HttpServletResponse response,
-                                   String postType,
-                                   String postStatus,
-                                   String postTitle,
-                                   String postContent,
-                                   String postDate
+                                   PostDTO post
     ) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
             //登录检测延后开发 TODO
             //super.preCheck(model, request, response);
 
-            PostDTO post = new PostDTO();
             //获得当前登陆用户对应的对象
             SysUserDTO sysUser = null;
             if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof SysUserDTO) {
@@ -163,27 +158,21 @@ public class PostApiController extends BGBaseController {
                 post.setPostAuthor(sysUser.getId());
             } else {
                 post.setPostAuthor(1);
-                //throw new WebException(Constants.ADMIN_USER_NOT_LOGIN);
             }
-            if (StringUtils.isEmpty(postType)) {
-                postType = PostTypeEmum.POST_TYPE_ESSAY.getName();
+            if (StringUtils.isEmpty(post.getPostType())) {
+                String postType = PostTypeEmum.POST_TYPE_ESSAY.getName();
+                post.setPostType(postType);
             }
-            if (StringUtils.isEmpty(postStatus)) {
-                postStatus = PostStatusEnum.POST_STATUS_PUBLISH.getName();
+            if (StringUtils.isEmpty(post.getPostStatus())) {
+                String postStatus = PostStatusEnum.POST_STATUS_PUBLISH.getName();
+                post.setPostStatus(postStatus);
             }
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             Date dtPostDate = sdf.parse(sdf.format(new Date()));
-            if (!StringUtils.isEmpty(postDate)) {
-                dtPostDate = sdf.parse(postDate);
+            if (StringUtils.isEmpty(post.getPostDate())) {
+                post.setPostDate(dtPostDate);
             }
-            post.setPostType(postType);
-            post.setPostStatus(postStatus);
-            if (!StringUtils.isEmpty(postTitle)) {
-                post.setPostTitle(postTitle);
-            }
-            post.setPostContent(postContent);
-            post.setPostDate(dtPostDate);
-            if (StringUtils.isEmpty(postContent)) {
+            if (StringUtils.isEmpty(post.getPostContent())) {
                 logger.error("文章信息内容不能为空");
                 restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
                 restResponseDTO.setMsg("文章信息内容不能为空");
@@ -215,10 +204,12 @@ public class PostApiController extends BGBaseController {
 
     @RequestMapping(value = "/api/post/update", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
-    public RestResponseDTO newPost(Model model, HttpServletRequest request, HttpServletResponse response) throws Exception {
+    public RestResponseDTO updatePost(Model model, HttpServletRequest request, HttpServletResponse response,
+                                   PostDTO post) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
-            boolean flag = false;
+            logger.info("开始修改，PostDTO=:" + JSON.toJSONString(post));
+            boolean flag = postService.editPostById(post);
             if (flag) {
                 logger.info("文章信息修改");
                 restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());

@@ -34,6 +34,12 @@
                         </div>
                     </div>
                     <div class="layui-form-item">
+                        <label class="layui-form-label">标题别名</label>
+                        <div class="layui-input-block">
+                            <input type="text" name="postSlug" th:value="${post?.postSlug}" lay-verify="postSlug" autocomplete="off" placeholder="标题别名" class="layui-input" th:disabled="${post.postType!=null && post.postType eq 'essay'}">
+                        </div>
+                    </div>
+                    <div class="layui-form-item">
                         <label class="layui-form-label">文章类型</label>
                         <div class="layui-input-block">
                             <select name="postType" lay-filter="post-type-change">
@@ -206,15 +212,18 @@
                 if (postId > 0) {//修改文章
                     console.log("修改文章");
                     $.post(BUGUCMS_BASE_URL + "api/post/update", {
+                        postId: postId,
                         postType: data.field.postType,
                         postStatus: data.field.postStatus,
                         postTitle: data.field.postTitle,
+                        postSlug: data.field.postSlug,
                         postContent: data.field.content,
                         postDate: data.field.postDate
                     }, function (res) {
                         console.log(JSON.stringify(res));
                         if (res.flag == 1) {
                             layer.msg('修改成功', {icon: 1});
+                            window.location.reload();
                         } else {
                             layer.msg('修改失败', {icon: 2});
                         }
@@ -225,6 +234,7 @@
                         postType: data.field.postType,
                         postStatus: data.field.postStatus,
                         postTitle: data.field.postTitle,
+                        postSlug: data.field.postSlug,
                         postContent: data.field.content,
                         postDate: data.field.postDate
                     }, function (res) {
@@ -232,6 +242,7 @@
                         console.log("postId:" + postId);
                         if (postId > 0) {
                             layer.msg('发布成功', {icon: 1});
+                            window.location.reload();
                         } else {
                             layer.msg('发布失败', {icon: 2});
                         }
@@ -245,8 +256,10 @@
                 var postType = data.value;
                 if (postType == 'essay') {
                     $('input[name="postTitle"]').attr("disabled", true);
+                    $('input[name="postSlug"]').attr("disabled", true);
                 } else {
                     $('input[name="postTitle"]').attr("disabled", false);
+                    $('input[name="postSlug"]').attr("disabled", false);
                 }
             });
         });

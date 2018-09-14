@@ -72,11 +72,18 @@
                         {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'center'},
                         {
                             field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
-                                var postName = d.postId;
-                                if(isNaN(d.postSlug)){
-                                    postName = d.postSlug;
+                                var pname = d.postSlug;
+                                var ptitle = d.postTitle;
+                                if(ptitle == ''){
+                                    if(d.postType=='essay'){
+                                        ptitle = '随笔';
+                                    }
+                                    ptitle += d.postId;
                                 }
-                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + postName + '.html" target="_blank">' + d.postTitle + '</a>';
+                                if(pname == ''){
+                                    pname = d.postId;
+                                }
+                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + pname + '.html" target="_blank">' + ptitle + '</a>';
                             }
                         },
                         {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'center'},

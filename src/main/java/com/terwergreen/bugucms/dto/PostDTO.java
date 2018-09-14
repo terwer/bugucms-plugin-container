@@ -99,26 +99,10 @@ public class PostDTO {
     @Setter
     private SysUserDTO sysUser;
 
-    public void setPostSlug(String postSlug) {
-        if (StringUtils.isEmpty(postSlug)) {
-            this.postSlug = String.valueOf(this.getPostId());
-        } else {
-            this.postSlug = postSlug;
-        }
-    }
-
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
         this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 240);
-    }
-
-    public void setPostTitle(String postTitle) {
-        if (StringUtils.isEmpty(postTitle.trim())) {
-            this.postTitle = this.getPostSlug();
-        } else {
-            this.postTitle = postTitle;
-        }
     }
 }
