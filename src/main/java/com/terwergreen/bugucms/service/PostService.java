@@ -68,6 +68,14 @@ public interface PostService {
     boolean editPostById(PostDTO post);
 
     /**
+     * 根据别名删除文章
+     *
+     * @param postSlug 文章别名
+     * @return 是否删除成功
+     */
+    boolean deletePostBySlug(String postSlug);
+
+    /**
      * 根据ID删除文章
      *
      * @param postId 文章ID

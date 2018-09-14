@@ -200,7 +200,6 @@
             form.on('select(postTypeChange)', function (data) {
                 console.log(data.value);
                 var postType = data.value;
-                alert(postType);
                 if (postType == 'essay') {
                     $('input[name="postTitle"]').attr("disabled", true);
                 } else {

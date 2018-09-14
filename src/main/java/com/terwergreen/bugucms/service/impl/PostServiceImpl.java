@@ -65,7 +65,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostBySlug(String slug) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("slug", slug);
-        PostDTO post = (PostDTO) commonDAO.querySingle("get_post_by_slug", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingle("getPostBySlug", paramMap);
         return post;
     }
 
@@ -73,14 +73,14 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(Integer postId) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("postId", postId);
-        PostDTO post = (PostDTO) commonDAO.querySingle("get_post_by_id", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingle("getPostById", paramMap);
         return post;
     }
 
     @Override
     public PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize, Map paramMap) throws BusinessServiceException {
         PageHelper.startPage(pageNum, pageSize);
-        List<PostDTO> list = (List<PostDTO>) commonDAO.queryListByMap("get_posts_by_type", paramMap);
+        List<PostDTO> list = (List<PostDTO>) commonDAO.queryListByMap("getPostsByType", paramMap);
         // 分页信息
         PageInfo<PostDTO> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
@@ -160,11 +160,32 @@ public class PostServiceImpl implements PostService {
 
     @Override
     public boolean editPostById(PostDTO post) {
+        int count = commonDAO.updateByObject("updatePost", post);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deletePostBySlug(String postSlug) {
+        Map paramMap = new HashMap();
+        paramMap.put("postSlug", postSlug);
+        int count = commonDAO.delete("deletePostBySlug", paramMap);
+        if (count > 0) {
+            return true;
+        }
         return false;
     }
 
     @Override
     public boolean deletePostById(Integer postId) {
+        Map paramMap = new HashMap();
+        paramMap.put("postId", postId);
+        int count = commonDAO.delete("deletePostById", paramMap);
+        if (count > 0) {
+            return true;
+        }
         return false;
     }
 }

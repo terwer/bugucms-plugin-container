@@ -99,11 +99,12 @@ public class PostManageController extends AdminBaseController {
      */
     private void initPage(Model model, Integer postId) throws Exception {
         try {
-            PostDTO post = null;
+            PostDTO post = new PostDTO();
             if (postId > 0) {
                 post = postService.getPostById(postId);
             }
             model.addAttribute("post", post);
+            model.addAttribute("postId", postId);
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

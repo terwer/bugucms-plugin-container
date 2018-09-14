@@ -15,6 +15,7 @@ import com.terwergreen.bugucms.util.RestResponseStates;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -142,7 +143,7 @@ public class PostApiController extends BGBaseController {
     ) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
-            //登录检测艳后开发 TODO
+            //登录检测延后开发 TODO
             //super.preCheck(model, request, response);
 
             PostDTO post = new PostDTO();
@@ -190,4 +191,25 @@ public class PostApiController extends BGBaseController {
         return restResponseDTO;
     }
 
+    @RequestMapping(value = "/api/post/delete/{postId}", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public RestResponseDTO deletePost(Model model, @PathVariable("postId") Integer postId) throws Exception {
+        RestResponseDTO restResponseDTO = new RestResponseDTO();
+        try {
+            boolean result = postService.deletePostById(postId);
+            if (result) {
+                restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
+            } else {
+                restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            }
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+            restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            throw new RestException(e);
+        }
+        return restResponseDTO;
+    }
 }

@@ -17,7 +17,7 @@
         <!-- 定义多对一关联信息（每个文章对应一个作者） -->
         <association property="sysUser" resultMap="userMap"/>
     </resultMap>
-    <select id="get_posts_by_type" resultMap="postMap">
+    <select id="getPostsByType" resultMap="postMap">
         SELECT p.post_id,pm.meta_key,ifnull(pm.meta_value,'文章') as meta_value,p.post_finished,p.comment_count, p.post_name, p.post_title,p.post_content,p.post_date,
         su.user_name,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,
         sr.id as role_id,sr.name as role_name,sr.cn_name
@@ -48,11 +48,11 @@
         ORDER BY post_modified DESC
     </select>
     <!-- 根据别名获取单个文章 -->
-    <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.dto.PostDTO">
+    <select id="getPostBySlug" resultType="com.terwergreen.bugucms.dto.PostDTO">
         SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
     </select>
     <!-- 根据ID获取单个文章 -->
-    <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
+    <select id="getPostById" resultType="com.terwergreen.bugucms.dto.PostDTO">
         SELECT post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
     </select>
     <!-- 新增文章 -->
@@ -61,4 +61,12 @@
         VALUES
         (#{postType},#{postAuthor},current_timestamp,current_timestamp,#{postContent})
     </insert>
+    <!-- 根据别名删除文章 -->
+    <delete id="deletePostBySlug">
+        DELETE FROM bg_posts WHERE post_name = #{postSlug}
+    </delete>
+    <!-- 根据ID删除文章 -->
+    <delete id="deletePostById">
+        DELETE FROM bg_posts WHERE post_id = #{postId}
+    </delete>
 </mapper>
