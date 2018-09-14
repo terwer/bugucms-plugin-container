@@ -140,13 +140,16 @@ layui.define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (expor
             // layer.msg('随笔发布成功', {icon: 1})
         });
 
-        $.post(BUGUCMS_BASE_URL + "api/post/new", {postType: "essay", postContent: content}, function (res) {
+        $.post(BUGUCMS_BASE_URL + "api/post/new", {
+            postType: "essay",
+            postContent: content
+        }, function (res) {
             var postId = JSON.stringify(res.data.postId);
             console.log("postId:" + postId);
             if (postId > 0) {
-                layer.msg('随笔发布成功', {icon: 1})
+                layer.msg('随笔发布成功', {icon: 1});
             } else {
-                layer.msg('随笔发布失败', {icon: 2})
+                layer.msg('随笔发布失败', {icon: 2});
             }
         });
     })

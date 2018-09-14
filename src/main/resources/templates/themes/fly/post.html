@@ -96,20 +96,20 @@
                 <div class="detail-body photos">
                     <div class="post-content" th:utext="${post.postContent}">postContent</div>
                     <p>
-                        该模版由 layui官方社区（<a href="http://fly.layui.com/" target="_blank">fly.layui.com</a>）倾情提供，只为表明我们对 layui 执着的信念、以及对未来持续加强的承诺。该模版基于 layui 搭建而成，可作为极简通用型社区的页面支撑。
+                        本站模版由 BuguCMS（<a href="https://github.com/terwer/bugucms" target="_blank">bugucms.terwergreen.com</a>）倾情提供，只为表明我们对 BuguCMS 执着的信念、以及对未来持续加强的承诺，可作为通用型博客、管理后台或者企业网站等内容管理系统的页面支撑。
                     </p>
                     <p>更新日志：</p>
                     <pre>
-# v3.0 2017-11-30
-* 采用 layui 2.2.3 作为 UI 支撑
+# v1.0 2018-9-14
+* 采用 layui 2.3.0 作为 UI 支撑
 * 全面同步最新的 Fly 社区风格，各种细节得到大幅优化
 * 更友好的响应式适配能力
 </pre>
                     下载<hr>
                     <p>
-                        官网：<a href="http://www.layui.com/template/fly/" target="_blank">http://www.layui.com/template/fly/</a><br>
-                        码云：<a href="https://gitee.com/sentsin/fly/" target="_blank">https://gitee.com/sentsin/fly/</a><br>
-                        GitHub：<a href="https://github.com/layui/fly" target="_blank">https://github.com/layui/fly</a>
+                        官网：<a href="http://www.terwergreen.com/" target="_blank">http://bugucms.terwergreen.com</a><br>
+                        码云：<a href="https://gitee.com/youweics/bugucms" target="_blank">https://gitee.com/youweics/bugucms</a><br>
+                        GitHub：<a href="https://github.com/terwer/bugucms" target="_blank">https://github.com/terwer/bugucms</a>
                     </p>
                 </div>
             </div>
@@ -233,30 +233,29 @@
             </div>
         </div>
         <div class="layui-col-md4">
-            <dl class="fly-panel fly-list-one">
-                <dt class="fly-panel-title">本周热议</dt>
-                <!--<dd>-->
-                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
-                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
-                <!--</dd>-->
-                <!-- 无数据时 -->
-                <div class="fly-none">没有相关数据</div>
-            </dl>
-
             <div class="fly-panel">
                 <div class="fly-panel-title">
-                    广告区域
+                    重磅推荐
                 </div>
                 <div class="fly-panel-main">
-                    <a href="http://layim.layui.com/?from=fly" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">LayIM 3.0 - layui 旗舰之作</a>
+                    <a href="https://github.com/terwer/bugucms" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">BuguCMS 1.0 - CMS旗舰之作</a>
                 </div>
             </div>
 
-            <!--<div class="fly-panel" style="padding: 20px 0; text-align: center;">-->
-                <!--<img src="../../res/images/weixin.jpg" style="max-width: 100%;" alt="layui">-->
-                <!--<p style="position: relative; color: #666;">微信扫码关注 layui 公众号</p>-->
-            <!--</div>-->
+            <div class="fly-panel" style="padding: 10px 0; text-align: center;">
+                <img th:src="@{|/themes/${siteConfigDTO.webtheme}/images/mp-qrcode.png|}" style="max-width: 95%;" alt="layui">
+                <!--<p style="position: relative; color: #666;">微信扫码关注 BuguCMS 公众号</p>-->
+            </div>
 
+            <dl class="fly-panel fly-list-one">
+                <dt class="fly-panel-title">本周热议</dt>
+                <dd th:if="false">
+                    <a href="">基于 layui 的极简社区页面模版</a>
+                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
+                </dd>
+                <!-- 无数据时 -->
+                <div class="fly-none">没有相关数据</div>
+            </dl>
         </div>
     </div>
 </div>

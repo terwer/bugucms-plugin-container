@@ -26,7 +26,7 @@ public class PostApiControllerTest {
     @Test
     public void getPosts() {
         try {
-            given(postApiController.getPosts(null, null, null, 1, 10));
+            given(postApiController.getPosts(null, null, null, null,null, 1, 10));
 
             mvc.perform(get("all")
                     //.with(user("blaze").password("Q1w2e3r4"))
