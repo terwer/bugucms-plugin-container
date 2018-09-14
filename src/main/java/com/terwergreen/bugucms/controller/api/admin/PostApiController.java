@@ -172,7 +172,7 @@ public class PostApiController extends BGBaseController {
             if (StringUtils.isEmpty(post.getPostDate())) {
                 post.setPostDate(dtPostDate);
             }
-            if (StringUtils.isEmpty(post.getPostContent())) {
+            if (StringUtils.isEmpty(post.getPostRawContent())) {
                 logger.error("文章信息内容不能为空");
                 restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
                 restResponseDTO.setMsg("文章信息内容不能为空");

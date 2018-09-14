@@ -81,14 +81,14 @@
         <if test="postSlug!=null and postSlug!=''">
             #{postSlug},
         </if>
-        #{postContent})
+        #{postRawContent})
     </insert>
     <update id="updatePost" parameterType="com.terwergreen.bugucms.dto.PostDTO">
         UPDATE bg_posts
         SET post_type = #{postType},
             post_status = #{postStatus},
             post_title = #{postTitle},
-            post_content = #{postContent},
+            post_content = #{postRawContent},
             post_date = #{postDate},
             <if test="postSlug!=null and postSlug!=''">
                 post_name = #{postSlug},
