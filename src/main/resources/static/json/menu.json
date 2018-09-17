@@ -82,7 +82,7 @@
         {
           "title": "主题",
           "icon": "layui-icon-template-1",
-          "href": "postManage/skin/themes"
+          "href": "themeManage/list"
         },
         {
           "title": "自定义",

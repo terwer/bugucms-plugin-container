@@ -92,17 +92,7 @@ public class BGBaseController {
 				logger.error("站点配置异常:siteConfigDTO=null");
 				throw new WebException("站点配置异常:siteConfigDTO=null");
 			}
-
-			//获得当前登陆用户对应的对象
-			//SysUserDTO sysUserDTO = null;
-			//if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof SysUserDTO) {
-			//	sysUserDTO = (SysUserDTO) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-			//} else {
-			//	throw new WebException(Constants.ADMIN_USER_NOT_LOGIN);
-			//}
-
 			model.addAttribute("siteConfigDTO", siteConfigDTO);
-			//model.addAttribute("sysUserDTO", sysUserDTO);
 		} catch (Exception e) {
 			logger.error("系统异常" + e.getLocalizedMessage(), e);
 			throw new WebException(e);

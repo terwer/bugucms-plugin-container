@@ -12,5 +12,9 @@
       SELECT option_name,option_value
       FROM bg_options
       WHERE option_group = #{optionGroup}
-</select>
+    </select>
+    <update id="update_option_by_group">
+        UPDATE bg_options SET option_value = #{optionValue}
+        WHERE option_name = #{optionName} AND option_group = #{optionGroup}
+    </update>
 </mapper>

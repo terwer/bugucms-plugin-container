@@ -3,20 +3,105 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="bgapp">
-    <!-- 获取最新文章 -->
-    <select id="get_posts_by_user" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_type <![CDATA[ <> ]]> 'page' order by post_modified desc limit 0,10
+    <!-- 根据类型获取文章 -->
+    <resultMap id="postMap" type="com.terwergreen.bugucms.dto.PostDTO">
+        <id column="post_id" property="postId"/>
+        <result column="meta_key" property="metaKey" />
+        <result column="meta_value" property="metaValue" />
+        <result column="post_finished" property="postFinished" />
+        <result column="comment_count" property="commentCount" />
+        <result column="post_type" property="postType" />
+        <result column="post_status" property="postStatus" />
+        <result column="post_name" property="postSlug" />
+        <result column="post_title" property="postTitle" />
+        <result column="post_content" property="postContent" />
+        <result column="post_date" property="postDate" />
+        <!-- 定义多对一关联信息（每个文章对应一个作者） -->
+        <association property="sysUser" resultMap="userMap"/>
+    </resultMap>
+    <select id="getPostsByType" resultMap="postMap">
+        SELECT p.post_id,pm.meta_key,ifnull(pm.meta_value,'文章') as meta_value,p.post_finished,p.comment_count, p.post_status, p.post_type, p.post_name, p.post_title,p.post_content,p.post_date,
+        su.user_name,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,
+        sr.id as role_id,sr.name as role_name,sr.cn_name
+        FROM bg_posts p
+        LEFT JOIN bg_postmeta pm ON pm.post_id = p.post_id
+        LEFT JOIN sys_user su ON su.id = p.post_author
+        LEFT JOIN sys_role_user sru on su.id= sru.sys_user_id
+        LEFT JOIN sys_role sr on sru.sys_role_id = sr.id
+        WHERE 1=1
+        <if test="postStatus!=null and postStatus!=''">
+            AND p.post_status = #{postStatus}
+        </if>
+        <if test="postType!=null and postType!=''">
+            AND p.post_type = #{postType}
+        </if>
+        <if test="userId!=null">
+            AND p.post_author = #{userId}
+        </if>
+        <if test="metaKey!=null and metaKey!=''">
+            AND pm.meta_key = #{metaKey}
+        </if>
+        <if test="metaValue!=null and metaValue!=''">
+            AND pm.meta_value = #{metaValue}
+        </if>
+        <if test="search!=null and search!=''">
+            AND ((p.post_title LIKE concat(concat('%',#{search}),'%')) OR (p.post_content LIKE concat(concat('%',#{search}),'%')))
+        </if>
+        ORDER BY post_modified DESC
     </select>
-    <!-- 获取单个文章 -->
-    <select id="get_post_by_slug" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_name = #{slug}
+    <!-- 根据别名获取单个文章 -->
+    <select id="getPostBySlug" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
     </select>
-    <!-- 获取单个文章 -->
-    <select id="get_post_by_id" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_id = #{postId}
+    <!-- 根据ID获取单个文章 -->
+    <select id="getPostById" resultType="com.terwergreen.bugucms.dto.PostDTO">
+        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
     </select>
-    <!-- 获取分页文章 -->
-    <select id="get_posts_by_page" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        select post_id as postId, post_name as postSlug, post_title as postTitle,post_content as postContent,post_date as postDate from bg_posts where post_type <![CDATA[ <> ]]> 'page' order by post_modified desc
-    </select>
+    <!-- 新增文章 -->
+    <insert id="insertPost" useGeneratedKeys="true" keyProperty="post_id" parameterType="com.terwergreen.bugucms.dto.PostDTO">
+        INSERT INTO bg_posts(post_type,post_author,post_date,post_modified,
+        <if test="postStatus!=null and postStatus!=''">
+            post_status,
+        </if>
+        <if test="postTitle!=null and postTitle!=''">
+            post_title,
+        </if>
+        <if test="postSlug!=null and postSlug!=''">
+            post_name,
+        </if>
+        post_content)
+        VALUES
+        (#{postType},#{postAuthor},#{postDate},current_timestamp,
+        <if test="postStatus!=null and postStatus!=''">
+            #{postStatus},
+        </if>
+        <if test="postTitle!=null and postTitle!=''">
+            #{postTitle},
+        </if>
+        <if test="postSlug!=null and postSlug!=''">
+            #{postSlug},
+        </if>
+        #{postRawContent})
+    </insert>
+    <update id="updatePost" parameterType="com.terwergreen.bugucms.dto.PostDTO">
+        UPDATE bg_posts
+        SET post_type = #{postType},
+            post_status = #{postStatus},
+            post_title = #{postTitle},
+            post_content = #{postRawContent},
+            post_date = #{postDate},
+            <if test="postSlug!=null and postSlug!=''">
+                post_name = #{postSlug},
+            </if>
+            post_modified = current_timestamp
+        WHERE post_id = #{postId}
+    </update>
+    <!-- 根据别名删除文章 -->
+    <delete id="deletePostBySlug">
+        DELETE FROM bg_posts WHERE post_name = #{postSlug}
+    </delete>
+    <!-- 根据ID删除文章 -->
+    <delete id="deletePostById">
+        DELETE FROM bg_posts WHERE post_id = #{postId}
+    </delete>
 </mapper>

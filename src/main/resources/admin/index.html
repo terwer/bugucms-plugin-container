@@ -65,7 +65,7 @@
     <!--侧边菜单结束-->
 
     <!--内容主体区域开始-->
-    <div class="layui-body" data-type="" data-title="控制台" data-icon="layui-icon-home" th:data-href="@{|/${siteConfigDTO.adminpath}/console|}"></div>
+    <div class="layui-body" data-type="" th:data-title="${title}" data-icon="layui-icon-home" th:data-href="@{|/${siteConfigDTO.adminpath}/${action}|}"></div>
     <!--内容主体区域结束-->
 </div>
 </body>

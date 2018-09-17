@@ -17,10 +17,20 @@
         .layui-btn i {
             font-size: 14px !important;
         }
+
+        .table-header {
+            padding: 16px 10px 0 15px;
+        }
     </style>
 </header>
 
 <div layout:fragment="content">
+    <div class="table-header" id="tableHeader">
+        <div class="layui-inline">
+            <input class="layui-input" data-type="reload" id="search" name="search" placeholder="关键字..." autocomplete="off">
+        </div>
+        <button class="layui-btn" data-type="reload">搜索</button>
+    </div>
     <table id="postTable"></table>
 </div>
 
@@ -49,30 +59,77 @@
                 });
             }
 
-            //第一个实例
+            //加载数据
+            var myindex = layer.load();
             table.render({
                 elem: '#postTable',
                 url: BUGUCMS_BASE_URL + 'api/post/list', //数据接口
                 method: 'post',
                 page: true,//开启分页
+                loading: true,//加载等待
                 cols: [
                     [ //表头
                         {field: 'postId', title: 'ID', width: 80, sort: true, fixed: 'center'},
                         {
                             field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
-                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + d.postSlug + '.html" target="_blank">' + d.postTitle + '</a>';
+                                var pname = d.postSlug;
+                                var ptitle = d.postTitle;
+                                if(ptitle == ''){
+                                    if(d.postType=='essay'){
+                                        ptitle = '随笔';
+                                    }
+                                    ptitle += d.postId;
+                                }
+                                if(pname == ''){
+                                    pname = d.postId;
+                                }
+                                return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + pname + '.html" target="_blank">' + ptitle + '</a>';
                             }
                         },
                         {field: 'postDate', title: '发布时间', width: 160, sort: true, fixed: 'center'},
                         {
                             field: 'action', title: '操作', width: 180, sort: true, fixed: 'center', templet: function (d) {
-                                var m = '<button class="layui-btn layui-btn-sm" bg-form-action="edit" bg-form-title="更新文章" bg-form-icon="layui-icon-release" bg-form-href="/postManage/edit/' + d.postId + '"><i class="layui-icon">&#xe642;修改</i></button>';
-                                var r = '<button class="layui-btn layui-btn-danger layui-btn-sm" bg-form-action="delete" bg-form-title="删除文章" bg-form-icon="layui-icon-release" bg-form-href="/postManage/delete/' + d.postId + '"><i class="layui-icon">&#xe640;删除</i></button>';
+                                var m = '<button class="layui-btn layui-btn-sm" bg-form-action="edit" bg-form-title="更新文章" bg-form-icon="layui-icon-release" bg-form-href="postManage/edit/' + d.postId + '"><i class="layui-icon">&#xe642;修改</i></button>';
+                                var r = '<button class="layui-btn layui-btn-danger layui-btn-sm" bg-form-action="delete" bg-form-title="删除文章" bg-form-icon="layui-icon-release" bg-form-href="api/post/delete/' + d.postId + '"><i class="layui-icon">&#xe640;删除</i></button>';
                                 return '<div class="layui-btn-group">' + m + r + '</div>';
                             }
                         }
                     ]
-                ]
+                ],
+                done: function (res, curr, count) {
+                    layer.close(myindex);
+                }
+            });
+
+            var active = {
+                reload: function () {
+                    // if($('#search').val()==''){
+                    //     layer.msg('关键字不能为空', {icon: 2});
+                    //     return false;
+                    // }
+                    //执行重载
+                    myindex = layer.load();
+                    table.reload('postTable', {
+                        page: {
+                            curr: 1 //重新从第 1 页开始
+                        },
+                        where: {
+                            search: $('#search').val()
+                        }
+                    });
+                }
+            };
+
+            $('#tableHeader .layui-btn').on('click', function () {
+                var type = $(this).data('type');
+                active[type] ? active[type].call(this) : '';
+            });
+
+            $('#search').on('keypress', function(event){
+                if(event.keyCode == "13") {
+                    var type = $(this).data('type');
+                    active[type] ? active[type].call(this) : '';
+                }
             });
 
             //ajax请求出错提示
@@ -94,7 +151,7 @@
 
                 switch (action) {
                     case "edit": {
-                        bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + href, title, icon);
+                        bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/" + href, title, icon);
                         break;
                     }
                     case "delete": {
@@ -113,27 +170,28 @@
                     layer.confirm('您确认删除该题目么？', {
                         btn: ['确认', '取消'] //按钮
                     }, function () {
-
                         layer.closeAll('dialog');
-
-                        $.get(url, {}, function (res) {
+                        var delUrl = BUGUCMS_BASE_URL + url;
+                        console.log("delete url:" + delUrl);
+                        $.post(delUrl, {}, function (res) {
                             doDeleteResult(res);
                         }, 'json');
 
                         function doDeleteResult(res) {
                             console.log(res);
-                            if (res != null && res.status == 1) {
+                            if (res != null && res.flag == 1) {
                                 layer.msg('删除成功', {icon: 1});
-                                window.location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/postManage/list";
+                                window.location.reload();
+                                //window.location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/?action=postManage/list&title=所有文章";
                             } else {
                                 layer.msg('操作失败', {icon: 2});
                             }
                         }
                     }, function () {
-                        layer.msg('您放弃了操作', {
-                            time: 20000, //20s后自动关闭
-                            btn: ['明白了', '知道了']
-                        });
+                        // layer.msg('您放弃了操作', {
+                        //     time: 20000, //20s后自动关闭
+                        //     btn: ['明白了', '知道了']
+                        // });
                     });
                 }
             });

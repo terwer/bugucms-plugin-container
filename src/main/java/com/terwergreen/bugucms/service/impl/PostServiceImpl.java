@@ -3,7 +3,6 @@ package com.terwergreen.bugucms.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.config.BugucmsConfig;
 import com.terwergreen.bugucms.core.dao.CommonDAO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
@@ -13,7 +12,6 @@ import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.service.PostService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.apache.xmlrpc.XmlRpcException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -27,6 +25,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_NUM;
+import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_SIZE;
 import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
 
 @Service
@@ -44,12 +44,13 @@ public class PostServiceImpl implements PostService {
     private boolean isDbAdminPasswordEncoded;
 
     @Override
-    public List<PostDTO> getPosts() throws BusinessServiceException {
-        Map paramMap = new HashMap();
-        List<PostDTO> posts = (List<PostDTO>) commonDAO.queryListByMap("get_posts_by_user", paramMap);
+    public List<PostDTO> getRecentPosts(Map paramMap) throws BusinessServiceException {
+        List<PostDTO> posts = getPostsByPage(DEFAULT_PAGE_NUM, DEFAULT_PAGE_SIZE, paramMap).getList();
         if (CollectionUtils.isEmpty(posts)) {
+            logger.error("查询结果为空");
             return null;
         } else {
+            logger.info("查询分页文章");
             return posts;
         }
     }
@@ -64,7 +65,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostBySlug(String slug) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("slug", slug);
-        PostDTO post = (PostDTO) commonDAO.querySingle("get_post_by_slug", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingle("getPostBySlug", paramMap);
         return post;
     }
 
@@ -72,19 +73,19 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(Integer postId) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("postId", postId);
-        PostDTO post = (PostDTO) commonDAO.querySingle("get_post_by_id", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingle("getPostById", paramMap);
         return post;
     }
 
     @Override
-    public PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize) throws BusinessServiceException {
+    public PageInfo<PostDTO> getPostsByPage(Integer pageNum, Integer pageSize, Map paramMap) throws BusinessServiceException {
         PageHelper.startPage(pageNum, pageSize);
-        List<PostDTO> list = (List<PostDTO>) commonDAO.queryList("get_posts_by_page");
+        List<PostDTO> list = (List<PostDTO>) commonDAO.queryListByMap("getPostsByType", paramMap);
         // 分页信息
         PageInfo<PostDTO> pageInfo = new PageInfo<>(list);
         long total = pageInfo.getTotal();
         int pages = pageInfo.getPages();
-        if(pageNum > pages){
+        if (pageNum > pages) {
             pageInfo.setList(new ArrayList<>());
         }
         pageNum = pageInfo.getPageNum();
@@ -144,5 +145,47 @@ public class PostServiceImpl implements PostService {
 
         usersBlogs.add(userBlog);
         return usersBlogs;
+    }
+
+    @Override
+    public Integer newPost(PostDTO post) {
+        Integer postId = 0;
+        int count = (int) commonDAO.insertByObject("insertPost", post);
+        if (count > 0) {
+            logger.info("新增文章成功");
+            postId = post.getPostId();
+        }
+        return postId;
+    }
+
+    @Override
+    public boolean editPostById(PostDTO post) {
+        int count = commonDAO.updateByObject("updatePost", post);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deletePostBySlug(String postSlug) {
+        Map paramMap = new HashMap();
+        paramMap.put("postSlug", postSlug);
+        int count = commonDAO.delete("deletePostBySlug", paramMap);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean deletePostById(Integer postId) {
+        Map paramMap = new HashMap();
+        paramMap.put("postId", postId);
+        int count = commonDAO.delete("deletePostById", paramMap);
+        if (count > 0) {
+            return true;
+        }
+        return false;
     }
 }

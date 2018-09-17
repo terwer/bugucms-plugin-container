@@ -28,10 +28,10 @@ public class HtmlUtils {
      * @return
      */
     public static String parseHtml(String html, int length) {
-        if (html.length() < length) {
-            //return "截取长度超过文件内容总长";
-            return parseHtml(html);
+        String allText = parseHtml(html);
+        if (allText.length() < length) {
+            return allText;
         }
-        return parseHtml(html.substring(0, length) + "...");
+        return allText.substring(0, length) + "...";
     }
 }

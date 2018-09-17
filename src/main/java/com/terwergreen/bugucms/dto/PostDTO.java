@@ -25,6 +25,24 @@ public class PostDTO {
     @Getter
     private String postSlug;
     /**
+     * 文章醉着
+     */
+    @Getter
+    @Setter
+    private Integer postAuthor;
+    /**
+     * 文章类型
+     */
+    @Getter
+    @Setter
+    private String postType;
+    /**
+     * 文章状态
+     */
+    @Getter
+    @Setter
+    private String postStatus;
+    /**
      * 文章标题
      */
     @Getter
@@ -51,24 +69,35 @@ public class PostDTO {
      * 文章摘要，数据库不保存
      */
     @Getter
-    @Setter
     private String postDesc;
     /**
      * 发布时间
      */
     @JSONField(format = "yyyy-MM-dd HH:mm:ss")  //FastJson包使用注解
-    @DateTimeFormat(pattern = "yyyy-MM-dd hh:MM")  //格式化前台日期参数注解
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")  //格式化前台日期参数注解
     @Getter
     @Setter
     private Date postDate;
 
-    public void setPostSlug(String postSlug) {
-        if (StringUtils.isEmpty(postSlug)) {
-            this.postSlug = String.valueOf(this.getPostId());
-        } else {
-            this.postSlug = postSlug;
-        }
-    }
+    @Getter
+    @Setter
+    private Integer postFinished;
+
+    @Getter
+    @Setter
+    private Integer commentCount;
+
+    @Getter
+    @Setter
+    private String metaKey;
+
+    @Getter
+    @Setter
+    private String metaValue;
+
+    @Getter
+    @Setter
+    private SysUserDTO sysUser;
 
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;

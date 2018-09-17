@@ -1,0 +1,27 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head th:include="themes/fly/include/header::commonHeaderCustom('关于本站 - ' + ${siteConfigDTO.webname},~{::style})">
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div th:include="themes/fly/include/header::commonHeaderContent"></div>
+
+about
+
+<div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
+    <script type="text/javascript">
+
+    </script>
+</div>
+</body>
+</html>
