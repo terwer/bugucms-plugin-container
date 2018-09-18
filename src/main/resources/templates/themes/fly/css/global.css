@@ -1,19 +1,19 @@
 /**
  
- @Name: FlyÃ§Â¤Â¾Ã¥Å’Âº
- @Author: Ã¨Â´Â¤Ã¥Â¿Æ’
+ @Name: Fly社区
+ @Author: 贤心
  @Site: fly.layui.com
 
  */
 
 
-/* Ã¥â€¦Â¨Ã¥Â±â‚¬ */
+/* 全局 */
 html,body{overflow-x: hidden;}
 html body{margin-top: 61px;}
 html{background-color: #F2F2F2;}
 i{font-style: normal;}
 
-/* Ã¥â€ºÂ¾Ã¦Â â€¡ */
+/* 图标 */
 
 @font-face {font-family: "layui-icon-fly";
     src: url('iconfont.eot?t=1512007250695'); /* IE9*/
@@ -91,9 +91,10 @@ i{font-style: normal;}
 .icon-renzheng:before{content:"\e62e"}
 
 
-/* Ã¨Â¾â€¦Ã¥Å Â© */
+/* 辅助 */
 a:hover{color: #009688; transition: all .3s;}
 pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid #009688;  background-color: #f8f8f8; font-family: Courier New; overflow: auto;}
+pre code{background-color: #f8f8f8; font-family: Courier New;font-size: 12px; }
 
 .layui-container{padding: 0;}
 .fly-main{width: 1079px; min-height: 600px; margin: 0 auto 15px;}
@@ -112,36 +113,36 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-mid{display: inline-block; height: 10px; width: 1px; margin: 0 10px; vertical-align: middle; background-color: #e2e2e2;}
 .fly-right{position: absolute; right: 15px; top: 0;}
 
-/* Ã¨Â¿â€¡Ã¥ÂºÂ¦ */
+/* 过度 */
 .fly-loading{position: absolute; top: 50%; left: 50%; margin: -12px 0 0 -15px; font-size: 30px; color: #c2c2c2;}
 
-/* Ã¥Â¤Â´Ã¥Æ’Â */
+/* 头像 */
 .fly-avatar{position: absolute; left: 15px; top: 15px;}
 .fly-avatar img{display: block; width: 45px; height: 45px; margin: 0; border-radius: 2px;}
 
-/* Ã¥Â¾Â½Ã§Â«Â  */
+/* 徽章 */
 .fly-badge-vip{height: 16px; line-height: 16px; padding: 0 3px; background-color: #FF5722; color: #fff; border-radius: 2px;}
 .fly-badge-accept{height: 18px; line-height: 18px; padding: 0 5px !important; background-color: #5FB878; border-radius: 2px;}
 
-/* Ã¨ÂµÅ¾Ã¥Å Â©Ã¥â€¢â€  */
+/* 赞助商 */
 .fly-zanzhu{display: block; position: relative; height: 60px; line-height: 60px; margin-top: 10px; padding: 0 20px; text-align: center; font-size: 16px; font-weight: 300; background-color: #009688; color: #fff;}
 .fly-zanzhu:first-child{margin-top: 0;}
 .fly-zanzhu:hover{opacity: 0.9; color: #fff;}
 
-/* Ã¥â€ºÂ¾Ã¦Â â€¡ */
+/* 图标 */
 .icon-touxiang{display: inline-block; font-size: 34px;}
 .icon-qq, .icon-weibo{font-size: 30px;}
 .icon-renzheng{position: relative; color: #FFB800;}
 .icon-kiss{font-size: 18px;}
 .icon-pinglun1{position: relative; top: 2px;}
 
-/* Ã¥Â¤Â´Ã©Æ’Â¨ */
+/* 头部 */
 .fly-header{position: fixed; left: 0; top: 0; z-index: 10000; width: 100%; height: 60px; border-bottom: 1px solid #404553; border-right: 1px solid #404553; border-radius: 0;}
-.fly-logo{position: absolute; left: 15px; top: 11px;}
-.fly-logo img{width: 135px;height: 37px}
-.fly-nav{margin-left: 200px;}
-.fly-nav a i{position: absolute; left: 25px; top: 0; padding-right: 10px; font-size: 26px;}
-.fly-nav a .icon-shouye, .nav a .icon-shezhi{top: 2px;}
+.fly-logo{position: absolute;/* left: 15px; *//* top: 11px; */}
+.fly-logo img{width: 200px;height: 60px;}
+/*.fly-nav-menu{margin-left: 200px;}*/
+/*.fly-nav-menu a i{position: absolute; left: 25px; top: 0; padding-right: 10px; font-size: 26px;}*/
+/*.fly-nav-menu a .icon-shouye, .nav a .icon-shezhi{top: 2px;}*/
 
 .fly-nav-user{position: absolute; top: 0; right: 0;}
 .fly-nav-user .iconfont{position: relative;}
@@ -153,8 +154,9 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-nav-msg{position:absolute; top: 50%; left: -25px; height: 20px; line-height: 20px; margin-top: -10px; padding:0 6px; background-color: #FF7200; color: #fff; border-radius: 2px;}
 .fly-nav-msg:hover{color:#fff;}
 
-.fly-header .layui-nav{padding: 0; background: none;}
-.fly-header .fly-nav a{/* padding: 0 25px 0 60px; */}
+.fly-header .layui-nav{padding: 0;background: none;margin-left: 200px;}
+.fly-header .layui-nav a{font-size:14px;}
+.fly-header .fly-nav a{padding: 0 25px 0 60px;}
 .fly-header .fly-nav-user li a{padding: 0 10px;}
 .fly-header .fly-nav-user li .fly-nav-avatar{padding-right: 0;}
 .fly-header .fly-nav-user a.iconfont{color: #A9B7B7;}
@@ -165,7 +167,7 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-header .fly-nav-user .layui-nav-more{display: none !important;}
 .fly-header .fly-nav-user .layui-nav-child{left: auto; right: 0; width: 120px; min-width: 0;}
 
-/* Ã¥Âºâ€¢Ã©Æ’Â¨ */
+/* 底部 */
 .fly-footer {margin: 50px 0 0; padding: 20px 0 30px; line-height: 30px; text-align: center; color: #737573; border-top: 1px solid #e2e2e2;}
 .fly-footer a{padding:0 6px; font-weight: 300; color: #333;}
 .fly-footer a:hover{color: #777;}
@@ -176,13 +178,13 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-union span a{padding: 0; display: inline; color: #999;}
 .fly-union span a:hover{text-decoration: underline;}
 
-/* Ã©ÂÂ¢Ã¦ÂÂ¿ */
+/* 面板 */
 .fly-panel{margin-bottom: 15px; border-radius: 2px; background-color: #fff; box-shadow: 0 1px 2px 0 rgba(0,0,0,.05);}
 .fly-panel[pad20]{padding: 20px;}
 .fly-panel-title{position: relative; height: 50px; line-height: 50px; padding: 0 15px; border-bottom: 1px dotted #E9E9E9; color: #333; border-radius: 2px 2px 0 0; font-size: 14px;}
 .fly-panel-main{padding: 10px 15px;}
 
-/* Ã¤Â¸â€œÃ¦Â Â */
+/* 专栏 */
 .fly-column{height: 50px; line-height: 50px;}
 .fly-column ul li{position: relative; display: inline-block; height: 50px;}
 .fly-column ul li a{padding: 0 20px;}
@@ -193,13 +195,13 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-column-right .layui-btn{vertical-align: initial;}
 .fly-column .layui-badge-dot{position: absolute; top: 50%; left: 50%; margin: -4px 0 0 20px;}
 
-/* Ã¦ÂÅ“Ã§Â´Â¢ */
+/* 搜索 */
 .fly-search{display: inline-block; vertical-align: top; width: 50px; height: 50px; margin-right: 10px; text-align: center; cursor: pointer; font-size: 20px;}
 .fly-search .layui-icon{font-size: 20px;}
 .fly-search:hover{color: #5FB878;}
 .fly-layer-search input{height: 75px; line-height: 75px; width: 500px; padding: 0 15px; font-size: 20px; border: none 0; background: none;}
 
-/* Ã§Â­â€ºÃ©â‚¬â€° */
+/* 筛选 */
 .fly-filter a{padding: 0 8px; color: #666;}
 .fly-filter a.layui-this{color: #5FB878;}
 .fly-filter .fly-mid{margin: 0 8px;}
@@ -218,20 +220,20 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-tab-border .tab-this{color: #000;}
 .fly-tab-border .tab-this:after{content: ''; position: absolute; bottom: -1px; left: -1px; width: 100%; height: 1px; padding: 0 1px; background-color: #009688;}
 
-/* Ã¥Ë†â€ Ã©Â¡Âµ */
+/* 分页 */
 .laypage-main,
 .laypage-main *{display:inline-block; *display:inline; *zoom:1; vertical-align:top;}
 .laypage-main{margin: 20px 0; border: 1px solid #009E94; border-right: none; border-bottom: none; font-size: 0;}
 .laypage-main *{padding: 0 20px; line-height: 36px; border-right: 1px solid #009E94; border-bottom: 1px solid #009E94; font-size: 14px;}
 .laypage-main .laypage-curr{background-color:#009E94; color:#fff;}
 
-/* Ã§Â®â‚¬Ã¦Ëœâ€œÃ§Â¼â€“Ã¨Â¾â€˜Ã¥â„¢Â¨ */
+/* 简易编辑器 */
 .fly-edit{position:relative; display: block; top: 1px; left:0; padding:0 10px; border: 1px solid #e6e6e6; border-radius: 2px 2px 0 0; background-color: #FBFBFB;}
 .fly-edit span{cursor:pointer; padding:0 10px; line-height: 38px; color:#009E94;}
 .fly-edit span i{position: relative; padding-right: 6px; font-size: 18px;}
 .fly-edit span:hover{color: #5DB276;}
 
-/* Ã¥Ë†â€”Ã¨Â¡Â¨ */
+/* 列表 */
 .fly-list li{position: relative; height: 45px; line-height: 22px; padding: 15px 15px 15px 75px; border-bottom: 1px dotted #e2e2e2;}
 .fly-list li:last-child{border-bottom: none;}
 .fly-list li h2,
@@ -254,7 +256,7 @@ pre{padding: 10px 15px; margin: 10px 0; font-size: 12px; border-left: 6px solid 
 .fly-list-badge{position: absolute; right: 15px; top: 15px; font-size: 0;}
 .fly-list-badge .layui-badge{margin-left: 5px; border-radius: 2px; font-size: 12px;}
 
-/* Ã¥Ââ€¢Ã¨Â¡Å’Ã¥Ë†â€”Ã¨Â¡Â¨ */
+/* 单行列表 */
 .fly-list-one .fly-panel-title{margin-bottom: 5px;}
 .fly-list-one dd{margin: 0 15px; line-height: 26px; white-space: nowrap; overflow: hidden; list-style: decimal-leading-zero inside; *list-style-type: decimal inside; color: #009E94;}
 .fly-list-one dd a,
@@ -270,7 +272,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .layui-edit-face ul li{cursor: pointer; float: left; border: 1px solid #e8e8e8; height: 22px; width: 26px; overflow: hidden; margin: -1px 0 0 -1px; padding: 4px 2px; text-align: center;}
 .layui-edit-face ul li:hover{position: relative; z-index: 2; border: 1px solid #eb7350; background: #fff9ec;}
 
-/* Ã§Â­Â¾Ã¥Ë†Â° */
+/* 签到 */
 .fly-signin cite{padding: 0 5px; color: #FF5722; font-style: normal;}
 .fly-signin .layui-badge-dot{top: -7px; margin-left: 0px;}
 .fly-signin-list{padding: 0; line-height: 30px;}
@@ -286,7 +288,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .fly-signin-main{position: relative; height: 38px; padding: 24px 15px; text-align: center;}
 .fly-signin-main span{padding-left: 10px;}
 
-/* Ã¦Â¦Å“Ã¥Ââ€¢ */
+/* 榜单 */
 .fly-rank{padding-bottom: 10px;}
 .fly-rank dl{position: relative; overflow: hidden; margin-left: 20px; text-align: center; font-size: 0;}
 .fly-rank dd{position: relative; width: 65px; height: 85px; margin: 10px 25px 5px 0; display:inline-block; *display:inline; *zoom:1; vertical-align:top; font-size:12px;}
@@ -295,12 +297,12 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .fly-rank dd a:hover cite{display: block;}
 .fly-rank dd a i{position:absolute; bottom: 0; left: 0; width: 100%; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-style: normal;}
 
-/* Ã©Ââ„¢Ã¦â‚¬ÂÃ¥Ë†â€”Ã¨Â¡Â¨ */
+/* 静态列表 */
 .fly-list-static li{line-height: 26px; list-style-position: inside; list-style-type: disc; white-space: nowrap; text-overflow: ellipsis; overflow: hidden;}
 .fly-list-static li a{color: #01AAED;}
 .fly-list-static li a:hover{opacity: 0.8;}
 
-/* Ã¥Ââ€¢Ã¨Â¡Å’Ã¥Ë†â€”Ã¨Â¡Â¨ */
+/* 单行列表 */
 .jie-row li{position: relative; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px dotted #E9E9E9; font-size: 0;}
 .jie-row li *{position: relative; display:inline-block; *display:inline; *zoom:1; vertical-align: top; line-height: 20px; font-size:12px;}
 .jie-row li span{padding: 0 6px; margin-right: 10px; background-color: #DADADA; color:#fff; font-size:12px;}
@@ -317,7 +319,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .jie-row li .jie-title{max-width: 70%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
 .jie-row li .jie-user img{position:relative; top: 16px; width: 35px; height: 35px;}
 
-/* DetailÃ©Â¡Âµ */
+/* Detail页 */
 .detail-box{padding: 20px;}
 .detail h1{font-size: 24px; line-height: 36px;}
 .fly-detail-info{position: relative; margin: 10px 0 15px;}
@@ -349,17 +351,17 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .detail-body table td{padding: 10px 20px; line-height: 22px; border: 1px solid #DFDFDF; font-size: 14px; font-weight: 400;}
 .detail .page-title{ border: none; background-color: #f2f2f2;}
 
-/* Ã¥Ââ€˜Ã¥Â¸â€“ */
+/* 发帖 */
 .layui-form-item.layui-col-space15{margin-bottom: 7.5px;}
 
 
-/* Ã¦Â±â€šÃ¨Â§Â£Ã§Â®Â¡Ã§Ââ€  */
+/* 求解管理 */
 .jie-admin{cursor: pointer;}
 .detail-hits .jie-admin{color: #fff; padding: 0 10px; }
 .detail-hits .jie-admin a{color: #fff;}
 .jieda-admin{position:absolute; right: 0; top: 4px;}
 
-/* Ã¥â€ºÅ¾Ã§Â­â€ */
+/* 回答 */
 .jieda{margin-bottom: 30px;}
 .jieda li{position: relative; padding: 20px 0 10px; border-bottom: 1px dotted #DFDFDF;}
 .jieda li:last-child{border-bottom: none;}
@@ -384,7 +386,7 @@ body .layui-edit-face  .layui-layer-content{padding:0; background-color:#fff; co
 .jieda-reply span .icon-svgmoban53{position: relative; top: 1px;}
 
 
-/* Ã§â€Â¨Ã¦Ë†Â·Ã¤Â¸Â­Ã¥Â¿Æ’ */
+/* 用户中心 */
 body .fly-user-main{position: relative; min-height: 600px;}
 .fly-user-main>.layui-nav{position: absolute; left: 0; top: 0; z-index: 1000; height: 100%; padding: 10px 0;}
 .fly-user-main>.layui-nav .layui-icon{position: relative; top: 2px; font-size: 20px; margin-right: 10px;}
@@ -403,7 +405,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .user-about p{line-height:30px;}
 .user-about p span{padding:0 5px; color:#999;}
 
-/* Ã¤Â¸ÂªÃ¤ÂºÂºÃ¤Â¸Â»Ã©Â¡Âµ */
+/* 个人主页 */
 .fly-home{position: relative; padding: 30px 0 30px; text-align: center;}
 .fly-home img{width:120px; height:120px; border-radius:100%;}
 .fly-home h1{font-size:26px; line-height:30px; margin-top:10px;}
@@ -429,7 +431,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .home-jieda li p{color:#999;}
 .home-jieda li p span{padding-right:5px;}
 
-/* Ã¦Ë†â€˜Ã§Å¡â€žÃ¦Â¶Ë†Ã¦ÂÂ¯ */
+/* 我的消息 */
 #LAY-minemsg{min-height:420px;}
 .mine-msg li{position:relative; margin-bottom: 15px; padding: 10px 0 5px; line-height:24px; border-bottom:1px dotted #E9E9E9}
 .mine-msg li cite{padding: 0 5px; color: #4F99CF;}
@@ -439,7 +441,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .mine-msg li .fly-delete{position: relative; top: -3px;}
 .mine-msg li .layui-elem-quote p[download]{padding: 10px 0 5px;}
 
-/* Ã¨Â®Â¾Ã§Â½Â® */
+/* 设置 */
 .avatar-add{position:relative; width:373px; height:373px; background-color:#F2F2F5;}
 .avatar-add .upload-img{position:absolute; left:50%; top:35px; margin:0 0 0 -56px;}
 .avatar-add img{position:absolute; left:50%; top:50%; width:168px; height:168px; margin:-50px 0 0 -84px; border-radius:100%;}
@@ -451,7 +453,7 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .app-bind .app-havebind .icon-qq{color:#7CA9C9}
 .app-bind .app-havebind .icon-weibo{color:#E6162D}
 
-/* Ã¦Â¡Ë†Ã¤Â¾â€¹ */
+/* 案例 */
 .fly-case-header{position: relative; height: 260px; text-align: center; background: #393D49;}
 .fly-case-year{position: absolute; top: 30px; width: 100%; line-height: 50px; font-size: 50px; text-align: center; color: #fff; font-weight: 300;}
 .fly-case-banner{position: absolute; left: 50%; top: 100px; width: 670px; margin-left: -335px;}
@@ -487,16 +489,16 @@ body .fly-user-main{position: relative; min-height: 600px;}
 .layer-ext-ul li{margin: 8px;}
 .layer-ext-case .layui-layer-title{border: none; background-color: #009688; color: #fff;}
 
-/* Ã¥Â¹Â¿Ã¥â€˜Å  */
+/* 广告 */
 .fly-ad{position: relative; background-color: #f2f2f2; overflow:hidden;}
-.fly-ad:before{content: 'Ã¥Â¹Â¿Ã¥â€˜Å Ã¤Â½Â'; position: absolute; z-index: 0; top: 50%; left: 50%; left: 50%; margin: -10px 0 0 -25px; color: #aaa; font-size: 18px; font-weight: 300;}
+.fly-ad:before{content: '广告位'; position: absolute; z-index: 0; top: 50%; left: 50%; left: 50%; margin: -10px 0 0 -25px; color: #aaa; font-size: 18px; font-weight: 300;}
 .fly-ad div{position: relative; z-index: 1;}
 
-/* Ã¥Ââ€¹Ã©â€œÂ¾ */
+/* 友链 */
 .fly-link dd{display: inline-block; vertical-align: top;}
 .fly-link a{line-height: 24px; padding-right: 15px;}
 
-/* 404Ã¦Ë†â€“Ã¦ÂÂÃ§Â¤Âº */
+/* 404或提示 */
 .fly-none{min-height: 600px; text-align: center; padding-top:50px; color: #999;}
 .fly-none .iconfont{line-height: 300px; font-size: 300px; color: #393D49;}
 .fly-none .icon-tishilian{display: inline-block; margin: 30px 0 20px;}
@@ -507,38 +509,38 @@ body .fly-user-main{position: relative; min-height: 600px;}
 @media screen and (max-width: 768px) {
     .fly-main{width: 100%;}
 
-    /* Ã©Â¡Â¶Ã¨Â¾Â¹Ã¨Â·Â */
+    /* 顶边距 */
     .fly-marginTop{margin-top: 0;}
 
-    /* Ã¥Â¤Â´Ã©Æ’Â¨ */
+    /* 头部 */
     .fly-header .fly-nav-user li .fly-nav-avatar{padding-right: 15px;}
     .fly-header .fly-nav-user{margin-right: 5px;}
 
-    /* Ã¤Â¸â€œÃ¦Â Â */
+    /* 专栏 */
     .fly-column{height: auto;}
     .fly-column ul{padding: 10px; font-size: 0;}
     .fly-column ul li{float: left; width: 33.33%; height: 36px; line-height: 36px; font-size: 14px; vertical-align: middle; text-align: center; box-sizing: border-box;}
     .fly-column-right{right: 10px;}
     .fly-column ul li.layui-this:after{display: none;}
 
-    /* Ã©Â¡ÂµÃ¨â€žÅ¡ */
+    /* 页脚 */
     .fly-footer{margin-top: 0; border-top: none;}
 
-    /* Ã¥Ë†â€ Ã©Â¡Âµ */
+    /* 分页 */
     .laypage-main a, .laypage-main span{display: none;}
     .laypage-main .laypage-prev,
     .laypage-main .laypage-curr,
     .laypage-main .laypage-next{display: inline-block;}
 
-    /* Ã¥Ë†â€”Ã¨Â¡Â¨ */
+    /* 列表 */
     .fly-list li h2 a{max-width: 72%;}
 
-    /* Detail Ã©Â¡Âµ */
+    /* Detail 页 */
     .fly-admin-box{display: block; margin: 0; margin-top: 10px;}
     .fly-detail-info .fly-list-nums{top: -2px;}
     .fly-edit span{padding: 0 6px;}
 
-    /* Ã¦Â¡Ë†Ã¤Â¾â€¹ */
+    /* 案例 */
     .fly-case-list,
     .fly-case-list li{width: 100%;  -webkit-box-sizing: border-box !important; -moz-box-sizing: border-box !important; box-sizing: border-box !important;}
     .fly-case-img{text-align: center;}
@@ -552,13 +554,4 @@ body .fly-user-main{position: relative; min-height: 600px;}
     .site-mobile .site-tree-mobile{display: none !important;}
     .site-mobile .fly-user-main>.layui-nav{left: 0;}
     .site-mobile .site-mobile-shade{content: ''; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,.9); z-index: 999;}
-}
-
-.layui-nav-item a i{
-    left:0;
-    font-size:16px;
-}
-
-.text-center{
-    text-align: center;
 }

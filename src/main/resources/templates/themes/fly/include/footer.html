@@ -32,6 +32,23 @@
     <script type="text/javascript" th:src="@{|/webjars/jquery/jquery.min.js|}"></script>
     <!-- layui -->
     <script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
+    <!-- hilightjs -->
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <!-- mathjax -->
+    <script src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript">
+        $('pre code').each(function(i, block) {
+            hljs.highlightBlock(block);
+        });
+
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [
+                    ["$", "$"], ["\\(", "\\)"]
+                ]
+            }
+        });
+    </script>
     <th:block th:replace="${scripts}"/>
 </div>
 </body>

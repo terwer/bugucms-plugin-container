@@ -13,10 +13,20 @@
       th:with="id=${post?.postId},title='写文章,更新文章'">
 
 <header layout:fragment="customHeader">
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/SimpleMDE/css/simplemde.min.css}"/>
+    <!-- hilightjs -->
+    <link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/github.min.css">
+    <link rel="dns-prefetch" href="//cdn.mathjax.org" />
+    <link rel="stylesheet" type="text/css" th:href="@{/lib/SimpleMDE/css/simplemde.min.css?v=20180918115000}"/>
     <link rel="stylesheet" type="text/css" href="http://www.layui.com/admin/std/dist/layuiadmin/style/admin.css"/>
     <style type="text/css">
-
+        pre{
+            padding: 10px 15px;
+            margin: 10px 0;
+        }
+        pre code{
+            font-size: 12px;
+            font-family: Courier New;
+        }
     </style>
 </header>
 
@@ -44,6 +54,7 @@
                         <div class="layui-input-block">
                             <select name="postType" lay-filter="post-type-change">
                                 <option value="post" th:selected="${post.postType==null || post.postType eq 'post'}">文章</option>
+                                <option value="note" th:selected="${post.postType!=null && post.postType eq 'note'}">笔记</option>
                                 <option value="essay" th:selected="${post.postType!=null && post.postType eq 'essay'}">随笔</option>
                                 <option value="page" th:selected="${post.postType!=null && post.postType eq 'page'}">页面</option>
                             </select>
@@ -77,7 +88,7 @@
                     </div>
                     <div class="layui-form-item layui-layout-admin">
                         <div class="layui-input-block">
-                            <div class="layui-footer" style="left: 0;">
+                            <div class="layui-footer" style="left: 0;z-index: 999999;">
                                 <button class="layui-btn" lay-submit="" lay-filter="post-form-submit">立即提交</button>
                                 <button type="reset" class="layui-btn layui-btn-danger">重置</button>
                                 <button class="layui-btn layui-btn-primary" id="screenButton">全屏</button>
@@ -95,23 +106,48 @@
 
 <footer layout:fragment="customFooter">
     <script type="text/javascript" th:src="@{/lib/SimpleMDE/js/simplemde.min.js}"></script>
+    <!-- hilightjs -->
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
+    <!-- mathjax -->
+    <script src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <script type="text/javascript" th:inline="javascript">
         var simplemde = null;
-        $(document).ready(function () {
-            simplemde = new SimpleMDE({
-                element: $("#content")[0],
-                placeholder: "请输入文章内容...",
-            });
-            // simplemde.toggleSideBySide()//打开实时全屏预览
-        });
 
-        $(function () {
+        $(document).ready(function () {
             fullscreen("screenButton");
-            
-            $("#preview").on("click",function () {
+
+            $("#preview").on("click", function () {
                 var url = $(this).parent().attr("href");
                 top.window.location.href = url;
             });
+        });
+
+        $(function () {
+            MathJax.Hub.Config({
+                tex2jax: {
+                    inlineMath: [
+                        ["$", "$"], ["\(", "\)"]
+                    ]
+                }
+            });
+
+            var QUEUE = MathJax.Hub.queue;
+            simplemde = new SimpleMDE({
+                element: document.getElementById("content"),
+                placeholder: "请输入文章内容...",
+                spellChecker: false,
+                previewRender: function (plainText) {
+                    var preview = document.getElementsByClassName("editor-preview-side")[0];
+                    preview.innerHTML = this.parent.markdown(plainText);
+                    preview.setAttribute('id', 'editor-preview')
+                    MathJax.Hub.Queue(["Typeset", MathJax.Hub, "editor-preview"]);
+                    return preview.innerHTML;
+                },
+                renderingConfig: {
+                    codeSyntaxHighlighting: true,
+                },
+            });
+            simplemde.toggleSideBySide()//打开实时全屏预览
         });
 
         /**

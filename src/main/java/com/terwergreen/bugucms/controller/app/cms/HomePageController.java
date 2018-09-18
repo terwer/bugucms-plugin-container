@@ -60,7 +60,11 @@ public class HomePageController extends BGBaseController {
             paramMap.put("postStatus", PostStatusEnum.POST_STATUS_PUBLISH.getName());
             paramMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
             if (!StringUtils.isEmpty(q)) {
-                paramMap.put("search", q);
+                if (PostTypeEmum.POST_TYPE_NOTE.getName().equals(q)) {
+                    paramMap.put("postType", PostTypeEmum.POST_TYPE_NOTE.getName());
+                } else {
+                    paramMap.put("search", q);
+                }
             }
             postList = postService.getRecentPosts(paramMap);
 
