@@ -54,6 +54,7 @@
                         <div class="layui-input-block">
                             <select name="postType" lay-filter="post-type-change">
                                 <option value="post" th:selected="${post.postType==null || post.postType eq 'post'}">文章</option>
+                                <option value="note" th:selected="${post.postType!=null && post.postType eq 'note'}">笔记</option>
                                 <option value="essay" th:selected="${post.postType!=null && post.postType eq 'essay'}">随笔</option>
                                 <option value="page" th:selected="${post.postType!=null && post.postType eq 'page'}">页面</option>
                             </select>

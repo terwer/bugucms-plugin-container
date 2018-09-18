@@ -15,7 +15,11 @@ public enum PostTypeEmum {
     /**
      * 页面
      */
-    POST_TYPE_PAGE("page", 3);
+    POST_TYPE_PAGE("page", 3),
+    /**
+     * 笔记
+     */
+    POST_TYPE_NOTE("note", 3);
 
     // 成员变量
     private String name;
