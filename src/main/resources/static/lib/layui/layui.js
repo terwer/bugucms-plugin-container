@@ -41,7 +41,7 @@
 
   //异常提示
   ,error = function(msg){
-    win.console && console.error && console.error('Layui hint: ' + msg);
+    win.console && console.error && console.log('Layui hint: ' + msg);
   }
 
   ,isOpera = typeof opera !== 'undefined' && opera.toString() === '[object Opera]'
