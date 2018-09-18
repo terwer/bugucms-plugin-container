@@ -8,7 +8,7 @@
 -->
 <!DOCTYPE html>
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
-<head th:include="themes/fly/include/header::commonHeaderCustom('详情 - ' + ${siteConfigDTO.webname},~{::style})">
+<head th:include="themes/fly/include/header::commonHeaderCustom(${post.postTitle} + ' - ' + ${siteConfigDTO.webname},~{::style})">
     <style type="text/css">
 
     </style>
