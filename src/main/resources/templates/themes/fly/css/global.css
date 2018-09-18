@@ -12,6 +12,7 @@ html,body{overflow-x: hidden;}
 html body{margin-top: 61px;}
 html{background-color: #F2F2F2;}
 i{font-style: normal;}
+h1,h2,h3,h4,h5,h6{padding:10px 0;}
 
 /* 图标 */
 
