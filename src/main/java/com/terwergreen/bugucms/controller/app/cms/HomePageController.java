@@ -79,8 +79,6 @@ public class HomePageController extends BGBaseController {
             mv.addObject("dingPostList", dingPostList);
             mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
-        } catch (TemplateInputException tie) {
-
         } catch (Exception e) {
             logger.error("系统异常" + e.getLocalizedMessage(), e);
             throw new WebException(e);

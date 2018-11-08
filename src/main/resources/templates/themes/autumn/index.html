@@ -1,0 +1,39 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:include="themes/autumn/include/header::commonHeaderCustom(${siteConfigDTO.webname} + ' - ' + ${siteConfigDTO.webslogen},~{::style})">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<div th:include="themes/autumn/include/header::commonHeaderContent"></div>
+
+<div th:include="themes/autumn/include/footer::commonFooterCustom(~{::script})">
+    <script type="text/javascript">
+        layui.cache.page = '';
+        layui.cache.user = {
+            username: '游客'
+            ,uid: -1
+            ,avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
+            ,experience: 83
+            ,sex: '男'
+        };
+        layui.config({
+            version: "3.0.0"
+            ,base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
+        }).extend({
+            fly: 'index'
+        }).use('fly');
+    </script>
+</div>
+
+</body>
+</html>
