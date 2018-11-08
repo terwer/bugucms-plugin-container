@@ -18,20 +18,6 @@
 
 <div th:include="themes/autumn/include/footer::commonFooterCustom(~{::script})">
     <script type="text/javascript">
-        layui.cache.page = '';
-        layui.cache.user = {
-            username: '游客'
-            ,uid: -1
-            ,avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
-            ,experience: 83
-            ,sex: '男'
-        };
-        layui.config({
-            version: "3.0.0"
-            ,base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
-        }).extend({
-            fly: 'index'
-        }).use('fly');
     </script>
 </div>
 
