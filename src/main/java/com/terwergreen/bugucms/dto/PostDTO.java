@@ -110,7 +110,7 @@ public class PostDTO {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
-        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 240);
+        this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 168);
     }
 
     public boolean isNewFlag() {

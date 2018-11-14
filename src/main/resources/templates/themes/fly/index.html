@@ -13,6 +13,11 @@
         ul, li {
             list-style: none !important;
         }
+
+        .archive-content{
+            color: #999;
+            overflow: hidden;
+        }
     </style>
 </head>
 <body>
@@ -30,19 +35,19 @@
             <li><a th:href="@{/guestbook.html}">留言<span class="layui-badge-dot"></span></a></li>
             <li><a th:href="@{/about.html}">关于</a></li>
             <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><span class="fly-mid"></span></li>
-                <div th:if="${sysUserDTO!=null}" th:remove="tag">
-                    <!-- 用户登入后显示 -->
-                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我发表的贴</a></li>
-                    <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我收藏的贴</a></li>
-                </div>
+            <div th:if="${sysUserDTO!=null}" th:remove="tag">
+                <!-- 用户登入后显示 -->
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我发表的文章</a></li>
+                <li class="layui-hide-xs layui-hide-sm layui-show-md-inline-block"><a href="#">我收藏的文章</a></li>
+            </div>
         </ul>
 
         <div class="fly-column-right layui-hide-xs">
             <span class="fly-search"><i class="layui-icon"></i></span>
-            <a href="#" class="layui-btn" sec:authorize="hasRole('ROLE_ADMIN')">发表新帖</a>
+            <a href="#" class="layui-btn" sec:authorize="hasRole('ROLE_ADMIN')">发布文章</a>
         </div>
         <div class="layui-hide-sm layui-show-xs-block" style="margin-top: -10px; padding-bottom: 10px; text-align: center;" sec:authorize="hasRole('ROLE_ADMIN')">
-            <a href="#" class="layui-btn">发表新帖</a>
+            <a href="#" class="layui-btn">发布文章</a>
         </div>
     </div>
 </div>
@@ -50,91 +55,96 @@
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
         <div class="layui-col-md8">
-            <div class="fly-panel">
-                <div class="fly-panel-title fly-filter">
-                    <a>置顶</a>
-                    <a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin"
-                       style="color: #FF5722;">去签到</a>
-                </div>
-                <ul class="fly-list">
-                    <li th:each="dingList,listStat:${dingPostList}">
-                        <a th:href="@{/}" class="fly-avatar">
-                            <img src="https://tvax1.sinaimg.cn/crop.0.0.540.540.180/0075uTFdly8fs75paasl1j30f00f0afd.jpg" alt="小布">
-                        </a>
-                        <h2>
-                            <a class="layui-badge" style="top: 0;" th:text="${dingList.metaValue}">公告</a>
-                            <a th:href="@{|/post/${dingList.postSlug eq '' ?dingList.postId:dingList.postSlug}.html|}" th:text="${dingList.postTitle}">标题</a>
-                        </h2>
-                        <div class="fly-list-info">
-                            <a th:href="@{/}" link>
-                                <cite th:text="${dingList?.sysUser?.nickName}">贤心</cite>
-                                <i class="iconfont icon-renzheng" title="认证信息：XXX"></i>
-                                <i class="layui-badge fly-badge-vip">VIP3</i>
-                            </a>
-                            <span>刚刚</span>
+            <!--<div class="fly-panel">-->
+            <!--<div class="fly-panel-title fly-filter">-->
+            <!--<a>置顶</a>-->
+            <!--<a href="#signin" class="layui-hide-sm layui-show-xs-block fly-right" id="LAY_goSignin"-->
+            <!--style="color: #FF5722;">去签到</a>-->
+            <!--</div>-->
+            <!--<ul class="fly-list">-->
+            <!--<li th:each="dingList,listStat:${dingPostList}">-->
+            <!--<a th:href="@{/}" class="fly-avatar">-->
+            <!--<img src="https://tvax1.sinaimg.cn/crop.0.0.540.540.180/0075uTFdly8fs75paasl1j30f00f0afd.jpg" alt="小布">-->
+            <!--</a>-->
+            <!--<h2>-->
+            <!--<a class="layui-badge" style="top: 0;" th:text="${dingList.metaValue}">公告</a>-->
+            <!--<a th:href="@{|/post/${dingList.postSlug eq '' ?dingList.postId:dingList.postSlug}.html|}" th:text="${dingList.postTitle}">标题</a>-->
+            <!--</h2>-->
+            <!--<div class="fly-list-info">-->
+            <!--<a th:href="@{/}" link>-->
+            <!--<cite th:text="${dingList?.sysUser?.nickName}">贤心</cite>-->
+            <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
+            <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
+            <!--</a>-->
+            <!--<span>刚刚</span>-->
 
-                            <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>
-                            <span class="layui-badge fly-badge-accept layui-hide-xs" th:text="${dingList.postFinished==1?'已结':'未结'}">已结</span>
-                            <span class="fly-list-nums">
-                                <i class="iconfont icon-pinglun1" title="回答"></i>
-                                <span th:text="${dingList.commentCount}">66</span>
-                            </span>
-                        </div>
-                        <div class="fly-list-badge">
-                            <span class="layui-badge layui-bg-black">置顶</span>
-                            <span class="layui-badge layui-bg-red">精帖</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
+            <!--<span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>-->
+            <!--<span class="layui-badge fly-badge-accept layui-hide-xs" th:text="${dingList.postFinished==1?'已结':'未结'}">已结</span>-->
+            <!--<span class="fly-list-nums">-->
+            <!--<i class="iconfont icon-pinglun1" title="回答"></i>-->
+            <!--<span th:text="${dingList.commentCount}">66</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--<div class="fly-list-badge">-->
+            <!--<span class="layui-badge layui-bg-black">置顶</span>-->
+            <!--<span class="layui-badge layui-bg-red">精帖</span>-->
+            <!--</div>-->
+            <!--</li>-->
+            <!--</ul>-->
+            <!--</div>-->
 
             <div class="fly-panel" style="margin-bottom: 0;">
-                <div class="fly-panel-title fly-filter">
-                    <a href="" class="layui-this">综合</a>
-                    <span class="fly-mid"></span>
-                    <a href="">未结</a>
-                    <span class="fly-mid"></span>
-                    <a href="">已结</a>
-                    <span class="fly-mid"></span>
-                    <a href="">精华</a>
-                    <span class="fly-filter-right layui-hide-xs">
-                        <a href="" class="layui-this">按最新</a>
-                        <span class="fly-mid"></span>
-                <a href="">按热议</a>
-                </span>
-            </div>
+                <!--<div class="fly-panel-title fly-filter">-->
+                <!--<a href="" class="layui-this">综合</a>-->
+                <!--<span class="fly-mid"></span>-->
+                <!--<a href="">未结</a>-->
+                <!--<span class="fly-mid"></span>-->
+                <!--<a href="">已结</a>-->
+                <!--<span class="fly-mid"></span>-->
+                <!--<a href="">精华</a>-->
+                <!--<span class="fly-filter-right layui-hide-xs">-->
+                <!--<a href="" class="layui-this">按最新</a>-->
+                <!--<span class="fly-mid"></span>-->
+                <!--<a href="">按热议</a>-->
+                <!--</span>-->
+                <!--</div>-->
 
                 <ul class="fly-list">
-                    <li th:each="list,listStat:${postList}">
-                        <a th:href="@{/}" class="fly-avatar">
-                            <img src="https://tvax1.sinaimg.cn/crop.0.0.540.540.180/0075uTFdly8fs75paasl1j30f00f0afd.jpg" alt="贤心">
-                        </a>
+                    <li th:each="list,listStat:${postList}" th:style="${list.thumbnails.size() > 0?'padding-left:180px;':'padding-left: 15px;'}">
+                        <thumbnail th:if="${list.thumbnails.size() > 0}" th:remove="tag">
+                            <a th:href="@{|/post/${list.postSlug eq '' ?list.postId:list.postSlug}.html|}" class="fly-avatar">
+                                <img th:src="${list.thumbnails.get(0)}" th:alt="${list.postTitle}" style="width: 150px;height: 135px;">
+                            </a>
+                        </thumbnail>
                         <h2>
-                            <a class="layui-badge" th:text="${list?.metaValue}">动态</a>
+                            <!--<a class="layui-badge" th:text="${list?.metaValue}">动态</a>-->
                             <a th:href="@{|/post/${list.postSlug eq '' ?list.postId:list.postSlug}.html|}" th:text="${list.postTitle}">标题</a>
                         </h2>
                         <div class="fly-list-info">
                             <a th:href="@{/}" link>
                                 <cite th:text="${list?.sysUser?.nickName}">小布</cite>
                                 <!--<i class="iconfont icon-renzheng" title="认证信息：XXX"></i>-->
-                                <i class="layui-badge fly-badge-vip">VIP3</i>
+                                <!--<i class="layui-badge fly-badge-vip">VIP3</i>-->
                             </a>
                             <span>刚刚</span>
 
-                            <span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>
-                            <span class="layui-badge fly-badge-accept layui-hide-xs" th:text="${list.postFinished==1?'已结':'未结'}">已结</span>
-                            <span class="fly-list-nums">
-                                <i class="iconfont icon-pinglun1" title="回答"></i> 66
-                            </span>
+                            <!--<span class="fly-list-kiss layui-hide-xs" title="悬赏飞吻"><i class="iconfont icon-kiss"></i> 60</span>-->
+                            <!--<span class="layui-badge fly-badge-accept layui-hide-xs" th:text="${list.postFinished==1?'已结':'未结'}">已结</span>-->
+                            <!--<span class="fly-list-nums">-->
+                            <!--<i class="iconfont icon-pinglun1" title="回答"></i> 66-->
+                            <!--</span>-->
                         </div>
-                        <div class="fly-list-badge" th:if="${list.metaKey!=null&&list.metaKey=='jing'}">
-                            <span class="layui-badge layui-bg-red">精帖</span>
+                        <!--<div class="fly-list-badge" th:if="${list.metaKey!=null&&list.metaKey=='jing'}">-->
+                        <!--<span class="layui-badge layui-bg-red">精帖</span>-->
+                        <!--</div>-->
+                        <div>
+                            <div class="archive-content" th:text="${list.postDesc}">postDesc</div>
                         </div>
                     </li>
                 </ul>
-                <div style="text-align: center" th:if="${postList.size()==10}">
+                <div style="text-align: center">
                     <div class="laypage-main">
-                        <a th:href="@{|/?page=2|}" class="laypage-next">更多求解</a>
+                        <a th:href="@{|/post/page/${page}|}" class="laypage-next" th:text="${postList.size()==10?'下一页':'首页'}">下一页</a>
                     </div>
                 </div>
             </div>
@@ -248,14 +258,14 @@
         layui.cache.page = '';
         layui.cache.user = {
             username: '游客'
-            ,uid: -1
-            ,avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
-            ,experience: 83
-            ,sex: '男'
+            , uid: -1
+            , avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
+            , experience: 83
+            , sex: '男'
         };
         layui.config({
             version: "3.0.0"
-            ,base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
+            , base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
         }).extend({
             fly: 'index'
         }).use('fly');
