@@ -1,10 +1,8 @@
 /**
-
- @Name: Fly社区主入口
-
+ @Name: automn - 秋天
+ @Author: terwer
+ @Copyright: terwergreen.com
  */
-
-
 layui.define(['layer', 'laytpl', 'form', 'element', 'upload', 'util'], function (exports) {
 
     var $ = layui.jquery

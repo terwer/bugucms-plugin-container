@@ -92,11 +92,6 @@ public class PostServiceImpl implements PostService {
         pageSize = pageInfo.getPageSize();
         logger.info("分页信息：total=" + total + "，pages=" + pages + "，pageNum=" + pageNum + "，pageSize=" + pageSize);
         return pageInfo;
-        //if (CollectionUtils.isEmpty(pageInfo.getList())) {
-        //    return null;
-        //} else {
-        //    return pageInfo;
-        //}
     }
 
     @Override

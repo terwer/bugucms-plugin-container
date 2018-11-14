@@ -1,12 +1,8 @@
 /**
- 
- @Name: Fly社区
- @Author: 贤心
- @Site: fly.layui.com
-
+ @Name: automn - 秋天
+ @Author: terwer
+ @Copyright: terwergreen.com
  */
-
-
 /* 全局 */
 html,body{overflow-x: hidden;}
 html{background-color: #F2F2F2;}
@@ -145,7 +141,7 @@ pre code{background-color: #f8f8f8; font-family: Courier New;font-size: 12px; }
 /* 头部 */
 .fly-header{left: 0; top: 0; z-index: 10000; width: 100%; height: 60px; border-bottom: 1px solid #404553; border-right: 1px solid #404553; border-radius: 0;}
 .fly-logo{position: absolute;/* left: 15px; *//* top: 11px; */}
-.fly-logo img{width: 200px;height: 60px;}
+.fly-logo img{width: 180px;height: 40px;margin-top: 10px;}
 /*.fly-nav-menu{margin-left: 200px;}*/
 /*.fly-nav-menu a i{position: absolute; left: 25px; top: 0; padding-right: 10px; font-size: 26px;}*/
 /*.fly-nav-menu a .icon-shouye, .nav a .icon-shezhi{top: 2px;}*/
@@ -240,13 +236,13 @@ pre code{background-color: #f8f8f8; font-family: Courier New;font-size: 12px; }
 .fly-edit span:hover{color: #5DB276;}
 
 /* 列表 */
-.fly-list li{position: relative; height: 45px; line-height: 22px; padding: 15px 15px 15px 75px; border-bottom: 1px dotted #e2e2e2;}
+.fly-list li{position: relative; line-height: 22px; padding: 15px 15px 15px 75px; border-bottom: 1px dotted #e2e2e2;}
 .fly-list li:last-child{border-bottom: none;}
 .fly-list li h2,
 .fly-list li h2 a,
 .fly-list-info{white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
 .fly-list li h2{height: 26px; font-size: 0;}
-.fly-list li h2 a{display: inline-block; max-width: 80%; padding-right: 10px; font-size: 16px;}
+.fly-list li h2 a{display: inline-block;max-width: 80%;padding-right: 10px;font-size: 16px;color: #5FB878;}
 .fly-list li h2 .layui-badge{top: -2px; height: 16px; line-height: 16px; padding: 0 5px; margin-right: 10px; font-size: 12px; border: 1px solid #5FB878; background: none; color: #5FB878;}
 
 .fly-list-info{position: relative; font-size: 13px; color: #999;}
@@ -560,4 +556,9 @@ body .fly-user-main{position: relative; min-height: 600px;}
     .site-mobile .site-tree-mobile{display: none !important;}
     .site-mobile .fly-user-main>.layui-nav{left: 0;}
     .site-mobile .site-mobile-shade{content: ''; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,.9); z-index: 999;}
+}
+
+.top-menu-item i{
+    font-size: 20px;
+    margin-right:5px;
 }

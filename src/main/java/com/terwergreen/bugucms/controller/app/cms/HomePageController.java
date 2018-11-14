@@ -1,28 +1,31 @@
 package com.terwergreen.bugucms.controller.app.cms;
 
 import com.alibaba.fastjson.JSON;
+import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
-import com.terwergreen.bugucms.dto.SysUserDTO;
-import com.terwergreen.bugucms.dto.PostDTO;
-import com.terwergreen.bugucms.service.PostService;
-import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.dto.PostDTO;
+import com.terwergreen.bugucms.dto.SiteConfigDTO;
+import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.util.PostStatusEnum;
 import com.terwergreen.bugucms.util.PostTypeEmum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.StringUtils;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
-import org.thymeleaf.exceptions.TemplateInputException;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_SIZE;
 
 @Controller
 @RequestMapping(value = "/")
@@ -38,7 +41,7 @@ public class HomePageController extends BGBaseController {
     /***********/
 
     @RequestMapping(value = "/", method = RequestMethod.GET)
-    public ModelAndView home(HttpServletRequest request, String q) throws Exception {
+    public ModelAndView home(HttpServletRequest request, String q, Integer page) throws Exception {
         SiteConfigDTO siteConfigDTO = null;
         SysUserDTO sysUserDTO = null;
         List<PostDTO> dingPostList = null;
@@ -66,17 +69,22 @@ public class HomePageController extends BGBaseController {
                     paramMap.put("search", q);
                 }
             }
-            postList = postService.getRecentPosts(paramMap);
+            if (null == page) {
+                page = 1;
+            }
+            PageInfo postListInfo = postService.getPostsByPage(page, DEFAULT_PAGE_SIZE, paramMap);
+            postList = postListInfo.getList();
 
-            Map dingParamMap = new HashMap();
-            dingParamMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
-            dingParamMap.put("metaKey", "ding");
-            dingPostList = postService.getRecentPosts(dingParamMap);
+            //Map dingParamMap = new HashMap();
+            //dingParamMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
+            //dingParamMap.put("metaKey", "ding");
+            //dingPostList = postService.getRecentPosts(dingParamMap);
 
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
-            mv.addObject("dingPostList", dingPostList);
+            //mv.addObject("dingPostList", dingPostList);
+            mv.addObject("page", postListInfo.getNextPage());
             mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
         } catch (Exception e) {
@@ -84,6 +92,11 @@ public class HomePageController extends BGBaseController {
             throw new WebException(e);
         }
         return mv;
+    }
+
+    @RequestMapping(value = "/post/page/{page}", method = RequestMethod.GET)
+    public ModelAndView postPageList(HttpServletRequest request, String q, @PathVariable("page") Integer page) throws Exception {
+        return home(request, q, page);
     }
 
     @RequestMapping(value = "/essay.html", method = RequestMethod.GET)
