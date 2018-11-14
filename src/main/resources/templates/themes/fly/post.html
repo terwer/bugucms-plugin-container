@@ -91,7 +91,7 @@
 
 <div class="layui-container">
     <div class="layui-row layui-col-space15">
-        <div class="layui-col-md8 content detail">
+        <div class="layui-col-md12 content detail">
             <div class="fly-panel detail-box">
                 <h1 th:text="${post.postTitle}">postTitle</h1>
                 <div class="fly-detail-info">
@@ -280,31 +280,31 @@
                 <!--</div>-->
             </div>
         </div>
-        <div class="layui-col-md4">
-            <div class="fly-panel">
-                <div class="fly-panel-title">
-                    重磅推荐
-                </div>
-                <div class="fly-panel-main">
-                    <a href="https://github.com/terwer/bugucms" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">BuguCMS 1.0 - CMS旗舰之作</a>
-                </div>
-            </div>
+        <!--<div class="layui-col-md4">-->
+            <!--<div class="fly-panel">-->
+                <!--<div class="fly-panel-title">-->
+                    <!--重磅推荐-->
+                <!--</div>-->
+                <!--<div class="fly-panel-main">-->
+                    <!--<a href="https://github.com/terwer/bugucms" target="_blank" class="fly-zanzhu" time-limit="2017.09.25-2099.01.01" style="background-color: #5FB878;">BuguCMS 1.0 - CMS旗舰之作</a>-->
+                <!--</div>-->
+            <!--</div>-->
 
-            <div class="fly-panel" style="padding: 10px 0; text-align: center;">
-                <img th:src="@{|/themes/${siteConfigDTO.webtheme}/images/mp-qrcode.png|}" style="max-width: 95%;" alt="layui">
-                <!--<p style="position: relative; color: #666;">微信扫码关注 BuguCMS 公众号</p>-->
-            </div>
+            <!--<div class="fly-panel" style="padding: 10px 0; text-align: center;">-->
+                <!--<img th:src="@{|/themes/${siteConfigDTO.webtheme}/images/mp-qrcode.png|}" style="max-width: 95%;" alt="layui">-->
+                <!--&lt;!&ndash;<p style="position: relative; color: #666;">微信扫码关注 BuguCMS 公众号</p>&ndash;&gt;-->
+            <!--</div>-->
 
-            <dl class="fly-panel fly-list-one">
-                <dt class="fly-panel-title">本周热议</dt>
-                <dd th:if="false">
-                    <a href="">基于 layui 的极简社区页面模版</a>
-                    <span><i class="iconfont icon-pinglun1"></i> 16</span>
-                </dd>
-                <!-- 无数据时 -->
-                <div class="fly-none">没有相关数据</div>
-            </dl>
-        </div>
+            <!--<dl class="fly-panel fly-list-one">-->
+                <!--<dt class="fly-panel-title">本周热议</dt>-->
+                <!--<dd th:if="false">-->
+                    <!--<a href="">基于 layui 的极简社区页面模版</a>-->
+                    <!--<span><i class="iconfont icon-pinglun1"></i> 16</span>-->
+                <!--</dd>-->
+                <!--&lt;!&ndash; 无数据时 &ndash;&gt;-->
+                <!--<div class="fly-none">没有相关数据</div>-->
+            <!--</dl>-->
+        <!--</div>-->
     </div>
 </div>
 
