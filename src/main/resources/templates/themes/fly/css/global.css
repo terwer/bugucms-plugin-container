@@ -8,6 +8,11 @@ html,body{overflow-x: hidden;}
 html{background-color: #F2F2F2;}
 i{font-style: normal;}
 
+hr{
+    color:#e2e2e2;
+    margin:0 5px 0 5px;
+}
+
 .post-content h1{padding:10px 0;}
 .post-content h2{padding:10px 0;}
 .post-content h3{padding:10px 0;}
@@ -236,7 +241,7 @@ pre code{background-color: #f8f8f8; font-family: Courier New;font-size: 12px; }
 .fly-edit span:hover{color: #5DB276;}
 
 /* 列表 */
-.fly-list li{position: relative; line-height: 22px; padding: 15px 15px 15px 75px; border-bottom: 1px dotted #e2e2e2;}
+.fly-list li{position: relative;line-height: 22px;padding: 15px;/* border-bottom: 1px dotted #e2e2e2; */}
 .fly-list li:last-child{border-bottom: none;}
 .fly-list li h2,
 .fly-list li h2 a,
@@ -556,9 +561,4 @@ body .fly-user-main{position: relative; min-height: 600px;}
     .site-mobile .site-tree-mobile{display: none !important;}
     .site-mobile .fly-user-main>.layui-nav{left: 0;}
     .site-mobile .site-mobile-shade{content: ''; position: fixed; top: 0; bottom: 0; left: 0; right: 0; background-color: rgba(0,0,0,.9); z-index: 999;}
-}
-
-.top-menu-item i{
-    font-size: 20px;
-    margin-right:5px;
 }
