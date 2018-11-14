@@ -75,15 +75,15 @@ public class HomePageController extends BGBaseController {
             PageInfo postListInfo = postService.getPostsByPage(page, DEFAULT_PAGE_SIZE, paramMap);
             postList = postListInfo.getList();
 
-            //Map dingParamMap = new HashMap();
-            //dingParamMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
-            //dingParamMap.put("metaKey", "ding");
-            //dingPostList = postService.getRecentPosts(dingParamMap);
+            Map dingParamMap = new HashMap();
+            dingParamMap.put("postType", PostTypeEmum.POST_TYPE_POST.getName());
+            dingParamMap.put("metaKey", "ding");
+            dingPostList = postService.getRecentPosts(dingParamMap);
 
             mv.setViewName("themes/" + siteConfigDTO.getWebtheme() + "/index");
             mv.addObject("siteConfigDTO", siteConfigDTO);
             mv.addObject("sysUserDTO", sysUserDTO);
-            //mv.addObject("dingPostList", dingPostList);
+            mv.addObject("dingPostList", dingPostList);
             mv.addObject("page", postListInfo.getNextPage());
             mv.addObject("postList", postList);
             logger.info("获取页面信息成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",sysUserDTO=" + sysUserDTO + ",postList=" + postList);
