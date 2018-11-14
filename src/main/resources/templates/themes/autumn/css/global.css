@@ -1,11 +1,16 @@
 /**
- @Name: automn - 秋天模板
+ @Name: automn - 秋天
  @Author: terwer
  @Copyright: terwergreen.com
  */
 body {
-    font: 14px 宋体 Helvetica Neue, Helvetica, PingFang SC, Tahoma, Arial, sans-serif;
+    font: 14px "Consolas", "Microsoft YaHei", "Arial", "sans-serif";
     overflow-x: hidden;
+}
+
+pre code{
+    font-family: "Consolas", "Microsoft YaHei", "Arial", "sans-serif" !important;
+    font-size: 18px;
 }
 
 .w1000 {
@@ -103,11 +108,11 @@ body {
 }
 
 .content {
-    padding: 100px 0 160px 0;
+    padding: 30px 0 30px 0 !important;
 }
 
 .content .cont .title {
-    margin-bottom: 60px;
+    margin-bottom: 10px !important;
 }
 
 .content .cont .title a {
@@ -130,7 +135,7 @@ body {
 }
 
 .content .cont .list-item .item {
-    margin-bottom: 80px;
+    margin-bottom: 10px;
     overflow: hidden;
 }
 
@@ -139,7 +144,7 @@ body {
 }
 
 .content .cont .list-item .item .item-cont {
-    padding-left: 100px;
+    padding-left: 0;
 }
 
 .content .cont .list-item .item .item-cont .go-icon {
@@ -168,7 +173,7 @@ body {
 .content .cont .list-item .item .item-cont h5 {
     font-size: 12px;
     color: #ff7f21;
-    margin-bottom: 32px;
+    /* margin-bottom: 32px; */
 }
 
 .content .cont .list-item .item .item-cont p {
@@ -270,10 +275,6 @@ body {
 
 .footer .practice-mode .text p {
     line-height: 32px;
-}
-
-.footer .practice-mode .text p span {
-    padding-left: 24px;
 }
 
 /*whisper*/
@@ -424,7 +425,7 @@ body {
 }
 
 .details-content .article-cont .title {
-    text-align: center;
+    /* text-align: center; */
     margin-bottom: 0;
 }
 
@@ -451,7 +452,7 @@ body {
 
 .details-content .article-cont p {
     line-height: 24px;
-    padding: 30px 0 30px 5px;
+    padding: 30px 0 0 5px;
     color: #333;
     text-indent: 40px;
 }
@@ -637,7 +638,7 @@ body {
     }
 
     .content .cont .list-item .item {
-        margin-bottom: 50px;
+        margin-bottom: 2px;
     }
 
     .content {

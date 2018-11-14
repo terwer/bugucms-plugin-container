@@ -33,11 +33,11 @@
             </div>
         </div>
     </div>
+    <!-- jquery -->
+    <script type="text/javascript" th:src="@{|/webjars/jquery/jquery.min.js|}"></script>
+    <!-- layui -->
+    <script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
+    <th:block th:replace="${scripts}"/>
 </div>
-<!-- jquery -->
-<script type="text/javascript" th:src="@{|/webjars/jquery/jquery.min.js|}"></script>
-<!-- layui -->
-<script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
-<th:block th:replace="${scripts}"/>
 </body>
 </html>

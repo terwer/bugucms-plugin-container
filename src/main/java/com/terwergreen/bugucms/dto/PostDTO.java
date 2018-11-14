@@ -6,6 +6,7 @@ import com.terwergreen.bugucms.util.ImageUtils;
 import com.terwergreen.bugucms.util.MarkdownUtils;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.util.StringUtils;
 
@@ -81,6 +82,10 @@ public class PostDTO {
 
     @Getter
     @Setter
+    private Date postModified;
+
+    @Getter
+    @Setter
     private Integer postFinished;
 
     @Getter
@@ -99,10 +104,16 @@ public class PostDTO {
     @Setter
     private SysUserDTO sysUser;
 
+    private boolean newFlag;
+
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
         this.thumbnails = ImageUtils.getImgSrc(this.getPostContent());
         this.postDesc = HtmlUtils.parseHtml(this.getPostContent(), 240);
+    }
+
+    public boolean isNewFlag() {
+        return postModified != null && DateUtils.isSameDay(postModified, new Date());
     }
 }

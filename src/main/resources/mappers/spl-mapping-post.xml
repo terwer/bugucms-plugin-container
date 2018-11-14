@@ -16,11 +16,12 @@
         <result column="post_title" property="postTitle" />
         <result column="post_content" property="postContent" />
         <result column="post_date" property="postDate" />
+        <result column="post_modified" property="postModified" />
         <!-- 定义多对一关联信息（每个文章对应一个作者） -->
         <association property="sysUser" resultMap="userMap"/>
     </resultMap>
     <select id="getPostsByType" resultMap="postMap">
-        SELECT p.post_id,pm.meta_key,ifnull(pm.meta_value,'文章') as meta_value,p.post_finished,p.comment_count, p.post_status, p.post_type, p.post_name, p.post_title,p.post_content,p.post_date,
+        SELECT p.post_id,pm.meta_key,ifnull(pm.meta_value,'文章') as meta_value,p.post_finished,p.comment_count, p.post_status, p.post_type, p.post_name, p.post_title,p.post_content,p.post_date,p.post_modified,
         su.user_name,su.nick_name,su.user_profile,su.user_url,su.mobile,su.email,su.status,su.user_desc,su.user_registered,
         sr.id as role_id,sr.name as role_name,sr.cn_name
         FROM bg_posts p
@@ -51,11 +52,11 @@
     </select>
     <!-- 根据别名获取单个文章 -->
     <select id="getPostBySlug" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
+        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,post_modified as postModified,comment_count as commentCount FROM bg_posts WHERE post_name = #{slug}
     </select>
     <!-- 根据ID获取单个文章 -->
     <select id="getPostById" resultType="com.terwergreen.bugucms.dto.PostDTO">
-        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
+        SELECT post_id as postId, post_name as postSlug, post_type as postType,post_status as postStatus, post_title AS postTitle,post_content AS postContent,post_date AS postDate,post_modified as postModified,comment_count as commentCount FROM bg_posts WHERE post_id = #{postId}
     </select>
     <!-- 新增文章 -->
     <insert id="insertPost" useGeneratedKeys="true" keyProperty="post_id" parameterType="com.terwergreen.bugucms.dto.PostDTO">

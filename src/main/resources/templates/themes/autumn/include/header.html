@@ -15,20 +15,9 @@
     <meta name="keywords" th:content="${siteConfigDTO.keywords}">
     <meta name="description" th:content="${siteConfigDTO.description}">
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
-    <link rel="dns-prefetch" href="//cdn.mathjax.org" />
-    <!-- 头部 -->
-    <!--
-    // 1.Segmentfault.com默认的solarized_light风格
-    https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/solarized_light.min.css
-    // 2.sublime主题风格
-    https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/monokai-sublime.min.css
-    // 3.默认风格
-    http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/default.min.css
-    -->
-    <link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/github.min.css">
     <!-- layui -->
     <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
-    <link rel="stylesheet" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/global.css|}">
+    <link rel="stylesheet" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/global.css?v=20181114105005|}">
     <script type="text/javascript" th:inline="javascript">
         //必须在服务器运行，不能直接打开
         /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
@@ -53,16 +42,18 @@
         </h1>
         <div class="nav">
             <a th:href="@{/}" class="active">文章</a>
-            <a href="#">微语</a>
+            <div th:if="${sysUserDTO!=null}" th:remove="tag">
+                <a href="#">随笔</a>
+            </div>
             <a href="#">留言</a>
-            <!--<a href="#">相册</a>-->
             <a href="#">关于</a>
         </div>
         <ul class="layui-nav header-down-nav">
             <li class="layui-nav-item"><a th:href="@{/}" class="active">文章</a></li>
-            <li class="layui-nav-item"><a href="#">微语</a></li>
+            <div th:if="${sysUserDTO!=null}" th:remove="tag">
+                <li class="layui-nav-item"><a href="#">随笔</a></li>
+            </div>
             <li class="layui-nav-item"><a href="#">留言</a></li>
-            <!--<li class="layui-nav-item"><a href="#">相册</a></li>-->
             <li class="layui-nav-item"><a href="#">关于</a></li>
         </ul>
         <p class="welcome-text">
@@ -73,12 +64,12 @@
     <div class="banner">
         <div class="cont w1000">
             <div class="title">
-                <h3>远方的<br/>灯塔</h3>
-                <h4>积跬步，以致千里</h4>
+                <h3 th:text="${siteConfigDTO.webname}">远方的<br/>灯塔</h3>
+                <h4 th:text="${siteConfigDTO.webslogen}">积跬步，以致千里</h4>
             </div>
             <div class="amount">
                 <p><span class="text">访问量</span><span class="access">10000</span></p>
-                <p><span class="text">日志</span><span class="daily-record">6000</span></p>
+                <p><span class="text">文章数</span><span class="daily-record">6000</span></p>
             </div>
         </div>
     </div>
