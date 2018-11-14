@@ -37,7 +37,6 @@
                             <div class="layui-col-xs12 layui-col-sm8 layui-col-md8">
                                 <div class="item-cont">
                                     <h3><span th:text="${post.postTitle}"></span>
-                                        <span th:text="${#dates.format(post.postDate,'yyyy-MM-dd HH:mm:ss')}"></span>
                                         <button class="layui-btn layui-btn-danger new-icon" th:if="${post.newFlag}">new</button>
                                     </h3>
                                     <h5>Java</h5>

@@ -10,6 +10,9 @@
 <html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 <head th:include="themes/autumn/include/header::commonHeaderCustom(${siteConfigDTO.webname} + ' - ' + ${siteConfigDTO.webslogen},~{::style})">
     <style type="text/css">
+        .banner{
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -36,8 +39,8 @@ http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/default.min.css
                                 <h3 th:text="${post.postTitle}">标题</h3>
                                 <p class="cont-info"><span class="data" th:text="${#dates.format(post.postDate, 'yyyy/MM/dd HH:mm:ss')}">2018/08/08</span><span class="types">Java</span></p>
                             </div>
-                            <div th:utext="${post.postContent}">正文
-                                <div/>
+                            <div>
+                                <div th:utext="${post.postContent}">正文</div>
                                 <div class="btn-box">
                                     <button class="layui-btn layui-btn-primary">上一篇</button>
                                     <button class="layui-btn layui-btn-primary">下一篇</button>

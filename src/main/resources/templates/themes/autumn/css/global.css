@@ -8,6 +8,10 @@ body {
     overflow-x: hidden;
 }
 
+a{
+    color: #ff7f21;
+}
+
 pre code{
     font-family: "Consolas", "Microsoft YaHei", "Arial", "sans-serif" !important;
     font-size: 18px;
