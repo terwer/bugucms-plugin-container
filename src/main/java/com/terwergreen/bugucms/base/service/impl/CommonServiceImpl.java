@@ -1,24 +1,25 @@
-package com.terwergreen.bugucms.core.service.impl;
+package com.terwergreen.bugucms.base.service.impl;
 
-import com.terwergreen.bugucms.base.service.BaseService;
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.dao.CommonDAO;
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.dao.CommonDAO;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.util.BeanUtils;
 import com.terwergreen.bugucms.util.Constants;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 @Service
-@SuppressWarnings({"unchecked", "rawtypes"})
-public class CommonServiceImpl extends BaseService implements CommonService {
+public class CommonServiceImpl implements CommonService {
+    private final Log logger = LogFactory.getLog(getClass());
 
-    @Autowired
+    @Resource
     private CommonDAO commonDAO;
 
     @Override

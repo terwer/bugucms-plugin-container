@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.dao;
+package com.terwergreen.bugucms.base.dao;
 
 import java.util.List;
 import java.util.Map;

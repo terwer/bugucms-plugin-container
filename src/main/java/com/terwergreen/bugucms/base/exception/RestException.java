@@ -1,9 +1,8 @@
-package com.terwergreen.bugucms.exception;
+package com.terwergreen.bugucms.base.exception;
 
 import java.security.PrivilegedActionException;
 
-public class RestException extends Exception
-{
+public class RestException extends Exception {
     /**
      * Constructs a new exception with the specified cause and a detail
      * message of <tt>(cause==null ? null : cause.toString())</tt> (which

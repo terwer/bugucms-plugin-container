@@ -3,7 +3,7 @@ package com.terwergreen.bugucms.controller.api.admin;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.RestResponseDTO;
 import com.terwergreen.bugucms.dto.ThemeDTO;
-import com.terwergreen.bugucms.exception.RestException;
+import com.terwergreen.bugucms.base.exception.RestException;
 import com.terwergreen.bugucms.service.ThemeService;
 import com.terwergreen.bugucms.util.RestResponseStates;
 import org.springframework.ui.Model;

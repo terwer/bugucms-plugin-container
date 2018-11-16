@@ -1,9 +1,8 @@
 package com.terwergreen.bugucms.dto;
 
+import com.terwergreen.bugucms.base.dto.BGDTO;
 import com.terwergreen.bugucms.util.RestResponseStates;
 import org.springframework.util.StringUtils;
-
-import com.terwergreen.bugucms.base.dto.BGDTO;
 
 /**
  * @author terwergreen

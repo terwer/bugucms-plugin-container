@@ -1,6 +1,6 @@
 package com.terwergreen.bugucms.util;
 
-import com.terwergreen.bugucms.base.service.CommonException;
+import com.terwergreen.bugucms.base.exception.CommonException;
 import oracle.sql.CLOB;
 import oracle.sql.NCLOB;
 import org.springframework.util.StringUtils;

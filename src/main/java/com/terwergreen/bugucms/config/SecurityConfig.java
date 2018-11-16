@@ -15,7 +15,7 @@
  */
 package com.terwergreen.bugucms.config;
 
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.service.SysUserService;
 import org.apache.commons.logging.Log;
@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return sysUserService;
     }
 
-    // @formatter:off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //运行加载iframe
@@ -91,9 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
-    // @formatter:on
 
-    // @formatter:off
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //内存中缓存权限数据
@@ -102,7 +99,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("source:123456,encodePassword:" + encodePassword);
         auth.userDetailsService(customUserService()).passwordEncoder(BugucmsConfig.passwordEncoder());
     }
-    // @formatter:on
 }
 
 

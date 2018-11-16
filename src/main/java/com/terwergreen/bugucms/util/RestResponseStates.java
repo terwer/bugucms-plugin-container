@@ -16,7 +16,7 @@ public enum RestResponseStates {
     private String value;
     private String msg;
 
-    private RestResponseStates(String value, String msg) {
+    RestResponseStates(String value, String msg) {
         this.value = value;
         this.msg = msg;
     }

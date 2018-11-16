@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.exception;
+package com.terwergreen.bugucms.base.exception;
 
 import java.security.PrivilegedActionException;
 

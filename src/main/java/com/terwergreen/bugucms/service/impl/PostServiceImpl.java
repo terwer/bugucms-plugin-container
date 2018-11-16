@@ -2,9 +2,9 @@ package com.terwergreen.bugucms.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.dao.CommonDAO;
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
+import com.terwergreen.bugucms.base.dao.CommonDAO;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;

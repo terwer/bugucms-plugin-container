@@ -1,7 +1,7 @@
-package com.terwergreen.bugucms.core.service;
+package com.terwergreen.bugucms.base.service;
 
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
 
 /**
  * 公共服务
