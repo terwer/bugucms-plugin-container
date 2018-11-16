@@ -3,6 +3,7 @@ package com.terwergreen.bugucms.service;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.dto.PostDTO;
+import com.terwergreen.bugucms.dto.PostMetaDTO;
 
 import java.util.List;
 import java.util.Map;
@@ -82,4 +83,11 @@ public interface PostService {
      * @return 是否删除成功
      */
     boolean deletePostById(Integer postId);
+
+    /**
+     * 新增或者修改文章属性
+     * @param postMeta
+     * @return
+     */
+    boolean saveOrUpdatePostMeta(PostMetaDTO postMeta);
 }

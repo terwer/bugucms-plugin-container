@@ -100,7 +100,7 @@ hr{
 /* 辅助 */
 a:hover{color: #009688; transition: all .3s;}
 pre{padding: 10px 15px;margin: 10px 0;font-size: 12px;border-left: 6px solid #009688;background-color: #f8f8f8;font-family: Courier New;overflow: auto;}
-pre code{background-color: #f8f8f8; font-family: Courier New;font-size: 12px;line-height: 16px;tab-size: 4;-moz-tab-size: 4;-o-tab-size: 4; }
+pre code{background-color: #f8f8f8;font-family: Courier New;font-size: 16px;line-height: 20px;tab-size: 4;-moz-tab-size: 4;-o-tab-size: 4;}
 
 .layui-container{padding: 0;}
 .fly-main{width: 1079px; min-height: 600px; margin: 0 auto 15px;}

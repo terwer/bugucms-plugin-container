@@ -97,10 +97,10 @@
                     -->
                     <span class="post-date" style="padding: 0 10px;" th:text="${#dates.format(post.postDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                     <span class="fly-list-nums">
-                        <a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i>
-                            <span th:text="${post.commentCount}"></span>
-                        </a>
-                        <i class="iconfont" title="人气">&#xe60b;</i> 62
+                        <!--<a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i>-->
+                            <!--<span th:text="${post.commentCount}"></span>-->
+                        <!--</a>-->
+                        <i class="iconfont" title="人气">&#xe60b;</i> <span th:text="${post.viewCount+1}">0</span>
                     </span>
                 </div>
                 <div class="detail-about">

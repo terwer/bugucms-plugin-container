@@ -3,6 +3,7 @@ package com.terwergreen.bugucms.controller.app.cms;
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.PostDTO;
+import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.core.service.CommonService;
@@ -76,6 +77,12 @@ public class PostController extends BGBaseController {
             if (post == null) {
                 logger.error("文章不存在");
                 throw new WebException("文章不存在");
+            } else {
+                PostMetaDTO viewCountPostMeta = new PostMetaDTO();
+                viewCountPostMeta.setPostId(post.getPostId());
+                viewCountPostMeta.setMetaKey("view_count");
+                viewCountPostMeta.setMetaValue(String.valueOf(post.getViewCount() + 1));
+                postService.saveOrUpdatePostMeta(viewCountPostMeta);
             }
             logger.info("获取文章成功:siteConfigDTO=" + JSON.toJSONString(siteConfigDTO) + ",post=" + post);
         } catch (Exception e) {

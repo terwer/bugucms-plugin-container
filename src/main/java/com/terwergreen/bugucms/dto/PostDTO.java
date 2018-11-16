@@ -8,7 +8,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;
 import org.springframework.format.annotation.DateTimeFormat;
-import org.springframework.util.StringUtils;
 
 import java.util.Date;
 import java.util.List;
@@ -94,17 +93,26 @@ public class PostDTO {
 
     @Getter
     @Setter
-    private String metaKey;
-
-    @Getter
-    @Setter
-    private String metaValue;
+    private List<PostMetaDTO> postMetas;
 
     @Getter
     @Setter
     private SysUserDTO sysUser;
 
+    /**
+     * 是否是最新发布的文章
+     */
     private boolean newFlag;
+
+    /**
+     * 置顶
+     */
+    private PostMetaDTO ding;
+
+    /**
+     * 查看次数
+     */
+    private Integer viewCount;
 
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;
@@ -115,5 +123,21 @@ public class PostDTO {
 
     public boolean isNewFlag() {
         return postModified != null && DateUtils.isSameDay(postModified, new Date());
+    }
+
+    public PostMetaDTO getDing() {
+        if (null == postMetas) {
+            return null;
+        }
+        PostMetaDTO dingPostMeta = postMetas.stream().filter(x -> x.getMetaKey().equals("ding")).findAny().orElse(null);
+        return dingPostMeta;
+    }
+
+    public Integer getViewCount() {
+        if (null == postMetas) {
+            return 0;
+        }
+        Integer count = Integer.parseInt(postMetas.stream().filter(x -> x.getMetaKey().equals("view_count")).map(x -> x.getMetaValue()).findFirst().orElse("0"));
+        return count;
     }
 }

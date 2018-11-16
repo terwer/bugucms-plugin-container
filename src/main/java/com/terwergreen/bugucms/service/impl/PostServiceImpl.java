@@ -6,6 +6,7 @@ import com.terwergreen.bugucms.base.service.BusinessServiceException;
 import com.terwergreen.bugucms.core.dao.CommonDAO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
+import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.dto.SysRoleDTO;
 import com.terwergreen.bugucms.dto.SysUserDTO;
@@ -178,6 +179,15 @@ public class PostServiceImpl implements PostService {
         Map paramMap = new HashMap();
         paramMap.put("postId", postId);
         int count = commonDAO.delete("deletePostById", paramMap);
+        if (count > 0) {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean saveOrUpdatePostMeta(PostMetaDTO postMeta) {
+        int count = commonDAO.updateByObject("saveOrUpdatePostMeta", postMeta);
         if (count > 0) {
             return true;
         }
