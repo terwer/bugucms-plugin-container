@@ -7,7 +7,7 @@ import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.base.service.CommonService;
-import com.terwergreen.bugucms.util.MarkdownUtils;
+import com.terwergreen.bugucms.utils.MarkdownUtils;
 import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.base.exception.WebException;
 import org.apache.commons.lang3.StringUtils;

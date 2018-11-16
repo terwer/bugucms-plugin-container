@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_NUM;
-import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_SIZE;
-import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
+import static com.terwergreen.bugucms.utils.Constants.DEFAULT_PAGE_NUM;
+import static com.terwergreen.bugucms.utils.Constants.DEFAULT_PAGE_SIZE;
+import static com.terwergreen.bugucms.utils.Constants.XMLRPC_URL;
 
 @Service
 public class PostServiceImpl implements PostService {

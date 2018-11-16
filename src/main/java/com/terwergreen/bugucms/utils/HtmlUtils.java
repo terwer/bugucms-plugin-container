@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.util;
+package com.terwergreen.bugucms.utils;
 
 public class HtmlUtils {
 

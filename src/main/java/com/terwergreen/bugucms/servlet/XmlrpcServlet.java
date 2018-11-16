@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
+import static com.terwergreen.bugucms.utils.Constants.XMLRPC_URL;
 
 /**
  * @Author Terwer

@@ -1,39 +1,31 @@
-package com.terwergreen.bugucms.util;
+package com.terwergreen.bugucms.utils;
 
 /**
- * 文章类型枚举
+ * 文章状态枚举
  */
-public enum PostTypeEmum {
+public enum PostStatusEnum {
     /**
-     * 文章
+     * 正常发布状态
      */
-    POST_TYPE_POST("post", 1),
+    POST_STATUS_PUBLISH("publish", 1),
     /**
-     * 随笔
+     * 草稿
      */
-    POST_TYPE_ESSAY("essay", 2),
-    /**
-     * 页面
-     */
-    POST_TYPE_PAGE("page", 3),
-    /**
-     * 笔记
-     */
-    POST_TYPE_NOTE("note", 3);
+    POST_STATUS_DRAFT("draft", 2);
 
     // 成员变量
     private String name;
     private int index;
 
     // 构造方法
-    PostTypeEmum(String name, int index) {
+    PostStatusEnum(String name, int index) {
         this.name = name;
         this.index = index;
     }
 
     // 普通方法
     public static String getName(int index) {
-        for (PostTypeEmum p : PostTypeEmum.values()) {
+        for (PostStatusEnum p : PostStatusEnum.values()) {
             if (p.getIndex() == index) {
                 return p.name;
             }

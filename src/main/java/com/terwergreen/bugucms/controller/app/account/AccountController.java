@@ -2,7 +2,7 @@ package com.terwergreen.bugucms.controller.app.account;
 
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.RestResponseDTO;
-import com.terwergreen.bugucms.util.RestResponseStates;
+import com.terwergreen.bugucms.utils.RestResponseStates;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

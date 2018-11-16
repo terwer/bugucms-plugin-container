@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.util;
+package com.terwergreen.bugucms.utils;
 
 /**
  * @author terwergreen Rest响应客户端的状态值

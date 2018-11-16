@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.dto;
 
 import com.alibaba.fastjson.annotation.JSONField;
-import com.terwergreen.bugucms.util.HtmlUtils;
-import com.terwergreen.bugucms.util.ImageUtils;
-import com.terwergreen.bugucms.util.MarkdownUtils;
+import com.terwergreen.bugucms.utils.HtmlUtils;
+import com.terwergreen.bugucms.utils.ImageUtils;
+import com.terwergreen.bugucms.utils.MarkdownUtils;
 import lombok.Getter;
 import lombok.Setter;
 import org.apache.commons.lang3.time.DateUtils;

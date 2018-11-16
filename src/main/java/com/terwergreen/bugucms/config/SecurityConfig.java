@@ -30,11 +30,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.Resource;
 
-import static com.terwergreen.bugucms.util.Constants.API_DOC_BASE_PATH;
-import static com.terwergreen.bugucms.util.Constants.AUTH_ERROR_URL;
-import static com.terwergreen.bugucms.util.Constants.AUTH_LOGIN_PAGE;
-import static com.terwergreen.bugucms.util.Constants.SERVLET_BASE_PATH;
-import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
+import static com.terwergreen.bugucms.utils.Constants.API_DOC_BASE_PATH;
+import static com.terwergreen.bugucms.utils.Constants.AUTH_ERROR_URL;
+import static com.terwergreen.bugucms.utils.Constants.AUTH_LOGIN_PAGE;
+import static com.terwergreen.bugucms.utils.Constants.SERVLET_BASE_PATH;
+import static com.terwergreen.bugucms.utils.Constants.XMLRPC_URL;
 
 /**
  * @Author Terwer

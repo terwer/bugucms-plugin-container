@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.util;
+package com.terwergreen.bugucms.utils;
 
 import com.vladsch.flexmark.ast.Node;
 import com.vladsch.flexmark.ext.abbreviation.AbbreviationExtension;

@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.util;
+package com.terwergreen.bugucms.utils;
 
 import com.terwergreen.bugucms.base.exception.CommonException;
 import oracle.sql.CLOB;
