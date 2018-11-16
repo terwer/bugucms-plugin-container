@@ -99,7 +99,7 @@
     </insert>
     <update id="updatePost" parameterType="com.terwergreen.bugucms.dto.PostDTO">
         UPDATE bg_posts
-        SET post_modified = current_timestamp,
+        SET
         <if test="postType!=null and postType!=''">
             post_type = #{postType},
         </if>
@@ -112,12 +112,13 @@
         <if test="postRawContent!=null and postRawContent!=''">
             post_content = #{postRawContent},
         </if>
-        <if test="postDate!=null and postDate!=''">
+        <if test="postDate!=null">
             post_date = #{postDate},
         </if>
         <if test="postSlug!=null and postSlug!=''">
             post_name = #{postSlug},
         </if>
+        post_modified = current_timestamp
         WHERE post_id = #{postId}
     </update>
     <!-- 根据别名删除文章 -->
