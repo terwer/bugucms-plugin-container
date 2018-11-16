@@ -1,4 +1,4 @@
-package com.terwergreen.bugucms.core.dao;
+package com.terwergreen.bugucms.dao;
 
 import com.terwergreen.bugucms.exception.DAOException;
 
@@ -12,9 +12,6 @@ import java.util.Map;
  * @Description 提供公共数据库增删改查
  **/
 public interface CommonDAO {
-
-    int MAX_ROW = 9999;
-
     /**
      * 查询列表
      *
@@ -54,6 +51,17 @@ public interface CommonDAO {
      * 分页查询
      *
      * @param sql
+     * @param paraMap  查询条件
+     * @param start    起始条目
+     * @param pageSize 每页显示条目
+     * @return
+     */
+    List queryPageList(String sql, Map paraMap, int start, int pageSize);
+
+    /**
+     * 分页查询
+     *
+     * @param sql
      * @param str      查询条件
      * @param start    起始条目
      * @param pageSize 每页显示条目
@@ -64,13 +72,13 @@ public interface CommonDAO {
     /**
      * 分页查询
      *
-     * @param sql
-     * @param paraMap  查询条件
+     * @param sql      查询条件
+     * @param paraMap
      * @param start    起始条目
      * @param pageSize 每页显示条目
      * @return
      */
-    List queryPageList(String sql, Map paraMap, int start, int pageSize);
+    List queryPageListByMap(String sql, Map paraMap, int start, int pageSize);
 
     /**
      * 分页查询
@@ -91,6 +99,7 @@ public interface CommonDAO {
      */
     Object querySingleByString(String sql);
 
+
     /**
      * 查询单个信息
      *
@@ -107,7 +116,7 @@ public interface CommonDAO {
      * @param paraMap
      * @return Object
      */
-    Object querySingle(String sql, Map paraMap);
+    Object querySingleByMap(String sql, Map paraMap);
 
     /**
      * 查询单个信息
@@ -209,23 +218,21 @@ public interface CommonDAO {
     boolean checkUpdateByObject(String sql, Object object);
 
     /**
-     * 批量更新
-     *
-     * @param sql
-     * @param updateList
-     * @return
-     * @throws DAOException
-     */
-    Integer updateBatch(final String sql, final List updateList) throws DAOException;
-
-    /**
      * 批量新增
      *
      * @param sql
      * @param insertList
      * @return
-     * @throws DAOException
      */
-    Integer insertBatch(final String sql, final List insertList) throws DAOException;
+    Integer insertBatch(String sql, List insertList);
+
+    /**
+     * 批量更新
+     *
+     * @param sql
+     * @param updateList
+     * @return
+     */
+    Integer updateBatch(String sql, List updateList);
 }
 

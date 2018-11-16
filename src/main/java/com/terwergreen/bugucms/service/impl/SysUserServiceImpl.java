@@ -1,6 +1,6 @@
 package com.terwergreen.bugucms.service.impl;
 
-import com.terwergreen.bugucms.core.dao.CommonDAO;
+import com.terwergreen.bugucms.dao.CommonDAO;
 import com.terwergreen.bugucms.dto.SysRoleDTO;
 import com.terwergreen.bugucms.dto.SysUserDTO;
 import com.terwergreen.bugucms.service.SysUserService;

@@ -3,7 +3,7 @@ package com.terwergreen.bugucms.service.impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.core.dao.CommonDAO;
+import com.terwergreen.bugucms.dao.CommonDAO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.dto.PostMetaDTO;
@@ -66,7 +66,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostBySlug(String slug) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("slug", slug);
-        PostDTO post = (PostDTO) commonDAO.querySingle("getPostBySlug", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingleByMap("getPostBySlug", paramMap);
         return post;
     }
 
@@ -74,7 +74,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(Integer postId) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("postId", postId);
-        PostDTO post = (PostDTO) commonDAO.querySingle("getPostById", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingleByMap("getPostById", paramMap);
         return post;
     }
 

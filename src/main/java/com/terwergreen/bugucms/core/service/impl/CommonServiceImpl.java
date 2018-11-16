@@ -2,7 +2,7 @@ package com.terwergreen.bugucms.core.service.impl;
 
 import com.terwergreen.bugucms.base.service.BaseService;
 import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.core.dao.CommonDAO;
+import com.terwergreen.bugucms.dao.CommonDAO;
 import com.terwergreen.bugucms.core.service.CommonService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.util.BeanUtils;
