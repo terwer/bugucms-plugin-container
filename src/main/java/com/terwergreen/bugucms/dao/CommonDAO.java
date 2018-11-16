@@ -1,7 +1,5 @@
 package com.terwergreen.bugucms.dao;
 
-import com.terwergreen.bugucms.exception.DAOException;
-
 import java.util.List;
 import java.util.Map;
 
@@ -224,7 +222,7 @@ public interface CommonDAO {
      * @param insertList
      * @return
      */
-    Integer insertBatch(String sql, List insertList);
+    void insertBatch(String sql, List insertList);
 
     /**
      * 批量更新
@@ -233,6 +231,6 @@ public interface CommonDAO {
      * @param updateList
      * @return
      */
-    Integer updateBatch(String sql, List updateList);
+    void updateBatch(String sql, List updateList);
 }
 

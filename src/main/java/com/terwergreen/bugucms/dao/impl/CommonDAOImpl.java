@@ -3,11 +3,12 @@ package com.terwergreen.bugucms.dao.impl;
 import com.terwergreen.bugucms.dao.CommonDAO;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSession;
+import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -16,10 +17,19 @@ import java.util.Map;
 @Repository
 public class CommonDAOImpl implements CommonDAO {
     private final Log logger = LogFactory.getLog(getClass());
+    /**
+     * 数据分页获取的最大数目
+     */
     private static final int MAX_ROW = 9999;
+    /**
+     * 最大批量插入或者更新数目
+     */
+    private static final int MAX_COMMIT_SIZE = 1000;
 
     @Resource
     private SqlSession sqlSession;
+    @Resource
+    private SqlSessionTemplate sqlSessionTemplate;
 
     @Override
     public List queryList(String sql) {
@@ -188,12 +198,60 @@ public class CommonDAOImpl implements CommonDAO {
     }
 
     @Override
-    public Integer insertBatch(String sql, List insertList) {
-        throw new NotImplementedException();
+    public void insertBatch(String sql, List insertList) {
+        //新获取一个模式为BATCH，自动提交为false的session
+        //如果自动提交设置为true,将无法控制提交的条数，改为最后统一提交，可能导致内存溢出
+        SqlSession session = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+        try {
+            if (null != insertList || insertList.size() > 0) {
+                int lsize = insertList.size();
+                for (int i = 0, n = insertList.size(); i < n; i++) {
+                    Object model = insertList.get(i);
+                    session.insert(sql, model);
+                    if ((i > 0 && i % MAX_COMMIT_SIZE == 0) || i == lsize - 1) {
+                        // 手动每1000个一提交，提交后无法回滚
+                        session.commit();
+                        // 清理缓存，防止溢出
+                        session.clearCache();
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            // 没有提交的数据可以回滚
+            session.rollback();
+            logger.error(e.getLocalizedMessage());
+        } finally {
+            session.close();
+        }
     }
 
     @Override
-    public Integer updateBatch(String sql, List updateList) {
-        throw new NotImplementedException();
+    public void updateBatch(String sql, List updateList) {
+        //新获取一个模式为BATCH，自动提交为false的session
+        //如果自动提交设置为true,将无法控制提交的条数，改为最后统一提交，可能导致内存溢出
+        SqlSession session = sqlSessionTemplate.getSqlSessionFactory().openSession(ExecutorType.BATCH, false);
+        try {
+            if (null != updateList || updateList.size() > 0) {
+                int lsize = updateList.size();
+                for (int i = 0, n = updateList.size(); i < n; i++) {
+                    Object model = updateList.get(i);
+                    session.update(sql, model);
+                    if ((i > 0 && i % MAX_COMMIT_SIZE == 0) || i == lsize - 1) {
+                        // 手动每1000个一提交，提交后无法回滚
+                        session.commit();
+                        // 清理缓存，防止溢出
+                        session.clearCache();
+                    }
+                }
+            }
+
+        } catch (Exception e) {
+            // 没有提交的数据可以回滚
+            session.rollback();
+            logger.error(e.getLocalizedMessage());
+        } finally {
+            session.close();
+        }
     }
 }
