@@ -15,10 +15,8 @@ import org.springframework.web.servlet.resource.WebJarsResourceResolver;
  * @Version 1.0
  * @Description Web配置
  **/
-
 @Configuration
 public class WebAppConfig extends WebMvcConfigurationSupport {
-
     /**
      * 添加静态文件路径
      *
@@ -27,14 +25,29 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         // 静态资源映射
-        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/", "classpath:/public/", "classpath:/templates/", "classpath:/admin/");
+        registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
+        registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");
+        registry.addResourceHandler("/templates/**").addResourceLocations("classpath:/templates/");
+        registry.addResourceHandler("/admin/**").addResourceLocations("classpath:/admin/");
+        // swagger-ui
+        registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         // webjars资源映射
         registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/")
                 .resourceChain(false)
                 .addResolver(new WebJarsResourceResolver())
                 .addResolver(new PathResourceResolver());
-        super.addResourceHandlers(registry);
     }
+
+    /**
+     * 跨域访问
+     *
+     * @param registry
+     */
+//    @Override
+//    public void addCorsMappings(CorsRegistry registry) {
+//        registry.addMapping("/api/**").allowedOrigins("*.terwergreen.com", "localhost").allowedMethods(HttpMethod.GET.toString(), HttpMethod.POST.toString()).allowedHeaders("*").allowCredentials(true).maxAge(3600);
+//        super.addCorsMappings(registry);
+//    }
 
     /**
      * 接口访问，带token
@@ -45,6 +58,16 @@ public class WebAppConfig extends WebMvcConfigurationSupport {
     public AuthHandlerInterceptor authHandlerInterceptor() {
         return new AuthHandlerInterceptor();
     }
+
+    /**
+     * 允许跨域访问
+     *
+     * @return
+     */
+//    @Bean
+//    public CorsHandlerInterceptor corsHandlerInterceptor() {
+//        return new CorsHandlerInterceptor();
+//    }
 
     /**
      * 配置拦截器

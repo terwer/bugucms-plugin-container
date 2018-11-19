@@ -3,10 +3,11 @@ package com.terwergreen.bugucms.controller.api.admin;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
+import com.terwergreen.bugucms.base.exception.RestException;
 import com.terwergreen.bugucms.dto.PostDTO;
+import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.dto.RestResponseDTO;
 import com.terwergreen.bugucms.dto.SysUserDTO;
-import com.terwergreen.bugucms.base.exception.RestException;
 import com.terwergreen.bugucms.service.PostService;
 import com.terwergreen.bugucms.utils.Constants;
 import com.terwergreen.bugucms.utils.PostStatusEnum;
@@ -229,6 +230,32 @@ public class PostApiController extends BGBaseController {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
             boolean result = postService.deletePostById(postId);
+            if (result) {
+                restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());
+            } else {
+                restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+                restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            }
+        } catch (Exception e) {
+            super.logger.error("接口异常:error=", e);
+            restResponseDTO.setFlag(RestResponseStates.SERVER_ERROR.getValue());
+            restResponseDTO.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+            throw new RestException(e);
+        }
+        return restResponseDTO;
+    }
+
+    @RequestMapping(value = "/api/post/meta/{postId}", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
+    @ResponseBody
+    public RestResponseDTO updatePostMeta(Model model, @PathVariable("postId") Integer postId, String metaKey, String metaValue) throws Exception {
+        RestResponseDTO restResponseDTO = new RestResponseDTO();
+        try {
+            PostMetaDTO postMeta = new PostMetaDTO();
+            postMeta.setPostId(postId);
+            postMeta.setMetaKey(metaKey);
+            postMeta.setMetaValue(metaValue);
+            boolean result = postService.saveOrUpdatePostMeta(postMeta);
             if (result) {
                 restResponseDTO.setFlag(RestResponseStates.SUCCESS.getValue());
                 restResponseDTO.setMsg(RestResponseStates.SUCCESS.getMsg());

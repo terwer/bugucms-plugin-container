@@ -61,6 +61,20 @@
     </style>
 </head>
 <body>
+
+<link rel="dns-prefetch" href="//cdn.mathjax.org"/>
+<!-- 头部 -->
+<!--
+// 1.Segmentfault.com默认的solarized_light风格
+https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/solarized_light.min.css
+// 2.sublime主题风格
+https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/monokai-sublime.min.css
+// 3.默认风格
+http://apps.bdimg.com/libs/highlight.js/9.1.0/styles/default.min.css
+-->
+<link rel="stylesheet" type="text/css" href="https://apps.bdimg.com/libs/highlight.js/9.1.0/styles/github.min.css">
+
+
 <div th:include="themes/fly/include/header::commonHeaderContent"></div>
 
 <div class="layui-hide-xs">
@@ -98,7 +112,7 @@
                     <span class="post-date" style="padding: 0 10px;" th:text="${#dates.format(post.postDate, 'yyyy-MM-dd HH:mm:ss')}"></span>
                     <span class="fly-list-nums">
                         <!--<a href="#comment"><i class="iconfont" title="回答">&#xe60c;</i>-->
-                            <!--<span th:text="${post.commentCount}"></span>-->
+                        <!--<span th:text="${post.commentCount}"></span>-->
                         <!--</a>-->
                         <i class="iconfont" title="人气">&#xe60b;</i> <span th:text="${post.viewCount+1}">0</span>
                     </span>
@@ -192,14 +206,30 @@
     </div>
 </div>
 
+<!-- hilightjs -->
+<script type="text/javascript" src="http://apps.bdimg.com/libs/highlight.js/9.1.0/highlight.min.js"></script>
+<!-- mathjax -->
+<script src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
     <script type="text/javascript">
+        $('pre code').each(function (i, block) {
+            hljs.highlightBlock(block);
+        });
+
+        MathJax.Hub.Config({
+            tex2jax: {
+                inlineMath: [
+                    ["$", "$"], ["\\(", "\\)"]
+                ]
+            }
+        });
+
         layui.config({
-            version: "3.0.0"
-            , base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
+            version: "3.0.0",
+            base: window.BUGUCMS_THEME_PATH + 'js/' //这里实际使用时，建议改成绝对路径
         }).extend({
-            fly: 'post'
-        }).use('fly');
+            post: 'post'
+        });
 
         //构造树
         function buildTreeData(tree, node) {

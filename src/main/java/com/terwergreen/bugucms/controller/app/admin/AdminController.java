@@ -7,6 +7,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -19,7 +20,7 @@ public class AdminController extends AdminBaseController {
     /** 页面开始 **/
     /***********/
 
-    @RequestMapping("/")
+    @RequestMapping(value = "/")
     public String main(Model model, HttpServletRequest request, HttpServletResponse response, @PathVariable("adminpath") String adminpath, String action, String title) throws Exception {
         try {
             super.preCheck(model, request, response, adminpath);
