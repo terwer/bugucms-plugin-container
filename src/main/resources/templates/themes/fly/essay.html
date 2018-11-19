@@ -194,7 +194,10 @@
                                     elemCont.val('');
                                 });
 
-                                layer.msg('随笔发布成功', {icon: 1});
+                                layer.msg('随笔发布成功', {
+                                    icon: 6,
+                                    time: 1000
+                                });
                             } else {
                                 layer.msg('随笔发布失败', {icon: 2});
                             }
@@ -232,16 +235,16 @@
                                 if (res.status == 0) {
                                     layer.msg(res.msg, {icon: 2});
                                 } else {
-                                    layer.msg('点赞成功', {icon: 1});
+                                    // layer.msg('点赞成功', {icon: 1});
+                                    niceIn($(obj));
+                                    layer.msg('点赞成功', {
+                                        icon: 6,
+                                        time: 1000
+                                    })
                                 }
                             });
                         }
                     });
-                    niceIn($(obj));
-                    layer.msg('点赞成功', {
-                        icon: 6
-                        , time: 1000
-                    })
                 }
             }
 
