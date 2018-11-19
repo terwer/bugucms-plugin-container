@@ -64,6 +64,7 @@
 
 <link rel="dns-prefetch" href="//cdn.mathjax.org"/>
 <link rel="stylesheet" type="text/css" href="https://cdn.staticfile.org/highlight.js/9.13.1/styles/vs.min.css">
+<link rel="stylesheet" type="text/css" th:href="@{/static/lib/jQuery-zoom/css/zoom.css}">
 
 <div th:include="themes/fly/include/header::commonHeaderContent"></div>
 
@@ -196,12 +197,21 @@
     </div>
 </div>
 
-<!-- hilightjs -->
-<script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.13.1/highlight.min.js"></script>
-<!-- mathjax -->
-<script src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 <div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
+    <!-- zoom.js -->
+    <script type="text/javascript" src="https://cdn.staticfile.org/zoom.js/0.0.1/zoom.min.js"></script>
+    <!-- hilightjs -->
+    <script type="text/javascript" src="https://cdn.staticfile.org/highlight.js/9.13.1/highlight.min.js"></script>
+    <!-- mathjax -->
+    <script src="//cdn.bootcss.com/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- zoom.js -->
+    <script type="text/javascript" th:src="@{/static/lib/jQuery-zoom/js/transition.js}"></script>
+    <script type="text/javascript" src="https://cdn.staticfile.org/jquery-zoom/1.7.21/jquery.zoom.min.js"></script>
     <script type="text/javascript">
+        $(function () {
+            $('img').attr('data-action', 'zoom');
+        })
+
         layui.config({
             base: BUGUCMS_BASE_URL + 'static/lib/',
             version: "3.0.0",
