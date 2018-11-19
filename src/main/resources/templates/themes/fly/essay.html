@@ -14,16 +14,16 @@
             display: none;
         }
 
-        .read-more a{
+        .read-more a {
             color: #1E9FFF;
         }
 
-        .load-more{
+        .load-more {
             color: #FFB800;
         }
     </style>
 </head>
-<link rel="stylesheet" type="text/css" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/essay.css|}">
+<link rel="stylesheet" type="text/css" th:href="@{|/static/themes/${siteConfigDTO.webtheme}/css/essay.css|}">
 <body class="lay-blog">
 
 <div th:include="themes/fly/include/header::commonHeaderContent"></div>
@@ -54,7 +54,7 @@
                             </p>
                             <p class="read-more">
                                 <span v-if="timeline.content.indexOf('...') >= 0">
-                                    <a  th:alt="@{/post/}" v-bind:title="timeline.key" href="javascript:void(0);" v-on:click="read">阅读全文</a>
+                                    <a th:alt="@{/post/}" v-bind:title="timeline.key" href="javascript:void(0);" v-on:click="read">阅读全文</a>
                                 </span>
                             </p>
                         </div>
@@ -74,83 +74,101 @@
 </div>
 
 <div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
-    <script type="text/javascript" th:src="@{|/themes/${siteConfigDTO.webtheme}/js/essay.js|}"></script>
+    <script type="text/javascript" th:src="@{|/static/themes/${siteConfigDTO.webtheme}/js/essay.js|}"></script>
     <!-- vuejs开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
-        var currentPage = 1;
+        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+            conf: 'bugucms/conf'
+        }).use(['conf', 'layer'], function () {
+            var conf = layui.conf,
+                layer = layui.layer,
+                $ = layui.$;
 
-        function getData() {
-            $.post(BUGUCMS_BASE_URL + "api/post/essay", {page: currentPage}, function (res) {
-                console.log("timelines:" + JSON.stringify(res.data.timelines));
-                if (res.data.timelines.length == 0) {
-                    app.tips = '加载完成';
-                } else {
-                    ++currentPage;
+            if (conf.debug) {
+                console.log("client config:" + JSON.stringify(conf));
+            }
+
+            var currentPage = 1;
+
+            function getData() {
+                var essayListUrl = BUGUCMS_BASE_URL + 'api/post/essay';//数据接口地址
+                // 如果开启token，传入token
+                if (conf.request.tokenName) {
+                    essayListUrl += '?tokenString=' + conf.request.tokenString;
                 }
-                for (var idx in res.data.timelines) {
-                    var timeline = res.data.timelines[idx];
-                    app.timelines.push(timeline);
-                }
-            });
-        }
-
-        var app = new Vue({
-                el: '#LAY-msg-box',
-                data: {
-                    timelines: [
-                        // {key: '20180823100000', year: '2018', title: 'Hello content1!', content: 'content1'}
-                    ],
-                    tips: '努力加载中...'
-                },
-                created: function () {
-                    this.tips = "加载更多";
-                    getData();
-                },
-                mounted: function () {
-                    // 添加滚动事件，检测滚动到页面底部
-                    window.addEventListener('scroll', this.scrollBottom)
-                },
-                // 在 `methods` 对象中定义方法
-                methods: {
-                    read: function (event) {
-                        // `this` 在方法里指向当前 Vue 实例
-                        console.log('alt:' + $(event.target).attr("alt"));
-                        console.log('title:' + $(event.target).attr("title"));
-                        var url = BUGUCMS_BASE_URL + 'post/' + $(event.target).attr("title") + '.html';
-                        //window.location.href = url;
-                        redirect_blank(url);
-                        // `event` 是原生 DOM 事件
-                        if (event) {
-                            console.log('e:' + event.target.tagName);
+                console.log("essayListUrl:" + essayListUrl);
+                $.post(essayListUrl, {page: currentPage}, function (res) {
+                    if (res.status == 0) {
+                        layer.msg(res.msg, {icon: 2});
+                    } else {
+                        console.log("timelines:" + JSON.stringify(res.data.timelines));
+                        if (res.data.timelines.length == 0) {
+                            app.tips = '加载完成';
+                        } else {
+                            ++currentPage;
                         }
-
-                        function redirect_blank(url) {
-                            var a = document.createElement('a');
-                            a.target = "_blank";
-                            a.href = url;
-                            a.click();
+                        for (var idx in res.data.timelines) {
+                            var timeline = res.data.timelines[idx];
+                            app.timelines.push(timeline);
                         }
+                    }
+                });
+            }
+
+            var app = new Vue({
+                    el: '#LAY-msg-box',
+                    data: {
+                        timelines: [
+                            // {key: '20180823100000', year: '2018', title: 'Hello content1!', content: 'content1'}
+                        ],
+                        tips: '努力加载中...'
                     },
-                    scrollBottom() {
-                        //鼠标滚动到页面最底部加载数据
-                        var documentHeight = [0];
-                        if ($(document).scrollTop() + $(window).height() > $(document).height() - 1) {
-                            documentHeight.push($(document).height());
-                            if (documentHeight[documentHeight.length - 1] > documentHeight[documentHeight.length - 2]) {
-                                documentHeight[documentHeight.length - 2] = documentHeight[documentHeight.length - 2] + documentHeight[documentHeight.length - 1];
-                                this.tips = '努力加载中...';
-                                getData();
-                                console.log("next data" + currentPage);
+                    created: function () {
+                        this.tips = "加载更多";
+                        getData();
+                    },
+                    mounted: function () {
+                        // 添加滚动事件，检测滚动到页面底部
+                        window.addEventListener('scroll', this.scrollBottom)
+                    },
+                    // 在 `methods` 对象中定义方法
+                    methods: {
+                        read: function (event) {
+                            // `this` 在方法里指向当前 Vue 实例
+                            console.log('alt:' + $(event.target).attr("alt"));
+                            console.log('title:' + $(event.target).attr("title"));
+                            var url = BUGUCMS_BASE_URL + 'post/' + $(event.target).attr("title") + '.html';
+                            //window.location.href = url;
+                            redirect_blank(url);
+                            // `event` 是原生 DOM 事件
+                            if (event) {
+                                console.log('e:' + event.target.tagName);
+                            }
+
+                            function redirect_blank(url) {
+                                var a = document.createElement('a');
+                                a.target = "_blank";
+                                a.href = url;
+                                a.click();
+                            }
+                        },
+                        scrollBottom() {
+                            //鼠标滚动到页面最底部加载数据
+                            var documentHeight = [0];
+                            if ($(document).scrollTop() + $(window).height() > $(document).height() - 1) {
+                                documentHeight.push($(document).height());
+                                if (documentHeight[documentHeight.length - 1] > documentHeight[documentHeight.length - 2]) {
+                                    documentHeight[documentHeight.length - 2] = documentHeight[documentHeight.length - 2] + documentHeight[documentHeight.length - 1];
+                                    this.tips = '努力加载中...';
+                                    getData();
+                                    console.log("next data" + currentPage);
+                                }
                             }
                         }
                     }
-                }
-            })
-        ;
-
-        $(function () {
-
+                })
+            ;
         });
     </script>
 </div>

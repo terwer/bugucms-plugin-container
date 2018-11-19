@@ -147,9 +147,6 @@ public class PostApiController extends BGBaseController {
     ) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
-            //登录检测延后开发 TODO
-            //super.preCheck(model, request, response);
-
             //获得当前登陆用户对应的对象
             SysUserDTO sysUser = null;
             if (SecurityContextHolder.getContext().getAuthentication().getPrincipal() instanceof SysUserDTO) {
@@ -204,7 +201,7 @@ public class PostApiController extends BGBaseController {
     @RequestMapping(value = "/api/post/update", method = RequestMethod.POST, produces = "application/json;charset=utf-8")
     @ResponseBody
     public RestResponseDTO updatePost(Model model, HttpServletRequest request, HttpServletResponse response,
-                                   PostDTO post) throws Exception {
+                                      PostDTO post) throws Exception {
         RestResponseDTO restResponseDTO = new RestResponseDTO();
         try {
             logger.info("开始修改，PostDTO=:" + JSON.toJSONString(post));

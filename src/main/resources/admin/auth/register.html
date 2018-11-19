@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <title>注册BUGUCMS</title>
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/css/sign.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/css/sign.css}">
     <script type="text/javascript" th:inline="javascript">
         (window.top === window.self) || (window.top.location.href = window.self.location.href);
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/ '/';
@@ -181,9 +181,9 @@
 </script>
 
 </body>
-<script type="text/javascript" th:src="@{/lib/layui/layui.js}"></script>
+<script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
 <script type="text/javascript">
-    layui.config({base: BUGUCMS_BASE_URL + 'js/'}).use('register');
-    layui.config({base: BUGUCMS_BASE_URL + 'lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
+    layui.config({base: BUGUCMS_BASE_URL + 'static/js/'}).use('register');
+    layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({tips: 'bugucms/extend/tips'}).use('tips');
 </script>
 </html>

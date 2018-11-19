@@ -3,12 +3,13 @@
  @Author: terwer
  @Copyright: terwergreen.com
  */
-layui.define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (exports) {
-    var element = layui.element
-        , form = layui.form
-        , laypage = layui.laypage
-        , $ = layui.jquery
-        , laytpl = layui.laytpl;
+layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({conf: 'bugucms/conf'}).use(['conf', 'layer']).define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (exports) {
+    var element = layui.element,
+        form = layui.form,
+        laypage = layui.laypage,
+        $ = layui.jquery,
+        conf = layui.conf,
+        laytpl = layui.laytpl;
 
 
     //statr 分页
@@ -124,7 +125,7 @@ layui.define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (expor
 
             //模拟数据
             , data = {
-                username: '小布'
+                username: '倚楼听雨'
                 , avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
                 , praise: 0
                 , content: content
@@ -137,16 +138,27 @@ layui.define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (expor
             // layer.msg('随笔发布成功', {icon: 1})
         });
 
-        $.post(BUGUCMS_BASE_URL + "api/post/new", {
+        console.log(JSON.stringify(conf.request));
+        var essayNewUrl = BUGUCMS_BASE_URL + 'api/post/new';//数据接口地址
+        // 如果开启token，传入token
+        if (conf.request.tokenName) {
+            essayNewUrl += '?tokenString=' + conf.request.tokenString;
+        }
+        console.log("essayNewUrl:" + essayNewUrl);
+        $.post(essayNewUrl, {
             postType: "essay",
             postContent: content
         }, function (res) {
-            var postId = JSON.stringify(res.data.postId);
-            console.log("postId:" + postId);
-            if (postId > 0) {
-                layer.msg('随笔发布成功', {icon: 1});
+            if (res.status == 0) {
+                layer.msg(res.msg, {icon: 2});
             } else {
-                layer.msg('随笔发布失败', {icon: 2});
+                var postId = JSON.stringify(res.data.postId);
+                console.log("postId:" + postId);
+                if (postId > 0) {
+                    layer.msg('随笔发布成功', {icon: 1});
+                } else {
+                    layer.msg('随笔发布失败', {icon: 2});
+                }
             }
         });
     })
@@ -164,4 +176,4 @@ layui.define(['element', 'form', 'laypage', 'jquery', 'laytpl'], function (expor
 
     //输出test接口
     exports('blog', {});
-});  
+});
