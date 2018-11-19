@@ -114,6 +114,11 @@ public class PostDTO {
      */
     private Integer viewCount;
 
+    /**
+     * 点赞次数
+     */
+    private Integer praiseCount;
+
     public void setPostContent(String postContent) {
         this.postRawContent = postContent;
         this.postContent = MarkdownUtils.md2html(postContent);
@@ -138,6 +143,14 @@ public class PostDTO {
             return 0;
         }
         Integer count = Integer.parseInt(postMetas.stream().filter(x -> x.getMetaKey().equals("view_count")).map(x -> x.getMetaValue()).findFirst().orElse("0"));
+        return count;
+    }
+
+    public Integer getPraiseCount() {
+        if (null == postMetas) {
+            return 0;
+        }
+        Integer count = Integer.parseInt(postMetas.stream().filter(x -> x.getMetaKey().equals("praise_count")).map(x -> x.getMetaValue()).findFirst().orElse("0"));
         return count;
     }
 }

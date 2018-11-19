@@ -21,6 +21,11 @@
         .load-more {
             color: #FFB800;
         }
+
+        .like em {
+            font-style: normal;
+            font-size: 12px;
+        }
     </style>
 </head>
 <link rel="stylesheet" type="text/css" th:href="@{|/templates/themes/${siteConfigDTO.webtheme}/css/essay.css|}">
@@ -48,7 +53,7 @@
                             <h1 v-cloak>{{ timeline.title }}</h1>
                             <p class="title count">
                                 <span class="name">倚楼听雨</span>
-                                <span class="info-img like"><i class="layui-icon layui-icon-praise"></i>5.8万</span>
+                                <span class="info-img like" v-bind:alt="timeline.key"><i class="layui-icon layui-icon-praise"></i><em>{{ timeline.praise }}</em></span>
                             </p>
                             <p class="info-intr" v-html="timeline.content" v-cloak>
                             </p>
@@ -153,21 +158,6 @@
                         return elemCont.focus();
                     }
 
-                    var view = $('#LAY-msg-tpl').html()
-                        //模拟数据
-                        , data = {
-                            username: '倚楼听雨'
-                            , avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png'
-                            , praise: 0
-                            , content: content
-                        };
-
-                    //模板渲染
-                    laytpl(view).render(data, function (html) {
-                        $('#LAY-msg-box').prepend(html);
-                        elemCont.val('');
-                    });
-
                     console.log(JSON.stringify(conf.request));
                     var essayNewUrl = BUGUCMS_BASE_URL + 'api/post/new';//数据接口地址
                     // 如果开启token，传入token
@@ -185,6 +175,25 @@
                             var postId = JSON.stringify(res.data.postId);
                             console.log("postId:" + postId);
                             if (postId > 0) {
+                                var view = $('#LAY-msg-tpl').html(), data = {
+                                    username: '倚楼听雨',
+                                    avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png',
+                                    praise: 0,
+                                    postId: postId,
+                                    content: content
+                                };
+
+                                // 点赞
+                                $('#LAY-msg-tpl').on('click', "span.like", function () {
+                                    doGood(this);
+                                });
+
+                                //模板渲染
+                                laytpl(view).render(data, function (html) {
+                                    $('#LAY-msg-box').prepend(html);
+                                    elemCont.val('');
+                                });
+
                                 layer.msg('随笔发布成功', {icon: 1});
                             } else {
                                 layer.msg('随笔发布失败', {icon: 2});
@@ -194,10 +203,47 @@
                 })
 
                 // 点赞
-                // $(".like").on('click', function () {
-                //     alert("cccc");
-                // });
+                $('#LAY-msg-box').on('click', "span.like", function () {
+                    doGood(this);
+                });
             });
+
+            function doGood(obj) {
+                console.log(JSON.stringify(conf.request));
+                if (!($(obj).hasClass("layblog-this"))) {
+                    var postId = $(obj).attr("alt");
+                    var goodCount = parseInt($(obj).find("em").text()) + 1;
+                    $(obj).find("em").text('已赞');
+                    $(obj).addClass('layblog-this');
+                    $.tipsBox({
+                        obj: $(obj),
+                        str: "+1",
+                        callback: function () {
+                            var essayLikeUrl = BUGUCMS_BASE_URL + 'api/post/meta/' + postId;//数据接口地址
+                            // 如果开启token，传入token
+                            if (conf.request.tokenName) {
+                                essayLikeUrl += '?tokenString=' + conf.request.tokenString;
+                            }
+                            console.log("essayLikeUrl:" + essayLikeUrl);
+                            $.post(essayLikeUrl, {
+                                metaKey: "praise_count",
+                                metaValue: goodCount
+                            }, function (res) {
+                                if (res.status == 0) {
+                                    layer.msg(res.msg, {icon: 2});
+                                } else {
+                                    layer.msg('点赞成功', {icon: 1});
+                                }
+                            });
+                        }
+                    });
+                    niceIn($(obj));
+                    layer.msg('点赞成功', {
+                        icon: 6
+                        , time: 1000
+                    })
+                }
+            }
 
             //start 评论的特效
             (function ($) {
@@ -280,11 +326,11 @@
         <div class="info-item">
             <img class="info-img" src="{{ d.avatar }}" alt="">
             <div class="info-text">
-                <p class="title">
+                <p class="title count">
                     <span class="name">{{ d.username }}</span>
-                    <span class="info-img">
+                    <span class="info-img like" alt="{{ d.postId }}">
 					  	<i class="layui-icon layui-icon-praise"></i>
-					  	{{ d.praise }}
+                        <em>{{ d.praise }}</em>
 					 	</span>
                 </p>
                 <p class="info-intr">

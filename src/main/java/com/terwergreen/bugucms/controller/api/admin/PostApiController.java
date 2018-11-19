@@ -120,6 +120,7 @@ public class PostApiController extends BGBaseController {
                     postContent = postDesc;
                 }
                 timelineMap.put("content", postContent);
+                timelineMap.put("praise", post.getPraiseCount());
                 timelines.add(timelineMap);
             }
 
