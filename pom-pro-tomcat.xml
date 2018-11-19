@@ -182,16 +182,11 @@
 			<artifactId>webjars-locator</artifactId>
 			<version>0.33</version>
 		</dependency>
-		<!--<dependency>-->
-			<!--<groupId>org.webjars</groupId>-->
-			<!--<artifactId>jquery</artifactId>-->
-			<!--<version>1.10.1</version>-->
-		<!--</dependency>-->
-		<!--<dependency>-->
-		<!--<groupId>org.webjars</groupId>-->
-		<!--<artifactId>bootstrap</artifactId>-->
-		<!--<version>3.3.7</version>-->
-		<!--</dependency>-->
+		<dependency>
+			<groupId>org.webjars</groupId>
+			<artifactId>jquery</artifactId>
+			<version>1.10.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>
