@@ -17,8 +17,8 @@ package com.terwergreen.bugucms.controller.app.admin;
 
 import com.terwergreen.bugucms.base.controller.BGBaseController;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
-import com.terwergreen.bugucms.core.service.CommonService;
-import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.base.service.CommonService;
+import com.terwergreen.bugucms.base.exception.WebException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

@@ -3,14 +3,14 @@ package com.terwergreen.bugucms.controller.app.cms;
 import com.alibaba.fastjson.JSON;
 import com.github.pagehelper.PageInfo;
 import com.terwergreen.bugucms.base.controller.BGBaseController;
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.dto.SysUserDTO;
-import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.base.exception.WebException;
 import com.terwergreen.bugucms.service.PostService;
-import com.terwergreen.bugucms.util.PostStatusEnum;
-import com.terwergreen.bugucms.util.PostTypeEmum;
+import com.terwergreen.bugucms.utils.PostStatusEnum;
+import com.terwergreen.bugucms.utils.PostTypeEmum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -25,7 +25,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_SIZE;
+import static com.terwergreen.bugucms.utils.Constants.DEFAULT_PAGE_SIZE;
 
 @Controller
 @RequestMapping(value = "/")

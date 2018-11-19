@@ -61,9 +61,15 @@
 
             //加载数据
             var myindex = layer.load();
+            var postListUrl = BUGUCMS_BASE_URL + 'api/post/list';//数据接口地址
+            // 如果开启token，传入token
+            if (conf.request.tokenName) {
+                postListUrl += '?tokenString=' + conf.request.tokenString;
+            }
+            console.log("postListUrl:" + postListUrl);
             table.render({
                 elem: '#postTable',
-                url: BUGUCMS_BASE_URL + 'api/post/list', //数据接口
+                url: postListUrl, //数据接口
                 method: 'post',
                 page: true,//开启分页
                 loading: true,//加载等待
@@ -74,13 +80,13 @@
                             field: 'postTitle', title: '文章标题', sort: true, fixed: 'left', templet: function (d) {
                                 var pname = d.postSlug;
                                 var ptitle = d.postTitle;
-                                if(ptitle == ''){
-                                    if(d.postType=='essay'){
+                                if (ptitle == '') {
+                                    if (d.postType == 'essay') {
                                         ptitle = '随笔';
                                     }
                                     ptitle += d.postId;
                                 }
-                                if(pname == ''){
+                                if (pname == '') {
                                     pname = d.postId;
                                 }
                                 return '<a class="layui-table-link" href="' + BUGUCMS_BASE_URL + 'post/' + pname + '.html" target="_blank">' + ptitle + '</a>';
@@ -125,8 +131,8 @@
                 active[type] ? active[type].call(this) : '';
             });
 
-            $('#search').on('keypress', function(event){
-                if(event.keyCode == "13") {
+            $('#search').on('keypress', function (event) {
+                if (event.keyCode == "13") {
                     var type = $(this).data('type');
                     active[type] ? active[type].call(this) : '';
                 }

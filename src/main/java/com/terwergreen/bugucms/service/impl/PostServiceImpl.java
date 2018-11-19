@@ -2,9 +2,9 @@ package com.terwergreen.bugucms.service.impl;
 
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
-import com.terwergreen.bugucms.core.dao.CommonDAO;
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
+import com.terwergreen.bugucms.base.dao.CommonDAO;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.dto.PostMetaDTO;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
@@ -26,9 +26,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_NUM;
-import static com.terwergreen.bugucms.util.Constants.DEFAULT_PAGE_SIZE;
-import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
+import static com.terwergreen.bugucms.utils.Constants.DEFAULT_PAGE_NUM;
+import static com.terwergreen.bugucms.utils.Constants.DEFAULT_PAGE_SIZE;
+import static com.terwergreen.bugucms.utils.Constants.XMLRPC_URL;
 
 @Service
 public class PostServiceImpl implements PostService {
@@ -66,7 +66,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostBySlug(String slug) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("slug", slug);
-        PostDTO post = (PostDTO) commonDAO.querySingle("getPostBySlug", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingleByMap("getPostBySlug", paramMap);
         return post;
     }
 
@@ -74,7 +74,7 @@ public class PostServiceImpl implements PostService {
     public PostDTO getPostById(Integer postId) throws BusinessServiceException {
         Map paramMap = new HashMap();
         paramMap.put("postId", postId);
-        PostDTO post = (PostDTO) commonDAO.querySingle("getPostById", paramMap);
+        PostDTO post = (PostDTO) commonDAO.querySingleByMap("getPostById", paramMap);
         return post;
     }
 

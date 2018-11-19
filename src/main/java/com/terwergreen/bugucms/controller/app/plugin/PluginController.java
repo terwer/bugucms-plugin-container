@@ -1,14 +1,11 @@
 package com.terwergreen.bugucms.controller.app.plugin;
 
 import com.terwergreen.bugucms.base.controller.BGBaseController;
-import com.terwergreen.bugucms.util.MathUtils;
+import com.terwergreen.bugucms.utils.MathUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping(value = "/plugin")

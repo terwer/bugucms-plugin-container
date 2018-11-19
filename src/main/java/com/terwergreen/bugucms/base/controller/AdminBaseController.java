@@ -1,10 +1,10 @@
 package com.terwergreen.bugucms.base.controller;
 
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.exception.WebException;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.dto.SysUserDTO;
-import com.terwergreen.bugucms.util.Constants;
-import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.utils.Constants;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.ui.Model;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import static com.terwergreen.bugucms.util.Constants.AUTH_LOGIN_PAGE;
+import static com.terwergreen.bugucms.utils.Constants.AUTH_LOGIN_PAGE;
 
 /**
  * @Author Terwer

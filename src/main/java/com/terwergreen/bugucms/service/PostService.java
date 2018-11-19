@@ -1,7 +1,7 @@
 package com.terwergreen.bugucms.service;
 
 import com.github.pagehelper.PageInfo;
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
 import com.terwergreen.bugucms.dto.PostDTO;
 import com.terwergreen.bugucms.dto.PostMetaDTO;
 

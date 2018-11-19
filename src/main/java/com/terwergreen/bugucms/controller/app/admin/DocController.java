@@ -1,7 +1,7 @@
 package com.terwergreen.bugucms.controller.app.admin;
 
 import com.terwergreen.bugucms.base.controller.AdminBaseController;
-import com.terwergreen.bugucms.exception.WebException;
+import com.terwergreen.bugucms.base.exception.WebException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;

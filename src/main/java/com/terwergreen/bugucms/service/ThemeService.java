@@ -1,6 +1,6 @@
 package com.terwergreen.bugucms.service;
 
-import com.terwergreen.bugucms.base.service.BusinessServiceException;
+import com.terwergreen.bugucms.base.exception.BusinessServiceException;
 import com.terwergreen.bugucms.dto.ThemeDTO;
 
 import javax.servlet.http.HttpServletRequest;

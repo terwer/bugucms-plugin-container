@@ -15,7 +15,7 @@
  */
 package com.terwergreen.bugucms.config;
 
-import com.terwergreen.bugucms.core.service.CommonService;
+import com.terwergreen.bugucms.base.service.CommonService;
 import com.terwergreen.bugucms.dto.SiteConfigDTO;
 import com.terwergreen.bugucms.service.SysUserService;
 import org.apache.commons.logging.Log;
@@ -30,11 +30,11 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 
 import javax.annotation.Resource;
 
-import static com.terwergreen.bugucms.util.Constants.API_DOC_BASE_PATH;
-import static com.terwergreen.bugucms.util.Constants.AUTH_ERROR_URL;
-import static com.terwergreen.bugucms.util.Constants.AUTH_LOGIN_PAGE;
-import static com.terwergreen.bugucms.util.Constants.SERVLET_BASE_PATH;
-import static com.terwergreen.bugucms.util.Constants.XMLRPC_URL;
+import static com.terwergreen.bugucms.utils.Constants.API_DOC_BASE_PATH;
+import static com.terwergreen.bugucms.utils.Constants.AUTH_ERROR_URL;
+import static com.terwergreen.bugucms.utils.Constants.AUTH_LOGIN_PAGE;
+import static com.terwergreen.bugucms.utils.Constants.SERVLET_BASE_PATH;
+import static com.terwergreen.bugucms.utils.Constants.XMLRPC_URL;
 
 /**
  * @Author Terwer
@@ -63,7 +63,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return sysUserService;
     }
 
-    // @formatter:off
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         //运行加载iframe
@@ -91,9 +90,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .permitAll();
     }
-    // @formatter:on
 
-    // @formatter:off
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         //内存中缓存权限数据
@@ -102,7 +99,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("source:123456,encodePassword:" + encodePassword);
         auth.userDetailsService(customUserService()).passwordEncoder(BugucmsConfig.passwordEncoder());
     }
-    // @formatter:on
 }
 
 

@@ -13,7 +13,7 @@
 
     </style>
 </head>
-<link rel="stylesheet" type="text/css" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/guestbook.css|}">
+<link rel="stylesheet" type="text/css" th:href="@{|/templates/themes/${siteConfigDTO.webtheme}/css/guestbook.css|}">
 <body class="lay-blog">
 
 <div th:include="themes/fly/include/header::commonHeaderContent"></div>
@@ -76,7 +76,7 @@
 </div>
 
 <div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
-    <script type="text/javascript" th:src="@{|/themes/${siteConfigDTO.webtheme}/js/guestbook.js|}"></script>
+    <script type="text/javascript" th:src="@{|/templates/themes/${siteConfigDTO.webtheme}/js/guestbook.js|}"></script>
     <script type="text/javascript">
 
     </script>

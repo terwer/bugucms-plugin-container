@@ -14,16 +14,21 @@
             display: none;
         }
 
-        .read-more a{
+        .read-more a {
             color: #1E9FFF;
         }
 
-        .load-more{
+        .load-more {
             color: #FFB800;
+        }
+
+        .like em {
+            font-style: normal;
+            font-size: 12px;
         }
     </style>
 </head>
-<link rel="stylesheet" type="text/css" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/essay.css|}">
+<link rel="stylesheet" type="text/css" th:href="@{|/templates/themes/${siteConfigDTO.webtheme}/css/essay.css|}">
 <body class="lay-blog">
 
 <div th:include="themes/fly/include/header::commonHeaderContent"></div>
@@ -48,13 +53,13 @@
                             <h1 v-cloak>{{ timeline.title }}</h1>
                             <p class="title count">
                                 <span class="name">倚楼听雨</span>
-                                <span class="info-img like"><i class="layui-icon layui-icon-praise"></i>5.8万</span>
+                                <span class="info-img like" v-bind:alt="timeline.key"><i class="layui-icon layui-icon-praise"></i><em>{{ timeline.praise }}</em></span>
                             </p>
                             <p class="info-intr" v-html="timeline.content" v-cloak>
                             </p>
                             <p class="read-more">
                                 <span v-if="timeline.content.indexOf('...') >= 0">
-                                    <a  th:alt="@{/post/}" v-bind:title="timeline.key" href="javascript:void(0);" v-on:click="read">阅读全文</a>
+                                    <a th:alt="@{/post/}" v-bind:title="timeline.key" href="javascript:void(0);" v-on:click="read">阅读全文</a>
                                 </span>
                             </p>
                         </div>
@@ -66,36 +71,31 @@
                     </div>
                 </div>
             </div>
-
-            <!--<div id="test1" class="paging"></div>-->
         </div>
     </div>
 </div>
 </div>
 
 <div th:include="themes/fly/include/footer::commonFooterCustom(~{::script})">
-    <script type="text/javascript" th:src="@{|/themes/${siteConfigDTO.webtheme}/js/essay.js|}"></script>
     <!-- vuejs开发环境版本，包含了有帮助的命令行警告 -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript">
-        var currentPage = 1;
+        layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
+            conf: 'bugucms/conf'
+        }).use(['conf', 'layer', 'element', 'form', 'jquery', 'laytpl'], function () {
+            var $ = layui.jquery,
+                conf = layui.conf,
+                layer = layui.layer,
+                form = layui.form,
+                laytpl = layui.laytpl;
 
-        function getData() {
-            $.post(BUGUCMS_BASE_URL + "api/post/essay", {page: currentPage}, function (res) {
-                console.log("timelines:" + JSON.stringify(res.data.timelines));
-                if (res.data.timelines.length == 0) {
-                    app.tips = '加载完成';
-                } else {
-                    ++currentPage;
-                }
-                for (var idx in res.data.timelines) {
-                    var timeline = res.data.timelines[idx];
-                    app.timelines.push(timeline);
-                }
-            });
-        }
+            var currentPage = 1;
 
-        var app = new Vue({
+            if (conf.debug) {
+                console.log("client config:" + JSON.stringify(conf));
+            }
+
+            var app = new Vue({
                 el: '#LAY-msg-box',
                 data: {
                     timelines: [
@@ -146,11 +146,177 @@
                         }
                     }
                 }
-            })
-        ;
+            });
 
-        $(function () {
+            $(function () {
+                // 发布随笔
+                $('#item-btn').on('click', function () {
+                    var elemCont = $('#LAY-msg-content')
+                        , content = elemCont.val();
+                    if (content.replace(/\s/g, '') == "") {
+                        layer.msg('先写点随笔再提交吧');
+                        return elemCont.focus();
+                    }
 
+                    console.log(JSON.stringify(conf.request));
+                    var essayNewUrl = BUGUCMS_BASE_URL + 'api/post/new';//数据接口地址
+                    // 如果开启token，传入token
+                    if (conf.request.tokenName) {
+                        essayNewUrl += '?tokenString=' + conf.request.tokenString;
+                    }
+                    console.log("essayNewUrl:" + essayNewUrl);
+                    $.post(essayNewUrl, {
+                        postType: "essay",
+                        postContent: content
+                    }, function (res) {
+                        if (res.status == 0) {
+                            layer.msg(res.msg, {icon: 2});
+                        } else {
+                            var postId = JSON.stringify(res.data.postId);
+                            console.log("postId:" + postId);
+                            if (postId > 0) {
+                                var view = $('#LAY-msg-tpl').html(), data = {
+                                    username: '倚楼听雨',
+                                    avatar: window.BUGUCMS_THEME_PATH + 'images/avatar/default.png',
+                                    praise: 0,
+                                    postId: postId,
+                                    content: content
+                                };
+
+                                // 点赞
+                                $('#LAY-msg-tpl').on('click', "span.like", function () {
+                                    doGood(this);
+                                });
+
+                                //模板渲染
+                                laytpl(view).render(data, function (html) {
+                                    $('#LAY-msg-box').prepend(html);
+                                    elemCont.val('');
+                                });
+
+                                layer.msg('随笔发布成功', {icon: 1});
+                            } else {
+                                layer.msg('随笔发布失败', {icon: 2});
+                            }
+                        }
+                    });
+                })
+
+                // 点赞
+                $('#LAY-msg-box').on('click', "span.like", function () {
+                    doGood(this);
+                });
+            });
+
+            function doGood(obj) {
+                console.log(JSON.stringify(conf.request));
+                if (!($(obj).hasClass("layblog-this"))) {
+                    var postId = $(obj).attr("alt");
+                    var goodCount = parseInt($(obj).find("em").text()) + 1;
+                    $(obj).find("em").text('已赞');
+                    $(obj).addClass('layblog-this');
+                    $.tipsBox({
+                        obj: $(obj),
+                        str: "+1",
+                        callback: function () {
+                            var essayLikeUrl = BUGUCMS_BASE_URL + 'api/post/meta/' + postId;//数据接口地址
+                            // 如果开启token，传入token
+                            if (conf.request.tokenName) {
+                                essayLikeUrl += '?tokenString=' + conf.request.tokenString;
+                            }
+                            console.log("essayLikeUrl:" + essayLikeUrl);
+                            $.post(essayLikeUrl, {
+                                metaKey: "praise_count",
+                                metaValue: goodCount
+                            }, function (res) {
+                                if (res.status == 0) {
+                                    layer.msg(res.msg, {icon: 2});
+                                } else {
+                                    layer.msg('点赞成功', {icon: 1});
+                                }
+                            });
+                        }
+                    });
+                    niceIn($(obj));
+                    layer.msg('点赞成功', {
+                        icon: 6
+                        , time: 1000
+                    })
+                }
+            }
+
+            //start 评论的特效
+            (function ($) {
+                $.extend({
+                    tipsBox: function (options) {
+                        options = $.extend({
+                            obj: null,  //jq对象，要在那个html标签上显示
+                            str: "+1",  //字符串，要显示的内容;也可以传一段html，如: "<b style='font-family:Microsoft YaHei;'>+1</b>"
+                            startSize: "12px",  //动画开始的文字大小
+                            endSize: "30px",    //动画结束的文字大小
+                            interval: 600,  //动画时间间隔
+                            color: "red",    //文字颜色
+                            callback: function () {
+                            }    //回调函数
+                        }, options);
+
+                        $("body").append("<span class='num'>" + options.str + "</span>");
+
+                        var box = $(".num");
+                        var left = options.obj.offset().left + options.obj.width() / 2;
+                        var top = options.obj.offset().top - 10;
+                        box.css({
+                            "position": "absolute",
+                            "left": left + "px",
+                            "top": top + "px",
+                            "z-index": 9999,
+                            "font-size": options.startSize,
+                            "line-height": options.endSize,
+                            "color": options.color
+                        });
+                        box.animate({
+                            "font-size": options.endSize,
+                            "opacity": "0",
+                            "top": top - parseInt(options.endSize) + "px"
+                        }, options.interval, function () {
+                            box.remove();
+                            options.callback();
+                        });
+                    }
+                });
+            })($);
+
+            function niceIn(prop) {
+                prop.find('i').addClass('niceIn');
+                setTimeout(function () {
+                    prop.find('i').removeClass('niceIn');
+                }, 1000);
+            }
+
+            function getData() {
+                var essayListUrl = BUGUCMS_BASE_URL + 'api/post/essay';//数据接口地址
+                // 如果开启token，传入token
+                if (conf.request.tokenName) {
+                    essayListUrl += '?tokenString=' + conf.request.tokenString;
+                }
+                console.log("essayListUrl:" + essayListUrl);
+                $.post(essayListUrl, {page: currentPage}, function (res) {
+                    if (res.status == 0) {
+                        layer.msg(res.msg, {icon: 2});
+                    } else {
+                        console.log("timelines:" + JSON.stringify(res.data.timelines));
+                        if (res.data.timelines.length == 0) {
+                            app.tips = '加载完成';
+                        } else {
+                            ++currentPage;
+                        }
+                        for (var idx in res.data.timelines) {
+                            var timeline = res.data.timelines[idx];
+                            app.timelines.push(timeline);
+                        }
+                    }
+                });
+            }
         });
     </script>
 </div>
@@ -160,11 +326,11 @@
         <div class="info-item">
             <img class="info-img" src="{{ d.avatar }}" alt="">
             <div class="info-text">
-                <p class="title">
+                <p class="title count">
                     <span class="name">{{ d.username }}</span>
-                    <span class="info-img">
+                    <span class="info-img like" alt="{{ d.postId }}">
 					  	<i class="layui-icon layui-icon-praise"></i>
-					  	{{ d.praise }}
+                        <em>{{ d.praise }}</em>
 					 	</span>
                 </p>
                 <p class="info-intr">
