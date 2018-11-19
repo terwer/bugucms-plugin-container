@@ -25,12 +25,16 @@
             console.log("server config:" + JSON.stringify(BUGUCMS_SERVER_CONFIG));
         }
     </script>
+    <style type="text/css">
+        @media screen and (max-width: 320px) {
+        }
+    </style>
 </head>
 <body class="layui-layout-body layui-unselect">
 <div class="layui-layout layui-layout-admin">
     <!--顶部导航开始-->
     <div class="layui-header">
-        <a class="lau-logo-mini"><i class="layui-icon layui-icon-tree"></i></a>
+        <a class="lau-logo-mini" th:href="@{|/${siteConfigDTO.adminpath}/|}"><i class="layui-icon layui-icon-console"></i></a>
         <a class="layui-logo" th:href="@{|/${siteConfigDTO.adminpath}/|}">Bugucms</a>
         <ul class="layui-nav layui-layout-left">
             <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu0"><i class="layui-icon layui-icon-set"> 博客设置</i></a></li>
