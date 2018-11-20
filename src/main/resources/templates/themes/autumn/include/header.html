@@ -16,15 +16,15 @@
     <meta name="description" th:content="${siteConfigDTO.description}">
     <link rel="icon" type="image/x-icon" th:href="@{/favicon.ico}">
     <!-- layui -->
-    <link rel="stylesheet" type="text/css" th:href="@{/lib/layui/css/layui.css}">
-    <link rel="stylesheet" th:href="@{|/themes/${siteConfigDTO.webtheme}/css/global.css?v=20181114105005|}">
+    <link rel="stylesheet" type="text/css" th:href="@{/static/lib/layui/css/layui.css}">
+    <link rel="stylesheet" th:href="@{|/templates/themes/${siteConfigDTO.webtheme}/css/global.css?v=20181114105005|}">
     <script type="text/javascript" th:inline="javascript">
         //必须在服务器运行，不能直接打开
         /^http(s*):\/\//.test(location.href) || alert('请先部署到 localhost 下再访问');
         //设置项目根路径
         window.BUGUCMS_BASE_URL = /*[[@{/}]]*/'/';
         window.BUGUCMS_ADMIN_PATH = /*[[${siteConfigDTO.adminpath}]]*/'admin';
-        window.BUGUCMS_THEME_PATH = /*[[@{|/themes/${siteConfigDTO.webtheme}/|}]]*/'/themes/default/';
+        window.BUGUCMS_THEME_PATH = /*[[@{|/templates/themes/${siteConfigDTO.webtheme}/|}]]*/'/themes/default/';
     </script>
     <th:block th:replace="${styles}"/>
 </head>
@@ -37,7 +37,7 @@
         <h1 class="logo">
             <a th:href="@{/}">
                 <span>远方的灯塔</span>
-                <img th:src="@{|/themes/${siteConfigDTO.webtheme}/images/logo.png|}">
+                <img th:src="@{|/templates/themes/${siteConfigDTO.webtheme}/images/logo.png|}">
             </a>
         </h1>
         <div class="nav">
