@@ -27,6 +27,7 @@ public class MenuServiceImpl implements MenuService {
         if (!CollectionUtils.isEmpty(menuList)) {
             for (MenuDTO menuDTO : menuList) {
                 Integer mid = menuDTO.getMenuId();
+                // 递归获取子菜单
                 List<MenuDTO> childMenuList = getMenuList(mid);
                 if (!CollectionUtils.isEmpty(menuList)) {
                     menuDTO.setList(childMenuList);

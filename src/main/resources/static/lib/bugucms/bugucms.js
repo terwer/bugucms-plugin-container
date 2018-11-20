@@ -110,7 +110,7 @@ layui.extend({conf: 'bugucms/conf'}).define(['conf', 'layer', 'laytpl', 'element
             BODY = $('.layui-body'),
             SIDE = $('.layui-side'),
             SIDE_MENU = [],
-            SINGLE = BODY.data('type') === 'single',
+            SINGLE = BODY.data('type') === 'single' || conf.pageTabs == false,
             IFRAME,
             LAYID,
             DRAWER_INDEX;
