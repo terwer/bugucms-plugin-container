@@ -6,7 +6,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
 
     //刷新验证码
     var captchaImg = $('.lau-sign-captcha'), captchaSrc = captchaImg.attr('src');
-    captchaImg.click(function () {
+    captchaImg.on('click', function () {
         $(this).attr('src', captchaSrc + '?_t=' + Math.random());
     });
 
@@ -20,7 +20,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
     });
 
     //获取手机验证码
-    $('.lau-sign-sms').click(function () {
+    $('.lau-sign-sms').on('click', function () {
         var phone = $('input[name="phone"]').val();
         if (!/^1\d{10}$/.test(phone)) {
             return tips.warning('请输入正确的手机号码');
@@ -33,7 +33,8 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
 
         var that = $(this);
         that.attr('disabled', true).addClass('layui-btn-disabled');
-        $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone, captcha: captcha}, function (json) {
+        // $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone, captcha: captcha}, function (json) {
+        $.get(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone, captcha: captcha}, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg);
                 var expire = json.data.expire;
@@ -75,7 +76,8 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
         tips.loading('请稍后...', 0, -1);
 
         //发送重置表单
-        $.post(BUGUCMS_BASE_URL + 'static/json/forgot.json', data.field, function (json) {
+        // $.post(BUGUCMS_BASE_URL + 'static/json/forgot.json', data.field, function (json) {
+        $.get(BUGUCMS_BASE_URL + 'static/json/forgot.json', data.field, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg, function () {
                     location.href = BUGUCMS_BASE_URL + 'auth/login';

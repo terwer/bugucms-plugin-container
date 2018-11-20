@@ -6,7 +6,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
 
     //刷新验证码
     var captchaImg = $('.lau-sign-captcha'), captchaSrc = captchaImg.attr('src');
-    captchaImg.click(function () {
+    captchaImg.on('click', function () {
         $(this).attr('src', captchaSrc + '?_t=' + Math.random());
     });
 
@@ -49,7 +49,6 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
                 location.href = BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + "/";
             });
         });
-        //}, 'json');
         return false;
     });
 
