@@ -5,6 +5,6 @@
 <mapper namespace="bgapp">
     <!-- 查询菜单列表 -->
     <select id="getMenuListByParentId" parameterType="java.lang.Integer" resultType="com.terwergreen.bugucms.dto.MenuDTO">
-        SELECT m.menu_id as menuId,m.title,m.icon,m.href FROM bg_menus m WHERE m.parent_id = #{parentId}
+        SELECT m.menu_id as menuId,m.parent_id as parentId,m.title,m.icon,m.href,m.event,m.open FROM bg_menus m WHERE m.parent_id = #{parentId}
     </select>
 </mapper>

@@ -102,7 +102,7 @@ layui.extend({conf: 'bugucms/conf'}).define(['conf', 'layer', 'laytpl', 'element
      * 初始化配置
      * @constructor
      */
-    var Layout = function (base, adminpath) {
+    var Layout = function () {
         //输出站点配置
         this.config = conf;
 
@@ -588,5 +588,5 @@ layui.extend({conf: 'bugucms/conf'}).define(['conf', 'layer', 'laytpl', 'element
         }, 1000);
     }
 
-    exports('bugucms', new Layout(BUGUCMS_BASE_URL, BUGUCMS_ADMIN_PATH));
+    exports('bugucms', new Layout());
 });
