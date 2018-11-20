@@ -26,17 +26,18 @@
         }
     </script>
     <style type="text/css">
-        @media screen and (max-width: 320px) {
+        .hide {
+            display: none;
         }
     </style>
 </head>
-<body class="layui-layout-body layui-unselect">
+<body>
 <div class="layui-layout layui-layout-admin">
     <!--顶部导航开始-->
     <div class="layui-header">
         <a class="lau-logo-mini" th:href="@{|/${siteConfigDTO.adminpath}/|}"><i class="layui-icon layui-icon-console"></i></a>
         <a class="layui-logo" th:href="@{|/${siteConfigDTO.adminpath}/|}">Bugucms</a>
-        <ul class="layui-nav layui-layout-left">
+        <ul class="layui-nav layui-layout-left hide">
             <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu0"><i class="layui-icon layui-icon-set"> 博客设置</i></a></li>
             <li class="layui-nav-item" lay-unselect><a lau-event="sideMenu1"><i class="layui-icon layui-icon-tips"> 操作指引</i></a></li>
             <li class="layui-nav-item" lay-unselect><a lau-event="messageBox"><i class="layui-icon layui-icon-notice"> 0</i></a></li>
@@ -58,33 +59,38 @@
     <!--顶部导航结束-->
 
     <!--侧边菜单开始-->
-    <div class="layui-side" th:data-href="@{/json/menu.json}">
+    <div class="layui-side">
         <div class="lau-side-fold"><i class="layui-icon layui-icon-shrink-right"></i></div>
         <div class="layui-side-scroll">
             <ul class="layui-nav layui-nav-tree">
-                <!--这里可以写菜单结构,也可以放空,使用异步加载-->
             </ul>
         </div>
     </div>
     <!--侧边菜单结束-->
 
     <!--内容主体区域开始-->
-    <div class="layui-body" data-type="" th:data-title="${title}" data-icon="layui-icon-home" th:data-href="@{|/${siteConfigDTO.adminpath}/${action}|}"></div>
+    <div class="layui-body" th:data-title="${title}" data-icon="layui-icon-home" th:data-href="@{|/${siteConfigDTO.adminpath}/${action}|}"></div>
     <!--内容主体区域结束-->
 </div>
-</body>
 <script type="text/javascript" th:src="@{/static/lib/layui/layui.js}"></script>
-<script>
+<script type="text/javascript">
     layui.config({base: BUGUCMS_BASE_URL + 'static/lib/'}).extend({
         bugucms: 'bugucms/bugucms'
     }).use(['bugucms'], function () {
         var bugucms = layui.bugucms,
-            config = bugucms.config,
+            conf = bugucms.config,
             layer = layui.layer,
             $ = layui.$;
-        if (config.debug) {
-            console.log("client config:" + JSON.stringify(config));
+
+        if (conf.debug) {
+            console.log("client config:" + JSON.stringify(conf));
         }
+
+        $(function () {
+            // 加载菜单
+            getChildMenu(0);
+            getChildMenu(1);
+        })
 
         //监听事件,这个不一定要用lau-event,可以自己写
         $(document).on('click', '[lau-event]', function () {
@@ -102,21 +108,57 @@
                     });
                     break;
                 case "sideMenu0":
-                    bugucms.sideMenuChange(0);
+                    getChildMenu(1);
                     break;
                 case "sideMenu1":
-                    bugucms.sideMenuChange(1);
+                    getChildMenu(2);
                     break;
                 case 'messageBox':
-                    if (config.debug) {
+                    if (conf.debug) {
                         console.log("新消息");
                     }
                     break;
                 case 'newPost':
-                    bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/postManage/new', "写文章");
+                    bugucms.go(BUGUCMS_BASE_URL + BUGUCMS_ADMIN_PATH + '/postManage/new', "写文章","layui-icon-add-1");
                     break;
             }
         });
+
+        function getChildMenu(parentId) {
+            //如果设置了侧栏菜单的获取路径,直接渲染
+            var menuListUrl = BUGUCMS_BASE_URL + 'api/menu/list/' + parentId;//数据接口地址
+            // 如果开启token，传入token
+            if (conf.request.tokenName) {
+                menuListUrl += '?tokenString=' + conf.request.tokenString;
+            }
+            $.ajax({
+                url: menuListUrl,
+                type: 'POST',
+                dataType: 'json',
+                success: function (res, textStatus, jqXHR) {
+                    if (conf.debug) {
+                        console.log("menu data before:" + JSON.stringify(res.data));
+                    }
+                    if (parentId == 0) {
+                        $(".layui-layout-left").empty();
+                        for (var k in res.data.menus) {
+                            var item = res.data.menus[k];
+                            var firstMenu = '<li class="layui-nav-item" lay-unselect><a lau-event="' + item.event + '"><i class="' + item.icon + '">  ' + item.title + '</i></a></li>';
+                            $(".layui-layout-left").append(firstMenu);
+                            $(".layui-layout-left").removeClass("hide");
+                        }
+                    } else {
+                        var secondMenus = new Array();
+                        secondMenus.push(res.data.menus);
+                        bugucms.sideMenuLoad(secondMenus);
+                    }
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    console.log("menu data request error");
+                }
+            });
+        }
     });
 </script>
+</body>
 </html>

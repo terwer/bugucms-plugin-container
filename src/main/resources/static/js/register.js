@@ -6,7 +6,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
 
     //刷新验证码
     var captchaImg = $('.lau-sign-captcha'), captchaSrc = captchaImg.attr('src');
-    captchaImg.click(function () {
+    captchaImg.on('click', function () {
         $(this).attr('src', captchaSrc + '?_t=' + Math.random());
     });
 
@@ -20,7 +20,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
     });
 
     //获取手机验证码
-    $('.lau-sign-sms').click(function () {
+    $('.lau-sign-sms').on('click', function () {
         var phone = $('input[name="phone"]').val();
         if (!/^1\d{10}$/.test(phone)) {
             return tips.warning('请输入正确的手机号码');
@@ -28,7 +28,8 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
 
         var that = $(this);
         that.attr('disabled', true).addClass('layui-btn-disabled');
-        $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone}, function (json) {
+        // $.post(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone}, function (json) {
+        $.get(BUGUCMS_BASE_URL + 'static/json/sms.json', {phone: phone}, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg);
                 var expire = json.data.expire;
@@ -51,10 +52,10 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
     });
 
     //弹出用户注册协议
-    $('.lau-sign-lic').click(function () {
+    $('.lau-sign-lic').on('click', function () {
         var license = $('input[name="license"]');
         layer.open({
-            title: 'LAU 官方站 网站服务条款',
+            title: 'BuguCMS服务条款',
             type: 1,
             area: ['700px', '450px'],
             content: $('#license').html(),
@@ -68,7 +69,7 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
             btn2: function (index, layero) {
                 license.prop('checked', false);
                 form.render('checkbox');
-                layer.alert('您拒绝了LAU协议，可能需要吊起来打');
+                layer.alert('您拒绝了BuguCMS协议，暂时无法注册');
             }
         });
     });
@@ -99,10 +100,11 @@ layui.define(['layer', 'form', 'tips'], function (exports) {
         tips.loading('注册中...', 0, -1);
 
         //发送注册表单
-        $.post('/json/register.json', data.field, function (json) {
+        // $.post(BUGUCMS_BASE_URL + 'static/json/register.json', data.field, function (json) {
+        $.get(BUGUCMS_BASE_URL + 'static/json/register.json', data.field, function (json) {
             if (json.errcode == 0) {
                 tips.success(json.errmsg, function () {
-                    location.href = '/html/login.html';
+                    location.href = BUGUCMS_BASE_URL + 'auth/login';
                 });
             } else {
                 tips.error(json.errmsg, function () {

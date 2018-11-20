@@ -328,66 +328,66 @@
         });
 
         //最近发布
-        var recentPublish = table.render({
-            elem: '#recent-publish',
-            url: BUGUCMS_BASE_URL + 'json/recent-publish.json',
-            page: true,
-            cols:
-                [
-                    [
-                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
-                        {
-                            field: 'title', title: '标题', templet: function (d) {
-                                return '<a class="layui-table-link">' + d.title + '</a>';
-                            }
-                        },
-                        {field: 'username', title: '文章作者'},
-                        {field: 'channel', title: '类别'},
-                        {field: 'crt', title: '点击率', sort: true}
-                    ]
-                ]
-        });
-
-        //今日热搜
-        var hotSearch = table.render({
-            elem: '#hot-search',
-            url: BUGUCMS_BASE_URL + 'json/hot-search.json',
-            page: true,
-            cols:
-                [
-                    [
-                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
-                        {
-                            field: 'keywords', title: '标题', templet: function (d) {
-                                return '<a class="layui-table-link">' + d.keywords + '</a>';
-                            }
-                        },
-                        {field: 'frequency', title: '搜索次数', sort: true},
-                        {field: 'userNums', title: '用户数', sort: true}
-                    ]
-                ]
-        });
-
-        //今日热帖
-        var hotArticle = table.render({
-            elem: '#hot-article',
-            url: BUGUCMS_BASE_URL + 'json/hot-article.json',
-            page: true,
-            cols:
-                [
-                    [
-                        {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
-                        {
-                            field: 'title', title: '标题', templet: function (d) {
-                                return '<a class="layui-table-link">' + d.title + '</a>';
-                            }
-                        },
-                        {field: 'username', title: '文章作者'},
-                        {field: 'channel', title: '类别'},
-                        {field: 'crt', title: '点击率', sort: true}
-                    ]
-                ]
-        });
+        // var recentPublish = table.render({
+        //     elem: '#recent-publish',
+        //     url: BUGUCMS_BASE_URL + 'json/recent-publish.json',
+        //     page: true,
+        //     cols:
+        //         [
+        //             [
+        //                 {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+        //                 {
+        //                     field: 'title', title: '标题', templet: function (d) {
+        //                         return '<a class="layui-table-link">' + d.title + '</a>';
+        //                     }
+        //                 },
+        //                 {field: 'username', title: '文章作者'},
+        //                 {field: 'channel', title: '类别'},
+        //                 {field: 'crt', title: '点击率', sort: true}
+        //             ]
+        //         ]
+        // });
+        //
+        // //今日热搜
+        // var hotSearch = table.render({
+        //     elem: '#hot-search',
+        //     url: BUGUCMS_BASE_URL + 'json/hot-search.json',
+        //     page: true,
+        //     cols:
+        //         [
+        //             [
+        //                 {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+        //                 {
+        //                     field: 'keywords', title: '标题', templet: function (d) {
+        //                         return '<a class="layui-table-link">' + d.keywords + '</a>';
+        //                     }
+        //                 },
+        //                 {field: 'frequency', title: '搜索次数', sort: true},
+        //                 {field: 'userNums', title: '用户数', sort: true}
+        //             ]
+        //         ]
+        // });
+        //
+        // //今日热帖
+        // var hotArticle = table.render({
+        //     elem: '#hot-article',
+        //     url: BUGUCMS_BASE_URL + 'json/hot-article.json',
+        //     page: true,
+        //     cols:
+        //         [
+        //             [
+        //                 {title: 'ID', width: 40, type: 'numbers', fixed: 'left'},
+        //                 {
+        //                     field: 'title', title: '标题', templet: function (d) {
+        //                         return '<a class="layui-table-link">' + d.title + '</a>';
+        //                     }
+        //                 },
+        //                 {field: 'username', title: '文章作者'},
+        //                 {field: 'channel', title: '类别'},
+        //                 {field: 'crt', title: '点击率', sort: true}
+        //             ]
+        //         ]
+        // });
 
     });
 </script>

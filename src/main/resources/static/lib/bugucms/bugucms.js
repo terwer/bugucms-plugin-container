@@ -8,9 +8,7 @@
  *
  *
  */
-layui.extend({
-    conf: 'bugucms/conf'
-}).define(['conf', 'layer', 'laytpl', 'element'], function (exports) {
+layui.extend({conf: 'bugucms/conf'}).define(['conf', 'layer', 'laytpl', 'element'], function (exports) {
     var conf = layui.conf,
         layer = layui.layer,
         laytpl = layui.laytpl,
@@ -104,7 +102,7 @@ layui.extend({
      * 初始化配置
      * @constructor
      */
-    var Layout = function (base, adminpath) {
+    var Layout = function () {
         //输出站点配置
         this.config = conf;
 
@@ -112,7 +110,7 @@ layui.extend({
             BODY = $('.layui-body'),
             SIDE = $('.layui-side'),
             SIDE_MENU = [],
-            SINGLE = BODY.data('type') === 'single',
+            SINGLE = BODY.data('type') === 'single' || conf.pageTabs == false,
             IFRAME,
             LAYID,
             DRAWER_INDEX;
@@ -129,56 +127,6 @@ layui.extend({
             IFRAME = BODY.html(html).find('iframe').first();
             element.render('nav');
         });
-
-        //如果设置了侧栏菜单的获取路径,直接渲染
-        var sideHref = $.trim(SIDE.data('href'));
-        if (sideHref) {
-            $.ajax({
-                url: sideHref,
-                dataType: 'json',
-                success: function (data, textStatus, jqXHR) {
-                    if (conf.debug) {
-                        console.log("base:" + base);
-                        console.log("menu data before:" + JSON.stringify(data));
-                    }
-                    if (typeof base == "undefined") {
-                        console.error("base url can not be undefined");
-                    } else {
-                        //博客菜单
-                        var rootPath = base + adminpath + '/';
-                        //多级菜单
-                        for (var k in data) {
-                            for (var i in data[k]) {
-                                var firstMenu = data[k][i];
-                                if (0 == i) {
-                                    data[k][i].href = rootPath + firstMenu.href;
-                                    data[k][i].href += "#";
-                                }
-                                //子菜单
-                                //var secondMenu = data[0][i].list;
-                                for (var j in firstMenu.list) {
-                                    var secondMenuItem = firstMenu.list[j];
-                                    //静态路径
-                                    if (typeof secondMenuItem.href != "undefined" && secondMenuItem.href.indexOf("html") >= 0) {
-                                        data[k][i].list[j].href = base + secondMenuItem.href;
-                                    } else {//页面路径，需要加上后台管理地址
-                                        data[k][i].list[j].href = rootPath + secondMenuItem.href;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    if (conf.debug) {
-                        console.log("menu data changed with base:" + JSON.stringify(data));
-                        console.log("menu data load success:" + JSON.stringify(data));
-                    }
-                    THIS.sideMenuLoad(data);
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    //console.log("menu data request error");
-                }
-            });
-        }
 
         /**
          * 刷新当前iframe
@@ -640,5 +588,5 @@ layui.extend({
         }, 1000);
     }
 
-    exports('bugucms', new Layout(BUGUCMS_BASE_URL, BUGUCMS_ADMIN_PATH));
+    exports('bugucms', new Layout());
 });
