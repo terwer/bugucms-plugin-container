@@ -23,6 +23,7 @@ public class PostDTO {
      * 文章别名
      */
     @Getter
+    @Setter
     private String postSlug;
     /**
      * 文章醉着
