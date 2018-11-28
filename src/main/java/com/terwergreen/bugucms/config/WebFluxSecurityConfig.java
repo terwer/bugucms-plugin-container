@@ -101,6 +101,8 @@ public class WebFluxSecurityConfig {
             //获取权限插件配置的内容
             int securityOn = (int) data.getOrDefault("securityOn", 0);
             String adminPath = (String) data.getOrDefault("adminPath", "admin");
+            String loginPath = (String) data.getOrDefault("loginPath", "login");
+            String logoutPath = (String) data.getOrDefault("logoutPath", "logout");
             if (1 == securityOn) {
                 logger.info("授权打开");
                 http.authorizeExchange()
@@ -110,13 +112,13 @@ public class WebFluxSecurityConfig {
                         .permitAll();
 
                 http.formLogin()
-                        //.loginPage("/login")
+                        .loginPage("/"+loginPath+"")
                         //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
                         //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
                         .and()
                         .logout()
-                        //.logoutUrl("/logout")
-                        .logoutSuccessHandler(logoutSuccessHandler("/login?logout"));
+                        .logoutUrl("/"+logoutPath)
+                        .logoutSuccessHandler(logoutSuccessHandler("/"+loginPath+"?logout"));
             } else {
                 logger.info("授权关闭");
                 http.authorizeExchange()
