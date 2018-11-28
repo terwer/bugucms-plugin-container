@@ -1,4 +1,4 @@
-target/
+/target/
 !.mvn/wrapper/maven-wrapper.jar
 
 ### STS ###
@@ -17,19 +17,15 @@ target/
 *.ipr
 
 ### NetBeans ###
-nbproject/private/
-build/
-nbbuild/
-dist/
-nbdist/
-.nb-gradle/
+/nbproject/private/
+/build/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
 
-.mvn/wrapper/
-mvnw
-mvnw.cmd
+# plugins
+/plugins/
 
-*log
-*.gz
-*.tmp
-bin/
-application-prd.properties      
+*.log
+*gz

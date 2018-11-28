@@ -1,0 +1,41 @@
+<!--
+  _______
+ |__   __|
+    | |  ___  _ __ __      __ ___  _ __
+    | | / _ \| '__|\ \ /\ / // _ \| '__|
+    | ||  __/| |    \ V  V /|  __/| |
+    |_| \___||_|     \_/\_/  \___||_|
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>BuguCMS</title>
+    <style type="text/css">
+        .text-cernter {
+            font-family: "Microsoft YaHei", "Courier New", Consolas, Georgia, 'Times New Roman';
+            text-align: center;
+            font-size: 80px;
+            font-weight: 700;
+            line-height: 80px;
+        }
+
+        .info {
+            font-size: 24px;
+        }
+
+        .plugin-info {
+            font-size: 16px;
+            line-height: 24px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+<h1 class="text-cernter">BuguCMS Container </h1>
+<h1 class="text-cernter">is serving...</h1>
+<h3 class="text-cernter info" th:text="${info}"></h3>
+<h3 class="text-cernter info"><a th:href="@{/plugins}">插件信息</a></h3>
+<p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
+</body>
+</html>
