@@ -4,11 +4,11 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.terwergreen</groupId>
-    <artifactId>bugucms</artifactId>
+    <artifactId>bugucms-plugin-container</artifactId>
     <version>2.0.0</version>
     <packaging>pom</packaging>
 
-    <name>bugucms</name>
+    <name>bugucms-plugin-container</name>
     <description>light-weight,pluggable cms</description>
 
     <parent>

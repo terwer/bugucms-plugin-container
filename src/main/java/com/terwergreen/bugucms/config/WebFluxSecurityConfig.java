@@ -8,6 +8,7 @@ import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
@@ -31,7 +32,7 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-@ConditionalOnBean(BugucmsPluginManager.class)
+@DependsOn("pluginManager")
 @EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     /**
@@ -55,26 +56,31 @@ public class WebFluxSecurityConfig {
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         logger.info("WebFlux Security is running");
         SecurityWebFilterChain filterChain = null;
-        // 获取授权插件扩展点
-        List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
-        if (CollectionUtils.isEmpty(extentions)) {
-            logger.warn(AUTH_PLUGIN + " extentions not exists");
+        if (null == pluginManager) {
             filterChain = configSecurity(http, null);
         } else {
-            logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-            PluginInterface extention = (PluginInterface) extentions.get(0);
-            Map data = extention.data();
-            logger.info("extentions data:" + JSON.toJSONString(data));
-            filterChain = configSecurity(http, data);
+            // 获取授权插件扩展点
+            try {
+                List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
+                if (CollectionUtils.isEmpty(extentions)) {
+                    logger.warn(AUTH_PLUGIN + " extentions not exists");
+                    filterChain = configSecurity(http, null);
+                } else {
+                    logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
+                    PluginInterface extention = (PluginInterface) extentions.get(0);
+                    Map data = extention.data();
+                    logger.info("extentions data:" + JSON.toJSONString(data));
+                    filterChain = configSecurity(http, data);
+                }
+            } catch (Exception e) {
+                logger.warn("无任何插件扩展点");
+                filterChain = configSecurity(http, null);
+            }
         }
         return filterChain;
     }
 
     private SecurityWebFilterChain configSecurity(ServerHttpSecurity http, Map data) {
-        // 获取权限插件配置的内容
-        int securityOn = (int) data.getOrDefault("securityOn", 0);
-        String adminPath = (String) data.getOrDefault("adminPath", "admin");
-
         //运行加载iframe
         http.headers().frameOptions().disable();
 
@@ -86,27 +92,37 @@ public class WebFluxSecurityConfig {
         //.requireCsrfProtectionMatcher(customCsrfMatcher)
 
         //配置权限及登录验证
-        if (1 == securityOn) {
-            logger.info("授权打开");
+        if (null == data) {
+            logger.info("授权配置信息有误");
             http.authorizeExchange()
-                    .pathMatchers("/" + adminPath + "/**")
-                    .authenticated()
                     .pathMatchers("/**")
                     .permitAll();
-
-            http.formLogin()
-                    //.loginPage("/login")
-                    //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
-                    //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
-                    .and()
-                    .logout()
-                    //.logoutUrl("/logout")
-                    .logoutSuccessHandler(logoutSuccessHandler("/login?logout"));
         } else {
-            logger.info("授权关闭");
-            http.authorizeExchange()
-                    .pathMatchers("/**")
-                    .permitAll();
+            //获取权限插件配置的内容
+            int securityOn = (int) data.getOrDefault("securityOn", 0);
+            String adminPath = (String) data.getOrDefault("adminPath", "admin");
+            if (1 == securityOn) {
+                logger.info("授权打开");
+                http.authorizeExchange()
+                        .pathMatchers("/" + adminPath + "/**")
+                        .authenticated()
+                        .pathMatchers("/**")
+                        .permitAll();
+
+                http.formLogin()
+                        //.loginPage("/login")
+                        //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
+                        //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
+                        .and()
+                        .logout()
+                        //.logoutUrl("/logout")
+                        .logoutSuccessHandler(logoutSuccessHandler("/login?logout"));
+            } else {
+                logger.info("授权关闭");
+                http.authorizeExchange()
+                        .pathMatchers("/**")
+                        .permitAll();
+            }
         }
         return http.build();
     }
