@@ -3,7 +3,6 @@ package com.terwergreen.bugucms.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.pf4j.RuntimeMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +13,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,7 +65,7 @@ public class PluginConfig {
         if (pluginSwitch) {
             BugucmsPluginManager pm = pluginManager();
             logger.debug("Load pluginEndpoints,pluginManager is:" + pm);
-            List<BugucmsPluginExtension> pluginExtentions = pm.getExtensions(BugucmsPluginExtension.class);
+            List pluginExtentions = pm.getExtensions(Object.class);
             logger.info("Load pluginExtentions from plugins:" + pluginExtentions);
             //注册RouterFunction模式的webFlux
             RouterFunction<?> webFlux = getReactiveRoutes(pm);
@@ -81,7 +82,20 @@ public class PluginConfig {
      */
     private RouterFunction<?> getReactiveRoutes(BugucmsPluginManager pm) {
         RouterFunction<?> base = baseRoot(pm);
-        RouterFunction<?> routes = pm.getExtensions(BugucmsPluginExtension.class).stream().flatMap(g -> g.reactiveRoutes().stream()).map(r -> (RouterFunction<ServerResponse>) r).reduce((o, r) -> (RouterFunction<ServerResponse>) o.andOther(r)).orElse(null);
+        RouterFunction<?> routes = pm.getExtensions(Object.class).stream().flatMap((Object g) -> {
+            List<?> reactiveRoutes = null;
+            try {
+                Method method = g.getClass().getDeclaredMethod("reactiveRoutes");
+                reactiveRoutes = (List<?>) method.invoke(g);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return reactiveRoutes.stream();
+        }).map(r -> (RouterFunction<ServerResponse>) r).reduce((o, r) -> (RouterFunction<ServerResponse>) o.andOther(r)).orElse(null);
         return routes == null ? base : base.andOther(routes);
     }
 
@@ -103,7 +117,20 @@ public class PluginConfig {
      * @return
      */
     private String pluginNamesMono(BugucmsPluginManager pm) {
-        List<String> identityList = pm.getExtensions(BugucmsPluginExtension.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
+        List<String> identityList = pm.getExtensions(Object.class).stream().map((Object g) -> {
+            String identify = null;
+            try {
+                Method method = g.getClass().getDeclaredMethod("identify");
+                identify = (String) method.invoke(g);
+            } catch (NoSuchMethodException e) {
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            return g.getClass().getName() + ": " + identify;
+        }).collect(Collectors.toList());
         try {
             return objectMapper.writeValueAsString(identityList);
         } catch (JsonProcessingException e) {
