@@ -2,11 +2,9 @@ package com.terwergreen.bugucms.config;
 
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
@@ -67,8 +65,8 @@ public class WebFluxSecurityConfig {
                     filterChain = configSecurity(http, null);
                 } else {
                     logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-                    PluginInterface extention = (PluginInterface) extentions.get(0);
-                    Map data = extention.data();
+                    Object extention = extentions.get(0);
+                    Map data = null;//extention.data();
                     logger.info("extentions data:" + JSON.toJSONString(data));
                     filterChain = configSecurity(http, data);
                 }
@@ -147,5 +145,3 @@ public class WebFluxSecurityConfig {
         return new MapReactiveUserDetailsService(admin);
     }
 }
-
-

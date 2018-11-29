@@ -1,5 +1,7 @@
 package com.terwergreen.bugucms.container;
 
+import com.terwergreen.bugucms.common.CommonDAOImpl;
+import com.terwergreen.bugucms.common.CommonServiceImpl;
 import org.pf4j.DefaultPluginManager;
 import org.pf4j.ExtensionFactory;
 import org.pf4j.spring.SpringPluginManager;
@@ -8,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 import javax.annotation.PostConstruct;
 import java.nio.file.Path;
@@ -50,8 +53,12 @@ public class BugucmsPluginManager extends SpringPluginManager {
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        logger.info("BugucmsPluginManager is setting ApplicationContext:" + applicationContext);
         super.setApplicationContext(applicationContext);
-        logger.debug("BugucmsPluginManager.setApplicationContext(),ApplicationContext=" + applicationContext);
+        //logger.info("BugucmsPluginManager register " + CommonDAOImpl.class + " in container " + applicationContext);
+        //((GenericApplicationContext) applicationContext).registerBean(CommonDAOImpl.class);
+        //logger.info("BugucmsPluginManager register " + CommonServiceImpl.class + " in container " + applicationContext);
+        //((GenericApplicationContext) applicationContext).registerBean(CommonServiceImpl.class);
     }
 
     /**

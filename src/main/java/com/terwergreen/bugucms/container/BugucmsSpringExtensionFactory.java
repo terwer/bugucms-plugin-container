@@ -1,14 +1,13 @@
 package com.terwergreen.bugucms.container;
 
 import com.terwergreen.plugins.BugucmsPlugin;
-import com.terwergreen.plugins.PluginInterface;
+import org.pf4j.Extension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 import org.pf4j.spring.SpringExtensionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +39,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     public Object create(Class<?> extensionClass) {
         logger.debug("BugucmsSpringExtensionFactory create extension，开始创建插件上下文...");
         // 获取插件管理器上下文
-        AnnotationConfigReactiveWebServerApplicationContext applicationContext = (AnnotationConfigReactiveWebServerApplicationContext) ((BugucmsPluginManager) pluginManager).getApplicationContext();
+        ApplicationContext applicationContext = ((BugucmsPluginManager) pluginManager).getApplicationContext();
         // 实例化扩展点
         Object extension = null;
         try {
@@ -50,12 +49,13 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
         }
         if (null == extension) {
             logger.info("扩展点不存在，创建扩展点：" + extension);
+            // 手动创建
             extension = createWithoutSpring(extensionClass);
             // 设置扩展点上下文
-            if (extension instanceof PluginInterface) {
+            if (extensionClass.isAnnotationPresent(Extension.class)) {
                 logger.info("Created PluginInterface instance:" + extensionClass.getName());
                 try {
-                    Method method = extensionClass.getDeclaredMethod("setApplicationContext", ApplicationContext.class);
+                    Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
                     method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
                     method.invoke(extension, applicationContext);
                 } catch (NoSuchMethodException e) {
@@ -67,8 +67,9 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
                     e.printStackTrace();
                 }
             }
+        } else {
             // 注入扩展到插件上下文
-            if (autowire && extension != null) {
+            if (extensionClass.isAnnotationPresent(Extension.class) && autowire) {
                 PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
                 if (pluginWrapper != null) {
                     Plugin plugin = pluginWrapper.getPlugin();
