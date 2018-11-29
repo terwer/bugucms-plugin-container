@@ -54,7 +54,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             if (extension instanceof BugucmsPluginExtension) {
                 logger.info("Created PluginInterface instance:" + extensionClass.getName());
                 try {
-                    Method method = extensionClass.getDeclaredMethod("setApplicationContext", ApplicationContext.class);
+                    Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
                     method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
                     method.invoke(extension, applicationContext);
                 } catch (NoSuchMethodException e) {
