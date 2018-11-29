@@ -1,6 +1,7 @@
 package com.terwergreen.bugucms.container;
 
 import com.terwergreen.plugins.BugucmsPlugin;
+import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
@@ -50,21 +51,24 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             extension = createWithoutSpring(extensionClass);
             // 设置扩展点上下文
-            logger.info("Created PluginInterface instance:" + extensionClass.getName());
-            try {
-                Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
-                method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
-                method.invoke(extension, applicationContext);
-            } catch (NoSuchMethodException e) {
-                logger.error("extension " + extension + " not contain applicationContext,thie plugin may not function");
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            if (extension instanceof BugucmsPluginExtension) {
+                logger.info("Created PluginInterface instance:" + extensionClass.getName());
+                try {
+                    Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
+                    method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
+                    method.invoke(extension, applicationContext);
+                } catch (NoSuchMethodException e) {
+                    logger.error("extension " + extension + " not contain applicationContext,thie plugin may not function");
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (InvocationTargetException e) {
+                    e.printStackTrace();
+                }
             }
+        } else {
             // 注入扩展到插件上下文
-            if (autowire && extension != null) {
+            if (autowire) {
                 PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
                 if (pluginWrapper != null) {
                     Plugin plugin = pluginWrapper.getPlugin();

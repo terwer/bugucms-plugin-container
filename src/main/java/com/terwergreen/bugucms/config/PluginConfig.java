@@ -3,7 +3,7 @@ package com.terwergreen.bugucms.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import com.terwergreen.plugins.PluginInterface;
+import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.pf4j.RuntimeMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -64,7 +64,7 @@ public class PluginConfig {
         if (pluginSwitch) {
             BugucmsPluginManager pm = pluginManager();
             logger.debug("Load pluginEndpoints,pluginManager is:" + pm);
-            List<PluginInterface> pluginExtentions = pm.getExtensions(PluginInterface.class);
+            List<BugucmsPluginExtension> pluginExtentions = pm.getExtensions(BugucmsPluginExtension.class);
             logger.info("Load pluginExtentions from plugins:" + pluginExtentions);
             //注册RouterFunction模式的webFlux
             RouterFunction<?> webFlux = getReactiveRoutes(pm);
@@ -81,7 +81,7 @@ public class PluginConfig {
      */
     private RouterFunction<?> getReactiveRoutes(BugucmsPluginManager pm) {
         RouterFunction<?> base = baseRoot(pm);
-        RouterFunction<?> routes = pm.getExtensions(PluginInterface.class).stream().flatMap(g -> g.reactiveRoutes().stream()).map(r -> (RouterFunction<ServerResponse>) r).reduce((o, r) -> (RouterFunction<ServerResponse>) o.andOther(r)).orElse(null);
+        RouterFunction<?> routes = pm.getExtensions(BugucmsPluginExtension.class).stream().flatMap(g -> g.reactiveRoutes().stream()).map(r -> (RouterFunction<ServerResponse>) r).reduce((o, r) -> (RouterFunction<ServerResponse>) o.andOther(r)).orElse(null);
         return routes == null ? base : base.andOther(routes);
     }
 
@@ -103,7 +103,7 @@ public class PluginConfig {
      * @return
      */
     private String pluginNamesMono(BugucmsPluginManager pm) {
-        List<String> identityList = pm.getExtensions(PluginInterface.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
+        List<String> identityList = pm.getExtensions(BugucmsPluginExtension.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
         try {
             return objectMapper.writeValueAsString(identityList);
         } catch (JsonProcessingException e) {

@@ -1,7 +1,7 @@
 package com.terwergreen.bugucms;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import com.terwergreen.plugins.PluginInterface;
+import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +39,7 @@ public class BugucmsApplication {
             public void run(ApplicationArguments args) {
                 // 输出插件信息
                 if (pluginSwitch) {
-                    List<PluginInterface> plugins = bugucmsPluginManager.getExtensions(PluginInterface.class);
+                    List<BugucmsPluginExtension> plugins = bugucmsPluginManager.getExtensions(BugucmsPluginExtension.class);
                     logger.info(String.format("Number of plugins found: %d", plugins.size()));
                     plugins.forEach(c -> logger.info("插件:" + c.getClass().getName() + ":" + c.identify()));
                     logger.info("插件已启动");
