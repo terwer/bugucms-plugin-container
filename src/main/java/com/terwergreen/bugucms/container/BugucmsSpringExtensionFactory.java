@@ -1,7 +1,6 @@
 package com.terwergreen.bugucms.container;
 
 import com.terwergreen.plugins.BugucmsPlugin;
-import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
@@ -39,7 +38,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     public Object create(Class<?> extensionClass) {
         logger.debug("BugucmsSpringExtensionFactory create extension，开始创建插件上下文...");
         // 获取插件管理器上下文
-        ApplicationContext applicationContext =  ((BugucmsPluginManager) pluginManager).getApplicationContext();
+        ApplicationContext applicationContext = ((BugucmsPluginManager) pluginManager).getApplicationContext();
         // 实例化扩展点
         Object extension = null;
         try {
@@ -51,20 +50,18 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             extension = createWithoutSpring(extensionClass);
             // 设置扩展点上下文
-            if (extension instanceof BugucmsPluginExtension) {
-                logger.info("Created PluginInterface instance:" + extensionClass.getName());
-                try {
-                    Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
-                    method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
-                    method.invoke(extension, applicationContext);
-                } catch (NoSuchMethodException e) {
-                    logger.error("extension " + extension + " not contain applicationContext,thie plugin may not function");
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+            logger.info("Created PluginInterface instance:" + extensionClass.getName());
+            try {
+                Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
+                method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
+                method.invoke(extension, applicationContext);
+            } catch (NoSuchMethodException e) {
+                logger.error("extension " + extension + " not contain applicationContext,thie plugin may not function");
+                e.printStackTrace();
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
             }
             // 注入扩展到插件上下文
             if (autowire && extension != null) {
