@@ -1,6 +1,7 @@
 package com.terwergreen.bugucms.container;
 
-import com.terwergreen.plugins.PluginInterface;
+import com.terwergreen.plugins.BugucmsPlugin;
+import com.terwergreen.plugins.BugucmsPluginExtension;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
@@ -50,7 +51,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             extension = createWithoutSpring(extensionClass);
             // 设置扩展点上下文
-            if (extension instanceof PluginInterface) {
+            if (extension instanceof BugucmsPluginExtension) {
                 logger.info("Created PluginInterface instance:" + extensionClass.getName());
                 try {
                     Method method = extensionClass.getDeclaredMethod("setApplicationContext", ApplicationContext.class);
