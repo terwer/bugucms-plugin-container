@@ -1,6 +1,5 @@
 package com.terwergreen.bugucms.container;
 
-import com.terwergreen.plugins.BugucmsPlugin;
 import com.terwergreen.plugins.PluginInterface;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
@@ -8,7 +7,6 @@ import org.pf4j.PluginWrapper;
 import org.pf4j.spring.SpringExtensionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.web.reactive.context.AnnotationConfigReactiveWebServerApplicationContext;
 import org.springframework.context.ApplicationContext;
 
 import java.lang.reflect.InvocationTargetException;
@@ -40,7 +38,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     public Object create(Class<?> extensionClass) {
         logger.debug("BugucmsSpringExtensionFactory create extension，开始创建插件上下文...");
         // 获取插件管理器上下文
-        AnnotationConfigReactiveWebServerApplicationContext applicationContext = (AnnotationConfigReactiveWebServerApplicationContext) ((BugucmsPluginManager) pluginManager).getApplicationContext();
+        ApplicationContext applicationContext =  ((BugucmsPluginManager) pluginManager).getApplicationContext();
         // 实例化扩展点
         Object extension = null;
         try {
