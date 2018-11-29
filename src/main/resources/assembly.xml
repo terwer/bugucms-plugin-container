@@ -1,0 +1,24 @@
+<assembly>
+    <id>bugucms-plugin-container</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>false</includeBaseDirectory>
+    <dependencySets>
+        <dependencySet>
+            <useProjectArtifact>true</useProjectArtifact>
+            <scope>runtime</scope>
+            <outputDirectory>WEB-INF/lib</outputDirectory>
+        </dependencySet>
+    </dependencySets>
+    <fileSets>
+        <fileSet>
+            <directory>target/classes</directory>
+            <outputDirectory>WEB-INF/classes</outputDirectory>
+        </fileSet>
+        <fileSet>
+            <directory>plugins</directory>
+            <outputDirectory>plugins</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

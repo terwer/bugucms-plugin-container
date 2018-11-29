@@ -33,7 +33,13 @@ public class CommonController {
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
         String webname = (String) commonService.getSiteConfig("webname");
+<<<<<<< HEAD
         model.addAttribute("info", "BuguCMS 2.0.0:" + webname);
+=======
+        String adminPath = (String) commonService.getSiteConfig("adminPath");
+        model.addAttribute("info", "BuguCMS 2.0.0:" + webname);
+        model.addAttribute("adminPath",adminPath);
+>>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
         String pluginInfo = "pluginSwitch:" + (pluginSwitch ? "开启" : "关闭");
         pluginInfo += "<br/>pf4j.mode:";
         pluginInfo += pf4jMode.equals("dev") ? RuntimeMode.DEVELOPMENT.toString() : RuntimeMode.DEPLOYMENT.toString();

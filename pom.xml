@@ -25,6 +25,14 @@
     </properties>
 
     <dependencies>
+<<<<<<< HEAD
+=======
+        <!-- Web MVC -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+>>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
         <!-- WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -100,7 +108,23 @@
 
     <build>
         <finalName>ROOT</finalName>
+<<<<<<< HEAD
         <plugins>
+=======
+
+        <!-- 设置打包的资源文件 -->
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <excludes>
+                    <exclude>assembly.xml</exclude>
+                </excludes>
+            </resource>
+        </resources>
+
+        <plugins>
+            <!-- compile -->
+>>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -109,9 +133,35 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+<<<<<<< HEAD
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+=======
+            <!-- 自定义结构 -->
+            <plugin>
+                <artifactId>maven-assembly-plugin</artifactId>
+                <version>2.3</version>
+                <configuration>
+                    <descriptors>
+                        <descriptor>
+                            src/main/resources/assembly.xml
+                        </descriptor>
+                    </descriptors>
+                    <appendAssemblyId>false</appendAssemblyId>
+                    <!-- 开发快速部署 -->
+                    <outputDirectory>target/</outputDirectory>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>make-assembly</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>attached</goal>
+                        </goals>
+                    </execution>
+                </executions>
+>>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
             </plugin>
             <!-- javadoc -->
             <plugin>
