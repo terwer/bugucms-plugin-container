@@ -52,30 +52,31 @@ public class WebFluxSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        logger.info("WebFlux Security is running");
-        SecurityWebFilterChain filterChain = null;
-        if (null == pluginManager) {
-            filterChain = configSecurity(http, null);
-        } else {
-            // 获取授权插件扩展点
-            try {
-                List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
-                if (CollectionUtils.isEmpty(extentions)) {
-                    logger.warn(AUTH_PLUGIN + " extentions not exists");
-                    filterChain = configSecurity(http, null);
-                } else {
-                    logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-                    Object extention = extentions.get(0);
-                    Map data = null;//extention.data();
-                    logger.info("extentions data:" + JSON.toJSONString(data));
-                    filterChain = configSecurity(http, data);
-                }
-            } catch (Exception e) {
-                logger.warn("无任何插件扩展点");
-                filterChain = configSecurity(http, null);
-            }
-        }
-        return filterChain;
+        return http.build();
+//        logger.info("WebFlux Security is running");
+//        SecurityWebFilterChain filterChain = null;
+//        if (null == pluginManager) {
+//            filterChain = configSecurity(http, null);
+//        } else {
+//            // 获取授权插件扩展点
+//            try {
+//                List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
+//                if (CollectionUtils.isEmpty(extentions)) {
+//                    logger.warn(AUTH_PLUGIN + " extentions not exists");
+//                    filterChain = configSecurity(http, null);
+//                } else {
+//                    logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
+//                    Object extention = extentions.get(0);
+//                    Map data = null;//extention.data();
+//                    logger.info("extentions data:" + JSON.toJSONString(data));
+//                    filterChain = configSecurity(http, data);
+//                }
+//            } catch (Exception e) {
+//                logger.warn("无任何插件扩展点");
+//                filterChain = configSecurity(http, null);
+//            }
+//        }
+//        return filterChain;
     }
 
     private SecurityWebFilterChain configSecurity(ServerHttpSecurity http, Map data) {

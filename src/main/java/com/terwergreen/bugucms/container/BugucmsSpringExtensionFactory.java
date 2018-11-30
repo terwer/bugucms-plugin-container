@@ -1,7 +1,8 @@
 package com.terwergreen.bugucms.container;
 
 import com.terwergreen.plugins.BugucmsPlugin;
-import org.pf4j.Extension;
+import com.terwergreen.plugins.BugucmsPluginExtension;
+import com.terwergreen.util.ReflectUtil;
 import org.pf4j.Plugin;
 import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
@@ -9,9 +10,6 @@ import org.pf4j.spring.SpringExtensionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 
 /**
  * @Author Terwer
@@ -50,26 +48,12 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
         if (null == extension) {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             // 手动创建
-            extension = createWithoutSpring(extensionClass);
-            // 设置扩展点上下文
-            if (extensionClass.isAnnotationPresent(Extension.class)) {
-                logger.info("Created PluginInterface instance:" + extensionClass.getName());
-                try {
-                    Method method = extensionClass.getDeclaredMethod("createApplicationContext", ApplicationContext.class);
-                    method.setAccessible(true);//为true则表示反射的对象在使用时取消Java语言访问检查
-                    method.invoke(extension, applicationContext);
-                } catch (NoSuchMethodException e) {
-                    logger.error("extension " + extension + " not contain applicationContext,thie plugin may not function");
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
-                    e.printStackTrace();
-                }
+            if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class)) {
+                extension = ReflectUtil.newInstance(extensionClass, (ApplicationContext)applicationContext);
             }
         } else {
             // 注入扩展到插件上下文
-            if (extensionClass.isAnnotationPresent(Extension.class) && autowire) {
+            if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class) && autowire) {
                 PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
                 if (pluginWrapper != null) {
                     Plugin plugin = pluginWrapper.getPlugin();
