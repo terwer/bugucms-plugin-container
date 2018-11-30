@@ -3,6 +3,7 @@ package com.terwergreen.bugucms.config;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
+import com.terwergreen.util.ReflectUtil;
 import org.pf4j.RuntimeMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,8 +14,7 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -83,16 +83,9 @@ public class PluginConfig {
     private RouterFunction<?> getReactiveRoutes(BugucmsPluginManager pm) {
         RouterFunction<?> base = baseRoot(pm);
         RouterFunction<?> routes = pm.getExtensions(Object.class).stream().flatMap((Object g) -> {
-            List<?> reactiveRoutes = null;
-            try {
-                Method method = g.getClass().getDeclaredMethod("reactiveRoutes");
-                reactiveRoutes = (List<?>) method.invoke(g);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            List<?> reactiveRoutes = (List<?>) ReflectUtil.invoke(g, "reactiveRoutes");
+            if (null == reactiveRoutes) {
+                reactiveRoutes = new ArrayList<>();
             }
             return reactiveRoutes.stream();
         }).map(r -> (RouterFunction<ServerResponse>) r).reduce((o, r) -> (RouterFunction<ServerResponse>) o.andOther(r)).orElse(null);
@@ -118,17 +111,7 @@ public class PluginConfig {
      */
     private String pluginNamesMono(BugucmsPluginManager pm) {
         List<String> identityList = pm.getExtensions(Object.class).stream().map((Object g) -> {
-            String identify = null;
-            try {
-                Method method = g.getClass().getDeclaredMethod("identify");
-                identify = (String) method.invoke(g);
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            }
+            String identify = (String) ReflectUtil.invoke(g, "identify");
             return g.getClass().getName() + ": " + identify;
         }).collect(Collectors.toList());
         try {

@@ -22,7 +22,7 @@ public class BugucmsApplication {
     public static void main(String[] args) {
         //设置应用类型
         SpringApplication springApplication = new SpringApplication(BugucmsApplication.class);
-        springApplication.setWebApplicationType(WebApplicationType.SERVLET);
+        springApplication.setWebApplicationType(WebApplicationType.REACTIVE);
         springApplication.run(args);
     }
 

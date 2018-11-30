@@ -2,6 +2,7 @@ package com.terwergreen.bugucms.config;
 
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
+import com.terwergreen.util.ReflectUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,7 @@ public class WebFluxSecurityConfig {
                 } else {
                     logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
                     Object extention = extentions.get(0);
-                    Map data = null;//extention.data();
+                    Map data = (Map) ReflectUtil.invoke(extention, "data");
                     logger.info("extentions data:" + JSON.toJSONString(data));
                     filterChain = configSecurity(http, data);
                 }
@@ -110,13 +111,13 @@ public class WebFluxSecurityConfig {
                         .permitAll();
 
                 http.formLogin()
-                        .loginPage("/"+loginPath+"")
+                        .loginPage("/" + loginPath + "")
                         //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
                         //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
                         .and()
                         .logout()
-                        .logoutUrl("/"+logoutPath)
-                        .logoutSuccessHandler(logoutSuccessHandler("/"+loginPath+"?logout"));
+                        .logoutUrl("/" + logoutPath)
+                        .logoutSuccessHandler(logoutSuccessHandler("/" + loginPath + "?logout"));
             } else {
                 logger.info("授权关闭");
                 http.authorizeExchange()
