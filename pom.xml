@@ -25,14 +25,11 @@
     </properties>
 
     <dependencies>
-<<<<<<< HEAD
-=======
         <!-- Web MVC -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
->>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
         <!-- WebFlux -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -54,7 +51,7 @@
         <dependency>
             <groupId>com.terwergreen</groupId>
             <artifactId>shared-plugin-interfaces</artifactId>
-            <version>3.1.0</version>
+            <version>3.2.2</version>
         </dependency>
         <!-- JSON -->
         <dependency>
@@ -108,9 +105,6 @@
 
     <build>
         <finalName>ROOT</finalName>
-<<<<<<< HEAD
-        <plugins>
-=======
 
         <!-- 设置打包的资源文件 -->
         <resources>
@@ -124,7 +118,6 @@
 
         <plugins>
             <!-- compile -->
->>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -133,11 +126,7 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-<<<<<<< HEAD
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-=======
+
             <!-- 自定义结构 -->
             <plugin>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -161,7 +150,6 @@
                         </goals>
                     </execution>
                 </executions>
->>>>>>> 0a176f64fe638ba090c8fe9d3e67732583d0ee56
             </plugin>
             <!-- javadoc -->
             <plugin>
