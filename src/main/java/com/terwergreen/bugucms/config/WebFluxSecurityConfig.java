@@ -30,8 +30,8 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-@DependsOn("pluginManager")
-@EnableWebFluxSecurity
+//@DependsOn("pluginManager")
+//@EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     /**
      * 授权插件名称
