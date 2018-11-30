@@ -10,6 +10,7 @@ import org.pf4j.spring.SpringExtensionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.GenericApplicationContext;
 
 /**
  * @Author Terwer
@@ -37,7 +38,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     public Object create(Class<?> extensionClass) {
         logger.debug("BugucmsSpringExtensionFactory create extension，开始创建插件上下文...");
         // 获取插件管理器上下文
-        ApplicationContext applicationContext = ((BugucmsPluginManager) pluginManager).getApplicationContext();
+        GenericApplicationContext applicationContext = (GenericApplicationContext) ((BugucmsPluginManager) pluginManager).getApplicationContext();
         // 实例化扩展点
         Object extension = null;
         try {
@@ -49,8 +50,9 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             // 手动创建
             if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class)) {
-                extension = ReflectUtil.newInstance(extensionClass, (ApplicationContext)applicationContext);
+                extension = ReflectUtil.newInstance(extensionClass, new Class[]{GenericApplicationContext.class}, new Object[]{applicationContext});
             }
+            logger.info("extension = " + extension);
         } else {
             // 注入扩展到插件上下文
             if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class) && autowire) {
