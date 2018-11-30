@@ -2,6 +2,7 @@ package com.terwergreen.bugucms.config;
 
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
+import com.terwergreen.util.ReflectUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +31,8 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-//@DependsOn("pluginManager")
-//@EnableWebFluxSecurity
+@DependsOn("pluginManager")
+@EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     /**
      * 授权插件名称
@@ -52,31 +53,30 @@ public class WebFluxSecurityConfig {
 
     @Bean
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
-        return http.build();
-//        logger.info("WebFlux Security is running");
-//        SecurityWebFilterChain filterChain = null;
-//        if (null == pluginManager) {
-//            filterChain = configSecurity(http, null);
-//        } else {
-//            // 获取授权插件扩展点
-//            try {
-//                List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
-//                if (CollectionUtils.isEmpty(extentions)) {
-//                    logger.warn(AUTH_PLUGIN + " extentions not exists");
-//                    filterChain = configSecurity(http, null);
-//                } else {
-//                    logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-//                    Object extention = extentions.get(0);
-//                    Map data = null;//extention.data();
-//                    logger.info("extentions data:" + JSON.toJSONString(data));
-//                    filterChain = configSecurity(http, data);
-//                }
-//            } catch (Exception e) {
-//                logger.warn("无任何插件扩展点");
-//                filterChain = configSecurity(http, null);
-//            }
-//        }
-//        return filterChain;
+        logger.info("WebFlux Security is running");
+        SecurityWebFilterChain filterChain = null;
+        if (null == pluginManager) {
+            filterChain = configSecurity(http, null);
+        } else {
+            // 获取授权插件扩展点
+            try {
+                List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
+                if (CollectionUtils.isEmpty(extentions)) {
+                    logger.warn(AUTH_PLUGIN + " extentions not exists");
+                    filterChain = configSecurity(http, null);
+                } else {
+                    logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
+                    Object extention = extentions.get(0);
+                    Map data = (Map) ReflectUtil.invoke(extention, "data");
+                    logger.info("extentions data:" + JSON.toJSONString(data));
+                    filterChain = configSecurity(http, data);
+                }
+            } catch (Exception e) {
+                logger.warn("无任何插件扩展点");
+                filterChain = configSecurity(http, null);
+            }
+        }
+        return filterChain;
     }
 
     private SecurityWebFilterChain configSecurity(ServerHttpSecurity http, Map data) {
@@ -111,13 +111,13 @@ public class WebFluxSecurityConfig {
                         .permitAll();
 
                 http.formLogin()
-                        .loginPage("/"+loginPath+"")
+                        .loginPage("/" + loginPath + "")
                         //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
                         //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
                         .and()
                         .logout()
-                        .logoutUrl("/"+logoutPath)
-                        .logoutSuccessHandler(logoutSuccessHandler("/"+loginPath+"?logout"));
+                        .logoutUrl("/" + logoutPath)
+                        .logoutSuccessHandler(logoutSuccessHandler("/" + loginPath + "?logout"));
             } else {
                 logger.info("授权关闭");
                 http.authorizeExchange()

@@ -51,6 +51,8 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             // 手动创建
             if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class)) {
                 extension = ReflectUtil.newInstance(extensionClass, new Class[]{GenericApplicationContext.class}, new Object[]{applicationContext});
+                //注入bean到上下文
+                applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
             }
             logger.info("extension = " + extension);
         } else {
