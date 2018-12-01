@@ -1,9 +1,10 @@
 package com.terwergreen.bugucms.container;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.pf4j.DefaultPluginManager;
 import org.pf4j.ExtensionFactory;
 import org.pf4j.spring.SpringPluginManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -18,7 +19,7 @@ import java.nio.file.Path;
  * @Description 自定义插件管理器
  **/
 public class BugucmsPluginManager extends SpringPluginManager {
-    private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(DefaultPluginManager.class);
 
     /**
      * 重定义工厂，用于设置上下文
@@ -49,8 +50,8 @@ public class BugucmsPluginManager extends SpringPluginManager {
      */
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        logger.info("插件管理器BugucmsPluginManager设置插件上下文，ApplicationContext is:" + applicationContext);
         super.setApplicationContext(applicationContext);
+        logger.debug("BugucmsPluginManager setApplicationContext,ApplicationContext is:" + applicationContext);
     }
 
     /**
@@ -59,7 +60,7 @@ public class BugucmsPluginManager extends SpringPluginManager {
     @PostConstruct
     @Override
     public void init() {
-        logger.debug("BugucmsPluginManager.init()");
+        logger.debug("BugucmsPluginManager init");
         initPlugins();
     }
 
