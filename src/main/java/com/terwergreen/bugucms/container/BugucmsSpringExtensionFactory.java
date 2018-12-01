@@ -50,22 +50,19 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             // 手动创建
             if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class)) {
                 extension = ReflectUtil.newInstance(extensionClass, new Class[]{GenericApplicationContext.class}, new Object[]{applicationContext});
-                //注入bean到上下文
-                //applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+                // 注入扩展到插件上下文
+                PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+                if (extension != null && pluginWrapper != null && autowire) {
+                    Plugin plugin = pluginWrapper.getPlugin();
+                    if (ReflectUtil.instanceOf(plugin.getClass(), BugucmsPlugin.class)) {
+                        // 将插件上下文设置为和容器一致
+                        logger.info("BugucmsSpringExtensionFactory注入扩展到插件上下文，将插件上下文设置为和容器一致");
+                        GenericApplicationContext pluginApplicationContext = (GenericApplicationContext) ReflectUtil.getField(plugin, "applicationContext");
+                        pluginApplicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+                    }
+                }
             }
             logger.info("扩展点创建完毕，extension=" + extension);
-        }
-
-        // 注入扩展到插件上下文
-        PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-        if (autowire && pluginWrapper != null) {
-            Plugin plugin = pluginWrapper.getPlugin();
-            if (ReflectUtil.instanceOf(plugin.getClass(), BugucmsPlugin.class)) {
-                // 将插件上下文设置为和容器一致
-                logger.info("BugucmsSpringExtensionFactory注入扩展到插件上下文，将插件上下文设置为和容器一致");
-                GenericApplicationContext pluginApplicationContext = (GenericApplicationContext)ReflectUtil.getField(plugin,"applicationContext");
-                pluginApplicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
-            }
         }
         return extension;
     }
