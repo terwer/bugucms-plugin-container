@@ -38,6 +38,10 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
         logger.debug("BugucmsSpringExtensionFactory create extension，开始创建插件上下文...");
         // 获取插件管理器上下文
         GenericApplicationContext applicationContext = (GenericApplicationContext) ((BugucmsPluginManager) pluginManager).getApplicationContext();
+        // logger.info("BugucmsPluginManager register " + CommonDAO.class.getTypeName() + " in container " + applicationContext);
+        // applicationContext.registerBean(CommonDAO.class.getTypeName(), CommonDAOImpl.class);
+        // logger.info("BugucmsPluginManager register " + CommonService.class.getTypeName() + " in container " + applicationContext);
+        // applicationContext.registerBean(CommonService.class.getTypeName(), CommonServiceImpl.class);
         // 实例化扩展点
         Object extension = null;
         try {
