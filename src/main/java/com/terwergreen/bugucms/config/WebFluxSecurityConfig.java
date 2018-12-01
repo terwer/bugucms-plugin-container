@@ -3,11 +3,9 @@ package com.terwergreen.bugucms.config;
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
-import com.terwergreen.util.ReflectUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -64,12 +62,8 @@ public class WebFluxSecurityConfig {
             filterChain = configSecurity(http, null);
         } else {
             logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-            Object extention = extentions.get(0);
-            boolean result = extention instanceof PluginInterface;
-            logger.info(result);
-            // PluginInterface extention = (PluginInterface) extentions.get(0);
-            // ((PluginInterface)extention).data();
-            Map data = (Map) ReflectUtil.invoke(extention, "data");
+            PluginInterface extention = (PluginInterface) extentions.get(0);
+            Map data = extention.data();
             logger.info("extentions data:" + JSON.toJSONString(data));
             filterChain = configSecurity(http, data);
         }
