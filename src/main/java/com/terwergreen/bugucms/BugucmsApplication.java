@@ -12,9 +12,12 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
 
 import java.util.List;
 
+@ComponentScan({"com.terwergreen"})
+//@ComponentScan({"com.terwergreen.bugucms"})//默认加载注解所在类所属的包
 @SpringBootApplication
 public class BugucmsApplication {
     private static final Log logger = LogFactory.getLog(BugucmsApplication.class);
