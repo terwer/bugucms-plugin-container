@@ -31,10 +31,10 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <!-- WebFlux -->
-        <dependency>
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
-        </dependency>
+        </dependency>-->
         <!-- pf4j -->
         <dependency>
             <groupId>org.pf4j</groupId>
@@ -51,7 +51,7 @@
         <dependency>
             <groupId>com.terwergreen</groupId>
             <artifactId>shared-plugin-interfaces</artifactId>
-            <version>3.2.2</version>
+            <version>3.2.3</version>
         </dependency>
         <!-- JSON -->
         <dependency>

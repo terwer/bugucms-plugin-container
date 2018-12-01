@@ -9,7 +9,6 @@ import org.pf4j.PluginWrapper;
 import org.pf4j.spring.SpringExtensionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
 /**
@@ -47,27 +46,25 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.debug("无法获取扩展点" + extensionClass);
         }
         if (null == extension) {
-            logger.info("扩展点不存在，创建扩展点：" + extension);
+            logger.info("扩展点不存在，创建扩展点");
             // 手动创建
             if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class)) {
                 extension = ReflectUtil.newInstance(extensionClass, new Class[]{GenericApplicationContext.class}, new Object[]{applicationContext});
                 //注入bean到上下文
-                applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
+                //applicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
             }
-            logger.info("extension = " + extension);
-        } else {
-            // 注入扩展到插件上下文
-            if (ReflectUtil.instanceOf(extensionClass, BugucmsPluginExtension.class) && autowire) {
-                PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
-                if (pluginWrapper != null) {
-                    Plugin plugin = pluginWrapper.getPlugin();
-                    if (plugin instanceof BugucmsPlugin) {
-                        // 将插件上下文设置为和容器一致
-                        logger.debug("BugucmsSpringExtensionFactory.create()，将插件上下文设置为和容器一致");
-                        ApplicationContext pluginContext = ((BugucmsPlugin) plugin).getApplicationContext();
-                        pluginContext.getAutowireCapableBeanFactory().autowireBean(extension);
-                    }
-                }
+            logger.info("扩展点创建完毕，extension=" + extension);
+        }
+
+        // 注入扩展到插件上下文
+        PluginWrapper pluginWrapper = pluginManager.whichPlugin(extensionClass);
+        if (autowire && pluginWrapper != null) {
+            Plugin plugin = pluginWrapper.getPlugin();
+            if (ReflectUtil.instanceOf(plugin.getClass(), BugucmsPlugin.class)) {
+                // 将插件上下文设置为和容器一致
+                logger.info("BugucmsSpringExtensionFactory注入扩展到插件上下文，将插件上下文设置为和容器一致");
+                GenericApplicationContext pluginApplicationContext = (GenericApplicationContext)ReflectUtil.getField(plugin,"applicationContext");
+                pluginApplicationContext.getAutowireCapableBeanFactory().autowireBean(extension);
             }
         }
         return extension;
