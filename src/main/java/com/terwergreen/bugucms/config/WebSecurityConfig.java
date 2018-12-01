@@ -34,7 +34,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
  **/
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private Log logger = LogFactory.getLog(this.getClass());
+    private static final Log logger = LogFactory.getLog(WebSecurityConfig.class);
 
     @Autowired
     private PasswordEncoder passwordEncoder;

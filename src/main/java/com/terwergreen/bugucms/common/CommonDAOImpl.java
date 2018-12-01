@@ -22,7 +22,8 @@ import java.util.Map;
  **/
 @Repository
 public class CommonDAOImpl implements CommonDAO {
-    private final Log logger = LogFactory.getLog(getClass());
+    private static final Log logger = LogFactory.getLog(CommonDAOImpl.class);
+
     /**
      * 数据分页获取的最大数目
      */

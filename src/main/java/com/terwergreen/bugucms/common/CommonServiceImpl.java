@@ -20,8 +20,9 @@ import java.util.Map;
  **/
 @Service
 public class CommonServiceImpl implements CommonService {
+    private static final Log logger = LogFactory.getLog(CommonServiceImpl.class);
+
     private static final String SITE_CONFIG_KEY = "siteConfig";
-    private final Log logger = LogFactory.getLog(getClass());
 
     @Autowired
     private CommonDAO commonDAO;

@@ -7,8 +7,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
 import org.springframework.security.core.userdetails.MapReactiveUserDetailsService;
 import org.springframework.security.core.userdetails.ReactiveUserDetailsService;
@@ -34,11 +32,12 @@ import java.util.Map;
 //@DependsOn("pluginManager")
 //@EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
+    private static final Log logger = LogFactory.getLog(WebFluxSecurityConfig.class);
+
     /**
      * 授权插件名称
      */
     private static final String AUTH_PLUGIN = "auth-plugin";
-    private Log logger = LogFactory.getLog(this.getClass());
 
     @Autowired
     private PasswordEncoder passwordEncoder;

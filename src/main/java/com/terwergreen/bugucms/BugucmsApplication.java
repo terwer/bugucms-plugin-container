@@ -2,8 +2,8 @@ package com.terwergreen.bugucms;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.BugucmsPluginExtension;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
@@ -17,7 +17,7 @@ import java.util.List;
 
 @SpringBootApplication
 public class BugucmsApplication {
-    private static Logger logger = LoggerFactory.getLogger(BugucmsApplication.class);
+    private static final Log logger = LogFactory.getLog(BugucmsApplication.class);
 
     public static void main(String[] args) {
         //设置应用类型
