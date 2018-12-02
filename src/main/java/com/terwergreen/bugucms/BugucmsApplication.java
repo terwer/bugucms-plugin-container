@@ -23,11 +23,11 @@ public class BugucmsApplication {
 
     public static void main(String[] args) {
         WebApplicationType applicationType = PropertyUtil.readProperty("bugucms.web.application-type").equals("servlet") ? WebApplicationType.SERVLET : WebApplicationType.REACTIVE;
-        logger.info("WebApplicationType is " + applicationType);
         //设置应用类型
         SpringApplication springApplication = new SpringApplication(BugucmsApplication.class);
         springApplication.setWebApplicationType(applicationType);
         springApplication.run(args);
+        logger.info("Container started SUCCESS with WebApplicationType:" + applicationType);
     }
 
     @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
