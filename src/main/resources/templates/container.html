@@ -11,6 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>BuguCMS</title>
+    <link th:href="@{/static/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
     <style type="text/css">
         .text-cernter {
             font-family: "Microsoft YaHei", "Courier New", Consolas, Georgia, 'Times New Roman';
@@ -39,5 +40,7 @@
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
 <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
 <h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
+<!-- jquery -->
+<script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
 </body>
 </html>
