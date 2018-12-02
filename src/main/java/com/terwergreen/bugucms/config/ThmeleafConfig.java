@@ -12,10 +12,8 @@ import org.springframework.context.annotation.Configuration;
 import org.thymeleaf.spring5.SpringTemplateEngine;
 import org.thymeleaf.templatemode.TemplateMode;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import org.thymeleaf.templateresolver.FileTemplateResolver;
 
 import javax.annotation.PostConstruct;
-import java.nio.file.Paths;
 import java.util.List;
 
 /**
@@ -41,6 +39,7 @@ public class ThmeleafConfig {
     @Bean
     public ClassLoaderTemplateResolver containerTemplateResolver() {
         String containerTemplatePath = "templates/";
+
         ClassLoaderTemplateResolver containerTemplateResolver = new ClassLoaderTemplateResolver();
         containerTemplateResolver.setPrefix(containerTemplatePath);
         containerTemplateResolver.setSuffix(".html");
@@ -48,8 +47,10 @@ public class ThmeleafConfig {
         containerTemplateResolver.setCharacterEncoding("UTF-8");
         containerTemplateResolver.setOrder(0);  // this is important. This way spring boot will listen to both places 0 and 1
         containerTemplateResolver.setCheckExistence(true);
+
         String absPath = containerTemplateResolver.getClass().getResource("/").getPath();
         logger.info("添加容器插件解析器，路径为:" + absPath + containerTemplatePath);
+
         return containerTemplateResolver;
     }
 
@@ -58,19 +59,20 @@ public class ThmeleafConfig {
         // 设置插件模板路径
         List<PluginWrapper> plugins = pluginManager.getPlugins();
         for (PluginWrapper pluginWrapper : plugins) {
-            String pluginPath = pluginWrapper.getPluginPath().toString();
-            String childPath = pluginManager.isDevelopment() ? "\\target\\classes\\templates\\" : "\\classes\\templates\\";
-            String pluginTemplatePath = Paths.get(pluginPath, childPath).toAbsolutePath().toString() + "\\";
-            logger.info("添加插件解析器，路径为:" + pluginTemplatePath);
+            String pluginTemplatePath = "templates/";
 
-            // 生成插件模板解析器
-            FileTemplateResolver pluginTemplateResolver = new FileTemplateResolver();
+            ClassLoader classLoader = pluginWrapper.getPluginClassLoader();
+            ClassLoaderTemplateResolver pluginTemplateResolver = new ClassLoaderTemplateResolver(classLoader);
             pluginTemplateResolver.setPrefix(pluginTemplatePath);
             pluginTemplateResolver.setSuffix(".html");
-            pluginTemplateResolver.setTemplateMode("HTML");
-            pluginTemplateResolver.setOrder(templateEngine.getTemplateResolvers().size());
-            pluginTemplateResolver.setCacheable(false);
+            pluginTemplateResolver.setTemplateMode(TemplateMode.HTML);
+            pluginTemplateResolver.setCharacterEncoding("UTF-8");
+            pluginTemplateResolver.setOrder(templateEngine.getTemplateResolvers().size());  // this is important. This way spring boot will listen to both places 0 and 1
+            pluginTemplateResolver.setCheckExistence(true);
             templateEngine.addTemplateResolver(pluginTemplateResolver);
+
+            String absPath = classLoader.getResource(".").getPath();
+            logger.info("添加插件插件解析器，路径为:" + absPath + pluginTemplatePath);
         }
     }
 }
