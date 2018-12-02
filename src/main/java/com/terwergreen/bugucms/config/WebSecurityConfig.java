@@ -20,6 +20,7 @@ import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
@@ -70,50 +71,60 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         logger.info("WebMVC Security config http");
-        // 获取授权插件扩展点
-        List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
-        if (CollectionUtils.isEmpty(extentions)) {
-            logger.warn(AUTH_PLUGIN + " extentions not exists");
-            configSecurity(http, null);
+        PluginWrapper pluginWrapper = pluginManager.getPlugin(AUTH_PLUGIN);
+        if (null != pluginWrapper) {
+            List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
+            if (CollectionUtils.isEmpty(extentions)) {
+                logger.warn(AUTH_PLUGIN + " extentions not exists");
+                configSecurity(http, null);
+            } else {
+                logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
+                PluginInterface extention = (PluginInterface) extentions.get(0);
+                Map data = extention.data();
+                logger.info("extentions data:" + JSON.toJSONString(data));
+                configSecurity(http, data);
+            }
         } else {
-            logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
-            PluginInterface extention = (PluginInterface) extentions.get(0);
-            Map data = extention.data();
-            logger.info("extentions data:" + JSON.toJSONString(data));
-            configSecurity(http, data);
+            logger.warn(AUTH_PLUGIN + " not exists");
+            configSecurity(http, null);
         }
     }
 
     private void configSecurity(HttpSecurity http, Map data) throws Exception {
-        // 获取权限插件配置的内容
-        int securityOn = (int) data.getOrDefault("securityOn", 0);
-        String adminPath = (String) data.getOrDefault("adminPath", "admin");
-        String loginPath = (String) data.getOrDefault("loginPath", "login");
-
         //运行加载iframe
         http.headers().frameOptions().disable();
 
         //关闭csrf
         http.csrf().disable();
 
-        //配置权限及登录验证
-        if (1 == securityOn) {
-            logger.info("授权打开");
+        if (null != data) {
+            // 获取权限插件配置的内容
+            int securityOn = (int) data.getOrDefault("securityOn", 0);
+            String adminPath = (String) data.getOrDefault("adminPath", "admin");
+            String loginPath = (String) data.getOrDefault("loginPath", "login");
             //配置权限及登录验证
-            http
-                    .authorizeRequests()
-                    .antMatchers("/").permitAll()
-                    .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
-                    .and()
-                    .formLogin()
-                    .loginPage("/" + loginPath + "").failureUrl("login?error")
-                    .permitAll()
-                    .and()
-                    .logout()
-                    .permitAll();
+            if (1 == securityOn) {
+                logger.info("授权打开");
+                //配置权限及登录验证
+                http
+                        .authorizeRequests()
+                        .antMatchers("/").permitAll()
+                        .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
+                        .and()
+                        .formLogin()
+                        .loginPage("/" + loginPath + "").failureUrl("login?error")
+                        .permitAll()
+                        .and()
+                        .logout()
+                        .permitAll();
+            } else {
+                logger.info("授权关闭");
+                http
+                        .authorizeRequests()
+                        .antMatchers("/**").permitAll();
+            }
         } else {
-            logger.info("授权关闭");
-            //配置权限及登录验证
+            logger.warn("授权插件不存在");
             http
                     .authorizeRequests()
                     .antMatchers("/**").permitAll();
