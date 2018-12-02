@@ -76,6 +76,7 @@ public class WebFluxSecurityConfig {
         // 获取权限插件配置的内容
         int securityOn = (int) data.getOrDefault("securityOn", 0);
         String adminPath = (String) data.getOrDefault("adminPath", "admin");
+        String loginPath = (String) data.getOrDefault("loginPath", "login");
 
         //运行加载iframe
         http.headers().frameOptions().disable();
@@ -97,7 +98,7 @@ public class WebFluxSecurityConfig {
                     .permitAll();
 
             http.formLogin()
-                    //.loginPage("/login")
+                    .loginPage("/" + loginPath + "")
                     //.authenticationFailureHandler(new RedirectServerAuthenticationFailureHandler("/login?error"))
                     //.authenticationSuccessHandler(new RedirectServerAuthenticationSuccessHandler("/admin"))
                     .and()

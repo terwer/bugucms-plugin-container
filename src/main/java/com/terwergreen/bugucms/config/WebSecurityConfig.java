@@ -88,6 +88,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         // 获取权限插件配置的内容
         int securityOn = (int) data.getOrDefault("securityOn", 0);
         String adminPath = (String) data.getOrDefault("adminPath", "admin");
+        String loginPath = (String) data.getOrDefault("loginPath", "login");
 
         //运行加载iframe
         http.headers().frameOptions().disable();
@@ -105,8 +106,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
                     .and()
                     .formLogin()
-                    //.loginPage("/login").failureUrl("login?error")
-                    //.permitAll()
+                    .loginPage("/" + loginPath + "").failureUrl("login?error")
+                    .permitAll()
                     .and()
                     .logout()
                     .permitAll();
