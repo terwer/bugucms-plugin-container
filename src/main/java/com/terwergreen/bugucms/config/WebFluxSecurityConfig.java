@@ -30,7 +30,7 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-@EnableWebFluxSecurity
+//@EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     private static final Log logger = LogFactory.getLog(WebFluxSecurityConfig.class);
 
