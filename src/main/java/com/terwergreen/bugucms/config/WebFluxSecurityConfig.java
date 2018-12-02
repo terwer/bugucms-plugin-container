@@ -6,6 +6,7 @@ import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -30,7 +31,9 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-//@EnableWebFluxSecurity
+//@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "reactive")
+@ConditionalOnExpression("'${bugucms.web.application-type}'.equals('reactive') && ${bugucms.plugin-switch:true}")
+@EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     private static final Log logger = LogFactory.getLog(WebFluxSecurityConfig.class);
 

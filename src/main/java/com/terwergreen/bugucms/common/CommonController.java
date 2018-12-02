@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class CommonController {
     private static final Log logger = LogFactory.getLog(CommonController.class);
 
-    @Value("${bugucms.pluginSwitch}")
+    @Value("${bugucms.plugin-switch}")
     private boolean pluginSwitch;
     @Value("${pf4j.mode}")
     private String pf4jMode;
-    @Value("${pf4j.pluginsDir}")
+    @Value("${pf4j.plugins-dir}")
     private String pf4jPluginsDir;
 
     @Autowired

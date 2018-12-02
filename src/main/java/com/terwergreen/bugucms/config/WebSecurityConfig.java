@@ -21,6 +21,7 @@ import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -39,6 +40,8 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全配置
  **/
+//@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
+@ConditionalOnExpression("'${bugucms.web.application-type}'.equals('servlet') && ${bugucms.plugin-switch:true}")
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Log logger = LogFactory.getLog(WebSecurityConfig.class);

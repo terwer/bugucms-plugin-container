@@ -8,6 +8,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -26,15 +27,16 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * @Version 1.0
  * @Description 项目配置
  **/
+@ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class PluginConfig {
     private static final Log logger = LogFactory.getLog(PluginConfig.class);
 
-    @Value("${bugucms.pluginSwitch}")
+    @Value("${bugucms.plugin-switch}")
     private boolean pluginSwitch;
     @Value("${pf4j.mode}")
     private String pf4jMode;
-    @Value("${pf4j.pluginsDir}")
+    @Value("${pf4j.plugins-dir}")
     private String pf4jPluginsDir;
     private final ObjectMapper objectMapper;
 
