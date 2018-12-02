@@ -112,7 +112,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
                         .and()
                         .formLogin()
-                        .loginPage("/" + loginPath + "").failureUrl("login?error")
+                        .loginPage("/" + loginPath + "")//.failureUrl("login?error")
                         .permitAll()
                         .and()
                         .logout()
