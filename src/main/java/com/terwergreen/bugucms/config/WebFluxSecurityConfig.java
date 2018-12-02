@@ -6,6 +6,7 @@ import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -30,7 +31,7 @@ import java.util.Map;
  * @Version 1.0
  * @Description 安全授权配置
  **/
-//@ConditionalOnBean(BugucmsPluginManager.class)
+@ConditionalOnBean(BugucmsPluginManager.class)
 @EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
     private static final Log logger = LogFactory.getLog(WebFluxSecurityConfig.class);
@@ -38,7 +39,7 @@ public class WebFluxSecurityConfig {
     /**
      * 授权插件名称
      */
-    private static final String AUTH_PLUGIN = "hello-plugin";
+    private static final String AUTH_PLUGIN = "auth-plugin";
 
     @Autowired
     private PasswordEncoder passwordEncoder;
