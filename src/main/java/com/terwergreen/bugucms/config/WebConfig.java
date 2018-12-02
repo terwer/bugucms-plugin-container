@@ -37,7 +37,7 @@ public class WebConfig implements WebMvcConfigurer {
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        logger.info("添加静态资源映射");
+        logger.info("添加容器静态资源映射");
         // 静态资源映射
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:/static/");
         registry.addResourceHandler("/public/**").addResourceLocations("classpath:/public/");
@@ -64,6 +64,8 @@ public class WebConfig implements WebMvcConfigurer {
             // 注册路径到Web上下文
             registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation);
             // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
+
+            logger.info("添加插件静态资源映射，from " + virtualPath + " to " + pluginResourceLocation);
         }
     }
 }
