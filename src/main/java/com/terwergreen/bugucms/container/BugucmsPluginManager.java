@@ -1,10 +1,9 @@
 package com.terwergreen.bugucms.container;
 
-import org.pf4j.DefaultPluginManager;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.pf4j.ExtensionFactory;
 import org.pf4j.spring.SpringPluginManager;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -19,7 +18,7 @@ import java.nio.file.Path;
  * @Description 自定义插件管理器
  **/
 public class BugucmsPluginManager extends SpringPluginManager {
-    private static final Logger logger = LoggerFactory.getLogger(DefaultPluginManager.class);
+    private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
 
     /**
      * 重定义工厂，用于设置上下文

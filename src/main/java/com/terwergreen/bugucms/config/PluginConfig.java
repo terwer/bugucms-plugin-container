@@ -4,9 +4,9 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,7 +28,8 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  **/
 @Configuration
 public class PluginConfig {
-    private static final Logger logger = LoggerFactory.getLogger(PluginConfig.class);
+    private static final Log logger = LogFactory.getLog(PluginConfig.class);
+
     @Value("${bugucms.pluginSwitch}")
     private boolean pluginSwitch;
     @Value("${pf4j.mode}")

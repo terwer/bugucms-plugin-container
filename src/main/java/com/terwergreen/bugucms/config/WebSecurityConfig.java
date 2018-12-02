@@ -15,6 +15,9 @@
  */
 package com.terwergreen.bugucms.config;
 
+import com.alibaba.fastjson.JSON;
+import com.terwergreen.bugucms.container.BugucmsPluginManager;
+import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +28,10 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.util.CollectionUtils;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author Terwer
@@ -36,8 +43,16 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Log logger = LogFactory.getLog(WebSecurityConfig.class);
 
+    /**
+     * 授权插件名称
+     */
+    private static final String AUTH_PLUGIN = "auth-plugin";
+
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private BugucmsPluginManager pluginManager;
 
     /**
      * 密码加密策略
@@ -49,10 +64,28 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
-
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         logger.info("WebMVC Security config http");
+        // 获取授权插件扩展点
+        List extentions = pluginManager.getExtensions(AUTH_PLUGIN);
+        if (CollectionUtils.isEmpty(extentions)) {
+            logger.warn(AUTH_PLUGIN + " extentions not exists");
+            configSecurity(http, null);
+        } else {
+            logger.info("Get " + AUTH_PLUGIN + " extentions:" + extentions);
+            PluginInterface extention = (PluginInterface) extentions.get(0);
+            Map data = extention.data();
+            logger.info("extentions data:" + JSON.toJSONString(data));
+            configSecurity(http, data);
+        }
+    }
+
+    private void configSecurity(HttpSecurity http, Map data) throws Exception {
+        // 获取权限插件配置的内容
+        int securityOn = (int) data.getOrDefault("securityOn", 0);
+        String adminPath = (String) data.getOrDefault("adminPath", "admin");
+
         //运行加载iframe
         http.headers().frameOptions().disable();
 
@@ -60,17 +93,27 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
 
         //配置权限及登录验证
-        http
-                .authorizeRequests()
-                .antMatchers("/").permitAll()
-                .antMatchers("/admin/**").hasRole("ADMIN")
-                .and()
-                .formLogin()
-                //.loginPage("/login").failureUrl("login?error")
-                //.permitAll()
-                .and()
-                .logout()
-                .permitAll();
+        if (1 == securityOn) {
+            logger.info("授权打开");
+            //配置权限及登录验证
+            http
+                    .authorizeRequests()
+                    .antMatchers("/").permitAll()
+                    .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
+                    .and()
+                    .formLogin()
+                    //.loginPage("/login").failureUrl("login?error")
+                    //.permitAll()
+                    .and()
+                    .logout()
+                    .permitAll();
+        } else {
+            logger.info("授权关闭");
+            //配置权限及登录验证
+            http
+                    .authorizeRequests()
+                    .antMatchers("/**").permitAll();
+        }
     }
 
     @Autowired
