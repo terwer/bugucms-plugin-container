@@ -1,7 +1,10 @@
 package com.terwergreen.bugucms.config;
 
+import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.pf4j.PluginWrapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +14,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.handler.AbstractHandlerMethodMapping;
 import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.servlet.resource.WebJarsResourceResolver;
+
+import java.util.List;
 
 /**
  * @Author Terwer
@@ -23,6 +28,9 @@ import org.springframework.web.servlet.resource.WebJarsResourceResolver;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
     private static final Log logger = LogFactory.getLog(WebConfig.class);
+
+    @Autowired
+    private BugucmsPluginManager pluginManager;
 
     /**
      * 添加静态文件路径
@@ -45,6 +53,19 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResolver(new PathResourceResolver());
 
         // 插件静态资源映射
-        registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
+        List<PluginWrapper> plugins = pluginManager.getPlugins();
+        for (PluginWrapper pluginWrapper : plugins) {
+            // 静态资源目录
+            String pluginStaticPath = "static/";
+            // 虚拟路径
+            String prefix = pluginWrapper.getPluginId().replace("-plugin", "");
+            String virtualPath = "/" + prefix + "/" + pluginStaticPath + "**";
+            // 实际路径
+            String absPath = pluginWrapper.getPluginClassLoader().getResource(".").getPath();
+            String pluginResourceLocation = "file://" + absPath + pluginStaticPath;
+            // 注册路径到Web上下文
+            registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation);
+            // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
+        }
     }
 }
