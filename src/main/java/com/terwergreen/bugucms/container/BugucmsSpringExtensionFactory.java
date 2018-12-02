@@ -39,12 +39,8 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
         // 获取插件管理器上下文
         GenericApplicationContext applicationContext = (GenericApplicationContext) ((BugucmsPluginManager) pluginManager).getApplicationContext();
         // 实例化扩展点
-        Object extension = null;
-        try {
-            extension = applicationContext.getBean(extensionClass);
-        } catch (Exception e) {
-            logger.debug("无法获取扩展点" + extensionClass);
-        }
+        Object extension = applicationContext.getBean(extensionClass);
+        logger.debug("无法获取扩展点" + extensionClass);
         if (null == extension) {
             logger.info("扩展点不存在，创建扩展点：" + extension);
             // 设置扩展点上下文
