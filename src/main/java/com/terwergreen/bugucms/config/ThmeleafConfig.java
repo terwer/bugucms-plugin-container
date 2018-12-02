@@ -41,8 +41,6 @@ public class ThmeleafConfig {
     @Bean
     public ClassLoaderTemplateResolver containerTemplateResolver() {
         String containerTemplatePath = "templates/";
-        logger.info("添加自定义插件解析器，路径为:" + Paths.get(containerTemplatePath).toAbsolutePath().toString());
-
         ClassLoaderTemplateResolver containerTemplateResolver = new ClassLoaderTemplateResolver();
         containerTemplateResolver.setPrefix(containerTemplatePath);
         containerTemplateResolver.setSuffix(".html");
@@ -50,6 +48,8 @@ public class ThmeleafConfig {
         containerTemplateResolver.setCharacterEncoding("UTF-8");
         containerTemplateResolver.setOrder(0);  // this is important. This way spring boot will listen to both places 0 and 1
         containerTemplateResolver.setCheckExistence(true);
+        String absPath = containerTemplateResolver.getClass().getResource("/").getPath();
+        logger.info("添加容器插件解析器，路径为:" + absPath + containerTemplatePath);
         return containerTemplateResolver;
     }
 
@@ -59,15 +59,15 @@ public class ThmeleafConfig {
         List<PluginWrapper> plugins = pluginManager.getPlugins();
         for (PluginWrapper pluginWrapper : plugins) {
             String pluginPath = pluginWrapper.getPluginPath().toString();
-            String childPath = "\\classes\\templates\\";
+            String childPath = pluginManager.isDevelopment() ? "\\target\\classes\\templates\\" : "\\classes\\templates\\";
             String pluginTemplatePath = Paths.get(pluginPath, childPath).toAbsolutePath().toString() + "\\";
-            logger.info("添加自定义插件解析器，路径为:" + pluginTemplatePath);
+            logger.info("添加插件解析器，路径为:" + pluginTemplatePath);
 
             // 生成插件模板解析器
             FileTemplateResolver pluginTemplateResolver = new FileTemplateResolver();
             pluginTemplateResolver.setPrefix(pluginTemplatePath);
             pluginTemplateResolver.setSuffix(".html");
-            pluginTemplateResolver.setTemplateMode("HTML5");
+            pluginTemplateResolver.setTemplateMode("HTML");
             pluginTemplateResolver.setOrder(templateEngine.getTemplateResolvers().size());
             pluginTemplateResolver.setCacheable(false);
             templateEngine.addTemplateResolver(pluginTemplateResolver);

@@ -21,9 +21,6 @@ import java.util.List;
 public class BugucmsApplication {
     private static final Log logger = LogFactory.getLog(BugucmsApplication.class);
 
-    @Value("${bugucms.web.application-type}")
-    private String applicationType;
-
     public static void main(String[] args) {
         WebApplicationType applicationType = PropertyUtil.readProperty("bugucms.web.application-type").equals("servlet") ? WebApplicationType.SERVLET : WebApplicationType.REACTIVE;
         logger.info("WebApplicationType is " + applicationType);

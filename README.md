@@ -1,6 +1,42 @@
 # bugucms
 轻量级、插件化的内容管理系统
 
+#### 安装教程
+
+1. 构建war包
+
+```
+mvn package -DskipTests
+```
+
+重命名
+
+```
+cd target
+rm *.war*
+mv ROOT.zip ROOT.war
+```
+
+部署
+
+```
+scp ROOT.war /mnt/d/Software/apache-tomcat-9.0.13/webapps
+```
+
+2. 安装到本地maven库
+
+## war包
+
+```
+mvn install:install-file -Dfile=target/bugucms-plugin-container-2.0.0.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.0 -Dpackaging=war
+```
+
+## 当做parent引用的pom.xml
+
+```
+mvn install:install-file -Dfile=pom.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.0 -Dpackaging=pom
+```
+
 ![BuguCMS](logo.jpg)
 
 释义：BuguCMS，全称 Bugu Content Manage System，中文即布谷内容管理系统，灵感取自布谷鸟，鸣声响亮，二声一度，希望用户在使用时像耳边时刻响起布谷鸟叫声一样愉悦。
@@ -39,29 +75,6 @@ HTML5
 jQuery 1.10.1     
 bootstrap 3.3.7   
 [LAU](https://github.com/carolkey/lying-admin/)（基于layui的后台管理模板）     
-
-#### 安装教程
-
-1. 构建war包
-
-```
-mvn package -DskipTests
-```
-
-2. 安装到本地maven库
-
-## war包
-
-```
-mvn install:install-file -Dfile=target/bugucms-plugin-container-2.0.0.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.0 -Dpackaging=war
-```
-
-## 当做parent引用的pom.xml
-
-```
-mvn install:install-file -Dfile=pom.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.0 -Dpackaging=pom
-```
-
 
 # 启动
 ## 注意

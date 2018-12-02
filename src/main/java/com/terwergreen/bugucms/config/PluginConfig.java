@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.config;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
@@ -38,11 +38,6 @@ public class PluginConfig {
     private String pf4jMode;
     @Value("${pf4j.plugins-dir}")
     private String pf4jPluginsDir;
-    private final ObjectMapper objectMapper;
-
-    public PluginConfig() {
-        this.objectMapper = new ObjectMapper();
-    }
 
     /**
      * 插件注入入口，注释此方法则插件功能关闭
@@ -98,7 +93,6 @@ public class PluginConfig {
         return route(GET("/plugins"), req -> ServerResponse.ok().body(Mono.just(pluginNamesMono(pm)), String.class));
     }
 
-
     /**
      * 插件信息
      *
@@ -107,9 +101,9 @@ public class PluginConfig {
      */
     private String pluginNamesMono(BugucmsPluginManager pm) {
         List<String> identityList = pm.getExtensions(PluginInterface.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
-        try {
-            return objectMapper.writeValueAsString(identityList);
-        } catch (JsonProcessingException e) {
+        if (CollectionUtils.isNotEmpty(identityList)) {
+            return JSON.toJSONString(identityList);
+        } else {
             return "[]";
         }
     }

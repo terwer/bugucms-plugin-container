@@ -3,6 +3,7 @@ package com.terwergreen.bugucms.container;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.ExtensionFactory;
+import org.pf4j.PluginClasspath;
 import org.pf4j.spring.SpringPluginManager;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
@@ -21,6 +22,25 @@ public class BugucmsPluginManager extends SpringPluginManager {
     private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
 
     /**
+     * 插件加载路径获取
+     *
+     * @return
+     */
+    public PluginClasspath getBugucmsPluginClasspath() {
+        return super.pluginClasspath;
+    }
+
+    /**
+     * 判断是否处于插件开发模式
+     *
+     * @return
+     */
+
+    public boolean isDevelopment() {
+        return super.isDevelopment();
+    }
+
+    /**
      * 重定义工厂，用于设置上下文
      *
      * @return
@@ -32,13 +52,25 @@ public class BugucmsPluginManager extends SpringPluginManager {
     }
 
     /**
+     * 创建插件目录
+     *
+     * @return
+     */
+    @Override
+    protected Path createPluginsRoot() {
+        Path pluginsRoot = super.createPluginsRoot();
+        logger.info("BugucmsPluginManager 创建插件目录,pluginsRoot is:" + pluginsRoot.toUri().toString());
+        return pluginsRoot;
+    }
+
+    /**
      * 插件初始化
      */
     @Override
     protected void initialize() {
         super.initialize();
-        Path pluginsRoot = super.getPluginsRoot();
-        logger.info("BugucmsPluginManager initialize,pluginsRoot is:" + pluginsRoot.toUri().toString());
+        //Path pluginsRoot = super.getPluginsRoot();
+        //logger.info("BugucmsPluginManager initialize,pluginsRoot is:" + pluginsRoot.toUri().toString());
     }
 
     /**
