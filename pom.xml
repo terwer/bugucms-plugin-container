@@ -10,7 +10,7 @@
 
     <name>bugucms-plugin-container</name>
     <description>light-weight,pluggable cms</description>
-    
+
     <parent>
         <groupId>com.terwergreen</groupId>
         <artifactId>shared-plugin-interfaces</artifactId>
@@ -32,6 +32,12 @@
             <version>2.1.0.RELEASE</version>
             <type>pom</type>
             <scope>import</scope>
+        </dependency>
+        <!-- shared-plugin-interfaces -->
+        <dependency>
+            <groupId>com.terwergreen</groupId>
+            <artifactId>shared-plugin-interfaces</artifactId>
+            <version>4.1.1</version>
         </dependency>
         <!-- Web MVC -->
         <dependency>
@@ -127,6 +133,13 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                </configuration>
+            </plugin>
+            <!-- war -->
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <failOnMissingWebXml>false</failOnMissingWebXml>
                 </configuration>
             </plugin>
             <!-- spring boot -->
