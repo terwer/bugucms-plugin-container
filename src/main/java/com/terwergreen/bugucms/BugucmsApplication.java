@@ -12,7 +12,6 @@ import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
@@ -27,17 +26,18 @@ public class BugucmsApplication {
         SpringApplication springApplication = new SpringApplication(BugucmsApplication.class);
         springApplication.setWebApplicationType(applicationType);
         springApplication.run(args);
-        logger.info("Container started SUCCESS with WebApplicationType:" + applicationType);
     }
 
-    @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
     @Bean
     public ApplicationRunner run() {
         return new ApplicationRunner() {
             @Value("${bugucms.plugin-switch}")
             private boolean pluginSwitch;
 
-            @Autowired
+            @Value("${bugucms.web.application-type}")
+            private String applicationType;
+
+            @Autowired(required = false)
             private BugucmsPluginManager bugucmsPluginManager;
 
             @Override
@@ -45,10 +45,10 @@ public class BugucmsApplication {
                 // 输出插件信息
                 if (pluginSwitch) {
                     List<PluginInterface> plugins = bugucmsPluginManager.getExtensions(PluginInterface.class);
-                    logger.info(String.format("Number of plugins found: %d", plugins.size()));
+                    logger.info(String.format("共找到%d个插件", plugins.size()));
                     plugins.forEach(c -> logger.info("插件:" + c.getClass().getName() + ":" + c.identify()));
-                    logger.info("插件已启动");
                 }
+                logger.info("容器启动完毕，项目类型为：" + applicationType.toUpperCase());
             }
         };
     }

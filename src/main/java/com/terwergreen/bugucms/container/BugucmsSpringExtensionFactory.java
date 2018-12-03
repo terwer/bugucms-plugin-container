@@ -5,7 +5,6 @@ import com.terwergreen.util.ReflectUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.Plugin;
-import org.pf4j.PluginManager;
 import org.pf4j.PluginWrapper;
 import org.pf4j.spring.SpringExtensionFactory;
 import org.springframework.context.ApplicationContext;
@@ -19,14 +18,14 @@ import org.springframework.context.support.GenericApplicationContext;
  **/
 public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     private static final Log logger = LogFactory.getLog(BugucmsSpringExtensionFactory.class);
-    private PluginManager pluginManager;
+    private BugucmsPluginManager pluginManager;
     private boolean autowire;
 
-    public BugucmsSpringExtensionFactory(PluginManager pluginManager) {
+    public BugucmsSpringExtensionFactory(BugucmsPluginManager pluginManager) {
         this(pluginManager, true);
     }
 
-    public BugucmsSpringExtensionFactory(PluginManager pluginManager, boolean autowire) {
+    public BugucmsSpringExtensionFactory(BugucmsPluginManager pluginManager, boolean autowire) {
         super(pluginManager, autowire);
         this.pluginManager = pluginManager;
         this.autowire = autowire;

@@ -15,6 +15,8 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -39,6 +41,10 @@ public class PluginConfig {
     @Value("${pf4j.plugins-dir}")
     private String pf4jPluginsDir;
 
+    public PluginConfig() {
+        logger.info("插件配置开始");
+    }
+
     /**
      * 插件注入入口，注释此方法则插件功能关闭
      *
@@ -52,7 +58,10 @@ public class PluginConfig {
             System.setProperty("pf4j.mode", pf4jMode.equals("dev") ? RuntimeMode.DEVELOPMENT.toString() : RuntimeMode.DEPLOYMENT.toString());
             System.setProperty("pf4j.pluginsDir", pf4jPluginsDir);
             // 创建插件管理器
-            return new BugucmsPluginManager();
+            logger.info("创建插件管理器");
+            Path pluginsRoot = Paths.get(pf4jPluginsDir);
+            logger.info("插件路径为：" + pluginsRoot.toUri().toString());
+            return new BugucmsPluginManager(pluginsRoot);
         }
         return null;
     }

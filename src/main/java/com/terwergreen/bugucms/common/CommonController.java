@@ -41,7 +41,7 @@ public class CommonController {
     @Autowired
     private CommonService commonService;
 
-    @Autowired
+    @Autowired(required = false)
     private BugucmsPluginManager pluginManager;
 
     @RequestMapping(method = RequestMethod.GET)
@@ -74,6 +74,9 @@ public class CommonController {
      * @return
      */
     private String getPlugins() {
+        if (null == pluginManager) {
+            return "plugin is disabled";
+        }
         String base = baseRoot(pluginManager);
         return base;
     }
