@@ -59,7 +59,7 @@ public class BugucmsPluginManager extends SpringPluginManager {
     @Override
     protected Path createPluginsRoot() {
         Path pluginsRoot = super.createPluginsRoot();
-        logger.info("BugucmsPluginManager 创建插件目录,pluginsRoot is:" + pluginsRoot.toUri().toString());
+        logger.debug("BugucmsPluginManager创建插件目录,pluginsRoot is:" + pluginsRoot.toUri().toString());
         return pluginsRoot;
     }
 
@@ -69,8 +69,8 @@ public class BugucmsPluginManager extends SpringPluginManager {
     @Override
     protected void initialize() {
         super.initialize();
-        //Path pluginsRoot = super.getPluginsRoot();
-        //logger.info("BugucmsPluginManager initialize,pluginsRoot is:" + pluginsRoot.toUri().toString());
+        Path pluginsRoot = super.getPluginsRoot();
+        logger.info("BugucmsPluginManager initialize,pluginsRoot is:" + pluginsRoot.toUri().toString());
     }
 
     /**
@@ -91,18 +91,13 @@ public class BugucmsPluginManager extends SpringPluginManager {
     @PostConstruct
     @Override
     public void init() {
-        logger.debug("BugucmsPluginManager init");
-        initPlugins();
-    }
-
-    /**
-     * 启动插件
-     */
-    private void initPlugins() {
-        logger.debug("BugucmsPluginManager initPlugins");
-        // 插件启动
+        logger.info("BugucmsPluginManager加载插件");
+        // 加载插件
         loadPlugins();
+        logger.info("BugucmsPluginManager启动插件");
+        // 启动插件
         startPlugins();
+        logger.info("BugucmsPluginManager注册依赖");
         // 注册依赖
         AbstractAutowireCapableBeanFactory beanFactory = (AbstractAutowireCapableBeanFactory) getApplicationContext().getAutowireCapableBeanFactory();
         BugucmsExtensionsInjector extensionsInjector = new BugucmsExtensionsInjector(this, beanFactory);

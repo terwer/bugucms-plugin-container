@@ -57,7 +57,7 @@ public class ThmeleafConfig {
     @PostConstruct
     public void pluginTemplateResolver() {
         // 设置插件模板路径
-        List<PluginWrapper> plugins = pluginManager.getPlugins();
+        List<PluginWrapper> plugins = pluginManager.getStartedPlugins();
         for (PluginWrapper pluginWrapper : plugins) {
             String pluginTemplatePath = "templates/";
 

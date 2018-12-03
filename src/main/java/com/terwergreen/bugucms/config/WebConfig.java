@@ -51,7 +51,7 @@ public class WebConfig implements WebMvcConfigurer {
                 .addResolver(new PathResourceResolver());
 
         // 插件静态资源映射
-        List<PluginWrapper> plugins = pluginManager.getPlugins();
+        List<PluginWrapper> plugins = pluginManager.getStartedPlugins();
         for (PluginWrapper pluginWrapper : plugins) {
             // 静态资源目录
             String pluginStaticPath = "static/";
