@@ -17,10 +17,11 @@ import javax.annotation.PostConstruct;
 import java.util.List;
 
 /**
- * @Author Terwer
- * @Date 2018/12/2 22:09
- * @Version 1.0
- * @Description 模板引擎配置
+ * 模板引擎配置
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/12/2 22:09
  **/
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration

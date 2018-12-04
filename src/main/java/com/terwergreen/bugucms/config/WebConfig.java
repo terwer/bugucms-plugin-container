@@ -16,10 +16,11 @@ import org.springframework.web.servlet.resource.WebJarsResourceResolver;
 import java.util.List;
 
 /**
- * @Author Terwer
- * @Date 2018/12/3 3:52
- * @Version 1.0
- * @Description 静态资源配置
+ * 静态资源配置
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/12/3 3:52
  **/
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
@@ -33,7 +34,7 @@ public class WebConfig implements WebMvcConfigurer {
     /**
      * 添加静态文件路径
      *
-     * @param registry
+     * @param registry 资源注册器
      */
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {

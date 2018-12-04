@@ -10,10 +10,11 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * @Author Terwer
- * @Date 2018/11/26 16:44
- * @Version 1.0
- * @Description 扩展点注入
+ * 扩展点注入
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/26 16:44
  **/
 public class BugucmsExtensionsInjector extends ExtensionsInjector {
     private static final Log logger = LogFactory.getLog(BugucmsExtensionsInjector.class);

@@ -15,10 +15,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author Terwer
- * @Date 2018/11/26 10:20
- * @Version 1.0
- * @Description 通用DAO的实现
+ * 通用DAO的实现
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/26 10:20
  **/
 @Repository
 public class CommonDAOImpl implements CommonDAO {

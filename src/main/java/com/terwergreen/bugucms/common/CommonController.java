@@ -21,10 +21,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * @Author Terwer
- * @Date 2018/11/26 18:05
- * @Version 1.0
- * @Description 公共控制器
+ * 公共控制器
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/26 18:05
  **/
 @Controller
 @RequestMapping("/")

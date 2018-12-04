@@ -28,13 +28,13 @@ scp ROOT.war /mnt/d/Software/apache-tomcat-9.0.13/webapps
 ## war包
 
 ```
-mvn install:install-file -Dfile=target/bugucms-plugin-container-2.0.1.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.1 -Dpackaging=war
+mvn install:install-file -Dfile=target/bugucms-plugin-container-2.0.3.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=war
 ```
 
 ## 当做parent引用的pom.xml
 
 ```
-mvn install:install-file -Dfile=pom.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.1 -Dpackaging=pom
+mvn install:install-file -Dfile=pom.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=pom
 ```
 
 ![BuguCMS](logo.jpg)

@@ -11,10 +11,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
 /**
- * @Author Terwer
- * @Date 2018/11/26 17:05
- * @Version 1.0
- * @Description 扩展点工厂
+ * 扩展点工厂
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/26 17:05
  **/
 public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
     private static final Log logger = LogFactory.getLog(BugucmsSpringExtensionFactory.class);

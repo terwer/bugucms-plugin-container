@@ -10,10 +10,11 @@ import javax.annotation.PostConstruct;
 import java.nio.file.Path;
 
 /**
- * @Author Terwer
- * @Date 2018/11/22 10:52
- * @Version 1.0
- * @Description 自定义插件管理器
+ * 自定义插件管理器
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/22 10:52
  **/
 public class BugucmsPluginManager extends SpringPluginManager {
     private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
@@ -26,7 +27,7 @@ public class BugucmsPluginManager extends SpringPluginManager {
     /**
      * 重定义工厂，用于设置上下文
      *
-     * @return
+     * @return BugucmsSpringExtensionFactory
      */
     @Override
     protected ExtensionFactory createExtensionFactory() {

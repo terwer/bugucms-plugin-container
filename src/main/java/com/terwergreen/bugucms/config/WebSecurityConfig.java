@@ -1,7 +1,7 @@
 /*
  * Copyright 2010-2018 Terwer Green.
  *
- * Licensed under the Apache License, Version 2.0 (the "License");
+ * Licensed under the Apache License, version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
@@ -36,10 +36,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author Terwer
- * @Date 2018/6/22 15:55
- * @Version 1.0
- * @Description 安全配置
+ * 安全配置
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/6/22 15:55
  **/
 //@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('servlet') && ${bugucms.plugin-switch:true}")
@@ -59,9 +60,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private BugucmsPluginManager pluginManager;
 
     /**
-     * 密码加密策略
+     * 获取密码加密策略
      *
-     * @return
+     * @return 密码加密策略
      */
     @Bean
     public PasswordEncoder passwordEncoder() {

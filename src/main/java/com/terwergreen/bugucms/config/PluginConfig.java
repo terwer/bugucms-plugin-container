@@ -24,10 +24,11 @@ import static org.springframework.web.reactive.function.server.RequestPredicates
 import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 /**
- * @Author Terwer
- * @Date 2018/11/21 11:19
- * @Version 1.0
- * @Description 项目配置
+ * 项目配置
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/11/21 11:19
  **/
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
@@ -48,7 +49,7 @@ public class PluginConfig {
     /**
      * 插件注入入口，注释此方法则插件功能关闭
      *
-     * @return
+     * @return BugucmsPluginManager
      */
     @Bean
     public BugucmsPluginManager pluginManager() {

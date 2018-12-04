@@ -27,10 +27,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Author Terwer
- * @Date 2018/6/22 15:55
- * @Version 1.0
- * @Description 安全授权配置
+ * 安全授权配置
+ *
+ * @author Terwer
+ * @version 1.0
+ * 2018/6/22 15:55
  **/
 //@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "reactive")
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('reactive') && ${bugucms.plugin-switch:true}")
