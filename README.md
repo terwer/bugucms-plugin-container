@@ -9,14 +9,6 @@
 mvn package -DskipTests
 ```
 
-重命名
-
-```
-cd target
-rm *.war*
-mv ROOT.zip ROOT.war
-```
-
 部署
 
 ```
@@ -28,13 +20,13 @@ scp ROOT.war /mnt/d/Software/apache-tomcat-9.0.13/webapps
 ## war包
 
 ```
-mvn install:install-file -Dfile=target/bugucms-plugin-container-2.0.3.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=war
+mvn install:install-file -Dfile=target/ROOT.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=war
 ```
 
 ## 当做parent引用的pom.xml
 
 ```
-mvn install:install-file -Dfile=pom.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=pom
+mvn install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.3 -Dpackaging=pom
 ```
 
 ![BuguCMS](logo.jpg)
@@ -61,10 +53,10 @@ http://www.terwergreen.com
 # 相关技术
 Centos 7.4      
 JDK1.8.162   
-Spring Boot 2.1.0   
+Spring Boot 2.0.0   
 LogBack      
 Thymeleaf模板引擎         
-Maven 3.5.3 (使用阿里云Maven仓库)          
+Maven 3.5.3 (使用华为云Maven仓库)          
 Tomcat 8.5.28   
 MySQL 5.7.19   
 Oracle 11g    
