@@ -6,7 +6,7 @@
     <groupId>com.terwergreen</groupId>
     <artifactId>bugucms-plugin-container</artifactId>
     <version>2.0.3</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>bugucms-plugin-container</name>
     <description>light-weight,pluggable cms</description>
