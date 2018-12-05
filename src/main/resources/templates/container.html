@@ -7,7 +7,8 @@
     |_| \___||_|     \_/\_/  \___||_|
 -->
 <!DOCTYPE html>
-<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
     <meta charset="UTF-8">
     <title>BuguCMS</title>
@@ -45,24 +46,33 @@
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
 <h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
 
-<p sec:authorize="!hasRole('ROLE_ADMIN')">
-    <a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>
-</p>
-
-<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
-    <p>当前登录用户:
-        <span sec:authentication="username"></span>
-        小布|
-        角色:
-        <span sec:authentication="principal.authorities"></span>
-    </p>
-    <p>
-        <a th:href="@{/logout}"><i class="iconfont"></i>注销</a>
+<div sec:authorize="!hasRole('ROLE_ADMIN')">
+    <p th:if="${!isAdmin}">
+        <a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>
     </p>
 </div>
 
+<div sec:authorize="isAuthenticated()">
+    <div th:if="${isLogin}">
+        <p>当前登录用户:
+            <span sec:authentication="name"></span>
+            <span th:text="${username}"/>|
+            角色:
+            <span sec:authentication="principal.authorities"></span>
+            <span th:each="role,roleStat:${roles}">
+                <span th:text="${role}"></span>
+            </span>
+        </p>
+        <p>
+            <a th:href="@{/logout}"><i class="iconfont"></i>注销</a>
+        </p>
+    </div>
+</div>
+
 <div sec:authorize="hasRole('ROLE_ADMIN')">
-    <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
+    <div th:if="${isAdmin}">
+        <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
+    </div>
 </div>
 
 <!-- jquery -->

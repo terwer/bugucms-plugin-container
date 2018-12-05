@@ -11,6 +11,8 @@ import org.pf4j.RuntimeMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,6 +49,15 @@ public class CommonController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String index(Model model) {
+
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        logger.info("current username: " + auth.getName());
+        model.addAttribute("username", auth.getName());
+        model.addAttribute("isLogin", !auth.getName().equals("anonymousUser"));
+        boolean isAdmin = auth.getAuthorities().stream().anyMatch(x -> x.getAuthority().equals("ROLE_ADMIN"));
+        model.addAttribute("isAdmin", isAdmin);
+        model.addAttribute("roles", auth.getAuthorities());
+
         String webname = (String) commonService.getSiteConfig("webname");
         model.addAttribute("info", "BuguCMS 2.0.0:" + webname);
         String adminPath = (String) commonService.getSiteConfig("adminPath");

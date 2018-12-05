@@ -32,7 +32,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
 import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.util.CollectionUtils;
@@ -151,23 +150,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
     }
 }
-
-class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        if (isAjaxRequest(request)) {
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-        } else {
-            response.sendRedirect("/login.html");
-        }
-    }
-
-    public static boolean isAjaxRequest(HttpServletRequest request) {
-        String ajaxFlag = request.getHeader("X-Requested-With");
-        return ajaxFlag != null && "XMLHttpRequest".equals(ajaxFlag);
-    }
-}
-
 
 class AjaxAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
     @Override
