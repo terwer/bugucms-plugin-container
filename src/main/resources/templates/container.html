@@ -12,6 +12,7 @@
     <meta charset="UTF-8">
     <title>BuguCMS</title>
     <link th:href="@{/static/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
+    <link th:href="@{/webjars/layui/css/layui.css}" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .text-cernter {
             font-family: "Microsoft YaHei", "Courier New", Consolas, Georgia, 'Times New Roman';
@@ -30,6 +31,10 @@
             line-height: 24px;
             font-weight: normal;
         }
+
+        p {
+            text-align: center;
+        }
     </style>
 </head>
 <body>
@@ -38,9 +43,31 @@
 <h3 class="text-cernter info" th:text="${info}"></h3>
 <h3 class="text-cernter info"><a th:href="@{/plugins}">插件信息</a></h3>
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
-<p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
 <h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
+
+<p sec:authorize="!hasRole('ROLE_ADMIN')">
+    <a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>
+</p>
+
+<div th:fragment="logout" class="logout" sec:authorize="isAuthenticated()">
+    <p>当前登录用户:
+        <span sec:authentication="username"></span>
+        小布|
+        角色:
+        <span sec:authentication="principal.authorities"></span>
+    </p>
+    <p>
+        <a th:href="@{/logout}"><i class="iconfont"></i>注销</a>
+    </p>
+</div>
+
+<div sec:authorize="hasRole('ROLE_ADMIN')">
+    <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
+</div>
+
 <!-- jquery -->
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+<!-- layui -->
+<script type="text/javascript" th:src="@{/webjars/layui/layui.js}"></script>
 </body>
 </html>

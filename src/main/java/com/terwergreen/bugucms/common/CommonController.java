@@ -62,6 +62,11 @@ public class CommonController {
         return "container";
     }
 
+    @RequestMapping(value = "main", method = RequestMethod.GET)
+    public String main(Model model) {
+        return index(model);
+    }
+
     @ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
     @RequestMapping(value = "plugins", method = RequestMethod.GET, produces = {"application/json;charset=utf-8"})
     @ResponseBody

@@ -28,10 +28,20 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
+import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
 import org.springframework.util.CollectionUtils;
 
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -47,7 +57,6 @@ import java.util.Map;
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private static final Log logger = LogFactory.getLog(WebSecurityConfig.class);
-
     /**
      * 授权插件名称
      */
@@ -114,21 +123,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .and()
                         .formLogin()
                         .loginPage("/" + loginPath + "")//.failureUrl("login?error")
+                        .loginProcessingUrl("/login")
+                        .usernameParameter("username")
+                        .passwordParameter("password")
+                        .successHandler(new AjaxAuthSuccessHandler())
+                        .failureHandler(new AjaxAuthFailHandler())
                         .permitAll()
                         .and()
                         .logout()
                         .permitAll();
             } else {
                 logger.info("授权关闭");
-                http
-                        .authorizeRequests()
-                        .antMatchers("/**").permitAll();
+                http.authorizeRequests().antMatchers("/**").permitAll();
             }
         } else {
             logger.warn("授权插件不存在");
-            http
-                    .authorizeRequests()
-                    .antMatchers("/**").permitAll();
+            http.authorizeRequests().antMatchers("/**").permitAll();
         }
     }
 
@@ -141,5 +151,49 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
     }
 }
+
+class UnauthorizedEntryPoint implements AuthenticationEntryPoint {
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
+        if (isAjaxRequest(request)) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
+        } else {
+            response.sendRedirect("/login.html");
+        }
+    }
+
+    public static boolean isAjaxRequest(HttpServletRequest request) {
+        String ajaxFlag = request.getHeader("X-Requested-With");
+        return ajaxFlag != null && "XMLHttpRequest".equals(ajaxFlag);
+    }
+}
+
+
+class AjaxAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
+    @Override
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        // 获取请求是从哪里来的
+        String referer = request.getParameter("referer");
+        String targetUrl = super.determineTargetUrl(request, response);
+        logger.info("referer from login page:" + referer);
+        logger.info("targetUrl from security:" + referer);
+        response.setStatus(HttpServletResponse.SC_OK);
+        response.setContentType("application/json");
+        request.setCharacterEncoding("UTF-8");
+        // String responseToClient = "{\"timestamp\":" + (new Date()).getTime() + ",\"status\":200,\"error\":\"\",\"message\":\"Authentication ok\",\"path\":\"/login\"}";
+        String responseToClient = "{\"timestamp\":" + (new Date()).getTime() + ",\"status\":200,\"error\":\"\",\"message\":\"Authentication ok\",\"path\":\"" + referer + "\"}";
+        response.getWriter().write(responseToClient);
+        response.getWriter().flush();
+    }
+}
+
+class AjaxAuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
+    @Override
+    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
+        // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed");
+        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "登陆失败，用户名或者密码错误");
+    }
+}
+
 
 
