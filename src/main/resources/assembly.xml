@@ -1,7 +1,7 @@
 <assembly>
     <id>bugucms-plugin-container</id>
     <formats>
-        <format>zip</format>
+        <format>war</format>
     </formats>
     <includeBaseDirectory>false</includeBaseDirectory>
     <dependencySets>
