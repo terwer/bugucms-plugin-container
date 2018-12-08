@@ -51,8 +51,9 @@
 <body>
 <h1 class="text-cernter">BuguCMS Container <br/>is serving...</h1>
 <h3 class="text-cernter info" th:text="${info}"></h3>
-<h3 class="text-cernter info"><a th:href="@{/plugins}">插件信息</a></h3>
+<h3 class="text-cernter info"><a th:href="@{/api/plugins}">插件信息</a></h3>
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
+<h3 class="text-cernter info"><a th:href="@{/api/site/config}">站点配置</a></h3>
 <h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
 <h3 class="text-cernter info"><a th:href="@{/swagger-ui.html}" target="_blank">Api文档</a></h3>
 <h3 class="text-cernter info"><a th:href="@{/druid/index.html}" target="_blank">druid数据库连接池监控</a></h3>

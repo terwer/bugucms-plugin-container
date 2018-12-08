@@ -1,10 +1,9 @@
 package com.terwergreen.bugucms.common;
 
-import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.core.CommonService;
 import com.terwergreen.plugins.PluginInterface;
-import org.apache.commons.collections.CollectionUtils;
+import com.terwergreen.pojo.SiteConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
@@ -19,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -58,10 +58,11 @@ public class CommonController {
         model.addAttribute("isAdmin", isAdmin);
         model.addAttribute("roles", auth.getAuthorities());
 
-        String webname = (String) commonService.getSiteConfig("webname");
-        model.addAttribute("info", "BuguCMS 2.0.3:" + webname);
-        String adminPath = (String) commonService.getSiteConfig("adminPath");
-        model.addAttribute("info", "BuguCMS 2.0.3:" + webname);
+        SiteConfig siteConfig = commonService.getSiteConfig();
+        String webname = siteConfig.getWebname();
+        model.addAttribute("info", "BuguCMS 2.0.4:" + webname);
+        String adminPath = siteConfig.getAdminpath();
+        model.addAttribute("info", "BuguCMS 2.0.4:" + webname);
         model.addAttribute("adminPath", adminPath);
         String pluginInfo = "pluginSwitch:" + (pluginSwitch ? "开启" : "关闭");
         pluginInfo += "<br/>pf4j.mode:";
@@ -79,10 +80,16 @@ public class CommonController {
     }
 
     @ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
-    @RequestMapping(value = "plugins", method = RequestMethod.GET, produces = {"application/json;charset=utf-8"})
+    @RequestMapping(value = "api/plugins", method = RequestMethod.GET, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public String plugins() {
+    public List plugins() {
         return getPlugins();
+    }
+
+    @RequestMapping(value = "api/site/config", method = RequestMethod.GET, produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public SiteConfig siteConfig() {
+        return commonService.getSiteConfig();
     }
 
     /**
@@ -90,12 +97,13 @@ public class CommonController {
      *
      * @return
      */
-    private String getPlugins() {
+    private List getPlugins() {
         if (null == pluginManager) {
-            return "plugin is disabled";
+            ArrayList noPluginList = new ArrayList();
+            noPluginList.add("plugin is disabled");
+            return noPluginList;
         }
-        String base = baseRoot(pluginManager);
-        return base;
+        return baseRoot(pluginManager);
     }
 
     /**
@@ -104,12 +112,7 @@ public class CommonController {
      * @param pm
      * @return
      */
-    private String baseRoot(BugucmsPluginManager pm) {
-        List<String> identityList = pm.getExtensions(PluginInterface.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
-        if (CollectionUtils.isNotEmpty(identityList)) {
-            return JSON.toJSONString(identityList);
-        } else {
-            return "[]";
-        }
+    private List baseRoot(BugucmsPluginManager pm) {
+        return pm.getExtensions(PluginInterface.class).stream().map(g -> g.getClass().getName() + ": " + g.identify()).collect(Collectors.toList());
     }
 }

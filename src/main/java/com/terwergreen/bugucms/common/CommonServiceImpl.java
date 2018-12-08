@@ -2,6 +2,7 @@ package com.terwergreen.bugucms.common;
 
 import com.terwergreen.core.CommonDAO;
 import com.terwergreen.core.CommonService;
+import com.terwergreen.pojo.SiteConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +30,20 @@ public class CommonServiceImpl implements CommonService {
     private CommonDAO commonDAO;
 
     @Override
-    public Object getSiteConfig(String optionName) {
+    public SiteConfig getSiteConfig() {
+        SiteConfig siteConfig = null;
+        try {
+            Map paramMap = new HashMap();
+            paramMap.put("optionGroup", SITE_CONFIG_KEY);
+            siteConfig = (SiteConfig) commonDAO.querySingleByMap("getSiteConfig", paramMap);
+        } catch (Exception e) {
+            logger.error("获取配置项异常", e);
+        }
+        return siteConfig;
+    }
+
+    @Override
+    public Object getSiteConfigItem(String optionName) {
         String result = null;
         try {
             Map paramMap = new HashMap();
@@ -67,19 +81,22 @@ public class CommonServiceImpl implements CommonService {
     }
 
     @Override
-    public Integer updateSiteConfig(String optionName, String optionValue) {
-        return updateOption(optionName, optionValue, SITE_CONFIG_KEY);
+    public boolean updateSiteConfig(String optionName, String newOptionValue) {
+        return updateOption(optionName, newOptionValue, SITE_CONFIG_KEY);
     }
 
     @Override
-    public Integer updateOption(String optionName, String optionValue, String optionGroup) {
-        Integer result = 0;
+    public boolean updateOption(String optionName, String optionValue, String optionGroup) {
+        boolean result = false;
         try {
             Map paramMap = new HashMap();
             paramMap.put("optionName", optionName);
             paramMap.put("optionValue", optionValue);
             paramMap.put("optionGroup", optionGroup);
-            result = commonDAO.update("updateOptionByGroup", paramMap);
+            int count = commonDAO.update("updateOptionByGroup", paramMap);
+            if (count > 0) {
+                result = true;
+            }
         } catch (Exception e) {
             logger.error("获取站点配置异常", e);
         }
