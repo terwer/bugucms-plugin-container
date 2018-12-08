@@ -1,12 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration debug="false">
+    <!--使用spring扩展profile支持，要以logback-spring.xml命名-->
+    <springProfile name="dev">
+        <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+        <property name="logFilePath" value="/home/terwer/IdeaProjects/bugucms-plugin-container/logs" />
+    </springProfile>
+    <springProfile name="pro">
+        <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
+        <property name="logFilePath" value="${catalina.base}/logs" />
+    </springProfile>
+
+    <property name="log.context.name" value="BugucmsApplication" />
+    <property name="log.charset" value="UTF-8" />
+
     <!-- 设置上下文名称 -->
     <contextName>${log.context.name}</contextName>
 
-    <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-    <property name="LOG_PATH" value="log" />
-    <property name="log.context.name" value="BugucmsApplication" />
-    <property name="log.charset" value="UTF-8" />
     <!-- Log4j: [S][%d{yyyyMMdd HH:mm:ss}][%-5p][%C:%L] - %m%n -->
     <!--格式化输出：%d表示日期，%thread表示线程名，%-5level：级别从左显示5个字符宽度%msg：日志消息，%n是换行符-->
     <property name="log.pattern" value="%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n" />
@@ -39,7 +48,7 @@
     <!-- 程序运行日志记录-3天-->
     <appender name="INFO_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_PATH}/info/info-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${logFilePath}/bugucms-info-%d{yyyy-MM-dd}.log</FileNamePattern>
             <MaxHistory>3</MaxHistory>  <!--保存天数  -->
         </rollingPolicy>
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -49,7 +58,7 @@
     <!-- 错误日志记录-15天 -->
     <appender name="ERROR_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <FileNamePattern>${LOG_PATH}/error/error-%d{yyyy-MM-dd}.log</FileNamePattern>
+            <FileNamePattern>${logFilePath}/bugucms-error-%d{yyyy-MM-dd}.log</FileNamePattern>
             <MaxHistory>15</MaxHistory>
         </rollingPolicy>
         <filter class="ch.qos.logback.classic.filter.LevelFilter">

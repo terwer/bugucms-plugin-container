@@ -2,7 +2,6 @@ package com.terwergreen.bugucms;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
-import com.terwergreen.util.PropertyUtil;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +9,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
-import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 
@@ -22,10 +20,10 @@ public class BugucmsApplication {
 
     public static void main(String[] args) {
         // 获取项目的配置类型
-        WebApplicationType applicationType = PropertyUtil.readProperty("bugucms.web.application-type").equals("servlet") ? WebApplicationType.SERVLET : WebApplicationType.REACTIVE;
+        // WebApplicationType applicationType = PropertyUtil.readProperty("bugucms.web.application-type").equals("servlet") ? WebApplicationType.SERVLET : WebApplicationType.REACTIVE;
         //设置应用类型
         SpringApplication springApplication = new SpringApplication(BugucmsApplication.class);
-        springApplication.setWebApplicationType(applicationType);
+        // springApplication.setWebApplicationType(applicationType);
         springApplication.run(args);
     }
 
