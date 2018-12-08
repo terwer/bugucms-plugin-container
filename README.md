@@ -1,12 +1,13 @@
 # bugucms
-轻量级、插件化的内容管理系统
+
+轻量级，插件化的内容管理系统
 
 #### 安装教程
 
-1. 构建war包
+> 构建war包
 
 ```
-mvn package -DskipTests
+mvn clean package -DskipTests
 ```
 
 部署
@@ -15,7 +16,7 @@ mvn package -DskipTests
 scp ROOT.war /mnt/d/Software/apache-tomcat-9.0.13/webapps
 ```
 
-2. 安装到本地maven库
+> 安装到本地maven库
 
 ## war包
 
