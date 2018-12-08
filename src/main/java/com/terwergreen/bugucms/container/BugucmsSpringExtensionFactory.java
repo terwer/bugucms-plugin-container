@@ -45,9 +45,8 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
             logger.debug("无法获取扩展点" + extensionClass);
         }
         if (null == extension) {
-            logger.info("扩展点不存在，创建扩展点：" + extension);
-            // 设置扩展点上下文
-            logger.info("Created PluginInterface instance:" + extensionClass.getName());
+            // 创建扩展点
+            logger.info("扩展点不存在，创建扩展点:" + extensionClass.getName());
             extension = ReflectUtil.newInstance(extensionClass, new Class[]{GenericApplicationContext.class}, new Object[]{applicationContext});
             // 注入扩展到插件上下文
             if (autowire && extension != null) {
@@ -55,8 +54,7 @@ public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
                 if (pluginWrapper != null) {
                     Plugin plugin = pluginWrapper.getPlugin();
                     if (plugin instanceof BugucmsPlugin) {
-                        // 将插件上下文设置为和容器一致
-                        logger.debug("BugucmsSpringExtensionFactory.create()，将插件上下文设置为和容器一致");
+                        logger.info("注入扩展到插件上下文：" + extension);
                         ApplicationContext pluginContext = ((BugucmsPlugin) plugin).getApplicationContext();
                         pluginContext.getAutowireCapableBeanFactory().autowireBean(extension);
                     }

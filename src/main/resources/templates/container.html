@@ -16,11 +16,10 @@
     <link th:href="@{/webjars/layui/css/layui.css}" rel="stylesheet" type="text/css"/>
     <style type="text/css">
         .text-cernter {
-            font-family: "Microsoft YaHei", "Courier New", Consolas, Georgia, 'Times New Roman';
+            font-family: "Microsoft YaHei", "DejaVu Sans Mono", Consolas, "Courier New", Georgia, 'Times New Roman';
             text-align: center;
             font-size: 80px;
             font-weight: 700;
-            line-height: 80px;
         }
 
         .info {
@@ -33,47 +32,61 @@
             font-weight: normal;
         }
 
+        h1 {
+            line-height: 80px;
+            margin-top: 200px;
+        }
+
+        h3 {
+            line-height: 24px;
+            margin-top: 50px;
+        }
+
         p {
             text-align: center;
+            line-height: 20px;
         }
     </style>
 </head>
 <body>
-<h1 class="text-cernter">BuguCMS Container </h1>
-<h1 class="text-cernter">is serving...</h1>
+<h1 class="text-cernter">BuguCMS Container <br/>is serving...</h1>
 <h3 class="text-cernter info" th:text="${info}"></h3>
 <h3 class="text-cernter info"><a th:href="@{/plugins}">插件信息</a></h3>
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
 <h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
+<h3 class="text-cernter info"><a th:href="@{/swagger-ui.html}" target="_blank">Api文档</a></h3>
+<h3 class="text-cernter info"><a th:href="@{/druid/index.html}" target="_blank">druid数据库连接池监控</a></h3>
 
-<div sec:authorize="!hasRole('ROLE_ADMIN')">
-    <p th:if="${!isAdmin}">
-        <a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>
-    </p>
-</div>
+<h3>
+    <div sec:authorize="!hasRole('ROLE_ADMIN')">
+        <p th:if="${!isAdmin}">
+            <a th:href="@{/auth/login}"><i class="iconfont"></i>登录</a>
+        </p>
+    </div>
 
-<div sec:authorize="isAuthenticated()">
-    <div th:if="${isLogin}">
-        <p>当前登录用户:
-            <span sec:authentication="name"></span>
-            <span th:text="${username}"/>|
-            角色:
-            <span sec:authentication="principal.authorities"></span>
-            <span th:each="role,roleStat:${roles}">
+    <div sec:authorize="isAuthenticated()">
+        <div th:if="${isLogin}">
+            <p>当前登录用户:
+                <span sec:authentication="name"></span>
+                <span th:text="${username}"/>|
+                角色:
+                <span sec:authentication="principal.authorities"></span>
+                <span th:each="role,roleStat:${roles}">
                 <span th:text="${role}"></span>
             </span>
-        </p>
-        <p>
-            <a th:href="@{/logout}"><i class="iconfont"></i>注销</a>
-        </p>
+            </p>
+            <p>
+                <a th:href="@{/logout}"><i class="iconfont"></i>注销</a>
+            </p>
+        </div>
     </div>
-</div>
 
-<div sec:authorize="hasRole('ROLE_ADMIN')">
-    <div th:if="${isAdmin}">
-        <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <div th:if="${isAdmin}">
+            <p class="text-cernter info"><a th:href="@{|/${adminPath}|}">后台管理</a></p>
+        </div>
     </div>
-</div>
+</h3>
 
 <!-- jquery -->
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
