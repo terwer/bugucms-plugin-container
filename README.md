@@ -21,13 +21,13 @@ scp ROOT.war /mnt/d/Software/apache-tomcat-9.0.13/webapps
 ## war包
 
 ```
-mvn install:install-file -Dfile=target/ROOT.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.6 -Dpackaging=war
+mvn install:install-file -Dfile=target/ROOT.war -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.7 -Dpackaging=war
 ```
 
 ## 当做parent引用的pom.xml
 
 ```
-mvn install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.6 -Dpackaging=pom
+mvn install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=2.0.7 -Dpackaging=pom
 ```
 
 ![BuguCMS](logo.jpg)
@@ -71,7 +71,7 @@ bootstrap 3.3.7
 
 # 启动
 ## 注意
-（1）ojdbc6.jar需要手动安装，在项目的lib目录下，需要用命令```mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.6 -Dpackaging=jar -Dfile=ojdbc6.jar```安装        
+（1）ojdbc6.jar需要手动安装，在项目的lib目录下，需要用命令```mvn install:install-file -DgroupId=com.oracle -DartifactId=ojdbc6 -Dversion=11.2.0.7 -Dpackaging=jar -Dfile=ojdbc6.jar```安装        
 （2）Spring Boot 默认将 /webjars/** 映射到 classpath:/META-INF/resources/webjars/ ，根据访问资源的规则，在JSP页面中引入jquery.js的方法为：
 ```
 <script type="text/javascript" th:src="@{/webjars/jquery/1.10.1/jquery.js}"></script>
