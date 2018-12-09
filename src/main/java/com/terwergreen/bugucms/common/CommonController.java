@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -48,8 +49,12 @@ public class CommonController {
     private BugucmsPluginManager pluginManager;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index(Model model) {
+    public ModelAndView index() {
+        return new ModelAndView("redirect:/blog");
+    }
 
+    @RequestMapping(value = "main", method = RequestMethod.GET)
+    public String main(Model model) {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         logger.info("current username: " + auth.getName());
         model.addAttribute("username", auth.getName());
@@ -72,11 +77,6 @@ public class CommonController {
         model.addAttribute("pluginInfo", pluginInfo);
         logger.info("容器运行正常");
         return "container";
-    }
-
-    @RequestMapping(value = "main", method = RequestMethod.GET)
-    public String main(Model model) {
-        return index(model);
     }
 
     @ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
