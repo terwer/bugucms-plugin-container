@@ -6,7 +6,7 @@
     <groupId>com.terwergreen</groupId>
     <artifactId>bugucms-plugin-container</artifactId>
     <version>2.0.6</version>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <name>bugucms-plugin-container</name>
     <description>light-weight,pluggable cms</description>
@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.terwergreen</groupId>
         <artifactId>shared-plugin-interfaces</artifactId>
-        <version>4.1.11</version>
+        <version>4.1.12</version>
         <relativePath/>
     </parent> <!-- 自定义插件接口（需要安装jar包到本地maven库，详情请看README.md）-->
 
