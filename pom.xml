@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.terwergreen</groupId>
         <artifactId>shared-plugin-interfaces</artifactId>
-        <version>4.1.10</version>
+        <version>4.1.11</version>
         <relativePath/>
     </parent> <!-- 自定义插件接口（需要安装jar包到本地maven库，详情请看README.md）-->
 
