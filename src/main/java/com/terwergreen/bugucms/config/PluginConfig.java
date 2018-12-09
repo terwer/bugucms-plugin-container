@@ -7,6 +7,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
@@ -37,45 +38,22 @@ public class PluginConfig {
 
     @Value("${bugucms.plugin-switch}")
     private boolean pluginSwitch;
-    @Value("${pf4j.mode}")
-    private String pf4jMode;
-    @Value("${pf4j.plugins-dir}")
-    private String pf4jPluginsDir;
+
+    @Autowired
+    private BugucmsPluginManager pluginManager;
 
     public PluginConfig() {
         logger.info("插件配置开始");
     }
 
-    /**
-     * 插件注入入口，注释此方法则插件功能关闭
-     *
-     * @return BugucmsPluginManager
-     */
-    @Bean
-    public BugucmsPluginManager pluginManager() {
-        logger.info("插件功能状态:" + (pluginSwitch ? "开启" : "关闭"));
-        if (pluginSwitch) {
-            // 插件开启，先设置环境变量
-            System.setProperty("pf4j.mode", pf4jMode.equals("dev") ? RuntimeMode.DEVELOPMENT.toString() : RuntimeMode.DEPLOYMENT.toString());
-            System.setProperty("pf4j.pluginsDir", pf4jPluginsDir);
-            // 创建插件管理器
-            logger.info("创建插件管理器");
-            Path pluginsRoot = Paths.get(pf4jPluginsDir);
-            logger.info("插件路径为：" + pluginsRoot.toUri().toString());
-            return new BugucmsPluginManager(pluginsRoot);
-        }
-        return null;
-    }
-
     @Bean
     public RouterFunction<?> pluginEndpoints() {
         if (pluginSwitch) {
-            BugucmsPluginManager pm = pluginManager();
-            logger.debug("Load pluginEndpoints,pluginManager is:" + pm);
-            List<PluginInterface> pluginExtentions = pm.getExtensions(PluginInterface.class);
+            logger.debug("Load pluginEndpoints,pluginManager is:" + pluginManager);
+            List<PluginInterface> pluginExtentions = pluginManager.getExtensions(PluginInterface.class);
             logger.info("Load pluginExtentions from plugins:" + pluginExtentions);
             //注册RouterFunction模式的webFlux
-            RouterFunction<?> webFlux = getReactiveRoutes(pm);
+            RouterFunction<?> webFlux = getReactiveRoutes(pluginManager);
             return webFlux;
         }
         return null;
