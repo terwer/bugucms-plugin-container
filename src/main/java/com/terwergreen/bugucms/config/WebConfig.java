@@ -56,17 +56,24 @@ public class WebConfig implements WebMvcConfigurer {
         for (PluginWrapper pluginWrapper : plugins) {
             // 静态资源目录
             String pluginStaticPath = "static/";
-            // 虚拟路径
-            String prefix = pluginWrapper.getPluginId().replace("-plugin", "");
-            String virtualPath = "/" + prefix + "/" + pluginStaticPath + "**";
-            // 实际路径
-            String absPath = pluginWrapper.getPluginClassLoader().getResource(".").getPath();
-            String pluginResourceLocation = "file://" + absPath + pluginStaticPath;
-            // 注册路径到Web上下文
-            registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation);
-            // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
+            registerPluginStaticResource(registry, pluginWrapper, pluginStaticPath);
 
-            logger.info("添加插件静态资源映射，from " + virtualPath + " to " + pluginResourceLocation);
+            // 模板资源目录
+            String pluginTemplatePath = "templates/";
+            registerPluginStaticResource(registry, pluginWrapper, pluginTemplatePath);
         }
+    }
+
+    private void registerPluginStaticResource(ResourceHandlerRegistry registry, PluginWrapper pluginWrapper, String pluginResourcePath) {
+        // 虚拟路径
+        String prefix = pluginWrapper.getPluginId().replace("-plugin", "");
+        String virtualPath = "/" + prefix + "/" + pluginResourcePath + "**";
+        // 实际路径
+        String absPath = pluginWrapper.getPluginClassLoader().getResource(".").getPath();
+        String pluginResourceLocation = "file://" + absPath + pluginResourcePath;
+        // 注册路径到Web上下文
+        registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation);
+        // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
+        logger.info("添加插件静态资源映射，from " + virtualPath + " to " + pluginResourceLocation);
     }
 }

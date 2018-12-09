@@ -13,7 +13,8 @@
     <meta charset="UTF-8">
     <title>BuguCMS</title>
     <link th:href="@{/static/favicon.ico}" rel="shortcut icon" type="image/vnd.microsoft.icon"/>
-    <link th:href="@{/webjars/layui/css/layui.css}" rel="stylesheet" type="text/css"/>
+    <!-- bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <style type="text/css">
         .text-cernter {
             font-family: "Microsoft YaHei", "DejaVu Sans Mono", Consolas, "Courier New", Georgia, 'Times New Roman';
@@ -34,7 +35,7 @@
 
         h1 {
             line-height: 80px;
-            margin-top: 200px;
+            margin-top: 120px;
         }
 
         h3 {
@@ -47,9 +48,13 @@
             line-height: 20px;
         }
     </style>
+    <script type="text/javascript" th:inline="javascript">
+        //设置项目根路径
+        window.BUGUCMS_BASE_URL = /*[[@{/}]]*/'/';
+    </script>
 </head>
 <body>
-<h1 class="text-cernter">BuguCMS Container <br/>is serving...</h1>
+<h1 class="text-cernter">容器成功运行中...</h1>
 <h3 class="text-cernter info" th:text="${info}"></h3>
 <h3 class="text-cernter info"><a th:href="@{/api/plugins}">插件信息</a></h3>
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
@@ -91,7 +96,7 @@
 
 <!-- jquery -->
 <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
-<!-- layui -->
-<script type="text/javascript" th:src="@{/webjars/layui/layui.js}"></script>
+<!-- bootstrap -->
+<script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
 </body>
 </html>

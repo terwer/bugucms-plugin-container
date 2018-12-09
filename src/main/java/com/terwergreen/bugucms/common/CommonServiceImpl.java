@@ -6,6 +6,7 @@ import com.terwergreen.pojo.SiteConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -29,6 +30,9 @@ public class CommonServiceImpl implements CommonService {
     @Autowired
     private CommonDAO commonDAO;
 
+    @Value("${bugucms.web.admin-path}")
+    private String adminPath;
+
     @Override
     public SiteConfig getSiteConfig() {
         SiteConfig siteConfig = null;
@@ -36,6 +40,12 @@ public class CommonServiceImpl implements CommonService {
             Map paramMap = new HashMap();
             paramMap.put("optionGroup", SITE_CONFIG_KEY);
             siteConfig = (SiteConfig) commonDAO.querySingleByMap("getSiteConfig", paramMap);
+            if (!siteConfig.getAdminpath().equals(adminPath)) {
+                logger.info("从配置文件读取后台管理路径");
+                siteConfig.setAdminpath(adminPath);
+                // 更新数据库
+                updateSiteConfig("adminPath", adminPath);
+            }
         } catch (Exception e) {
             logger.error("获取配置项异常", e);
         }
@@ -46,12 +56,19 @@ public class CommonServiceImpl implements CommonService {
     public Object getSiteConfigItem(String optionName) {
         String result = null;
         try {
-            Map paramMap = new HashMap();
-            paramMap.put("optionGroup", SITE_CONFIG_KEY);
-            paramMap.put("optionName", optionName);
-            Map resultMap = (Map) commonDAO.querySingleByMap("getOptionByGroup", paramMap);
-            if (null != resultMap) {
-                result = (String) resultMap.get("optionValue");
+            if (optionName.equals("adminPath")) {
+                logger.info("从配置文件读取后台管理路径");
+                result = adminPath;
+                // 更新数据库
+                updateSiteConfig("adminPath", adminPath);
+            } else {
+                Map paramMap = new HashMap();
+                paramMap.put("optionGroup", SITE_CONFIG_KEY);
+                paramMap.put("optionName", optionName);
+                Map resultMap = (Map) commonDAO.querySingleByMap("getOptionByGroup", paramMap);
+                if (null != resultMap) {
+                    result = (String) resultMap.get("optionValue");
+                }
             }
         } catch (Exception e) {
             logger.error("获取配置项异常", e);
