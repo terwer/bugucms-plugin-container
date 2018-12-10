@@ -22,9 +22,6 @@ import org.springframework.transaction.annotation.TransactionManagementConfigure
 
 import javax.sql.DataSource;
 import java.io.File;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -85,44 +82,41 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
                 // 实际路径
                 String absPath = pluginWrapper.getPluginClassLoader().getResource(".").getPath();
                 String pluginMappersLocation = absPath + pluginMappersPath;
-                Path path = Paths.get(pluginMappersLocation);
-                logger.info("plugins mappers location:" + pluginMappersLocation);
-                if (Files.exists(path)) {
-                    // 添加插件mappers文件映射
-                    String filePath = "file://" + pluginMappersLocation + "/*.xml";
-                    logger.info("添加" + pluginWrapper.getPluginId() + "插件mappers文件映射:" + filePath);
-                    Resource[] pluginResources = resolver.getResources(filePath);
-                    if (pluginResources.length > 0) {
-                        logger.info("找到mappers映射文件,合并");
-                        resources = ArrayUtils.addAll(resources, pluginResources);
-                    }
+                // 添加插件mappers文件映射
+                String filePath = "file://" + pluginMappersLocation + "/*.xml";
+                logger.info("plugins mappers location:" + filePath);
+                logger.info("添加" + pluginWrapper.getPluginId() + "插件mappers文件映射:" + filePath);
+                Resource[] pluginResources = resolver.getResources(filePath);
+                if (pluginResources.length > 0) {
+                    logger.info("找到mappers映射文件,合并");
+                    resources = ArrayUtils.addAll(resources, pluginResources);
                 }
 
-//                // 映射classType
-//                String pojoPath = absPath + "com/terwergreen/plugins/" + prefix + "/pojo";
-//                File file = new File(pojoPath);
-//                File[] tempList = file.listFiles();
-//                if (null != tempList && tempList.length > 0) {
-//                    for (File f : tempList) {
-//                        if (f.getName().endsWith(".class")) {
-//                            String fullName = "com.terwergreen.plugins." + prefix + ".pojo." + f.getName().replace(".class", "");
-//                            Class clazz = Class.forName(fullName, true, pluginWrapper.getPluginClassLoader());
-//                            if (null != clazz) {
-//                                logger.info("映射类型：" + clazz);
-//                                clazzes.add(clazz);
-//                            }
-//                        }
-//                    }
-//                }
+                // 映射classType
+                String pojoPath = absPath + "com/terwergreen/plugins/" + prefix + "/pojo";
+                File file = new File(pojoPath);
+                File[] tempList = file.listFiles();
+                if (null != tempList && tempList.length > 0) {
+                    for (File f : tempList) {
+                        if (f.getName().endsWith(".class")) {
+                            String fullName = "com.terwergreen.plugins." + prefix + ".pojo." + f.getName().replace(".class", "");
+                            Class clazz = Class.forName(fullName, true, pluginWrapper.getPluginClassLoader());
+                            if (null != clazz) {
+                                logger.info("映射类型：" + clazz);
+                                clazzes.add(clazz);
+                            }
+                        }
+                    }
+                }
             }
             logger.info("合并完成：" + resources);
             sqlSessionFactory.setMapperLocations(resources);
 
-//            Class[] typeAliases = new Class[clazzes.size()];
-//            typeAliases = clazzes.toArray(typeAliases);
-//            sqlSessionFactory.setTypeAliases(typeAliases);
-//            // sqlSessionFactory.setTypeAliasesPackage("com.terwergreen.pojo");
-//            // sqlSessionFactory.setTypeAliasesPackage("com.terwergreen.plugins.blog.pojo");
+            Class[] typeAliases = new Class[clazzes.size()];
+            typeAliases = clazzes.toArray(typeAliases);
+            sqlSessionFactory.setTypeAliases(typeAliases);
+            // sqlSessionFactory.setTypeAliasesPackage("com.terwergreen.pojo");
+            // sqlSessionFactory.setTypeAliasesPackage("com.terwergreen.plugins.blog.pojo");
 
             return sqlSessionFactory.getObject();
         } catch (Exception e) {
