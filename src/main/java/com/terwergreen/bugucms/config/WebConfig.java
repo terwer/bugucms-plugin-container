@@ -46,7 +46,7 @@ public class WebConfig implements WebMvcConfigurer {
         // swagger-ui
         registry.addResourceHandler("swagger-ui.html").addResourceLocations("classpath:/META-INF/resources/");
         // webjars资源映射
-        registry.addResourceHandler("/webjars/**").addResourceLocations("/webjars/")
+        registry.addResourceHandler("/webjars/**").addResourceLocations("classpath:/META-INF/resources/webjars/")
                 .resourceChain(false)
                 .addResolver(new WebJarsResourceResolver())
                 .addResolver(new PathResourceResolver());
@@ -61,9 +61,20 @@ public class WebConfig implements WebMvcConfigurer {
             // 模板资源目录
             String pluginTemplatePath = "templates/";
             registerPluginStaticResource(registry, pluginWrapper, pluginTemplatePath);
+
+            // WarJars资源目录
+            String webjarsPath = "webjars/";
+            registerPluginMetaInfResource(registry, pluginWrapper, webjarsPath);
         }
     }
 
+    /**
+     * 注册静态资源映射
+     *
+     * @param registry
+     * @param pluginWrapper
+     * @param pluginResourcePath
+     */
     private void registerPluginStaticResource(ResourceHandlerRegistry registry, PluginWrapper pluginWrapper, String pluginResourcePath) {
         // 虚拟路径
         String prefix = pluginWrapper.getPluginId().replace("-plugin", "");
@@ -75,5 +86,21 @@ public class WebConfig implements WebMvcConfigurer {
         registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation);
         // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/static/");
         logger.info("添加插件静态资源映射，from " + virtualPath + " to " + pluginResourceLocation);
+    }
+
+    private void registerPluginMetaInfResource(ResourceHandlerRegistry registry, PluginWrapper pluginWrapper, String pluginResourcePath) {
+        // 虚拟路径
+        String prefix = pluginWrapper.getPluginId().replace("-plugin", "");
+        String virtualPath = "/" + prefix + "/" + pluginResourcePath + "**";
+        // 实际路径
+        String absPath = pluginWrapper.getPluginClassLoader().getResource(".").getPath();
+        String pluginResourceLocation = "file://" + absPath + "META-INF/resources/" + pluginResourcePath;
+        // 注册路径到Web上下文
+        registry.addResourceHandler(virtualPath).addResourceLocations(pluginResourceLocation)
+                .resourceChain(false)
+                .addResolver(new WebJarsResourceResolver())
+                .addResolver(new PathResourceResolver());
+        // registry.addResourceHandler("/auth/static/**").addResourceLocations("plugins/auth-plugin-1.0.0/classes/META-INF/resources/webjars/");
+        logger.info("添加META-INF资源映射，from " + virtualPath + " to " + pluginResourceLocation);
     }
 }
