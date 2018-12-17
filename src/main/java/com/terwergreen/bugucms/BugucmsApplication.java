@@ -4,7 +4,6 @@ import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
