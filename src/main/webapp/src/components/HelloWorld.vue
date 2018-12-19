@@ -12,6 +12,7 @@
       <li><a href="/main">插件容器</a></li>
       <li><a href="/blog">博客</a></li>
     </ul>
+    <v-selectpage :data="list" key-field="id" show-field="name" ></v-selectpage>
     <h3>Installed CLI Plugins</h3>
     <ul>
       <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
@@ -41,6 +42,14 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  data(){
+    return {
+      list: [
+        {id:1 ,name:'Chicago Bulls',desc:'芝加哥公牛'},
+        {id:2 ,name:'Cleveland Cavaliers',desc:'克里夫兰骑士'},
+      ]
+    }
   }
 }
 </script>
