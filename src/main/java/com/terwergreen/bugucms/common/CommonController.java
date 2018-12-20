@@ -27,9 +27,9 @@ import java.util.stream.Collectors;
  * 公共控制器
  *
  * @author Terwer
- * @version 1.0
- * 2018/11/26 18:05
+ * @version 1.0 2018/11/26 18:05
  **/
+@SuppressWarnings("all")
 @Controller
 @RequestMapping("/")
 public class CommonController {

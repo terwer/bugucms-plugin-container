@@ -47,6 +47,7 @@ import java.util.Map;
  * @version 1.0
  * 2018/6/22 15:55
  **/
+@SuppressWarnings("all")
 //@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('servlet') && ${bugucms.plugin-switch:true}")
 @EnableWebSecurity

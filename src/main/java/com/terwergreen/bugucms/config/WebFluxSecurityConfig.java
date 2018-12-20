@@ -33,6 +33,7 @@ import java.util.Map;
  * @version 1.0
  * 2018/6/22 15:55
  **/
+@SuppressWarnings("all")
 //@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "reactive")
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('reactive') && ${bugucms.plugin-switch:true}")
 @EnableWebFluxSecurity
