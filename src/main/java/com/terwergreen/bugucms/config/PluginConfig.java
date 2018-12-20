@@ -31,6 +31,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
  * @version 1.0
  * 2018/11/21 11:19
  **/
+@SuppressWarnings("all")
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class PluginConfig {

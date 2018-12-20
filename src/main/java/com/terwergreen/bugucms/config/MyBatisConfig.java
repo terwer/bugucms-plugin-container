@@ -28,6 +28,7 @@ import java.util.List;
 /**
  * MyBatis扫描路径配置
  */
+@SuppressWarnings("all")
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class MyBatisConfig implements TransactionManagementConfigurer {

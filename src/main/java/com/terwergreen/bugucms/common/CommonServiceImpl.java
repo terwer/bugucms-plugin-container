@@ -18,9 +18,9 @@ import java.util.Map;
  * 公共服务
  *
  * @author Terwer
- * @version 1.0
- * 2018/11/26 15:16
+ * @version 1.0 2018/11/26 15:16
  **/
+@SuppressWarnings("all")
 @Service
 public class CommonServiceImpl implements CommonService {
     private static final Log logger = LogFactory.getLog(CommonServiceImpl.class);

@@ -18,9 +18,9 @@ import java.util.Map;
  * 通用DAO的实现
  *
  * @author Terwer
- * @version 1.0
- * 2018/11/26 10:20
+ * @version 1.0 2018/11/26 10:20
  **/
+@SuppressWarnings("all")
 @Repository
 public class CommonDAOImpl implements CommonDAO {
     private static final Log logger = LogFactory.getLog(CommonDAOImpl.class);
