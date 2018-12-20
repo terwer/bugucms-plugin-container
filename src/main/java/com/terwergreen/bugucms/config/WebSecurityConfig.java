@@ -44,8 +44,7 @@ import java.util.Map;
  * 安全配置
  *
  * @author Terwer
- * @version 1.0
- * 2018/6/22 15:55
+ * @version 1.0 2018/6/22 15:55
  **/
 @SuppressWarnings("all")
 //@ConditionalOnProperty(name = "bugucms.web.application-type", havingValue = "servlet")
