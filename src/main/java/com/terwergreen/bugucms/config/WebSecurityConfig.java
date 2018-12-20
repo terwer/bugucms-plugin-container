@@ -18,6 +18,8 @@ package com.terwergreen.bugucms.config;
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
+import com.terwergreen.util.RestResponse;
+import com.terwergreen.util.RestResponseStates;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
@@ -28,19 +30,13 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationFailureHandler;
-import org.springframework.security.web.authentication.SimpleUrlAuthenticationSuccessHandler;
+import org.springframework.security.web.savedrequest.DefaultSavedRequest;
 import org.springframework.util.CollectionUtils;
 
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -111,6 +107,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             int securityOn = (int) data.getOrDefault("securityOn", 0);
             String adminPath = (String) data.getOrDefault("adminPath", "admin");
             String loginPath = (String) data.getOrDefault("loginPath", "login");
+            String loginProcessingUrl = (String) data.getOrDefault("loginProcessingUrl", "login");
+            String logoutUrl = (String) data.getOrDefault("logoutUrl", "logout");
+            String usernameParameter = (String) data.getOrDefault("usernameParameter", "username");
+            String passwordParameter = (String) data.getOrDefault("passwordParameter", "password");
+
             //配置权限及登录验证
             if (1 == securityOn) {
                 logger.info("授权打开");
@@ -121,15 +122,52 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                         .antMatchers("/" + adminPath + "/**").hasRole("ADMIN")
                         .and()
                         .formLogin()
-                        .loginPage("/" + loginPath + "")//.failureUrl("login?error")
-                        .loginProcessingUrl("/login")
-                        .usernameParameter("username")
-                        .passwordParameter("password")
-                        .successHandler(new AjaxAuthSuccessHandler())
-                        .failureHandler(new AjaxAuthFailHandler())
+                        .loginPage("/" + loginPath)
+                        .loginProcessingUrl("/" + loginProcessingUrl)
+                        .usernameParameter(usernameParameter)
+                        .passwordParameter(passwordParameter)
+                        .successHandler((request, response, authentication) -> {
+                            // 获取请求是从哪里来的
+                            String targetUrl = "/";
+                            DefaultSavedRequest defaultSavedRequest = (DefaultSavedRequest) request.getSession().getAttribute("SPRING_SECURITY_SAVED_REQUEST");
+                            if (defaultSavedRequest != null) {
+                                targetUrl = defaultSavedRequest.getRedirectUrl();
+                            }
+                            logger.info("targetUrl:" + targetUrl);
+
+                            Map resultMap = new HashMap();
+                            resultMap.put("targetUrl", targetUrl);
+
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            RestResponse restResponse = new RestResponse(RestResponseStates.SUCCESS.getValue(),"登陆成功",resultMap);
+                            String responseToClient = JSON.toJSONString(restResponse);
+                            response.getWriter().write(responseToClient);
+                            response.getWriter().flush();
+                        })
+                        .failureHandler((request, response, e) -> {
+                            logger.info("登陆失败，用户名或者密码错误");
+
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            RestResponse restResponse = new RestResponse(RestResponseStates.INVALID_PASSWORD.getValue(),"登陆失败，用户名或者密码错误",null);
+                            String responseToClient = JSON.toJSONString(restResponse);
+                            response.getWriter().write(responseToClient);
+                            response.getWriter().flush();
+                        })
                         .permitAll()
                         .and()
                         .logout()
+                        .logoutUrl("/" + logoutUrl)
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler((request, response, authentication) -> {
+                            String returnUrl = request.getParameter("returnUrl");
+                            logger.info("logout ok,redirect to previous page:" + returnUrl);
+                            response.sendRedirect(returnUrl);
+                        })
                         .permitAll();
             } else {
                 logger.info("授权关闭");
@@ -150,32 +188,3 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
     }
 }
-
-class AjaxAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
-    @Override
-    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        // 获取请求是从哪里来的
-        String referer = request.getParameter("referer");
-        String targetUrl = super.determineTargetUrl(request, response);
-        logger.info("referer from login page:" + referer);
-        logger.info("targetUrl from security:" + referer);
-        response.setStatus(HttpServletResponse.SC_OK);
-        response.setContentType("application/json");
-        request.setCharacterEncoding("UTF-8");
-        // String responseToClient = "{\"timestamp\":" + (new Date()).getTime() + ",\"status\":200,\"error\":\"\",\"message\":\"Authentication ok\",\"path\":\"/login\"}";
-        String responseToClient = "{\"timestamp\":" + (new Date()).getTime() + ",\"status\":200,\"error\":\"\",\"message\":\"Authentication ok\",\"path\":\"" + referer + "\"}";
-        response.getWriter().write(responseToClient);
-        response.getWriter().flush();
-    }
-}
-
-class AjaxAuthFailHandler extends SimpleUrlAuthenticationFailureHandler {
-    @Override
-    public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        // response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Authentication failed");
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "登陆失败，用户名或者密码错误");
-    }
-}
-
-
-
