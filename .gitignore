@@ -9,6 +9,8 @@
 .settings
 .springBeans
 .sts4-cache
+*.eml
+*.userlibraries
 
 ### IntelliJ IDEA ###
 .idea
