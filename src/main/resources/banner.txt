@@ -4,4 +4,4 @@
     | | / _ \| '__|\ \ /\ / // _ \| '__|
     | ||  __/| |    \ V  V /|  __/| |
     |_| \___||_|     \_/\_/  \___||_|
- :: ${AnsiColor.GREEN}Bugucms ::          (${AnsiColor.BRIGHT_RED}v2.0.7${AnsiColor.YELLOW}.SNAPSHORT)
+ :: ${AnsiColor.GREEN}Bugucms ::                  (${AnsiColor.BRIGHT_RED}v2.1.1${AnsiColor.YELLOW})

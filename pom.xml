@@ -5,7 +5,7 @@
 
     <groupId>com.terwergreen</groupId>
     <artifactId>bugucms-plugin-container</artifactId>
-    <version>2.0.7</version>
+    <version>2.1.1</version>
     <packaging>jar</packaging>
 
     <name>bugucms-plugin-container</name>
@@ -14,7 +14,7 @@
     <parent>
         <groupId>com.terwergreen</groupId>
         <artifactId>shared-plugin-interfaces</artifactId>
-        <version>4.1.12</version>
+        <version>4.1.13</version>
         <relativePath/>
     </parent> <!-- 自定义插件接口（需要安装jar包到本地maven库，详情请看README.md）-->
 
@@ -112,6 +112,7 @@
         </dependency>
 
         <!-- Web前端开发库 -->
+        <!-- webjars -->
         <dependency>
             <groupId>org.webjars</groupId>
             <artifactId>webjars-locator</artifactId>
@@ -176,6 +177,24 @@
     </dependencyManagement>
 
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/webapp</directory>
+                <!--注意此次必须要放在此目录下才能被访问到 -->
+                <targetPath>META-INF/resources</targetPath>
+                <includes>
+                    <include>dist/**</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <!-- compile -->
             <plugin>
