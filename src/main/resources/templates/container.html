@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
     <style type="text/css">
         .text-cernter {
-            font-family: "Microsoft YaHei", "DejaVu Sans Mono", Consolas, "Courier New", Georgia, 'Times New Roman';
+            font-family: "Microsoft YaHei", "DejaVu Sans Mono", Consolas, "Courier New", Georgia, 'Times New Roman',serif;
             text-align: center;
             font-size: 80px;
             font-weight: 700;
@@ -74,7 +74,7 @@
         <div th:if="${isLogin}">
             <p>当前登录用户:
                 <span sec:authentication="name"></span>
-                <span th:text="${username}"/>|
+                <span th:text="${username}"></span>|
                 角色:
                 <span sec:authentication="principal.authorities"></span>
                 <span th:each="role,roleStat:${roles}">
