@@ -1,8 +1,8 @@
 # ldp
 
-Lightweight Pluguable Development Plantform
+轻量级，插件化的开发平台
 
-# How to run
+# 运行
 
 ```
 cd $WORKSPACE/bugucms-plugin-container
