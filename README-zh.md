@@ -5,10 +5,13 @@
 # 运行
 
 ```
-cd $WORKSPACE/bugucms-plugin-container
+cd $WORKSPACE
 cd src/main/webapp
+npm get registry
+npm install
 npm run build
 
-cd $WORKSPACE/bugucms-plugin-container
+cd $WORKSPACE
+mvnw clean package
 mvnw spring-boot:run
 ```

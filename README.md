@@ -5,10 +5,13 @@ Lightweight Pluguable Development Plantform
 # How to run
 
 ```
-cd $WORKSPACE/bugucms-plugin-container
+cd $WORKSPACE
 cd src/main/webapp
+npm get registry
+npm install
 npm run build
 
-cd $WORKSPACE/bugucms-plugin-container
-mvn spring-boot:run
+cd $WORKSPACE
+mvnw clean package
+mvnw spring-boot:run
 ```
