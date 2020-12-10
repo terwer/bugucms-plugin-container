@@ -1,8 +1,8 @@
 # bugucms
 
-Lightweight Pluguable Development Plantform
+轻量级，插件化的开发平台
 
-# How to run
+# 运行
 
 ```
 cd $WORKSPACE/bugucms-plugin-container
@@ -10,5 +10,5 @@ cd src/main/webapp
 npm run build
 
 cd $WORKSPACE/bugucms-plugin-container
-mvn spring-boot:run
+mvnw spring-boot:run
 ```
