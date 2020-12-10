@@ -115,7 +115,7 @@ public class CommonServiceImpl implements CommonService {
                 result = true;
             }
         } catch (Exception e) {
-            logger.error("获取站点配置异常", e);
+            logger.error("更新站点配置异常", e);
         }
         return result;
     }

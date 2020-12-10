@@ -4,6 +4,8 @@ import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -24,6 +26,7 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * MyBatis扫描路径配置
@@ -134,5 +137,24 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     @Bean
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean
+    public DatabaseIdProvider getDatabaseIdProvider() {
+        DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();
+        Properties properties = new Properties();
+        properties.setProperty("Oracle", "oracle");
+        properties.setProperty("MySQL", "mysql");
+        properties.setProperty("DB2", "db2");
+        properties.setProperty("Derby", "derby");
+        properties.setProperty("H2", "h2");
+        properties.setProperty("HSQL", "hsql");
+        properties.setProperty("Informix", "informix");
+        properties.setProperty("Microsoft SQL Server", "sqlserver");
+        properties.setProperty("PostgreSQL", "postgresql");
+        properties.setProperty("Sybase", "sybase");
+        properties.setProperty("Hana", "hana");
+        databaseIdProvider.setProperties(properties);
+        return databaseIdProvider;
     }
 }

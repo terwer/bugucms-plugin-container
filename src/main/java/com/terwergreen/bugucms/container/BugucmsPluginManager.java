@@ -1,9 +1,12 @@
 package com.terwergreen.bugucms.container;
 
+import com.terwergreen.core.CommonService;
+import com.terwergreen.pojo.SiteConfig;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.ExtensionFactory;
 import org.pf4j.spring.SpringPluginManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 
 import javax.annotation.PostConstruct;
@@ -18,6 +21,9 @@ import java.nio.file.Path;
  **/
 public class BugucmsPluginManager extends SpringPluginManager {
     private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
+
+    @Autowired
+    private CommonService commonService;
 
     public BugucmsPluginManager(Path pluginsRoot) {
         super(pluginsRoot);
@@ -51,6 +57,9 @@ public class BugucmsPluginManager extends SpringPluginManager {
         BugucmsExtensionsInjector extensionsInjector = new BugucmsExtensionsInjector(this, beanFactory);
         logger.info("注册插件到上下文");
         extensionsInjector.injectExtensions();
+
+//        SiteConfig siteConfig = commonService.getSiteConfig();
+//        logger.debug("s"+siteConfig);
 
         logger.info("插件初始化完毕");
     }
