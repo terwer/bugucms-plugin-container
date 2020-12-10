@@ -1,4 +1,4 @@
-# ldp
+# bugucms
 
 轻量级，插件化的开发平台
 
@@ -10,5 +10,5 @@ cd src/main/webapp
 npm run build
 
 cd $WORKSPACE/bugucms-plugin-container
-mvn spring-boot:run
+mvnw spring-boot:run
 ```
