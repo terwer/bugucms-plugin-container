@@ -24,7 +24,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is already running. pid=${pid} ."
   else
-    java -jar ${APP_NAME}
+    java -jar ${APP_NAME} &
     echo "${APP_NAME} start success"
   fi
 }
