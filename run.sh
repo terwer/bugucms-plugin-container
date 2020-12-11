@@ -22,7 +22,7 @@ npm run build
 
 cd $WORKSPACE
 chmod +x mvnw
-./mvnw clean package -V -e
+./mvnw clean package -DskipTests -V -e
 echo "current user:"
 whoami
 sudo ./mvnw spring-boot:run
