@@ -25,5 +25,10 @@ chmod +x mvnw
 ./mvnw clean package -DskipTests -V -e
 echo "current user:"
 whoami
+echo "stoping previous application..."
+sudo ./mvnw spring-boot:stop
+echo "previous application stoped."
+echo "starting previus application..."
 sudo ./mvnw spring-boot:run &
+echo "application started."
 echo "finish."
