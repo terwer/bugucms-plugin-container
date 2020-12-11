@@ -1,4 +1,3 @@
--- drop table if exists bg_options;
 create table if not exists bg_options (
     option_id  bigint unsigned auto_increment comment '配置ID'
         primary key,
