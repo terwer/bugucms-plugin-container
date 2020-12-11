@@ -40,7 +40,7 @@ whoami
 APP_PATH=$WORKSPACE/target
 cd $APP_PATH
 pwd
-chmod +x springboot.sh
+chmod +x classes/springboot.sh
 sh classes/springboot.sh restart
 
 
