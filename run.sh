@@ -23,4 +23,4 @@ npm run build
 cd $WORKSPACE
 chmod +x mvnw
 ./mvnw clean package -V -e
-sudo ./mvnw spring-boot:run
+echo "CBGtyw105036" |sudo -S ./mvnw spring-boot:run
