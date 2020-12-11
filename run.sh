@@ -25,5 +25,4 @@ chmod +x mvnw
 ./mvnw clean package -V -e
 echo "current user:"
 whoami
-# su root
-# echo "CBGtyw105036" |sudo -S ./mvnw spring-boot:run
+sudo ./mvnw spring-boot:run
