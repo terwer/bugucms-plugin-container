@@ -32,3 +32,14 @@ whoami
 #sudo ./mvnw spring-boot:run &
 #echo "application started."
 #echo "finish."
+#export LANG=en_US.UTF-8
+#export JAVA_HOME=/etc/java/java-1.8.0-openjdk/java-1.8.0-openjdk-1.8.0.272.b10-3.el8_3.x86_64
+#export PATH=$JAVA_HOME/bin:$PATH
+#export MALLOC_ARENA_MAX=4
+#JAVA_OPTS="-server -Xms1024m -Xmx1024m -Xss256k -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=384m -XX:NewSize=512m -XX:MaxNewSize=512m -XX:SurvivorRatio=8"
+APP_PATH=$WORKSPACE/target
+cd $APP_PATH
+pwd
+sh springboot.sh restart
+
+
