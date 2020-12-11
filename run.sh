@@ -25,4 +25,5 @@ chmod +x mvnw
 ./mvnw clean package -DskipTests -V -e
 echo "current user:"
 whoami
-sudo ./mvnw spring-boot:run
+sudo ./mvnw spring-boot:run &
+echo "finish."
