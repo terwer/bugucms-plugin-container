@@ -51,18 +51,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
 
-        // 分页插件(这里配置无效，需要在配置文件配置)
-        // PageInterceptor pageInterceptor = new PageInterceptor();
-        // Properties properties = new Properties();
-        // properties.setProperty("reasonable", "true");
-        // properties.setProperty("supportMethodsArguments", "true");
-        // properties.setProperty("returnPageInfo", "check");
-        // properties.setProperty("params", "count=countSql");
-        // properties.setProperty("helperDialect", "mysql");
-        // pageInterceptor.setProperties(properties);
-        // 添加插件
-        // sqlSessionFactory.setPlugins(new Interceptor[]{pageInterceptor});
-
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
@@ -76,7 +64,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
                 pluginManager = (BugucmsPluginManager) applicationContext.getBean("pluginManager");
             }
             // 插件mappers映射文件
-            List<PluginWrapper> plugins = pluginManager.getStartedPlugins();
+            List<PluginWrapper> plugins = pluginManager.getResolvedPlugins();
             ArrayList<Class> clazzes = new ArrayList<>();
             for (PluginWrapper pluginWrapper : plugins) {
                 // mappers文件目录
