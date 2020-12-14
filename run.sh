@@ -1,3 +1,4 @@
+APP_VERSION=2.1.1
 echo 'current workspace:'
 echo $WORKSPACE
 cd $WORKSPACE
@@ -22,7 +23,12 @@ npm run build
 
 cd $WORKSPACE
 chmod +x mvnw
+# 打包
 ./mvnw clean package -DskipTests -V -e
+# 安装提供给插件引用的pom
+./mvnw install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=${APP_VERSION} -Dpackaging=pom
+sudo ./mvnw install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=${APP_VERSION} -Dpackaging=pom
+# 配置环境并启动
 echo "current user:"
 whoami
 #echo "stoping previous application..."
