@@ -25,11 +25,13 @@ import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.savedrequest.DefaultSavedRequest;
@@ -62,6 +64,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private BugucmsPluginManager pluginManager;
+
+    @Autowired
+    private ApplicationContext applicationContext;
 
     /**
      * 获取密码加密策略
@@ -141,7 +146,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
                             response.setCharacterEncoding("UTF-8");
-                            RestResponse restResponse = new RestResponse(RestResponseStates.SUCCESS.getValue(),"登陆成功",resultMap);
+                            RestResponse restResponse = new RestResponse(RestResponseStates.SUCCESS.getValue(), "登陆成功", resultMap);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);
                             response.getWriter().flush();
@@ -152,7 +157,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
                             response.setCharacterEncoding("UTF-8");
-                            RestResponse restResponse = new RestResponse(RestResponseStates.INVALID_PASSWORD.getValue(),"登陆失败，用户名或者密码错误",null);
+                            RestResponse restResponse = new RestResponse(RestResponseStates.INVALID_PASSWORD.getValue(), "登陆失败，用户名或者密码错误", null);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);
                             response.getWriter().flush();
@@ -182,9 +187,22 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         logger.info("WebMVC Security config password");
-        //内存中缓存权限数据
-        auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("123456")).roles("ADMIN");
-        String encodePassword = passwordEncoder.encode("123456");
-        logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
+        // 数据库认证参考
+        // https://www.cnblogs.com/niechen/p/9163590.html
+        UserDetailsService userService = null;
+        try {
+            userService = (UserDetailsService) applicationContext.getBean("userService");
+        } catch (Exception e) {
+            logger.warn("数据库认证失败，请检查配置");
+        }
+        if (null != userService) {
+            auth.userDetailsService(userService);
+            logger.info("WebMVC Security 数据库认证:" + userService);
+        } else {
+            //内存中缓存权限数据
+            auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("123456")).roles("ADMIN");
+            String encodePassword = passwordEncoder.encode("123456");
+            logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
+        }
     }
 }
