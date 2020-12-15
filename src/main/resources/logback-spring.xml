@@ -71,6 +71,9 @@
         </layout>
     </appender>
 
+    <!-- 自定义日志级别 -->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace"/>
+
     <!-- 日志输出级别 -->
     <root level="INFO">
         <appender-ref ref="STDOUT_COLOR" />
