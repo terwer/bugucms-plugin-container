@@ -2,6 +2,10 @@
 
 Lightweight Pluguable Development Plantform
 
+# prepare
+
+install https://gitee.com/youweics/shared-plugin-interfaces
+
 # How to run
 
 ```
