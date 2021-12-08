@@ -3,11 +3,11 @@
     <!--使用spring扩展profile支持，要以logback-spring.xml命名-->
     <springProfile name="dev">
         <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-        <property name="logFilePath" value="F:/workspace/logs" />
+        <property name="logFilePath" value="C:/Users/Terwer/workspace/bugucms/logs" />
     </springProfile>
     <springProfile name="pro">
         <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-        <property name="logFilePath" value="/var/lib/jenkins/workspace/logs" />
+        <property name="logFilePath" value="/var/lib/jenkins/workspace/bugucms/logs" />
     </springProfile>
 
     <property name="log.context.name" value="BugucmsApplication" />
