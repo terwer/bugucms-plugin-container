@@ -24,7 +24,7 @@ start(){
   if [ $? -eq "0" ]; then
     echo "${APP_NAME} is already running. pid=${pid} ."
   else
-    sudo java -jar ${APP_NAME} &
+    java -jar ${APP_NAME} &
     echo "${APP_NAME} start success"
   fi
 }
@@ -33,7 +33,7 @@ start(){
 stop(){
   is_exist
   if [ $? -eq "0" ]; then
-    sudo kill -9 $pid
+    kill -9 $pid
   else
     echo "${APP_NAME} is not running"
   fi

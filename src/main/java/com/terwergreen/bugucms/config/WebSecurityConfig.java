@@ -193,7 +193,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         try {
             userService = (UserDetailsService) applicationContext.getBean("userService");
         } catch (Exception e) {
-            logger.warn("数据库认证失败，请检查配置");
+            logger.warn("找不到授权模块，无法进行数据库权限认证");
         }
         if (null != userService) {
             auth.userDetailsService(userService);
