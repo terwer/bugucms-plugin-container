@@ -27,7 +27,6 @@ chmod +x mvnw
 ./mvnw clean package -DskipTests -V -e
 # 安装提供给插件引用的pom
 ./mvnw install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=${APP_VERSION} -Dpackaging=pom
-sudo ./mvnw install:install-file -Dfile=pom-parent.xml -DgroupId=com.terwergreen -DartifactId=bugucms-plugin-container -Dversion=${APP_VERSION} -Dpackaging=pom
 # 配置环境并启动
 echo "current user:"
 whoami
