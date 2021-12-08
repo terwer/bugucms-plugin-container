@@ -4,6 +4,10 @@ echo $WORKSPACE
 cd $WORKSPACE
 cd src/main/webapp
 
+nvm install v16.13.1
+node --version
+npm --version
+
 npm set registry https://registry.npm.taobao.org && \
 npm set disturl https://npm.taobao.org/dist && \
 npm set sass_binary_site https://npm.taobao.org/mirrors/node-sass && \
