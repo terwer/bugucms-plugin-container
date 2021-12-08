@@ -4,7 +4,7 @@ echo $WORKSPACE
 cd $WORKSPACE
 cd src/main/webapp
 
-nvm install v16.13.1
+# nvm install v16.13.1
 node --version
 npm --version
 
