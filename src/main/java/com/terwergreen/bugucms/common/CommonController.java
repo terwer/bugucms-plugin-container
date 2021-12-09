@@ -4,6 +4,8 @@ import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.core.CommonService;
 import com.terwergreen.plugins.PluginInterface;
 import com.terwergreen.pojo.SiteConfig;
+import com.terwergreen.util.RestResponse;
+import com.terwergreen.util.RestResponseStates;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
@@ -14,6 +16,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -30,6 +33,7 @@ import java.util.stream.Collectors;
  * @version 1.0 2018/11/26 18:05
  **/
 @SuppressWarnings("all")
+@CrossOrigin
 @Controller
 @RequestMapping("/")
 public class CommonController {
@@ -49,7 +53,7 @@ public class CommonController {
     private BugucmsPluginManager pluginManager;
 
     @RequestMapping(method = RequestMethod.GET)
-    public String index(){
+    public String index() {
         return "redirect:/index.html";
     }
 
@@ -86,10 +90,25 @@ public class CommonController {
         return getPlugins();
     }
 
+    @RequestMapping(value = "api/site/config/list", method = {RequestMethod.GET, RequestMethod.POST}, produces = {"application/json;charset=utf-8"})
+    @ResponseBody
+    public RestResponse siteConfigList() {
+        return this.siteConfig();
+    }
+
     @RequestMapping(value = "api/site/config", method = RequestMethod.GET, produces = {"application/json;charset=utf-8"})
     @ResponseBody
-    public SiteConfig siteConfig() {
-        return commonService.getSiteConfig();
+    public RestResponse siteConfig() {
+        RestResponse restResponse = new RestResponse();
+        try {
+            restResponse.setData(commonService.getSiteConfig());
+            restResponse.setStatus(RestResponseStates.SUCCESS.getValue());
+            restResponse.setMsg(RestResponseStates.SUCCESS.getMsg());
+        } catch (Exception e) {
+            restResponse.setStatus(RestResponseStates.SERVER_ERROR.getValue());
+            restResponse.setMsg(RestResponseStates.SERVER_ERROR.getMsg());
+        }
+        return restResponse;
     }
 
     /**
