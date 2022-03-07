@@ -145,7 +145,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
-                            // response.setCharacterEncoding("UTF-8");
+                            response.setCharacterEncoding("UTF-8");
                             RestResponse restResponse = new RestResponse(RestResponseStates.SUCCESS.getValue(), "登陆成功", resultMap);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);
@@ -156,7 +156,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
-                            // response.setCharacterEncoding("UTF-8");
+                            response.setCharacterEncoding("UTF-8");
                             RestResponse restResponse = new RestResponse(RestResponseStates.INVALID_PASSWORD.getValue(), "登陆失败，用户名或者密码错误", null);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);
@@ -200,9 +200,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             logger.info("WebMVC Security 数据库认证:" + userService);
         } else {
             //内存中缓存权限数据
-            auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("123456")).roles("ADMIN");
-            String encodePassword = passwordEncoder.encode("123456");
-            logger.info("WebMVC Security passwordSource:123456,encodePassword:" + encodePassword);
+            auth.inMemoryAuthentication().withUser("admin").password(passwordEncoder.encode("105036")).roles("ADMIN");
+            String encodePassword = passwordEncoder.encode("105036");
+            logger.info("WebMVC Security passwordSource:105036,encodePassword:" + encodePassword);
         }
     }
 }
