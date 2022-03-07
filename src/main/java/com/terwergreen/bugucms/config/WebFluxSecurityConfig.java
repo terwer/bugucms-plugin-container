@@ -3,9 +3,9 @@ package com.terwergreen.bugucms.config;
 import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.annotation.Bean;
@@ -38,7 +38,7 @@ import java.util.Map;
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('reactive') && ${bugucms.plugin-switch:true}")
 @EnableWebFluxSecurity
 public class WebFluxSecurityConfig {
-    private static final Log logger = LogFactory.getLog(WebFluxSecurityConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebFluxSecurityConfig.class);
 
     /**
      * 授权插件名称

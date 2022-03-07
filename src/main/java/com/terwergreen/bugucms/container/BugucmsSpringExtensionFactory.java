@@ -2,11 +2,11 @@ package com.terwergreen.bugucms.container;
 
 import com.terwergreen.plugins.BugucmsPlugin;
 import com.terwergreen.util.ReflectUtil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.Plugin;
 import org.pf4j.PluginWrapper;
 import org.pf4j.spring.SpringExtensionFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.GenericApplicationContext;
 
@@ -18,7 +18,7 @@ import org.springframework.context.support.GenericApplicationContext;
  * 2018/11/26 17:05
  **/
 public class BugucmsSpringExtensionFactory extends SpringExtensionFactory {
-    private static final Log logger = LogFactory.getLog(BugucmsSpringExtensionFactory.class);
+    private static final Logger logger = LoggerFactory.getLogger(BugucmsSpringExtensionFactory.class);
     private BugucmsPluginManager pluginManager;
     private boolean autowire;
 

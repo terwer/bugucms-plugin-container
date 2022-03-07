@@ -20,9 +20,9 @@ import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
 import com.terwergreen.util.RestResponse;
 import com.terwergreen.util.RestResponseStates;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnExpression;
 import org.springframework.context.ApplicationContext;
@@ -53,7 +53,7 @@ import java.util.Map;
 @ConditionalOnExpression("'${bugucms.web.application-type}'.equals('servlet') && ${bugucms.plugin-switch:true}")
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-    private static final Log logger = LogFactory.getLog(WebSecurityConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebSecurityConfig.class);
     /**
      * 授权插件名称
      */
@@ -145,7 +145,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
-                            response.setCharacterEncoding("UTF-8");
+                            // response.setCharacterEncoding("UTF-8");
                             RestResponse restResponse = new RestResponse(RestResponseStates.SUCCESS.getValue(), "登陆成功", resultMap);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);
@@ -156,7 +156,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
                             response.setStatus(HttpServletResponse.SC_OK);
                             response.setContentType("application/json");
-                            response.setCharacterEncoding("UTF-8");
+                            // response.setCharacterEncoding("UTF-8");
                             RestResponse restResponse = new RestResponse(RestResponseStates.INVALID_PASSWORD.getValue(), "登陆失败，用户名或者密码错误", null);
                             String responseToClient = JSON.toJSONString(restResponse);
                             response.getWriter().write(responseToClient);

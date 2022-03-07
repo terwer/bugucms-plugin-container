@@ -4,9 +4,8 @@ import com.alibaba.fastjson.JSON;
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import com.terwergreen.plugins.PluginInterface;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.pf4j.RuntimeMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -16,8 +15,6 @@ import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -35,7 +32,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class PluginConfig {
-    private static final Log logger = LogFactory.getLog(PluginConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(PluginConfig.class);
 
     @Value("${bugucms.plugin-switch}")
     private boolean pluginSwitch;

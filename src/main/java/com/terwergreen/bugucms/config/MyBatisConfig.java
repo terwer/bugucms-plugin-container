@@ -2,14 +2,14 @@ package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.ibatis.mapping.DatabaseIdProvider;
 import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
@@ -35,7 +35,7 @@ import java.util.Properties;
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class MyBatisConfig implements TransactionManagementConfigurer {
-    private static final Log logger = LogFactory.getLog(MyBatisConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
 
     @Autowired
     DataSource dataSource;

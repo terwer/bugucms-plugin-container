@@ -31,3 +31,5 @@
 
 *.log
 *gz
+.DS_Store
+OssManager.java
