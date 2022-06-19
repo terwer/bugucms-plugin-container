@@ -1,5 +1,4 @@
-APP_VERSION=2.1.1
-APP_NAME=bugucms-plugin-container-${APP_VERSION}.jar
+APP_NAME=bugucms-plugin-container.jar
 
 #使用说明，用来提示输入参数
 usage() {

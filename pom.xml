@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>bugucms-plugin-container</artifactId>
-	<version>2.1.1</version>
+	<version>3.0.0</version>
 	<packaging>jar</packaging>
 
     <name>bugucms-plugin-container</name>
@@ -77,11 +77,13 @@
             <scope>runtime</scope>
         </dependency>
         <!-- h2 -->
+        <!--
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>runtime</scope>
         </dependency>
+        -->
         <!-- thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -243,6 +245,8 @@
     </dependencyManagement>
 
     <build>
+        <finalName>bugucms-plugin-container</finalName>
+
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
@@ -334,7 +338,6 @@
                 <version>2.7</version>
             </plugin>
             <!-- javadoc -->
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>

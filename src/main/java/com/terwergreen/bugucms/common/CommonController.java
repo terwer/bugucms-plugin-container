@@ -68,9 +68,8 @@ public class CommonController {
 
         SiteConfig siteConfig = commonService.getSiteConfig();
         String webname = siteConfig.getWebname();
-        model.addAttribute("info", "BuguCMS 2.1.1:" + webname);
+        model.addAttribute("info", "BuguCMS - " + webname);
         String adminPath = siteConfig.getAdminpath();
-        model.addAttribute("info", "BuguCMS 2.1.1:" + webname);
         model.addAttribute("adminPath", adminPath);
         String pluginInfo = "pluginSwitch:" + (pluginSwitch ? "开启" : "关闭");
         pluginInfo += "<br/>pf4j.mode:";

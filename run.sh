@@ -1,7 +1,7 @@
-APP_VERSION=2.1.1
+APP_VERSION=$(mvn help:evaluate -Dexpression=project.version -q -DforceStdout)
+WORKSPACE=${PWD}
 echo 'current workspace:'
 echo $WORKSPACE
-cd $WORKSPACE
 cd src/main/webapp
 
 # nvm install v16.13.1
@@ -51,6 +51,5 @@ cd $APP_PATH
 pwd
 chmod +x classes/springboot.sh
 sh classes/springboot.sh restart
-
 
 
