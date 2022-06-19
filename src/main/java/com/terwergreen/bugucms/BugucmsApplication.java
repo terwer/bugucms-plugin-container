@@ -1,22 +1,27 @@
 package com.terwergreen.bugucms;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
+import com.terwergreen.bugucms.utils.BuguCMSConstants;
+import com.terwergreen.bugucms.utils.SpringBeanUtils;
 import com.terwergreen.plugins.PluginInterface;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.xmlrpc.webserver.XmlRpcServlet;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
+import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 
 @SpringBootApplication
 public class BugucmsApplication {
-    private static final Log logger = LogFactory.getLog(BugucmsApplication.class);
+    private static final Logger logger = LoggerFactory.getLogger(BugucmsApplication.class);
 
     public static void main(String[] args) {
         // 获取项目的配置类型
@@ -24,7 +29,19 @@ public class BugucmsApplication {
         //设置应用类型
         SpringApplication springApplication = new SpringApplication(BugucmsApplication.class);
         // springApplication.setWebApplicationType(applicationType);
-        springApplication.run(args);
+        // 启动Spring Boot
+        ConfigurableApplicationContext applicationContext = springApplication.run(args);
+        // 提供给上下文工具
+        SpringBeanUtils.setContext(applicationContext);
+    }
+
+    @SuppressWarnings({"unchecked", "rawtypes"})
+    @Bean
+    public ServletRegistrationBean registerServlet() {
+        return new ServletRegistrationBean(
+                new XmlRpcServlet(),
+                BuguCMSConstants.CONSTANT_XMLRPC_NAME // xml-rpc访问接口
+        );
     }
 
     @Bean

@@ -3,9 +3,8 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.terwergreen</groupId>
     <artifactId>bugucms-plugin-container</artifactId>
-    <version>2.1.1</version>
+    <version>3.0.0</version>
     <packaging>pom</packaging>
 
     <name>bugucms-plugin-container</name>
@@ -15,7 +14,6 @@
         <groupId>com.terwergreen</groupId>
         <artifactId>shared-plugin-interfaces</artifactId>
         <version>4.1.13</version>
-        <relativePath>../shared-plugin-interfaces/pom-parent.xml</relativePath>
     </parent> <!-- 自定义插件接口（需要安装jar包到本地maven库，详情请看README.md）-->
 
     <properties>
@@ -78,6 +76,14 @@
             <artifactId>mysql-connector-java</artifactId>
             <scope>runtime</scope>
         </dependency>
+        <!-- h2 -->
+        <!--
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <scope>runtime</scope>
+        </dependency>
+        -->
         <!-- thymeleaf -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -110,6 +116,68 @@
             <artifactId>pagehelper-spring-boot-starter</artifactId>
             <version>1.2.5</version>
         </dependency>
+        <!-- Spring Boot健康检查与监控 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+
+        <!-- 应用相关，后期应该想办法脱离容器 -->
+        <!-- metaWeblogApi支持 -->
+        <dependency>
+            <groupId>org.apache.xmlrpc</groupId>
+            <artifactId>xmlrpc-server</artifactId>
+            <version>3.1.3</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.servlet</groupId>
+                    <artifactId>servlet-api</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <!-- 阿里云oss -->
+        <dependency>
+            <groupId>com.aliyun.oss</groupId>
+            <artifactId>aliyun-sdk-oss</artifactId>
+            <version>3.13.2</version>
+        </dependency>
+        <!-- 应用相关，后期应该想办法脱离容器 -->
+
+        <!-- 统一日志框架，门面使用slf4j，实现使用LogBack -->
+        <!-- Logback -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.2.10</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-core</artifactId>
+            <version>1.2.10</version>
+            <scope>compile</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jul-to-slf4j</artifactId>
+            <version>1.7.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>1.7.33</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>1.7.33</version>
+        </dependency>
+        <!-- 统一日志框架，门面使用slf4j，实现使用LogBack -->
 
         <!-- Web前端开发库 -->
         <!-- webjars -->
@@ -177,6 +245,8 @@
     </dependencyManagement>
 
     <build>
+        <finalName>bugucms-plugin-container</finalName>
+
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
@@ -276,15 +346,8 @@
                     <charset>UTF-8</charset>
                     <encoding>UTF-8</encoding>
                     <docencoding>UTF-8</docencoding>
+                    <doclint>none</doclint>
                 </configuration>
-                <executions>
-                    <execution>
-                        <id>attach-javadocs</id>
-                        <goals>
-                            <goal>jar</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.container;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
 import org.pf4j.spring.ExtensionsInjector;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import java.util.Set;
  * 2018/11/26 16:44
  **/
 public class BugucmsExtensionsInjector extends ExtensionsInjector {
-    private static final Log logger = LogFactory.getLog(BugucmsExtensionsInjector.class);
+    private static final Logger logger = LoggerFactory.getLogger(BugucmsExtensionsInjector.class);
     protected final BugucmsPluginManager pluginManager;
     protected final AbstractAutowireCapableBeanFactory beanFactory;
 

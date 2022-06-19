@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;
@@ -26,7 +26,7 @@ import java.util.List;
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
-    private static final Log logger = LogFactory.getLog(WebConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(WebConfig.class);
 
     @Autowired
     private BugucmsPluginManager pluginManager;

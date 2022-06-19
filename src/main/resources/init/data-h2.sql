@@ -1,0 +1,10 @@
+insert into bg_options(option_id,option_group,option_name,option_value) select 1, 'siteConfig', 'domain', 'localhost:8081' where not exists (select 1 from bg_options where option_id=1);
+insert into bg_options(option_id,option_group,option_name,option_value) select 2, 'siteConfig', 'weburl', 'http://localhost:8081' where not exists (select 1 from bg_options where option_id=2);
+insert into bg_options(option_id,option_group,option_name,option_value) select 3, 'siteConfig', 'webtheme', 'default' where not exists (select 1 from bg_options where option_id=3);
+insert into bg_options(option_id,option_group,option_name,option_value) select 4, 'siteConfig', 'webname', '远方的灯塔' where not exists (select 1 from bg_options where option_id=4);
+insert into bg_options(option_id,option_group,option_name,option_value) select 5, 'siteConfig', 'webslogen', '专注于服务端技术分享' where not exists (select 1 from bg_options where option_id=5);
+insert into bg_options(option_id,option_group,option_name,option_value) select 6, 'siteConfig', 'keywords', '软件架构、服务端开发、Java、Spring、Dubbo、Zookeeper、微服务' where not exists (select 6 from bg_options where option_id=1);
+insert into bg_options(option_id,option_group,option_name,option_value) select 7, 'siteConfig', 'description', '远方的灯塔是关注与分享互联网及服务端开发技术的个人博客，致力于Java后端开发及服务端技术、软件架构、微服务技术分享。同时也记录个人的一路点滴，所蕴含的包括前端、后端、数据库等知识，欢迎您关注我们。' where not exists (select 1 from bg_options where option_id=7);
+insert into bg_options(option_id,option_group,option_name,option_value) select 8, 'siteConfig', 'debug', 'false' where not exists (select 1 from bg_options where option_id=8);
+insert into bg_options(option_id,option_group,option_name,option_value) select 9, 'siteConfig', 'beianinfo', '粤ICP备18023717号-1' where not exists (select 1 from bg_options where option_id=9);
+insert into bg_options(option_id,option_group,option_name,option_value) select 10, 'siteConfig', 'adminPath', 'm' where not exists (select 1 from bg_options where option_id=10);

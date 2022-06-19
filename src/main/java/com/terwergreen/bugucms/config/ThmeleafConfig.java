@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -26,7 +26,7 @@ import java.util.List;
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class ThmeleafConfig {
-    private static final Log logger = LogFactory.getLog(ThmeleafConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(ThmeleafConfig.class);
 
     @Autowired
     private SpringTemplateEngine templateEngine;

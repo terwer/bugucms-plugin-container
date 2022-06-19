@@ -2,12 +2,14 @@ package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.mapping.DatabaseIdProvider;
+import org.apache.ibatis.mapping.VendorDatabaseIdProvider;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.pf4j.PluginWrapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +26,7 @@ import javax.sql.DataSource;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * MyBatis扫描路径配置
@@ -32,7 +35,7 @@ import java.util.List;
 @ConditionalOnProperty(name = "bugucms.plugin-switch", havingValue = "true")
 @Configuration
 public class MyBatisConfig implements TransactionManagementConfigurer {
-    private static final Log logger = LogFactory.getLog(MyBatisConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(MyBatisConfig.class);
 
     @Autowired
     DataSource dataSource;
@@ -48,18 +51,6 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
         SqlSessionFactoryBean sqlSessionFactory = new SqlSessionFactoryBean();
         sqlSessionFactory.setDataSource(dataSource);
 
-        // 分页插件(这里配置无效，需要在配置文件配置)
-        // PageInterceptor pageInterceptor = new PageInterceptor();
-        // Properties properties = new Properties();
-        // properties.setProperty("reasonable", "true");
-        // properties.setProperty("supportMethodsArguments", "true");
-        // properties.setProperty("returnPageInfo", "check");
-        // properties.setProperty("params", "count=countSql");
-        // properties.setProperty("helperDialect", "mysql");
-        // pageInterceptor.setProperties(properties);
-        // 添加插件
-        // sqlSessionFactory.setPlugins(new Interceptor[]{pageInterceptor});
-
         //添加XML目录
         ResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
         try {
@@ -73,7 +64,7 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
                 pluginManager = (BugucmsPluginManager) applicationContext.getBean("pluginManager");
             }
             // 插件mappers映射文件
-            List<PluginWrapper> plugins = pluginManager.getStartedPlugins();
+            List<PluginWrapper> plugins = pluginManager.getResolvedPlugins();
             ArrayList<Class> clazzes = new ArrayList<>();
             for (PluginWrapper pluginWrapper : plugins) {
                 // mappers文件目录
@@ -134,5 +125,24 @@ public class MyBatisConfig implements TransactionManagementConfigurer {
     @Bean
     public PlatformTransactionManager annotationDrivenTransactionManager() {
         return new DataSourceTransactionManager(dataSource);
+    }
+
+    @Bean
+    public DatabaseIdProvider getDatabaseIdProvider() {
+        DatabaseIdProvider databaseIdProvider = new VendorDatabaseIdProvider();
+        Properties properties = new Properties();
+        properties.setProperty("Oracle", "oracle");
+        properties.setProperty("MySQL", "mysql");
+        properties.setProperty("DB2", "db2");
+        properties.setProperty("Derby", "derby");
+        properties.setProperty("H2", "h2");
+        properties.setProperty("HSQL", "hsql");
+        properties.setProperty("Informix", "informix");
+        properties.setProperty("Microsoft SQL Server", "sqlserver");
+        properties.setProperty("PostgreSQL", "postgresql");
+        properties.setProperty("Sybase", "sybase");
+        properties.setProperty("Hana", "hana");
+        databaseIdProvider.setProperties(properties);
+        return databaseIdProvider;
     }
 }

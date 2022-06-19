@@ -3,11 +3,11 @@
     <!--使用spring扩展profile支持，要以logback-spring.xml命名-->
     <springProfile name="dev">
         <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-        <property name="logFilePath" value="/home/terwer/IdeaProjects/bugucms-plugin-container/logs" />
+        <property name="logFilePath" value="bugucms/logs" />
     </springProfile>
     <springProfile name="pro">
         <!--定义日志文件的存储地址 勿在 LogBack 的配置中使用相对路径-->
-        <property name="logFilePath" value="${catalina.base}/logs" />
+        <property name="logFilePath" value="/var/lib/jenkins/workspace/bugucms/logs" />
     </springProfile>
 
     <property name="log.context.name" value="BugucmsApplication" />
@@ -70,6 +70,9 @@
             <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{50} - %msg%n </pattern>
         </layout>
     </appender>
+
+    <!-- 自定义日志级别 -->
+    <logger name="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping" level="trace"/>
 
     <!-- 日志输出级别 -->
     <root level="INFO">

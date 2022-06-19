@@ -1,9 +1,9 @@
 package com.terwergreen.bugucms.config;
 
 import com.terwergreen.bugucms.container.BugucmsPluginManager;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.pf4j.RuntimeMode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +20,7 @@ import java.nio.file.Paths;
  **/
 @Configuration
 public class BugucmsConfig {
-    private static final Log logger = LogFactory.getLog(BugucmsConfig.class);
+    private static final Logger logger = LoggerFactory.getLogger(BugucmsConfig.class);
 
     @Value("${bugucms.plugin-switch}")
     private boolean pluginSwitch;

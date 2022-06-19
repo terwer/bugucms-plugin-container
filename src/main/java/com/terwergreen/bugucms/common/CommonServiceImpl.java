@@ -3,8 +3,8 @@ package com.terwergreen.bugucms.common;
 import com.terwergreen.core.CommonDAO;
 import com.terwergreen.core.CommonService;
 import com.terwergreen.pojo.SiteConfig;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -23,7 +23,7 @@ import java.util.Map;
 @SuppressWarnings("all")
 @Service
 public class CommonServiceImpl implements CommonService {
-    private static final Log logger = LogFactory.getLog(CommonServiceImpl.class);
+    private static final Logger logger = LoggerFactory.getLogger(CommonServiceImpl.class);
 
     private static final String SITE_CONFIG_KEY = "siteConfig";
 
@@ -115,7 +115,7 @@ public class CommonServiceImpl implements CommonService {
                 result = true;
             }
         } catch (Exception e) {
-            logger.error("获取站点配置异常", e);
+            logger.error("更新站点配置异常", e);
         }
         return result;
     }

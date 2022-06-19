@@ -47,6 +47,12 @@
             text-align: center;
             line-height: 20px;
         }
+
+        .admin-menu a {
+            margin-right: 10px;
+            padding-bottom: 20px;
+            display: inline-block;
+        }
     </style>
     <script type="text/javascript" th:inline="javascript">
         //设置项目根路径
@@ -58,10 +64,17 @@
 <h3 class="text-cernter info" th:text="${info}"></h3>
 <h3 class="text-cernter info"><a th:href="@{/api/plugins}">插件信息</a></h3>
 <p class="text-cernter plugin-info" th:utext="${pluginInfo}"></p>
-<h3 class="text-cernter info"><a th:href="@{/api/site/config}">站点配置</a></h3>
-<h3 class="text-cernter info"><a th:href="@{/}">首页</a></h3>
-<h3 class="text-cernter info"><a th:href="@{/swagger-ui.html}" target="_blank">Api文档</a></h3>
-<h3 class="text-cernter info"><a th:href="@{/druid/index.html}" target="_blank">druid数据库连接池监控</a></h3>
+<h3 class="text-cernter info admin-menu">
+    <a th:href="@{/api/site/config}">站点配置</a>
+    <a th:href="@{/}">首页</a>
+    <a th:href="@{/swagger-ui.html}" target="_blank">Api文档</a>
+    <br/>
+    <a th:href="@{/druid/index.html}" target="_blank">druid数据库连接池监控</a>
+    <!--
+    <a th:href="@{/h2-console}" target="_blank">h2管理工具</a>
+    -->
+    <a th:href="@{/actuator}" target="_blank">健康检查</a>
+</h3>
 
 <h3>
     <div sec:authorize="!hasRole('ROLE_ADMIN')">

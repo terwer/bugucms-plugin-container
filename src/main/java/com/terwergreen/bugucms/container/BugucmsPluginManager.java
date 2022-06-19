@@ -1,9 +1,11 @@
 package com.terwergreen.bugucms.container;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.terwergreen.core.CommonService;
 import org.pf4j.ExtensionFactory;
 import org.pf4j.spring.SpringPluginManager;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory;
 
 import javax.annotation.PostConstruct;
@@ -17,10 +19,15 @@ import java.nio.file.Path;
  * 2018/11/22 10:52
  **/
 public class BugucmsPluginManager extends SpringPluginManager {
-    private static final Log logger = LogFactory.getLog(BugucmsPluginManager.class);
+    private static final Logger logger = LoggerFactory.getLogger(BugucmsPluginManager.class);
+
+    @Autowired
+    private CommonService commonService;
 
     public BugucmsPluginManager(Path pluginsRoot) {
         super(pluginsRoot);
+        logger.info("加载插件");
+        loadPlugins();
         logger.info("插件管理器创建完毕");
     }
 
@@ -40,9 +47,6 @@ public class BugucmsPluginManager extends SpringPluginManager {
     public void init() {
         logger.info("初始化插件");
 
-        logger.info("加载插件");
-        loadPlugins();
-
         logger.info("启动插件");
         startPlugins();
 
@@ -51,6 +55,7 @@ public class BugucmsPluginManager extends SpringPluginManager {
         BugucmsExtensionsInjector extensionsInjector = new BugucmsExtensionsInjector(this, beanFactory);
         logger.info("注册插件到上下文");
         extensionsInjector.injectExtensions();
+
 
         logger.info("插件初始化完毕");
     }
